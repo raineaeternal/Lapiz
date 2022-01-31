@@ -44,7 +44,7 @@
 .vscode
 .idea
 
-# CMake and Quest specific stuff
+# CMake and Quest specific folders and files
 build
 cmake-build-debug
 *.qmod
