@@ -3,7 +3,7 @@
 #include <future>
 #include <optional>
 
-namespace z::Web {
+namespace z::web {
     class IHttpResponse {
       public:
         /// @brief The HTTP response code.

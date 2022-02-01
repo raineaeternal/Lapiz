@@ -6,7 +6,10 @@
 
 #include "IHttpResponse.hpp"
 
-namespace z::Web {
+template <class Type, class BaseClass>
+concept CheckType = std::is_base_of<BaseClass, Type>::value;
+
+namespace z::web {
     class IHttpService {
       public:
         /// @brief The Authorization Bearer token for your requests (primarily

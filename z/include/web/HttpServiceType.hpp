@@ -1,6 +1,6 @@
 #pragma once
 
-namespace z::Web {
+namespace z::web {
     /// @brief Defines a type of HTTP Service
     enum class HttpServiceType {
         /// @brief Uses UnityWebRequests to handle http calls.

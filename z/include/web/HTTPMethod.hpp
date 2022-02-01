@@ -1,6 +1,6 @@
 #pragma once
 
-namespace z::Web {
+namespace z::web {
     /// @brief Represents the most common HTTP methods
     enum class HTTPMethod {
         /// @brief HTTP Get Request
