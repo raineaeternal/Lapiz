@@ -21,7 +21,7 @@ on:
     branches: main
 
 env:
-    ndkname: android-ndk-r23
+    ndkname: android-ndk-r22
     module_id: lapis
     qmodName: Lapiz
 
