@@ -36,6 +36,10 @@ jobs:
         submodules: true
         lfs: true
     
+    - uses: nttld/setup-ndk@v1
+      with:
+        ndk-version: r23b
+    
     - uses: seanmiddleditch/gha-setup-ninja@v3
       with:
         version: 1.10.2
