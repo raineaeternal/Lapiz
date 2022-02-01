@@ -20,7 +20,7 @@
     }
   ],
   "modFiles": [
-    "liblapiz.so"
+    "libLapiz.so"
   ],
   "libraryFiles": [
     "libbeatsaber-hook_3_6_7.so"
