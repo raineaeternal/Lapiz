@@ -39,8 +39,7 @@ add_library(
         ${COMPILE_ID}
         SHARED
         ${cpp_file_list}
-        ${c_file_list} include/main.hpp include/Utilities/ClawUtils.hpp src/Utilities/ClawUtils.cpp include/Enums/Devices.hpp include/Utilities/QosmeticsAPI.hpp include/Utilities/HookingUtility.hpp src/Hooks/Hooks.cpp include/Utilities/ScalingUtils.hpp src/Utilities/ScalingUtils.cpp)
-
+        ${c_file_list} include/main.hpp)
 target_include_directories(${COMPILE_ID} PRIVATE .)
 
 target_include_directories(${COMPILE_ID} PRIVATE extern/includes/questui_components)
