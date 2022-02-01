@@ -1,18 +1,47 @@
 #pragma once
 
+#include "customtypes/Injectable.hpp"
+
 namespace z {
+    /// @brief Beat Saber specific locations, which points to a place install Zenject bindings.
     enum class Location {
+
+        /// @brief Represents no binding.
         None = 0,
+
+        /// @brief Installs your bindings in the app context. Anything installed here will be available in every container.
         App = 1,
-        Menu = 2
+
+        /// @brief Installs your bindings onto the standard gameplay (Solo or Party) player.
+        Menu = 2,
+
+        /// @brief Installs your bindings onto the campaign player.
         StandardPlayer = 4,
+
+        /// @brief Installs your bindings onto the local multiplayer player.
         CampaignPlayer = 8,
+
+        /// @brief Installs your bindings onto the local multiplayer player.
         Multi = 16,
+
+        /// @brief Installs your bindings onto any player location (Standard, Campaign, or Multiplayer)
         Player = StandardPlayer | CampaignPlayer | Multi,
+
+        /// @brief Installs your bindings onto the tutorial.
         Tutorial = 32,
+
+        /// @brief Installs your bindings onto GameCore.
+        /// @brief Anything specific to the game level will be installed here. It does not necessarily guarantee that anything player specific (audio managers, saber stuff, note spawning stuff)
+        ///        will be included. Some things you would expect to be in here would be the currently played map (difficulty beatmap).
         GameCore = 64,
+
+        /// @brief Installs your bindings onto the Multiplayer Core.
         MultiplayerCore = 128,
+
+        /// @brief Installs your bindings onto all Players related to singleplayer (Standard, Campaign, or Tutorial).
         SinglePlayer = StandardPlayer | CampaignPlayer | Tutorial,
+
+        /// @brief Installs your bindings onto every connected player in multiplayer.
         ConnectedPlayer = 256
     };
 
