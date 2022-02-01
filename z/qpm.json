@@ -3,11 +3,11 @@
   "dependenciesDir": "extern",
   "info": {
     "name": "Lapiz",
-    "id": "Lapiz",
+    "id": "lapiz",
     "version": "0.1.0",
     "url": "https://github.com/raineio/z",
     "additionalData": {
-      "overrideSoName": "libLapiz.so"
+      "overrideSoName": "liblapiz.so"
     }
   },
   "dependencies": [
