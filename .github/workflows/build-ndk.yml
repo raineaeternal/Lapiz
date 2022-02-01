@@ -37,6 +37,9 @@ jobs:
         lfs: true
     
     - uses: seanmiddleditch/gha-setup-ninja@v3
+      with:
+        version: 1.10.2
+        
 
     - name: Create ndkpath.txt
       run: |
