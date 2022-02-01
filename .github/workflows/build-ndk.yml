@@ -37,6 +37,7 @@ jobs:
         lfs: true
     
     - uses: nttld/setup-ndk@v1
+      id: setup-ndk
       with:
         ndk-version: r23b
     
@@ -48,7 +49,7 @@ jobs:
     - name: Create ndkpath.txt
       run: |
         cd ${GITHUB_WORKSPACE}/z
-        echo "$ANDROID_NDK_LATEST_HOME" > ${GITHUB_WORKSPACE}/ndkpath.txt
+        echo "${{ steps.setup-ndk.outputs.ndk-path }}" > ${GITHUB_WORKSPACE}/ndkpath.txt
         cat ${GITHUB_WORKSPACE}/ndkpath.txt
 
     - name: Get QPM
