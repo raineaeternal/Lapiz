@@ -21,7 +21,7 @@ on:
     branches: main
 
 env:
-    ndkname: android-ndk-r22
+    ndkname: android-ndk-r23b
     module_id: lapis
     qmodName: Lapiz
 
@@ -130,7 +130,7 @@ jobs:
         content: "${{ env.CI_SHA_SHORT }} - `${{ github.event.head_commit.message }}`\nrelease.so"
         username: "${{ github.repository }}"
         avatar-url: "http://github.com/${{ env.CI_REPOSITORY_OWNER }}.png"
-        filename: ./z/build/${{ steps.libname.outputs.NAME }}
+        filename: ./z/build/libLapiz.so
 
     - name: Publish debug.so to webhook
       if: ${{ steps.webhook-set.outputs.EXISTS }}
@@ -140,7 +140,7 @@ jobs:
         content: "debug.so"
         username: "${{ github.repository }}"
         avatar-url: "http://github.com/${{ env.CI_REPOSITORY_OWNER }}.png"
-        filename: ./z/build/debug_${{ steps.libname.outputs.NAME }}
+        filename: ./z/build/libLapiz.so
 
 #     - name: Publish qmod to webhook
 #       uses: tsickert/discord-webhook@v3.2.0
