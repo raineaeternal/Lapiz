@@ -1,10 +1,27 @@
 #include "enum/LocationEnum.hpp"
-#include "extern/includes/codegen/include/Zenject"
+#include "beatsaber-hook/shared/utils/logging.hpp"
 
 namespace z {
     class Zenjector {
 
-        template<class name>
-        void Install();
+        /// @brief Installs a custom installer alongside another installer.
+        template<class T>
+        void Install(T args[]);
+
+        /// @brief Install bindings to a custom location with a backing installer(s).
+        void Install(Location location);
+
+        /// @brief Install bindings to another installer without a custom installer
+        template<class TKey>
+        void UseMetadataBinder();
+
+        /// @brief Uses Ferns FMT packages on QPM. Not implemented, nor used currently.
+        // void UseLogger();
+
+        /// @brief Lets you use Lapiz' HTTP service system. Not implemented, nor used currently.
+        // void UseHttpService();
+
+        /// @brief Makes it possible for Quest mods to sync to a github service. Not implemented, nor used currently.
+        // void UseLapizSync();
     };
 }
