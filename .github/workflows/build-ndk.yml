@@ -49,8 +49,8 @@ jobs:
     - name: Create ndkpath.txt
       run: |
         cd ${GITHUB_WORKSPACE}/z
-        echo "${{ steps.setup-ndk.outputs.ndk-path }}" > ${GITHUB_WORKSPACE}/ndkpath.txt
-        cat ${GITHUB_WORKSPACE}/ndkpath.txt
+        echo "${{ steps.setup-ndk.outputs.ndk-path }}" > ndkpath.txt
+        cat ndkpath.txt
 
     - name: Get QPM
       if: steps.cache-qpm.outputs.cache-hit != 'true'
