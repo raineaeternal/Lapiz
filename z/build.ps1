@@ -24,12 +24,14 @@ if ($clean.IsPresent)
     }
 }
 
+$NDKPath = (Get-Content $PSScriptRoot/ndkpath.txt) + "/build/cmake/android.toolchain.cmake"
+
 if (($clean.IsPresent) -or (-not (Test-Path -Path "build")))
 {
     $out = new-item -Path build -ItemType Directory
 } 
 
 cd build
-& cmake -G "Ninja" -DCMAKE_BUILD_TYPE="RelWithDebInfo" ../
+& cmake -G "Ninja" -DCMAKE_BUILD_TYPE="RelWithDebInfo" -DCMAKE_TOOLCHAIN_FILE=$NDKPath ../
 & cmake --build .
 cd ..
