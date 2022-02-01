@@ -1,6 +1,17 @@
 #pragma once
 
 #include "customtypes/Injectable.hpp"
+#include "beatsaber-hook/shared/utils/il2cpp-utils.hpp"
+
+#include "GlobalNamespace/PCAppInit.hpp"
+#include "GlobalNamespace/MainSettingsMenuViewControllersInstaller.hpp"
+#include "GlobalNamespace/StandardGameplayInstaller.hpp"
+#include "GlobalNamespace/MissionGameplayInstaller.hpp"
+#include "GlobalNamespace/MultiplayerLocalPlayerInstaller.hpp"
+#include "GlobalNamespace/TutorialInstaller.hpp"
+#include "GlobalNamespace/MultiplayerCoreInstaller.hpp"
+#include "GlobalNamespace/GameCoreSceneSetup.hpp"
+#include "GlobalNamespace/MultiplayerConnectedPlayerInstaller.hpp"
 
 namespace z {
     /// @brief Beat Saber specific locations, which points to a place install Zenject bindings.
@@ -68,7 +79,7 @@ namespace z {
             installerTypes.emplace(classof(StandardGameplayInstaller * ));
         if (HasFlag(location, Location::CampaignPlayer))
             installerTypes.emplace(classof(MissionGameplayInstaller * ));
-        if (HasFlag(location, Location::MultiPlayer))
+        if (HasFlag(location, Location::Multi))
             installerTypes.emplace(classof(MultiplayerLocalPlayerInstaller * ));
         if (HasFlag(location, Location::Tutorial))
             installerTypes.emplace(classof(TutorialInstaller * ));

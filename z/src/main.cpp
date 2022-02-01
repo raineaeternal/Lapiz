@@ -16,8 +16,6 @@ extern "C" void setup(ModInfo& info) {
     info.id = ID;
     info.version = VERSION;
     modInfo = info;
-
-    getConfig().Load(); // Load the config file
     getLogger().info("Completed setup!");
 }
 
