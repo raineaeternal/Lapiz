@@ -9,7 +9,7 @@ namespace z {
         void Install(T args[]);
 
         /// @brief Install bindings to a custom location with a backing installer(s).
-        void Install(Location location);
+        void Install(z::Location);
 
         /// @brief Install bindings to another installer without a custom installer
         template<class TKey>
