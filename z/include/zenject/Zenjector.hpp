@@ -13,7 +13,7 @@ namespace z {
 
         /// @brief Install bindings to another installer without a custom installer
         template<class TKey>
-        void UseMetadataBinder();
+        void UseMetadataBinder(TKey);
 
         /// @brief Uses Ferns FMT packages on QPM. Not implemented, nor used currently.
         // void UseLogger();
