@@ -132,26 +132,27 @@ jobs:
 
     - name: Publish release.so to webhook
       if: ${{ steps.webhook-set.outputs.EXISTS }}
-      uses: tsickert/discord-webhook@v3.2.0
+      uses: tsickert/discord-webhook@v4.0.0
       with:
         webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
         content: "${{ env.CI_SHA_SHORT }} - `${{ github.event.head_commit.message }}`\nrelease.so"
         username: "${{ github.repository }}"
-        avatar-url: "http://github.com/${{ env.CI_REPOSITORY_OWNER }}.png"
+        avatar-url: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
         filename: ./z/build/libLapiz.so
 
     - name: Publish debug.so to webhook
       if: ${{ steps.webhook-set.outputs.EXISTS }}
-      uses: tsickert/discord-webhook@v3.2.0
+      uses: tsickert/discord-webhook@v4.0.0
+
       with:
         webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
         content: "debug.so"
         username: "${{ github.repository }}"
-        avatar-url: "http://github.com/${{ env.CI_REPOSITORY_OWNER }}.png"
+        avatar-url: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
         filename: ./z/build/libLapiz.so
 
 #     - name: Publish qmod to webhook
-#       uses: tsickert/discord-webhook@v3.2.0
+#       uses: tsickert/discord-webhook@v4.0.0
 #       with:
 #         # Url is github secret, so it doesn't get leaked
 #         webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
@@ -160,7 +161,7 @@ jobs:
 #         # user is repo name
 #         username: "${{ github.repository }}"
 #         # avatar url is repo owner avatar
-#         avatar-url: "http://github.com/${{ env.CI_REPOSITORY_OWNER }}.png"
+#         avatar-url: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
 #         # file to upload is the qmod
 #         filename: ./z/${{ env.qmodName }}.qmod
        # Disabling qmod upload becasue people are getting qmods from GH actions when they should not
