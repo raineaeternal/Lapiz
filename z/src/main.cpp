@@ -1,4 +1,5 @@
 #include "main.hpp"
+#include "include/utilities/HookingUtility.hpp"
 
 static ModInfo modInfo; // Stores the ID and version of our mod, and is sent to the modloader upon startup
 
@@ -30,6 +31,6 @@ extern "C" void load() {
     il2cpp_functions::Init();
 
     getLogger().info("Installing hooks...");
-    // Install our hooks (none defined yet)
+    z::HookingUtility::InstallHooks(getLogger());
     getLogger().info("Installed all hooks!");
 }

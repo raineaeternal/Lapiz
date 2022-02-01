@@ -39,7 +39,8 @@ add_library(
         ${COMPILE_ID}
         SHARED
         ${cpp_file_list}
-        ${c_file_list} include/main.hpp)
+        ${c_file_list} include/main.hpp include/enum/LocationEnum.h include/zenject/Zenjector.hpp)
+
 target_include_directories(${COMPILE_ID} PRIVATE .)
 
 target_include_directories(${COMPILE_ID} PRIVATE extern/includes/questui_components)

@@ -12,7 +12,7 @@ namespace z {
         Tutorial = 32,
         GameCore = 64,
         MultiplayerCore = 128,
-        Singleplayer = StandardPlayer | CampaignPlayer | Tutorial,
+        SinglePlayer = StandardPlayer | CampaignPlayer | Tutorial,
         ConnectedPlayer = 256
     };
 
@@ -29,26 +29,27 @@ namespace z {
     static std::unordered_set<Il2CppClass*> getInstallerForLocation(Location location) {
         using namespace GlobalNamespace;
 
-        std::unordered_set<Il2CppClass*> installerTypes;
+        std::unordered_set < Il2CppClass * > installerTypes;
 
         if (HasFlag(location, Location::App))
-            installerTypes.emplace(classof(PCAppInit*));
+            installerTypes.emplace(classof(PCAppInit * ));
         if (HasFlag(location, Location::Menu))
-            installerTypes.emplace(classof(MainSettingsMenuViewControllersInstaller*));
+            installerTypes.emplace(classof(MainSettingsMenuViewControllersInstaller * ));
         if (HasFlag(location, Location::StandardPlayer))
-            installerTypes.emplace(classof(StandardGameplayInstaller*));
+            installerTypes.emplace(classof(StandardGameplayInstaller * ));
         if (HasFlag(location, Location::CampaignPlayer))
-            installerTypes.emplace(classof(MissionGameplayInstaller*));
+            installerTypes.emplace(classof(MissionGameplayInstaller * ));
         if (HasFlag(location, Location::MultiPlayer))
-            installerTypes.emplace(classof(MultiplayerLocalPlayerInstaller*));
+            installerTypes.emplace(classof(MultiplayerLocalPlayerInstaller * ));
         if (HasFlag(location, Location::Tutorial))
-            installerTypes.emplace(classof(TutorialInstaller*));
+            installerTypes.emplace(classof(TutorialInstaller * ));
         if (HasFlag(location, Location::GameCore))
-            installerTypes.emplace(classof(GameCoreSceneSetup*));
+            installerTypes.emplace(classof(GameCoreSceneSetup * ));
         if (HasFlag(location, Location::MultiplayerCore))
-            installerTypes.emplace(classof(MultiplayerCoreInstaller*));
+            installerTypes.emplace(classof(MultiplayerCoreInstaller * ));
         if (HasFlag(location, Location::ConnectedPlayer))
-            installerTypes.emplace(classof(MultiplayerConnectedPlayerInstaller*));
+            installerTypes.emplace(classof(MultiplayerConnectedPlayerInstaller * ));
 
         return installerTypes;
+    }
 }
