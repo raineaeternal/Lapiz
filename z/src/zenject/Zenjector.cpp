@@ -7,7 +7,7 @@ namespace z {
 
     }
 
-    void Zenjector::Install(Location location) {
+    void Zenjector::Install(z::Location) {
 
     }
 
@@ -16,3 +16,4 @@ namespace z {
 
     }
 }
+
