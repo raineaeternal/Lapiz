@@ -3,7 +3,7 @@ name: NDK build
 on:
   workflow_dispatch:
   push:
-    branches: [master, qpm-rust]
+    branches: [main]
     paths-ignore:
       - '**.yml'
       - '!.github/workflows/build-ndk.yml'
@@ -18,7 +18,7 @@ on:
       - '**.md'
       - '.gitignore'
   pull_request:
-    branches: master
+    branches: main
 
 env:
     ndkname: android-ndk-r22
@@ -58,7 +58,7 @@ jobs:
       run: |
         chmod +x ./QPM/qpm-rust
         cd ${GITHUB_WORKSPACE}/z
-        ./QPM/qpm-rust collapse
+        ../QPM/qpm-rust collapse
     
     - name: QPM Dependencies Cache
       id: cache-qpm-deps
@@ -76,10 +76,10 @@ jobs:
     - name: QPM Restore
       run: |
         cd ${GITHUB_WORKSPACE}/z
-        ./QPM/qpm-rust restore
+        ../QPM/qpm-rust restore
         
     - name: Run QPM legacy fix
-      run: ./QPM/qpm-rust cache legacy-fix
+      run: ../QPM/qpm-rust cache legacy-fix
 
     - name: List Post Restore
       run: |
