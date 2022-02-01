@@ -1,0 +1,9 @@
+# Style "cscpp"
+# global
+BasedOnStyle: LLVM
+AllowShortBlocksOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: true
+AllowShortIfStatementsOnASingleLine: true
+Cpp11BracedListStyle: true
+IndentWidth: 4
+NamespaceIndentation: All
