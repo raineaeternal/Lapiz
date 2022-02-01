@@ -126,30 +126,30 @@ jobs:
 #        path: ./${{ env.qmodName }}.qmod
 #        if-no-files-found: error
 
-    - name: Check if webhook secret set
-      id: webhook-set
-      run: echo ::set-output name=EXISTS::"${{secrets.DISCORD_WEBHOOK_URL != ''}}"
+#     - name: Check if webhook secret set
+#       id: webhook-set
+#       run: echo ::set-output name=EXISTS::"${{secrets.DISCORD_WEBHOOK_URL != ''}}"
 
-    - name: Publish release.so to webhook
-      if: ${{ steps.webhook-set.outputs.EXISTS }}
-      uses: tsickert/discord-webhook@v4.0.0
-      with:
-        webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        content: "${{ env.CI_SHA_SHORT }} - `${{ github.event.head_commit.message }}`\nrelease.so"
-        username: "${{ github.repository }}"
-        avatar-url: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-        filename: ./z/build/libLapiz.so
+#     - name: Publish release.so to webhook
+#       if: ${{ steps.webhook-set.outputs.EXISTS }}
+#       uses: tsickert/discord-webhook@v4.0.0
+#       with:
+#         webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+#         content: "${{ env.CI_SHA_SHORT }} - `${{ github.event.head_commit.message }}`\nrelease.so"
+#         username: "${{ github.repository }}"
+#         avatar-url: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+#         filename: ./z/build/libLapiz.so
 
-    - name: Publish debug.so to webhook
-      if: ${{ steps.webhook-set.outputs.EXISTS }}
-      uses: tsickert/discord-webhook@v4.0.0
+#     - name: Publish debug.so to webhook
+#       if: ${{ steps.webhook-set.outputs.EXISTS }}
+#       uses: tsickert/discord-webhook@v4.0.0
 
-      with:
-        webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        content: "debug.so"
-        username: "${{ github.repository }}"
-        avatar-url: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-        filename: ./z/build/libLapiz.so
+#       with:
+#         webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+#         content: "debug.so"
+#         username: "${{ github.repository }}"
+#         avatar-url: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+#         filename: ./z/build/libLapiz.so
 
 #     - name: Publish qmod to webhook
 #       uses: tsickert/discord-webhook@v4.0.0
