@@ -39,7 +39,7 @@ add_library(
         ${COMPILE_ID}
         SHARED
         ${cpp_file_list}
-        ${c_file_list} include/main.hpp include/enum/LocationEnum.h include/zenject/Zenjector.hpp)
+        ${c_file_list} include/main.hpp include/enum/LocationEnum.hpp include/zenject/Zenjector.hpp include/zenject/ZenjectManager.hpp include/customtypes/Injectable.hpp)
 
 target_include_directories(${COMPILE_ID} PRIVATE .)
 

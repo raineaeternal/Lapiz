@@ -12,13 +12,13 @@ namespace z {
         /// @brief Installs your bindings in the app context. Anything installed here will be available in every container.
         App = 1,
 
-        /// @brief Installs your bindings onto the standard gameplay (Solo or Party) player.
+        /// @brief Installs your bindings onto the menu.
         Menu = 2,
 
-        /// @brief Installs your bindings onto the campaign player.
+        /// @brief Installs your bindings onto the standard gameplay (Solo or Party) player
         StandardPlayer = 4,
 
-        /// @brief Installs your bindings onto the local multiplayer player.
+        /// @brief Installs your bindings onto the campaign player.
         CampaignPlayer = 8,
 
         /// @brief Installs your bindings onto the local multiplayer player.

@@ -2,12 +2,12 @@
   "sharedDir": "shared",
   "dependenciesDir": "extern",
   "info": {
-    "name": "QClaws",
-    "id": "Claws",
+    "name": "Lapiz",
+    "id": "Lapiz",
     "version": "0.1.0",
-    "url": null,
+    "url": "https://github.com/raineio/z",
     "additionalData": {
-      "overrideSoName": "libClaws.so"
+      "overrideSoName": "libLapiz.so"
     }
   },
   "dependencies": [
@@ -33,11 +33,6 @@
     {
       "id": "custom-types",
       "versionRange": "^0.15.1",
-      "additionalData": {}
-    },
-    {
-      "id": "qosmetics-api",
-      "versionRange": "^0.1.4",
       "additionalData": {}
     }
   ],
