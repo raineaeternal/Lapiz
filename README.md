@@ -11,24 +11,4 @@ Port of [SiraUtils](https://github.com/Auros/SiraUtil) features to Quest.
 
 Fork the repo, make your changes and Pull Request it!
 
-  * Read under for guidelines on PRs.
-
-# Submitting a Pull Request?
-
-* Namespace your code by folder
-* Lowercase namespace (`z::`)
-* Follow the Clang format
-    * CLion does this automatically, no need to do anything.
-    * Download the Visual Studio Code clang extension and make a `.clang-format` file with the configuration under.
-* When we request changes, you have 1 week to respond. If not we will dismiss the PR, and close it.
-
-```clang
-# Style "cscpp"
-# global for actions
-BasedOnStyle: LLVM
-AllowShortBlocksOnASingleLine: true
-AllowShortCaseLabelsOnASingleLine: true
-AllowShortIfStatementsOnASingleLine: true
-Cpp11BracedListStyle: true
-IndentWidth: 4
-NamespaceIndentation: All```
+Follow [the contributing guidelines found here](/CONTRIBUTING.md)
