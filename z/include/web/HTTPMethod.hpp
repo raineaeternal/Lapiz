@@ -7,9 +7,13 @@ namespace z::web {
         GET,
         /// @brief HTTP Post Request
         POST,
+        /// @brief HTTP Post Request w/o body checks.
+        POST_NBC,
         /// @brief HTTP Put Request
         PUT,
         /// @brief HTTP Patch Request
-        PATCH
+        PATCH,
+        /// @brief HTTP Delete Request
+        DELETE
     };
 } // namespace z::Web

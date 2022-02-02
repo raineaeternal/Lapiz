@@ -1,6 +1,6 @@
 #pragma once
-#include "main.hpp"
 
+#include "main.hpp"
 #include "beatsaber-hook/shared/utils/hooking.hpp"
 
 namespace z {
