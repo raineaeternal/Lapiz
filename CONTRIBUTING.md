@@ -33,7 +33,7 @@ Please make sure to give us the following if applicable:
 
 - Logs
 - Game Version
-- Lapiz Version
+- `z` Version
 - If your code is open source, a link to it.
 - Build Error Messages
 - Screenshots of visible bugs.
