@@ -4,7 +4,7 @@
 #include "web/IHttpService.hpp"
 
 namespace z::web::implementations::uwr {
-    class UWRHttpService : IHttpService {
+    class UWRHttpService : public IHttpService {
       public:
         std::future<IHttpResponse>
         GetAsync(std::string url,

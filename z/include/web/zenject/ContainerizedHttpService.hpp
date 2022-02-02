@@ -5,7 +5,7 @@
 namespace z::web::zenject {
     template <class T>
     requires CheckType<T, IHttpService>
-    class ContainerizedHttpService : IHttpService {
+    class ContainerizedHttpService : public IHttpService {
       private:
         T _childService;
 

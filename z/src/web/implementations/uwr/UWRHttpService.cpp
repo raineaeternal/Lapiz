@@ -14,7 +14,7 @@ using namespace z::web::implementations::uwr;
 using namespace UnityEngine::Networking;
 using namespace UnityEngine;
 
-UWRHttpService::sendAsync(
+std::future<IHttpResponse> UWRHttpService::sendAsync(
     HTTPMethod method, std::string url, std::string body = "",
     std::map<std::string, std::string> withHeaders = {},
     std::function<void(float)> downloadProgress = nullptr) {
