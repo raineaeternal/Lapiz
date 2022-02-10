@@ -3,7 +3,7 @@
 #include "customtypes/Injectable.hpp"
 #include "beatsaber-hook/shared/utils/il2cpp-utils.hpp"
 
-#include "GlobalNamespace/PCAppInit.hpp"
+#include "GlobalNamespace/QuestAppInit.hpp"
 #include "GlobalNamespace/MainSettingsMenuViewControllersInstaller.hpp"
 #include "GlobalNamespace/StandardGameplayInstaller.hpp"
 #include "GlobalNamespace/MissionGameplayInstaller.hpp"
@@ -13,10 +13,9 @@
 #include "GlobalNamespace/GameCoreSceneSetup.hpp"
 #include "GlobalNamespace/MultiplayerConnectedPlayerInstaller.hpp"
 
-namespace z {
+namespace z::zenject {
     /// @brief Beat Saber specific locations, which points to a place install Zenject bindings.
     enum class Location {
-
         /// @brief Represents no binding.
         None = 0,
 
@@ -42,7 +41,8 @@ namespace z {
         Tutorial = 32,
 
         /// @brief Installs your bindings onto GameCore.
-        /// @brief Anything specific to the game level will be installed here. It does not necessarily guarantee that anything player specific (audio managers, saber stuff, note spawning stuff)
+        /// @brief Anything specific to the game level will be installed here.
+        ///        It does not necessarily guarantee that anything player specific (audio managers, saber stuff, note spawning stuff)
         ///        will be included. Some things you would expect to be in here would be the currently played map (difficulty beatmap).
         GameCore = 64,
 
@@ -72,7 +72,7 @@ namespace z {
         std::unordered_set < Il2CppClass * > installerTypes;
 
         if (HasFlag(location, Location::App))
-            installerTypes.emplace(classof(PCAppInit * ));
+            installerTypes.emplace(classof(QuestAppInit * ));
         if (HasFlag(location, Location::Menu))
             installerTypes.emplace(classof(MainSettingsMenuViewControllersInstaller * ));
         if (HasFlag(location, Location::StandardPlayer))

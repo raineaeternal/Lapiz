@@ -1,17 +1,20 @@
 #include "enum/LocationEnum.hpp"
 #include "beatsaber-hook/shared/utils/logging.hpp"
+#include "System/Collections/Generic/IEnumerable_1.hpp"
+#include "Zenject/IInstaller.hpp"
 
 namespace z {
     class Zenjector {
       public:
         /// @brief Installs a custom installer alongside another installer.
         template<class T>
-        void Install(T args[]) {
-            
+        requires (std::is_convertible_v<T, Zenject::IInstaller>)
+        void Install(zenject::Location location) {
+            System::Collections::IEnumerable
         };
 
         /// @brief Install bindings to a custom location with a backing installer(s).
-        void Install(z::Location) {
+        void Install(int) {
 
         };
 
@@ -30,5 +33,6 @@ namespace z {
         void UseLapizSync() {
 
         };
+
     };
 }
