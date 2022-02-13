@@ -3,20 +3,20 @@
 #include "System/Collections/Generic/IEnumerable_1.hpp"
 #include "Zenject/IInstaller.hpp"
 
-namespace z {
+namespace z::zenject {
     class Zenjector {
       public:
         /// @brief Installs a custom installer alongside another installer.
-        template<class T>
-        requires (std::is_convertible_v<T, Zenject::IInstaller>)
+        template<class TCustomInstaller>
+        requires (std::is_convertible_v<TCustomInstaller, Zenject::IInstaller>)
         void Install(zenject::Location location) {
-            System::Collections::IEnumerable
+            std::unordered_set < Il2CppClass * > installerTypes = zenject::getInstallerForLocation(location);
         };
 
         /// @brief Install bindings to a custom location with a backing installer(s).
-        void Install(int) {
+        // void Install(int) {
 
-        };
+        // };
 
         /// @brief Install bindings to another installer without a custom installer
         template<class TKey>
