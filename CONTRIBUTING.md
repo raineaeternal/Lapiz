@@ -1,7 +1,7 @@
 # Submitting a Pull Request?
 
 * Namespace your code by folder
-* Lowercase namespace (`z::`)
+* Lowercase namespace (`lapiz::`)
 * Follow the Clang format
     * CLion does this automatically, no need to do anything.
     * Download the Visual Studio Code clang extension.
@@ -33,7 +33,7 @@ Please make sure to give us the following if applicable:
 
 - Logs
 - Game Version
-- `z` Version
+- Lapiz Version
 - If your code is open source, a link to it.
 - Build Error Messages
 - Screenshots of visible bugs.
