@@ -33,6 +33,5 @@ namespace z::zenject {
         void UseLapizSync() {
 
         };
-
     };
 }

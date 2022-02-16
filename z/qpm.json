@@ -27,7 +27,7 @@
     },
     {
       "id": "codegen",
-      "versionRange": "^0.18.2",
+      "versionRange": "^0.19.3",
       "additionalData": {}
     },
     {

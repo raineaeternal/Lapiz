@@ -9,5 +9,17 @@ namespace z::zenject::internal {
         Context context;
         System::Type installerType;
         ZenjectInstallation accessor;
+
+        void AddInstaller() {
+
+        }
+
+        void AddInstaller() {
+
+        }
+
+        void AddInstaller() {
+
+        }
     };
 }
