@@ -2,7 +2,7 @@
 
 #include "System/Type.hpp"
 
-namespace z::zenject::internal {
+namespace lapiz::zenject::internal {
 
     struct InstallSet
     {

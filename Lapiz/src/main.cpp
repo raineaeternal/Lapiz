@@ -24,6 +24,6 @@ extern "C" void load() {
     il2cpp_functions::Init();
 
     getLogger().info("Installing hooks...");
-    z::HookingUtility::InstallHooks(getLogger());
+    lapiz::HookingUtility::InstallHooks(getLogger());
     getLogger().info("Installed all hooks!");
 }

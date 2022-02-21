@@ -13,7 +13,7 @@
 #include "GlobalNamespace/GameCoreSceneSetup.hpp"
 #include "GlobalNamespace/MultiplayerConnectedPlayerInstaller.hpp"
 
-namespace z::zenject {
+namespace lapiz::zenject {
     /// @brief Beat Saber specific locations, which points to a place install Zenject bindings.
     enum class Location {
         /// @brief Represents no binding.

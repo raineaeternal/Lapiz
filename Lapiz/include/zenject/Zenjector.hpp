@@ -3,7 +3,7 @@
 #include "System/Collections/Generic/IEnumerable_1.hpp"
 #include "Zenject/IInstaller.hpp"
 
-namespace z::zenject {
+namespace lapiz::zenject {
     class Zenjector {
       public:
         /// @brief Installs a custom installer alongside another installer.

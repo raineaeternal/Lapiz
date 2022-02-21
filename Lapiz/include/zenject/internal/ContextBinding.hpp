@@ -4,7 +4,7 @@
 #include "ModestTree"
 #include "Zenject/ZenjectIn
 
-namespace z::zenject::internal {
+namespace lapiz::zenject::internal {
     struct ContextBinding {
         Context context;
         System::Type installerType;

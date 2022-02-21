@@ -1,6 +1,6 @@
 #pragma once
 
-namespace z::zenject {
+namespace lapiz::zenject {
     class ZenjectManager {
 
     };
