@@ -34,11 +34,6 @@
       "id": "custom-types",
       "versionRange": "^0.15.1",
       "additionalData": {}
-    },
-    {
-      "id": "fmt",
-      "versionRange": "^8.0.5",
-      "additionalData": {}
     }
   ],
   "additionalData": {}
