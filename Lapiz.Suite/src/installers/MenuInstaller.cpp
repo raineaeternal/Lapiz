@@ -1,6 +1,6 @@
 #include "Zenject/IInstaller.hpp"
 
-namespace Suite::installers {
+namespace Suite::Installers {
     class MenuInstaller : public Zenject::IInstaller {
 
     };

@@ -1,6 +1,12 @@
 #include "main.hpp"
 #include "include/utilities/HookingUtility.hpp"
 
+#include "include/enum/LocationEnum.hpp"
+#include "include/zenject/Zenjector.hpp"
+
+using namespace lapiz::zenject;
+using namespace lapiz::Installers;
+
 static ModInfo modInfo; // Stores the ID and version of our mod, and is sent to the modloader upon startup
 
 // Loads the config from disk using our modInfo, then returns it for use
@@ -25,5 +31,6 @@ extern "C" void load() {
 
     getLogger().info("Installing hooks...");
     lapiz::HookingUtility::InstallHooks(getLogger());
+    Zenjector::Install(Location::App, [](auto container) {  });
     getLogger().info("Installed all hooks!");
 }
