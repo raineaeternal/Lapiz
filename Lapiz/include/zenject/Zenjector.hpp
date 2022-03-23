@@ -18,24 +18,25 @@ namespace lapiz::zenject {
             std::unordered_set < Il2CppClass * > installerTypes = zenject::getInstallerForLocation(location);
         };
 
-        /// @brief Install bindings to a custom location with a backing installer(s).
+        /// @brief Installs the Binding instructions and methods to the specified domain location. Recommend using this only for App domain.
+        /// @param location Required to install to the DiContainer.
+        /// @param installCallback Your lambda you install to the specified domain with.
         static void Install(zenject::Location location, std::function<void(Zenject::DiContainer*)> installCallback) {
             std::unordered_set < Il2CppClass * > installerTypes = zenject::getInstallerForLocation(location);
         };
 
         /// @brief Install bindings to another installer without a custom installer
-        template<class TKey>
-        void UseMetadataBinder(TKey) {
+        static void UseMetadataBinder() {
 
         };
 
         /// @brief Lets you use Lapiz' HTTP service system. Not implemented, nor used currently.
-        void UseHttpService() {
+        static void UseHttpService() {
 
         };
 
         /// @brief Makes it possible for Quest mods to sync to an external service, like GitHub. Not implemented, nor used currently.
-        void UseLapizSync() {
+        static void UseLapizSync() {
 
         };
     };

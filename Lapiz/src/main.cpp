@@ -1,11 +1,8 @@
 #include "main.hpp"
 #include "include/utilities/HookingUtility.hpp"
 
-#include "include/enum/LocationEnum.hpp"
-#include "include/zenject/Zenjector.hpp"
-
-using namespace lapiz::zenject;
-using namespace lapiz::Installers;
+#include "paper/shared/logger.hpp"
+#include "paper/shared/log_level.hpp"
 
 static ModInfo modInfo; // Stores the ID and version of our mod, and is sent to the modloader upon startup
 
@@ -29,8 +26,12 @@ extern "C" void setup(ModInfo& info) {
 extern "C" void load() {
     il2cpp_functions::Init();
 
-    getLogger().info("Installing hooks...");
+    if (!Paper::Logger::IsInited()) {
+        Paper::Logger::Init("/sdcard/Android/data/com.beatgames.beatsaber/files/logs");
+    }
+
+    Paper::Logger::fmtLog<Paper::LogLevel::INF>("Logger initialized..");
+    Paper::Logger::fmtLog<Paper::LogLevel::INF>("Installing Zenject bindings and hooks..");
+
     lapiz::HookingUtility::InstallHooks(getLogger());
-    Zenjector::Install(Location::App, [](auto container) {  });
-    getLogger().info("Installed all hooks!");
 }
