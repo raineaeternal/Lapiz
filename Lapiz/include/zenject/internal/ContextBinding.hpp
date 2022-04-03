@@ -1,7 +1,7 @@
 #pragma once
 
 
-namespace lapiz::zenject::internal {
+namespace Lapiz::Zenject::internal {
     struct ContextBinding {
 
     };

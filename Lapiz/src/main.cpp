@@ -1,6 +1,12 @@
 #include "main.hpp"
 #include "include/utilities/HookingUtility.hpp"
 
+#include "include/zenject/Zenjector.hpp"
+#include "include/enum/LocationEnum.hpp"
+
+#include "include/Installer.hpp"
+#inlucde "CustomType.hpp"
+
 #include "paper/shared/logger.hpp"
 #include "paper/shared/log_level.hpp"
 
@@ -22,6 +28,9 @@ extern "C" void setup(ModInfo& info) {
     getLogger().info("Completed setup!");
 }
 
+using namespace Lapiz::Zenject;
+using namespace Tests;
+
 // Called later on in the game loading - a good time to install function hooks
 extern "C" void load() {
     il2cpp_functions::Init();
@@ -33,5 +42,13 @@ extern "C" void load() {
     Paper::Logger::fmtLog<Paper::LogLevel::INF>("Logger initialized..");
     Paper::Logger::fmtLog<Paper::LogLevel::INF>("Installing Zenject bindings and hooks..");
 
-    lapiz::HookingUtility::InstallHooks(getLogger());
+    Zenjector::Install(Location::App, [](void* container) {
+        container;
+    });
+    Zenjector::Install(Location::GameCore, [](auto container) {
+        container;
+    });
+    Zenjector::Install<MyMenuInstaller, CustomType>(Location::None);
+
+    Lapiz::HookingUtility::InstallHooks(getLogger());
 }

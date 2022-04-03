@@ -13,7 +13,7 @@
 #include "GlobalNamespace/GameCoreSceneSetup.hpp"
 #include "GlobalNamespace/MultiplayerConnectedPlayerInstaller.hpp"
 
-namespace lapiz::zenject {
+namespace Lapiz::Zenject {
     /// @brief Beat Saber specific locations, which points to a place install Zenject bindings.
     enum class Location {
         /// @brief Represents no binding.
@@ -56,11 +56,13 @@ namespace lapiz::zenject {
         ConnectedPlayer = 256
     };
 
-    inline Location operator|(Location a, Location b)
-    {return static_cast<Location>(static_cast<int>(a) | static_cast<int>(b));}
+    inline Location operator|(Location a, Location b) {
+        return static_cast<Location>(static_cast<int>(a) | static_cast<int>(b));
+    }
 
-    inline Location operator&(Location a, Location b)
-    {return static_cast<Location>(static_cast<int>(a) & static_cast<int>(b));}
+    inline Location operator&(Location a, Location b) {
+        return static_cast<Location>(static_cast<int>(a) & static_cast<int>(b));
+    }
 
     inline bool HasFlag(Location location, Location flag) {
         return (location & flag) == flag;
