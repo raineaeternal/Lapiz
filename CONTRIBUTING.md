@@ -1,7 +1,7 @@
 # Submitting a Pull Request?
 
 * Namespace your code by folder
-* Lowercase namespace (`lapiz::`)
+* Lowercase namespace (`Lapiz::`)
 * Follow the Clang format
     * CLion does this automatically, no need to do anything.
     * Download the Visual Studio Code clang extension.
