@@ -1,4 +1,8 @@
 #include "main.hpp"
+#include "zenject/Zenjector.hpp"
+#include "enum/LocationEnum.hpp"
+
+using namespace lapiz::zenject;
 
 static ModInfo modInfo; // Stores the ID and version of our mod, and is sent to the modloader upon startup
 
@@ -23,6 +27,7 @@ extern "C" void load() {
     il2cpp_functions::Init();
 
     getLogger().info("Installing hooks...");
-    z::Zenjector::Install<>();
+    Zenjector::Install<MenuInstaller, >(Location::Menu);
+    Zenjector::Install(Location::App [](auto container) {});
     getLogger().info("Installed all hooks!");
 }

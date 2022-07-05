@@ -27,12 +27,17 @@
     },
     {
       "id": "codegen",
-      "versionRange": "^0.18.2",
+      "versionRange": "^0.19.3",
       "additionalData": {}
     },
     {
       "id": "custom-types",
       "versionRange": "^0.15.1",
+      "additionalData": {}
+    },
+    {
+      "id": "paper",
+      "versionRange": "^1.0.5",
       "additionalData": {}
     }
   ],

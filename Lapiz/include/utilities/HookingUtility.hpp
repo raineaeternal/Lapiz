@@ -3,7 +3,7 @@
 
 #include "beatsaber-hook/shared/utils/hooking.hpp"
 
-namespace z {
+namespace Lapiz {
     class HookingUtility {
     private:
         inline static std::vector<void (*)(Logger &logger)> installFuncs;
