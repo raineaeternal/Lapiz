@@ -1,5 +1,4 @@
 # Style "cscpp"
-# global
 BasedOnStyle: LLVM
 AllowShortBlocksOnASingleLine: true
 AllowShortCaseLabelsOnASingleLine: true
