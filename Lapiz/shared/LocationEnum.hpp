@@ -68,29 +68,29 @@ namespace Lapiz::Zenject {
         return (location & flag) == flag;
     }
 
-    static std::unordered_set<Il2CppClass*> getInstallerForLocation(Location location) {
+    static std::unordered_set<Il2CppClass*> get_InstallerForLocation(Location location) {
         using namespace GlobalNamespace;
 
         std::unordered_set < Il2CppClass * > installerTypes;
 
         if (HasFlag(location, Location::App))
-            installerTypes.emplace(classof(QuestAppInit * ));
+            installerTypes.emplace(classof(GlobalNamespace::QuestAppInit* ));
         if (HasFlag(location, Location::Menu))
-            installerTypes.emplace(classof(MainSettingsMenuViewControllersInstaller * ));
+            installerTypes.emplace(classof(GlobalNamespace::MainSettingsMenuViewControllersInstaller* ));
         if (HasFlag(location, Location::StandardPlayer))
-            installerTypes.emplace(classof(StandardGameplayInstaller * ));
+            installerTypes.emplace(classof(GlobalNamespace::StandardGameplayInstaller* ));
         if (HasFlag(location, Location::CampaignPlayer))
-            installerTypes.emplace(classof(MissionGameplayInstaller * ));
+            installerTypes.emplace(classof(GlobalNamespace::MissionGameplayInstaller* ));
         if (HasFlag(location, Location::Multi))
-            installerTypes.emplace(classof(MultiplayerLocalPlayerInstaller * ));
+            installerTypes.emplace(classof(GlobalNamespace::MultiplayerLocalPlayerInstaller* ));
         if (HasFlag(location, Location::Tutorial))
-            installerTypes.emplace(classof(TutorialInstaller * ));
+            installerTypes.emplace(classof(GlobalNamespace::TutorialInstaller* ));
         if (HasFlag(location, Location::GameCore))
-            installerTypes.emplace(classof(GameCoreSceneSetup * ));
+            installerTypes.emplace(classof(GlobalNamespace::GameCoreSceneSetup* ));
         if (HasFlag(location, Location::MultiplayerCore))
-            installerTypes.emplace(classof(MultiplayerCoreInstaller * ));
+            installerTypes.emplace(classof(GlobalNamespace::MultiplayerCoreInstaller* ));
         if (HasFlag(location, Location::ConnectedPlayer))
-            installerTypes.emplace(classof(MultiplayerConnectedPlayerInstaller * ));
+            installerTypes.emplace(classof(GlobalNamespace::MultiplayerConnectedPlayerInstaller* ));
 
         return installerTypes;
     }
