@@ -27,8 +27,8 @@ First, you'll need an installer class. To do this, we'll use Custom Types.
 #include "GlobalNamespace/Zenject/IInstaller.hpp"
 
 DECLARE_CLASS_CODEGEN_INTERFACE(Lapiz, MenuInstaller, classof(Zenject::IInstaller*),
-    DECLARE_INSTANCE_OVERRIDE_METHOD();
-    DECLARE_INSTANCE_OVERRIDE_METHOD();
+    DECLARE_OVERRIDE_METHOD();
+    DECLARE_OVERRIDE_METHOD();
 )
 
 ```
@@ -41,11 +41,13 @@ To properly install the installer class we just made, you need to use the first 
 #include "installers/MenuInstaller.hpp"
 
 // Used together with an installer class
-Zenjector::Install<Lapiz::MenuInstaller>(Location::Menu);
+Zenjector::Install<Lapiz::MenuInstaller*>(Location::Menu);
 
 // Used as a standalone installer for smaller things, to reduce file clutter.
 Zenjector::Install(Location::Menu, [](auto container){
-    // Do container-> to the pointertype you need
+    // container-> is used to access the DiContainer address,
+    // where you can install anything you need.
+    container->BindInterfaceAndSelfTo<Lapiz::MenuInstaller*>()->AsSingle();
 });
 ```
 
