@@ -10,7 +10,11 @@ namespace BSML
     class Logging
     {
     public:
-        static Logger& getLogger();
+    static Logger& getLogger() {
+        static Logger* logger = new Logger({MOD_ID, VERSION}, LoggerOptions(false, true));
+        return *logger;
+    }
+}
     };
 }
 template <> struct fmt::formatter<::StringW> : formatter<string_view> {

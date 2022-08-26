@@ -2,18 +2,18 @@
   "sharedDir": "shared",
   "dependenciesDir": "extern",
   "info": {
-    "name": "Lapiz.Suite",
-    "id": "lapiz.suite",
+    "name": "Lapiz",
+    "id": "lapiz",
     "version": "0.1.0",
-    "url": "https://github.com/raineio/z",
+    "url": "https://github.com/raineio/Lapiz",
     "additionalData": {
-      "overrideSoName": "libLapiz.Suite.so"
+      "overrideSoName": "libLapiz.so"
     }
   },
   "dependencies": [
     {
       "id": "beatsaber-hook",
-      "versionRange": "^3.0.0",
+      "versionRange": "^3.12.0",
       "additionalData": {
         "extraFiles": [
           "src/inline-hook"
@@ -27,17 +27,17 @@
     },
     {
       "id": "codegen",
-      "versionRange": "^0.18.2",
+      "versionRange": "^0.25.0",
       "additionalData": {}
     },
     {
       "id": "custom-types",
-      "versionRange": "^0.15.1",
+      "versionRange": "^0.15.18",
       "additionalData": {}
     },
     {
-      "id": "lapiz",
-      "versionRange": "^0.1.0",
+      "id": "paper",
+      "versionRange": "^1.2.8",
       "additionalData": {}
     }
   ],

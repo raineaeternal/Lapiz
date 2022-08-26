@@ -1,7 +1,7 @@
 #pragma once
 
-#include "enum/LocationEnum.hpp"
-#include "beatsaber-hook/shared/utils/logging.hpp"
+#include "LocationEnum.hpp"
+#include "utilities/logging.hpp"
 #include "System/Collections/Generic/IEnumerable_1.hpp"
 #include "Zenject/IInstaller.hpp"
 
@@ -15,7 +15,7 @@ namespace Lapiz::Zenject {
         /// @tparam TCustomType A custom type to make Garbage Collection not cause potential Null pointer dereferences unnecessarily.
         /// @param location Required to install something to the DiContainer location.
         template<class TCustomInstaller, class TCustomType>
-        requires (std::is_convertible_v<TCustomInstaller, IInstaller>, std::is_convertible_v<TCustomType, IInstaller>)
+        requires (std::is_convertible_v<TCustomInstaller, IInstaller>)
         static void Install(Zenject::Location location) {
             std::unordered_set < Il2CppClass * > installerTypes = Zenject::getInstallerForLocation(location);
         };
