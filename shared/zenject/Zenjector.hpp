@@ -1,6 +1,6 @@
 #pragma once
 
-#include "LocationEnum.hpp"
+#include "Location.hpp"
 #include "utilities/logging.hpp"
 #include "System/Collections/Generic/IEnumerable_1.hpp"
 #include "Zenject/IInstaller.hpp"
@@ -28,18 +28,12 @@ namespace Lapiz::Zenject {
         };
 
         /// @brief Install bindings to another installer without a custom installer
-        static void UseMetadataBinder() {
-
-        };
+        static void UseMetadataBinder() {};
 
         /// @brief Lets you use Lapiz' HTTP service system. Not implemented, nor used currently.
-        static void UseHttpService() {
-
-        };
+        static void UseHttpService() {};
 
         /// @brief Makes it possible for Quest mods to sync to an external service, like GitHub. Not implemented, nor used currently.
-        static void UseLapizSync() {
-
-        };
+        static void UseLapizSync() {};
     };
 }
