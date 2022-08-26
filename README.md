@@ -26,7 +26,7 @@ First, you'll need an installer class. To do this, we'll use Custom Types.
 #include "custom-types/macros.hpp"
 #include "GlobalNamespace/Zenject/IInstaller.hpp"
 
-DECLARE_CLASS_CODEGEN_INTERFACE(Lapiz, MenuInstaller, classof(Zenject::IInstaller*)
+DECLARE_CLASS_CODEGEN_INTERFACE(Lapiz, MenuInstaller, classof(Zenject::IInstaller*),
     DECLARE_INSTANCE_OVERRIDE_METHOD();
     DECLARE_INSTANCE_OVERRIDE_METHOD();
 )
