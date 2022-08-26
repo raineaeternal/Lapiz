@@ -16,19 +16,14 @@ extern "C" void setup(ModInfo& info) {
     info.id = ID;
     info.version = VERSION;
     modInfo = info;
-    getLogger().info("Completed setup!");
+    INFO("Completed setup!");
 }
 
 // Called later on in the game loading - a good time to install function hooks
 extern "C" void load() {
     il2cpp_functions::Init();
 
-    if (!Paper::Logger::IsInited()) {
-        Paper::Logger::Init("/sdcard/Android/data/com.beatgames.beatsaber/files/logs");
-    }
-
-    Paper::Logger::fmtLog<Paper::LogLevel::INF>("Logger initialized..");
-    Paper::Logger::fmtLog<Paper::LogLevel::INF>("Installing Zenject bindings and hooks..");
+    INFO("Installing Zenject bindings and hooks..");
 
     Hooks::InstallHooks(getLogger());
 }
