@@ -14,6 +14,43 @@ Lapiz is nowhere close to stable, and therefore not ready for release. We are st
 
 Probably! There might be mods that require it and uses its providers or its features to make their mod work!
 
+## For Developers
+
+Zenject can be tedious to do in C++, especially if you don't know how to do this stuff. If you need help, please do send a message in #quest-mod-dev in [BSMG](discord.gg/beatsabermods) and I will get back to you as soon as I'm able.
+
+With that out of the way, this is how you use Zenject through Lapiz.
+
+First, you'll need an installer class. To do this, we'll use Custom Types.
+
+```cpp
+#include "custom-types/macros.hpp"
+#include "GlobalNamespace/Zenject/IInstaller.hpp"
+
+DECLARE_CLASS_CODEGEN_INTERFACE(Lapiz, MenuInstaller, classof(Zenject::IInstaller*)
+    DECLARE_INSTANCE_OVERRIDE_METHOD();
+    DECLARE_INSTANCE_OVERRIDE_METHOD();
+)
+
+```
+
+To properly install the installer class we just made, you need to use the first of these provided install methods.
+
+```cpp
+#include "Lapiz/Zenjector.hpp"
+#include "Lapiz/Location.hpp"
+#include "installers/MenuInstaller.hpp"
+
+// Used together with an installer class
+Zenjector::Install<Lapiz::MenuInstaller>(Location::Menu);
+
+// Used as a standalone installer for smaller things, to reduce file clutter.
+Zenjector::Install(Location::Menu, [](auto container){
+    // Do container-> to the pointertype you need
+});
+```
+
+Do note that this is very much preliminary documentation, and that more in-depth docs will come as a part of the final release.
+
 ## Contributing?
 
 Fork the repo, make your changes and Pull Request it!
