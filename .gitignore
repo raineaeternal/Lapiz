@@ -6,7 +6,6 @@ tombstone_*
 qpm.shared.json
 mod.json
 *.log
-mod.json
 *.qmod
 *.psd
 .vscode/
