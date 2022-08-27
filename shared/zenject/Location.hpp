@@ -11,6 +11,8 @@
 #include "GlobalNamespace/MultiplayerCoreInstaller.hpp"
 #include "GlobalNamespace/GameCoreSceneSetup.hpp"
 #include "GlobalNamespace/MultiplayerConnectedPlayerInstaller.hpp"
+#include "GlobalNamespace/MultiplayerLocalPlayerInstaller.hpp"
+#include "GlobalNamespace/MultiplayerLocalInactivePlayerInstaller.hpp"
 
 namespace Lapiz::Zenject {
     /// @brief Beat Saber specific locations, which points to a place install Zenject bindings.
@@ -52,7 +54,13 @@ namespace Lapiz::Zenject {
         SinglePlayer = StandardPlayer | CampaignPlayer | Tutorial,
 
         /// @brief Installs your bindings onto every connected player in multiplayer.
-        ConnectedPlayer = 256
+        ConnectedPlayer = 256,
+
+        /// @brief Installs your bindings onto the local active player in multiplayer. This is the current local player, no matter if they're spectating or not. The current backing installer is <see cref="MultiplayerLocalPlayerInstaller" />
+        AlwaysMultiPlayer = 512,
+
+        /// @brief Installs your bindings onto the local inactive player in multiplayer. Think of this as when the local user is spectating in multiplayer. The current backing installer is <see cref="MultiplayerLocalInactivePlayerInstaller" />
+        InactiveMultiPlayer = 1024,
     };
 
     inline Location operator|(Location a, Location b) {
@@ -90,7 +98,10 @@ namespace Lapiz::Zenject {
             installerTypes.emplace(classof(GlobalNamespace::MultiplayerCoreInstaller* ));
         if (HasFlag(location, Location::ConnectedPlayer))
             installerTypes.emplace(classof(GlobalNamespace::MultiplayerConnectedPlayerInstaller* ));
-
+        if (HasFlag(location, Location::AlwaysMultiPlayer))
+            installerTypes.emplace(classof(GlobalNamespace::MultiplayerLocalPlayerInstaller* ));
+        if (HasFlag(location, Location::InactiveMultiPlayer))
+            installerTypes.emplace(classof(GlobalNamespace::MultiplayerLocalInactivePlayerInstaller* ));
         return installerTypes;
     }
 }

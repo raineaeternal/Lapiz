@@ -5,7 +5,7 @@
 namespace Lapiz::Zenject {
     class ZenjectManager {
 
-
+        
     };
 
     class ZenjectorDatum {

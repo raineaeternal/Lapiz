@@ -3,7 +3,7 @@
 #include "utilities/logging.hpp"
 
 #include "zenject/Zenjector.hpp"
-#include "Location.hpp"
+#include "zenject/Location.hpp"
 
 #include "utilities/logging.hpp"
 
@@ -23,5 +23,5 @@ extern "C" void load() {
 
     INFO("Installing Zenject bindings and hooks..");
 
-    Hooks::InstallHooks(getLogger());
+    Hooks::InstallHooks(Lapiz::Logging::getLogger());
 }
