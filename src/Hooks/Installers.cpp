@@ -1,7 +1,7 @@
 #include "utilities/hooking.hpp"
 #include "utilities/logging.hpp"
 
-#include "GlobalNamespace/PCAppInit.hpp"
+#include "GlobalNamespace/QuestAppInit.hpp"
 #include "GlobalNamespace/MainSettingsMenuViewControllersInstaller.hpp"
 #include "GlobalNamespace/StandardGameplayInstaller.hpp"
 #include "GlobalNamespace/MissionGameplayInstaller.hpp"
@@ -13,8 +13,8 @@
 #include "GlobalNamespace/MultiplayerLocalPlayerInstaller.hpp"
 #include "GlobalNamespace/MultiplayerLocalInactivePlayerInstaller.hpp"
 
-MAKE_AUTO_HOOK_MATCH(PCAppInit_InstallBindings, &GlobalNamespace::PCAppInit::InstallBindings, void, GlobalNamespace::PCAppInit* self) {
-    PCAppInit_InstallBindings(self);
+MAKE_AUTO_HOOK_MATCH(PCAppInit_InstallBindings, &GlobalNamespace::QuestAppInit::InstallBindings, void, GlobalNamespace::QuestAppInit* self) {
+    QuestAppInit_InstallBindings(self);
 }
 
 MAKE_AUTO_HOOK_MATCH(MainSettingsMenuViewControllersInstaller_InstallBindings, &GlobalNamespace::MainSettingsMenuViewControllersInstaller::InstallBindings, void, GlobalNamespace::MainSettingsMenuViewControllersInstaller* self) {
