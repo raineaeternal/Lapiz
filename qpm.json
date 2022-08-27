@@ -7,7 +7,7 @@
     "version": "0.1.0",
     "url": "https://github.com/raineio/Lapiz",
     "additionalData": {
-      "overrideSoName": "libLapiz.so"
+      "overrideSoName": "liblapiz.so"
     }
   },
   "dependencies": [
