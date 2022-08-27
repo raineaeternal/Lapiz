@@ -8,9 +8,11 @@ namespace Lapiz::Zenject::Internal {
     class InstallInstruction
     {
         public:
-            InstallInstruction(Il2CppClass* installerType, ZenjectorCallback installCallback) : _installerType(installerType), _installCallback(installCallback) {};
+            InstallInstruction(Il2CppClass* baseInstaller, ZenjectorCallback installCallback) : _baseInstaller(baseInstaller), _installCallback(installCallback) {};
+            auto get_baseInstaller() { return _baseInstaller; }
+            void onInstall(::Zenject::DiContainer* container) { if (_installCallback) _installCallback(container); }
         private:
-            const Il2CppClass* _installerType;
+            const Il2CppClass* _baseInstaller;
             const ZenjectorCallback _installCallback;
     };
 }

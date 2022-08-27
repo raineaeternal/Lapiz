@@ -8,10 +8,13 @@
 using namespace Zenject;
 
 namespace Lapiz::Zenject {
+    class ZenjectManager;
+
     namespace Internal{
         class InstallSet;
         class InstallInstruction;
     }
+
     typedef std::function<void(::Zenject::DiContainer*)> ZenjectorCallback;
     class Zenjector {
         public:
@@ -59,6 +62,8 @@ namespace Lapiz::Zenject {
             /// @brief Makes it possible for Quest mods to sync to an external service, like GitHub. Not implemented, nor used currently.
             static void UseLapizSync() {};
         private:
+            friend class ZenjectManager;
+
             void Install(Il2CppClass* baseInstallerT, ZenjectorCallback installCallback);
             void Install(Il2CppClass* customInstallerT, Il2CppClass* baseInstallerT, ArrayW<Il2CppObject*> parameters);
             void Install(Il2CppClass* customInstallerT, Zenject::Location location, ArrayW<Il2CppObject*> parameters);

@@ -9,8 +9,8 @@ using namespace Lapiz::Zenject::Internal::Filters;
 
 namespace Lapiz::Zenject {
     void Zenjector::Install(Zenject::Location location, ZenjectorCallback installCallback) {
-        for (auto t : InstallerForLocation(location)) {
-            _installInstructions.emplace(new InstallInstruction(t, installCallback));
+        for (auto baseInstallerT : InstallerForLocation(location)) {
+            _installInstructions.emplace(new InstallInstruction(baseInstallerT, installCallback));
         }
     }
 
