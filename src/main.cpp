@@ -3,9 +3,7 @@
 #include "utilities/logging.hpp"
 
 #include "zenject/Zenjector.hpp"
-#include "enum/LocationEnum.hpp"
-
-#include "CustomType.hpp"
+#include "Location.hpp"
 
 #include "utilities/logging.hpp"
 

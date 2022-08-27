@@ -1,6 +1,5 @@
 #pragma once
 
-#include "customtypes/Injectable.hpp"
 #include "beatsaber-hook/shared/utils/il2cpp-utils.hpp"
 
 #include "GlobalNamespace/QuestAppInit.hpp"
@@ -68,7 +67,7 @@ namespace Lapiz::Zenject {
         return (location & flag) == flag;
     }
 
-    static std::unordered_set<Il2CppClass*> get_InstallerForLocation(Location location) {
+    static std::unordered_set<Il2CppClass*> InstallerForLocation(Location location) {
         using namespace GlobalNamespace;
 
         std::unordered_set < Il2CppClass * > installerTypes;
