@@ -24,7 +24,7 @@ namespace Lapiz::Zenject {
         /// @param location Required to install to the DiContainer.
         /// @param installCallback Your lambda you install to the specified domain with.
         static void Install(Zenject::Location location, std::function<void(DiContainer*)> installCallback) {
-            std::unordered_set < Il2CppClass * > installerTypes = Zenject::getInstallerForLocation(location);
+            std::unordered_set < Il2CppClass * > installerTypes = Zenject::InstallerForLocation(location);
         };
 
         /// @brief Install bindings to another installer without a custom installer
