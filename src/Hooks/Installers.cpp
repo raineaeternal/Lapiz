@@ -13,7 +13,7 @@
 #include "GlobalNamespace/MultiplayerLocalPlayerInstaller.hpp"
 #include "GlobalNamespace/MultiplayerLocalInactivePlayerInstaller.hpp"
 
-MAKE_AUTO_HOOK_MATCH(PCAppInit_InstallBindings, &GlobalNamespace::QuestAppInit::InstallBindings, void, GlobalNamespace::QuestAppInit* self) {
+MAKE_AUTO_HOOK_MATCH(QuestAppInit_InstallBindings, &GlobalNamespace::QuestAppInit::InstallBindings, void, GlobalNamespace::QuestAppInit* self) {
     QuestAppInit_InstallBindings(self);
 }
 
