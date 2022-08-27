@@ -1,7 +1,9 @@
 #pragma once
 
-namespace Lapiz::Zenject::internal::filters {
+#include "../ContextBinding.hpp"
+namespace Lapiz::Zenject::Internal::Filters {
     class IInstallFilter {
-        bool ShouldInstall(ContextBinding binding);
+        public:
+            virtual bool ShouldInstall(ContextBinding* binding) const = 0;
     };
 }
