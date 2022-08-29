@@ -8,7 +8,7 @@ Lapiz is a library that abstracts the more difficult and tedious parts of [Zenje
 
 ### When is this going to release?
 
-Lapiz is nowhere close to stable, and therefore not ready for release. We are still working on implementing [Zenject](https://github.com/modesttree/Zenject) and the other important wrapper and providers.
+Soon, but you can already use the Zenject part of it! Just run `qpm-rust dependency add lapiz` to use it in your own mod.
 
 ### I got this installed... Do I need it?
 
@@ -63,4 +63,5 @@ Fork the repo, make your changes and Pull Request it!
 Follow [the contributing guidelines found here](/CONTRIBUTING.md)
 
 ## Credits
+
  - [Dan Rouse](https://github.com/danrouse)'s original implementation of zenject has helped a ton: [bsq-zenject](https://github.com/danrouse/bsq-zenjeqt/blob/master/src/hooks.cpp)
