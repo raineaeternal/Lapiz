@@ -4,8 +4,6 @@
 #include "utilities/logging.hpp"
 #include "System/Collections/Generic/IEnumerable_1.hpp"
 #include "../concepts.hpp"
-#include "internal/Delegate.hpp"
-#include "internal/MutateSet.hpp"
 
 #include "Zenject/DiContainer.hpp"
 #include "Zenject/SceneDecoratorContext.hpp"

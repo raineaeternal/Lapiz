@@ -3,6 +3,8 @@
 #include "internal/InstallInstruction.hpp"
 #include "internal/filters/TypedInstallFilter.hpp"
 #include "internal/filters/MultiTypedInstallFilter.hpp"
+#include "internal/Delegate.hpp"
+#include "internal/MutateSet.hpp"
 
 using namespace Lapiz::Zenject::Internal;
 using namespace Lapiz::Zenject::Internal::Filters;
