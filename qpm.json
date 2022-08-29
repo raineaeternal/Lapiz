@@ -4,7 +4,7 @@
   "info": {
     "name": "Lapiz",
     "id": "lapiz",
-    "version": "0.1.0",
+    "version": "0.0.2",
     "url": "https://github.com/raineio/Lapiz",
     "additionalData": {
       "overrideSoName": "liblapiz.so"
