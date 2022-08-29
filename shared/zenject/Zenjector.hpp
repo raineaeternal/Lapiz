@@ -4,15 +4,19 @@
 #include "utilities/logging.hpp"
 #include "System/Collections/Generic/IEnumerable_1.hpp"
 #include "../concepts.hpp"
+#include "internal/Delegate.hpp"
+#include "internal/MutateSet.hpp"
 
-using namespace Zenject;
+#include "Zenject/DiContainer.hpp"
+#include "Zenject/SceneDecoratorContext.hpp"
 
 namespace Lapiz::Zenject {
     class ZenjectManager;
 
-    namespace Internal{
+    namespace Internal {
         class InstallSet;
         class InstallInstruction;
+        class MutateSet;
     }
 
     typedef std::function<void(::Zenject::DiContainer*)> ZenjectorCallback;
@@ -53,6 +57,13 @@ namespace Lapiz::Zenject {
                 Install(classof(TBaseInstaller), installCallback);
             };
 
+            /// @brief Searches a decorator context for the first instance that matches a type, then invokes a callback with that instance for it to be modified or mutated.
+            /// @tparam TMutableType The type to mutate.
+            /// @param contractName The contract name of the SceneDecoratorContext to search on.
+            /// @param mutationCallback The callback used to mutate the object instance.
+            template<typename TMutableType>
+            void Mutate(std::string contractName, std::function<void(::Zenject::SceneDecoratorContext*, TMutableType)> mutationCallback);
+
             /// @brief Install bindings to another installer without a custom installer
             static void UseMetadataBinder() {};
 
@@ -70,5 +81,6 @@ namespace Lapiz::Zenject {
 
             std::unordered_set<Internal::InstallSet*> _installSets;
             std::unordered_set<Internal::InstallInstruction*> _installInstructions;
+            std::unordered_set<Internal::MutateSet*> _mutateSets;
     };
 }

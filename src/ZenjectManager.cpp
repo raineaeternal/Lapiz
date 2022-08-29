@@ -1,9 +1,16 @@
+#define private public
+#include "modloader/shared/modloader.hpp"
+#undef private
+
 #include "ZenjectManager.hpp"
+
 #include "Hooks/ContextDecorator.hpp"
 
 #include "internal/InstallInstruction.hpp"
 #include "internal/InstallSet.hpp"
 #include "Zenject/SceneDecoratorContext.hpp"
+
+#include "modloader/shared/modloader.hpp"
 
 namespace Lapiz::Zenject {
     static ZenjectManager instance;
@@ -21,15 +28,14 @@ namespace Lapiz::Zenject {
         Internal::ContextDecorator::contextInstalling += {&ZenjectManager::ContextDecorator_ContextInstalling, this};
     }
 
-    void ZenjectManager::InstallAllMods() {
-        /*
-            for all mods:
-                look up symbol install(Zenjector*);
-                execute if found
-                Add(zenjector);
-                done
-        */
-    }
+    // void ZenjectManager::InstallAllMods(Lapiz::Zenject::Zenjector zenjector) {
+    //     void (*install_func)(Zenjector&);
+    //     *(void**)(&install_func) = dlsym(handle, "install");
+
+    //     if (install_func) {
+    //         install_func(zenjector)
+    //     }
+    // }
 
     void ZenjectManager::ContextDecorator_ContextInstalling(::Zenject::Context* mainContext, Internal::ContextBindingSet installerBindings) {
         if (mainContext->get_name() == _initialContextName)
@@ -42,10 +48,10 @@ namespace Lapiz::Zenject {
 
         for (auto zenjector : _zenjectors) {
             if (isDecorator) {
-                /* // TODO
                 for (auto set : zenjector->_mutateSets) {
                     _mutatorManager->Install(set, mainContext, injectableList);
                 }
+                /* // TODO
                 for (auto set : zenjector->_exposeSets) {
                     _exposerManager->Install(set, mainContext, injectableList);
                 }
