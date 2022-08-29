@@ -1,10 +1,10 @@
 #pragma once
 
 #include "Zenject/Context.hpp"
-#include "internal/ContextBinding.hpp"
-#include "internal/Instructors/InstructorManager.hpp"
-#include "internal/Mutators/MutatorManager.hpp"
-#include "internal/Exposers/ExposerManager.hpp"
+#include "zenject/internal/ContextBinding.hpp"
+#include "zenject/internal/Instructors/InstructorManager.hpp"
+#include "zenject/internal/Mutators/MutatorManager.hpp"
+#include "zenject/internal/Exposers/ExposerManager.hpp"
 #include "zenject/Zenjector.hpp"
 
 namespace Lapiz::Zenject {

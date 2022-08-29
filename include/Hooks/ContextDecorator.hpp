@@ -1,7 +1,7 @@
 #pragma once
 #include "Zenject/Context.hpp"
 
-#include "internal/ContextBinding.hpp"
+#include "zenject/internal/ContextBinding.hpp"
 #include "Zenject/Context.hpp"
 #include "Zenject/InstallerBase.hpp"
 #include "Zenject/ScriptableObjectInstaller.hpp"

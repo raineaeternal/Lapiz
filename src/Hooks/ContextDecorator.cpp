@@ -3,7 +3,7 @@
 
 #include "Hooks/ContextDecorator.hpp"
 
-#include "internal/ContextBinding.hpp"
+#include "zenject/internal/ContextBinding.hpp"
 #include "Zenject/SceneDecoratorContext.hpp"
 
 

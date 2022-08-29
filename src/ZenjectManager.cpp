@@ -3,8 +3,8 @@
 
 #include "Hooks/ContextDecorator.hpp"
 
-#include "internal/InstallInstruction.hpp"
-#include "internal/InstallSet.hpp"
+#include "zenject/internal/InstallInstruction.hpp"
+#include "zenject/internal/InstallSet.hpp"
 #include "Zenject/SceneDecoratorContext.hpp"
 
 #include "modloader/shared/modloader.hpp"
