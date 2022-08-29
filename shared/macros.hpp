@@ -17,7 +17,7 @@ private:                                                                        
     struct __AttributeRegistration_##name : ::Lapiz::Zenject::Attributes::AttributeRegistration {                       \
         __AttributeRegistration_##name() : ::Lapiz::Zenject::Attributes::AttributeRegistration() {}                     \
         Il2CppClass* get_declaringType() const override {                                                               \
-            return ___TargetType::___TypeRegistration::klass_ptr;                                                         \
+            return ___TargetType::___TypeRegistration::klass_ptr;                                                       \
         }                                                                                                               \
         const char* get_name() const override { return #name; }                                                         \
         bool isMethod() const override { return true; }                                                                 \
@@ -31,7 +31,7 @@ private:                                                                        
     struct __AttributeRegistration_##name : ::Lapiz::Zenject::Attributes::AttributeRegistration {                       \
         __AttributeRegistration_##name() : ::Lapiz::Zenject::Attributes::AttributeRegistration() {}                     \
         Il2CppClass* get_declaringType() const override {                                                               \
-            return ___TargetType::___TypeRegistration::klass_ptr;                                                         \
+            return ___TargetType::___TypeRegistration::klass_ptr;                                                       \
         }                                                                                                               \
         const char* get_name() const override { return #name; }                                                         \
         bool isMethod() const override { return true; }                                                                 \
@@ -46,7 +46,7 @@ private:                                                                        
     struct __AttributeRegistration_##name : ::Lapiz::Zenject::Attributes::AttributeRegistration {                       \
         __AttributeRegistration_##name() : ::Lapiz::Zenject::Attributes::AttributeRegistration() {}                     \
         Il2CppClass* get_declaringType() const override {                                                               \
-            return ___TargetType::___TypeRegistration::klass_ptr;                                                         \
+            return ___TargetType::___TypeRegistration::klass_ptr;                                                       \
         }                                                                                                               \
         const char* get_name() const override { return #name; }                                                         \
         const char* get_id() const override { return ID; }                                                              \
@@ -61,7 +61,7 @@ private:                                                                        
     struct __AttributeRegistration_##name : ::Lapiz::Zenject::Attributes::AttributeRegistration {                       \
         __AttributeRegistration_##name() : ::Lapiz::Zenject::Attributes::AttributeRegistration() {}                     \
         Il2CppClass* get_declaringType() const override {                                                               \
-            return ___TargetType::___TypeRegistration::klass_ptr;                                                         \
+            return ___TargetType::___TypeRegistration::klass_ptr;                                                       \
         }                                                                                                               \
         const char* get_name() const override { return #name; }                                                         \
         const char* get_id() const override { return ID; }                                                              \
@@ -77,7 +77,7 @@ private:                                                                        
     struct __AttributeRegistration_##name : ::Lapiz::Zenject::Attributes::AttributeRegistration {                       \
         __AttributeRegistration_##name() : ::Lapiz::Zenject::Attributes::AttributeRegistration() {}                     \
         Il2CppClass* get_declaringType() const override {                                                               \
-            return ___TargetType::___TypeRegistration::klass_ptr;                                                         \
+            return ___TargetType::___TypeRegistration::klass_ptr;                                                       \
         }                                                                                                               \
         const char* get_name() const override { return #name; }                                                         \
         bool isField() const override { return true; }                                                                  \
@@ -91,7 +91,7 @@ private:                                                                        
     struct __AttributeRegistration_##name : ::Lapiz::Zenject::Attributes::AttributeRegistration {                       \
         __AttributeRegistration_##name() : ::Lapiz::Zenject::Attributes::AttributeRegistration() {}                     \
         Il2CppClass* get_declaringType() const override {                                                               \
-            return ___TargetType::___TypeRegistration::klass_ptr;                                                         \
+            return ___TargetType::___TypeRegistration::klass_ptr;                                                       \
         }                                                                                                               \
         const char* get_name() const override { return #name; }                                                         \
         bool isField() const override { return true; }                                                                  \
@@ -106,7 +106,7 @@ private:                                                                        
     struct __AttributeRegistration_##name : ::Lapiz::Zenject::Attributes::AttributeRegistration {                       \
         __AttributeRegistration_##name() : ::Lapiz::Zenject::Attributes::AttributeRegistration() {}                     \
         Il2CppClass* get_declaringType() const override {                                                               \
-            return ___TargetType::___TypeRegistration::klass_ptr;                                                         \
+            return ___TargetType::___TypeRegistration::klass_ptr;                                                       \
         }                                                                                                               \
         const char* get_name() const override { return #name; }                                                         \
         const char* get_id() const override { return ID; }                                                              \
@@ -121,7 +121,7 @@ private:                                                                        
     struct __AttributeRegistration_##name : ::Lapiz::Zenject::Attributes::AttributeRegistration {                       \
         __AttributeRegistration_##name() : ::Lapiz::Zenject::Attributes::AttributeRegistration() {}                     \
         Il2CppClass* get_declaringType() const override {                                                               \
-            return ___TargetType::___TypeRegistration::klass_ptr;                                                         \
+            return ___TargetType::___TypeRegistration::klass_ptr;                                                       \
         }                                                                                                               \
         const char* get_name() const override { return #name; }                                                         \
         const char* get_id() const override { return ID; }                                                              \
