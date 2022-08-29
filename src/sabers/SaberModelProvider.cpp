@@ -39,6 +39,11 @@ namespace Lapiz::Sabers {
         _activeSaberModelRegistration = registrations[0];
     }
 
+    void SaberModelProvider::dtor() {
+        instance = nullptr;
+        Finalize();
+    }
+
     GlobalNamespace::SaberModelController* SaberModelProvider::NewModel(std::optional<GlobalNamespace::SaberType> saberType = std::nullopt) {
         auto newModel = CreateNew(saberType.value_or(SaberType::SaberA));
         for (auto glow : newModel->setSaberGlowColors) {

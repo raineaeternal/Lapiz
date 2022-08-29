@@ -28,7 +28,7 @@ DECLARE_CLASS_CODEGEN(Lapiz::Sabers, SaberModelProvider, Il2CppObject,
         bool SaberModelContainer_Start_Prefix(GlobalNamespace::SaberModelContainer* self);
 
         DECLARE_CTOR(ctor, Zenject::DiContainer* container, GlobalNamespace::SaberManager* saberManager, ListWrapper<SaberModelRegistrationWrapper*> saberModelRegistrations);
-        DECLARE_SIMPLE_DTOR();
+        DECLARE_DTOR(dtor);
     private:
         static SaberModelProvider* instance;
         GlobalNamespace::SaberModelController* CreateNew(GlobalNamespace::SaberType saberType);
