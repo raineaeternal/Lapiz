@@ -30,7 +30,7 @@ namespace Lapiz::Zenject {
         if (mainContext->get_name() == _initialContextName)
             _initialSceneConstructionRegistered = true;
 
-        if (_initialSceneConstructionRegistered) return;
+        if (!_initialSceneConstructionRegistered) return;
 
         std::set<UnityEngine::MonoBehaviour*> injectableList;
         bool isDecorator = il2cpp_utils::IsConvertibleFrom(&classof(::Zenject::SceneDecoratorContext*)->byval_arg, &mainContext->klass->byval_arg, false);
