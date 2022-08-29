@@ -7,6 +7,7 @@
 #include "internal/MutateSet.hpp"
 #include "internal/ExposeSet.hpp"
 #include "ZenjectManager.hpp"
+#include "utilities/logging.hpp"
 
 using namespace Lapiz::Zenject::Internal;
 using namespace Lapiz::Zenject::Internal::Filters;
