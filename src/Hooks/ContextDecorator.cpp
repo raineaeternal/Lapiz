@@ -23,8 +23,7 @@ namespace Lapiz::Zenject::Internal {
             bindings->emplace(std::make_shared<ContextBinding>(self, normalInstaller->klass, accessor));
 
         for (auto normalInstallerType : normalInstallerTypes) {
-            Il2CppType* t = (Il2CppType*)normalInstallerType->impl.value.m_value;
-            bindings->emplace(std::make_shared<ContextBinding>(self, il2cpp_functions::Class_FromIl2CppType(t), accessor));
+            bindings->emplace(std::make_shared<ContextBinding>(self, il2cpp_functions::class_from_system_type((Il2CppReflectionType*)normalInstallerType), accessor));
         }
 
         for (auto scriptableObjectInstaller : scriptableObjectInstallers)
