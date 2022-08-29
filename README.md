@@ -58,3 +58,6 @@ Do note that this is very much preliminary documentation, and that more in-depth
 Fork the repo, make your changes and Pull Request it!
 
 Follow [the contributing guidelines found here](/CONTRIBUTING.md)
+
+## Credits
+ - [Dan Rouse](https://github.com/danrouse)'s original implementation of zenject has helped a ton: [bsq-zenject](https://github.com/danrouse/bsq-zenjeqt/blob/master/src/hooks.cpp)
