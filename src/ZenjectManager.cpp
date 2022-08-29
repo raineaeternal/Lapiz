@@ -1,5 +1,5 @@
 #include "ZenjectManager.hpp"
-#include "utilitites/logging.hpp"
+#include "utilities/logging.hpp"
 
 #include "Hooks/ContextDecorator.hpp"
 
