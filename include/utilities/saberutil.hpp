@@ -12,6 +12,10 @@
 #include "UnityEngine/MaterialPropertyBlock.hpp"
 
 namespace SaberUtil {
+    UnityEngine::Color GetColor(GlobalNamespace::SaberModelController* saberModelController) {
+        return saberModelController->saberTrail->color;
+    }
+
     UnityEngine::Color ColorWithAlpha(UnityEngine::Color color, float alpha) {
         color.a = alpha;
         return color;
