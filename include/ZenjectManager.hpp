@@ -3,6 +3,7 @@
 #include "Zenject/Context.hpp"
 #include "internal/ContextBinding.hpp"
 #include "internal/Instructors/InstructorManager.hpp"
+#include "internal/Mutators/MutatorManager.hpp"
 #include "zenject/Zenjector.hpp"
 
 namespace Lapiz::Zenject {
@@ -24,5 +25,6 @@ namespace Lapiz::Zenject {
             std::set<Zenjector*> _zenjectors;
 
             Internal::Instructors::InstructorManager _instructorManager;
+            Internal::Mutators::MutatorManager _mutatorManager;
     };
 }

@@ -49,7 +49,7 @@ namespace Lapiz::Zenject {
         for (auto zenjector : _zenjectors) {
             if (isDecorator) {
                 for (auto set : zenjector->_mutateSets) {
-                    _mutatorManager->Install(set, mainContext, injectableList);
+                    _mutatorManager.Install(set, mainContext, injectableList);
                 }
                 /* // TODO
                 for (auto set : zenjector->_exposeSets) {
