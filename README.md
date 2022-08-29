@@ -40,11 +40,14 @@ To properly install the installer class we just made, you need to use the first 
 #include "Lapiz/Location.hpp"
 #include "installers/MenuInstaller.hpp"
 
+// First you need to get a Zenjector instance.
+auto zenjector = Zenjector::Get();
+
 // Used together with an installer class
-Zenjector::Install<Lapiz::MenuInstaller*>(Location::Menu);
+zenjector->Install<Lapiz::MenuInstaller*>(Location::Menu);
 
 // Used as a standalone installer for smaller things, to reduce file clutter.
-Zenjector::Install(Location::Menu, [](auto container){
+zenjector->Install(Location::Menu, [](Zenject::DiContainer* container){
     // container-> is used to access the DiContainer address,
     // where you can install anything you need.
     container->BindInterfaceAndSelfTo<Lapiz::MenuInstaller*>()->AsSingle();
