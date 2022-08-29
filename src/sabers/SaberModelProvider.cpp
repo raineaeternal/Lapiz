@@ -39,12 +39,7 @@ namespace Lapiz::Sabers {
         _activeSaberModelRegistration = registrations[0];
     }
 
-    void SaberModelProvider::dtor() {
-        instance = nullptr;
-        Finalize();
-    }
-
-    GlobalNamespace::SaberModelController* SaberModelProvider::NewModel(std::optional<GlobalNamespace::SaberType> saberType = std::nullopt) {
+    GlobalNamespace::SaberModelController* SaberModelProvider::NewModel(std::optional<GlobalNamespace::SaberType> saberType) {
         auto newModel = CreateNew(saberType.value_or(SaberType::SaberA));
         for (auto glow : newModel->setSaberGlowColors) {
             if (!saberType.has_value())
@@ -98,6 +93,11 @@ namespace Lapiz::Sabers {
         return newModel;
     }
 
+    void SaberModelProvider::Dispose() {
+        instance = nullptr;
+    }
+
+
     bool SaberModelProvider::SetSaberGlowColor_Start_Prefix(GlobalNamespace::SetSaberGlowColor* self) {
         if (_earlyInittingGlowColors->Contains(self)) {
             _earlyInittingGlowColors->Remove(self);
@@ -117,7 +117,7 @@ namespace Lapiz::Sabers {
         return true;
     }
 
-    bool SaberModelProvider::SaberModelContainer_Start_Prefix(GlobalNamespace::SaberModelContainer* self) {
+    void SaberModelProvider::SaberModelContainer_Start_Prefix(GlobalNamespace::SaberModelContainer* self) {
         if (self != _localLeftContainer && self != _localRightContainer) return;
         if (_activeSaberModelRegistration == _defaultSaberModelRegistration) return;
 

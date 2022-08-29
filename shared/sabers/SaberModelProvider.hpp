@@ -8,8 +8,9 @@
 #include "GlobalNamespace/SetSaberGlowColor.hpp"
 #include "GlobalNamespace/SetSaberFakeGlowColor.hpp"
 #include "System/Collections/Generic/HashSet_1.hpp"
+#include "System/IDisposable.hpp"
 
-DECLARE_CLASS_CODEGEN(Lapiz::Sabers, SaberModelProvider, Il2CppObject,
+DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelProvider, Il2CppObject, classof(System::IDisposable*),
     DECLARE_INSTANCE_FIELD(Zenject::DiContainer*, _container);
     DECLARE_INSTANCE_FIELD(GlobalNamespace::SaberManager*, _saberManager);
     DECLARE_INSTANCE_FIELD(GlobalNamespace::SaberModelContainer*, _localLeftContainer);
@@ -19,16 +20,17 @@ DECLARE_CLASS_CODEGEN(Lapiz::Sabers, SaberModelProvider, Il2CppObject,
     DECLARE_INSTANCE_FIELD(System::Collections::Generic::HashSet_1<GlobalNamespace::SetSaberGlowColor*>*, _earlyInittingGlowColors);
     DECLARE_INSTANCE_FIELD(System::Collections::Generic::HashSet_1<GlobalNamespace::SetSaberFakeGlowColor*>*, _earlyInittingFakeGlowColors);
 
+    DECLARE_OVERRIDE_METHOD(void, Dispose, il2cpp_utils::il2cpp_type_check::MetadataGetter<&::System::IDisposable::Dispose>::get());
     public:
         static SaberModelProvider* get_instance();
         GlobalNamespace::SaberModelController* NewModel(std::optional<GlobalNamespace::SaberType> saberType = std::nullopt);
         
         bool SetSaberGlowColor_Start_Prefix(GlobalNamespace::SetSaberGlowColor* self);
         bool SetSaberFakeGlowColor_Start_Prefix(GlobalNamespace::SetSaberFakeGlowColor* self);
-        bool SaberModelContainer_Start_Prefix(GlobalNamespace::SaberModelContainer* self);
+        void SaberModelContainer_Start_Prefix(GlobalNamespace::SaberModelContainer* self);
 
         DECLARE_CTOR(ctor, Zenject::DiContainer* container, GlobalNamespace::SaberManager* saberManager, ListWrapper<SaberModelRegistrationWrapper*> saberModelRegistrations);
-        DECLARE_DTOR(dtor);
+        DECLARE_SIMPLE_DTOR();
     private:
         static SaberModelProvider* instance;
         GlobalNamespace::SaberModelController* CreateNew(GlobalNamespace::SaberType saberType);

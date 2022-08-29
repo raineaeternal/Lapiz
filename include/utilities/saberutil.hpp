@@ -12,23 +12,23 @@
 #include "UnityEngine/MaterialPropertyBlock.hpp"
 
 namespace SaberUtil {
-    UnityEngine::Color GetColor(GlobalNamespace::SaberModelController* saberModelController) {
+    static UnityEngine::Color GetColor(GlobalNamespace::SaberModelController* saberModelController) {
         return saberModelController->saberTrail->color;
     }
 
-    UnityEngine::Color ColorWithAlpha(UnityEngine::Color color, float alpha) {
+    static UnityEngine::Color ColorWithAlpha(UnityEngine::Color color, float alpha) {
         color.a = alpha;
         return color;
     }
 
-    void SetColors(GlobalNamespace::SetSaberFakeGlowColor* setSaberFakeGlowColor, UnityEngine::Color color) {
+    static void SetColors(GlobalNamespace::SetSaberFakeGlowColor* setSaberFakeGlowColor, UnityEngine::Color color) {
             auto parametricSpriteController = setSaberFakeGlowColor->parametric3SliceSprite;
             auto tint = setSaberFakeGlowColor->tintColor;
             parametricSpriteController->color = color * tint;
             parametricSpriteController->Refresh();
     }
     
-    void SetColors(GlobalNamespace::SetSaberGlowColor* setSaberGlowColor, UnityEngine::Color color) {
+    static void SetColors(GlobalNamespace::SetSaberGlowColor* setSaberGlowColor, UnityEngine::Color color) {
             auto meshRenderer = setSaberGlowColor->meshRenderer;
             auto materialPropertyBlock = setSaberGlowColor->materialPropertyBlock;
             auto propertyTintPairs = setSaberGlowColor->propertyTintColorPairs;
@@ -44,7 +44,7 @@ namespace SaberUtil {
             meshRenderer->SetPropertyBlock(materialPropertyBlock);
     }
 
-    void SetColor(GlobalNamespace::SaberModelController* saberModelController, UnityEngine::Color color) {
+    static void SetColor(GlobalNamespace::SaberModelController* saberModelController, UnityEngine::Color color) {
         auto trail = saberModelController->saberTrail;
 
         auto light = saberModelController->saberLight;

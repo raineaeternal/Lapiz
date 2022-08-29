@@ -5,7 +5,7 @@
 DEFINE_TYPE(Lapiz::Sabers, SaberModelRegistrationWrapper);
 
 namespace Lapiz::Sabers {
-        SaberModelRegistration::SaberModelRegistration(const Il2CppClass* type, int priority = 0) {
+        SaberModelRegistration::SaberModelRegistration(const Il2CppClass* type, int priority) {
             if (!type || !TypeUtil::hasAncestor<GlobalNamespace::SaberModelController*>(type)) {
                 throw std::invalid_argument(fmt::format("Type {}::{} does not have SaberModelController as ancestor!", type->namespaze, type->name));
             }
@@ -14,7 +14,7 @@ namespace Lapiz::Sabers {
             _leftType = _rightType = type;
         }
 
-        SaberModelRegistration::SaberModelRegistration(const Il2CppClass* leftType, const Il2CppClass* rightType, int priority = 0) {
+        SaberModelRegistration::SaberModelRegistration(const Il2CppClass* leftType, const Il2CppClass* rightType, int priority) {
             if (!leftType || !TypeUtil::hasAncestor<GlobalNamespace::SaberModelController*>(leftType)) {
                 throw std::invalid_argument(fmt::format("Type {}::{} does not have SaberModelController as ancestor!", leftType->namespaze, leftType->name));
             }
@@ -28,7 +28,7 @@ namespace Lapiz::Sabers {
             _rightType = rightType;
         }
 
-        SaberModelRegistration::SaberModelRegistration(GlobalNamespace::SaberModelController* prefab, int priority = 0) {
+        SaberModelRegistration::SaberModelRegistration(GlobalNamespace::SaberModelController* prefab, int priority) {
             if (!prefab || !prefab->m_CachedPtr.m_value) {
                 throw std::invalid_argument("Prefab was not valid!");
             }
@@ -38,7 +38,7 @@ namespace Lapiz::Sabers {
             _rightTemplate = prefab;
         }
 
-        SaberModelRegistration::SaberModelRegistration(GlobalNamespace::SaberModelController* leftModelPrefab, GlobalNamespace::SaberModelController* rightModelPrefab, int priority = 0) {
+        SaberModelRegistration::SaberModelRegistration(GlobalNamespace::SaberModelController* leftModelPrefab, GlobalNamespace::SaberModelController* rightModelPrefab, int priority) {
             if (!leftModelPrefab || !leftModelPrefab->m_CachedPtr.m_value) {
                 throw std::invalid_argument("Left prefab was not valid!");
             }
@@ -53,7 +53,7 @@ namespace Lapiz::Sabers {
 
         }
 
-        SaberModelRegistration::SaberModelRegistration(std::function<GlobalNamespace::SaberModelController*(void)> instruction, int priority = 0) {
+        SaberModelRegistration::SaberModelRegistration(std::function<GlobalNamespace::SaberModelController*(void)> instruction, int priority) {
             if (!instruction) {
                 throw std::invalid_argument("Instruction was not valid!");
             }
@@ -62,7 +62,7 @@ namespace Lapiz::Sabers {
             _leftInstruction = _rightInstruction = instruction;
         }
 
-        SaberModelRegistration::SaberModelRegistration(std::function<GlobalNamespace::SaberModelController*(void)> leftInstruction, std::function<GlobalNamespace::SaberModelController*(void)> rightInstruction, int priority = 0) {
+        SaberModelRegistration::SaberModelRegistration(std::function<GlobalNamespace::SaberModelController*(void)> leftInstruction, std::function<GlobalNamespace::SaberModelController*(void)> rightInstruction, int priority) {
             if (!leftInstruction) {
                 throw std::invalid_argument("Left instruction was not valid!");
             }

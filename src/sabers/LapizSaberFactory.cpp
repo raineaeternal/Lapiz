@@ -16,7 +16,7 @@ namespace Lapiz::Sabers {
     LapizSaber* LapizSaberFactory::Spawn(System::Type* backingSaberType, GlobalNamespace::SaberType saberType) {
         auto lapizSaberGameObject = UnityEngine::GameObject::New_ctor("Lapiz | LapizSaber");
         auto lapizSaber = _container->InstantiateComponent<LapizSaber*>(lapizSaberGameObject);
-        lapizSaber->colorUpdated = std::bind(&UpdateColorInternal, this, std::placeholders::_1, std::placeholders::_2);
+        lapizSaber->colorUpdated = std::bind(&LapizSaberFactory::UpdateColorInternal, this, std::placeholders::_1, std::placeholders::_2);
         lapizSaber->Setup(backingSaberType, saberType);
         if (SaberCreated.size() > 0) SaberCreated.invoke(lapizSaber);
         return lapizSaber;

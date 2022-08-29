@@ -19,6 +19,6 @@ MAKE_AUTO_HOOK_MATCH(SetSaberFakeGlowColor_Start, &GlobalNamespace::SetSaberFake
 
 MAKE_AUTO_HOOK_MATCH(SaberModelContainer_Start, &GlobalNamespace::SaberModelContainer::Start, void, GlobalNamespace::SaberModelContainer* self) {
     auto instance = Lapiz::Sabers::SaberModelProvider::get_instance();
-    if (!instance || instance->SaberModelContainer_Start_Prefix(self))
-        SaberModelContainer_Start(self);
+    if (instance) instance->SaberModelContainer_Start_Prefix(self);
+    SaberModelContainer_Start(self);
 }

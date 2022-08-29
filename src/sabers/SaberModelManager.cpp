@@ -18,7 +18,7 @@ namespace Lapiz::Sabers {
 
         _colorManager = colorManager;
         _lapizSaberFactory = lapizSaberFactory;
-        _lapizSaberFactory->SaberCreated += {&SiraSaberFactory_SaberCreated, this};
+        _lapizSaberFactory->SaberCreated += {&SaberModelManager::SiraSaberFactory_SaberCreated, this};
     }
 
     void SaberModelManager::SiraSaberFactory_SaberCreated(LapizSaber* lapizSaber) {
@@ -76,7 +76,7 @@ namespace Lapiz::Sabers {
                     _salvationList->Add(*contractItr);
                 }
             } else {
-                auto existingItr = std::find_if(_desperationList.begin(), _desperationList.end(), [saber](auto x){ x->get_saber() == saber; });
+                auto existingItr = std::find_if(_desperationList.begin(), _desperationList.end(), [saber](auto x){ return x->get_saber() == saber; });
                 if (existingItr == _desperationList.end()) {
                     _desperationList->Add(DesperationContract::New_ctor(saber, color));
                 }
@@ -105,7 +105,7 @@ namespace Lapiz::Sabers {
     }
 
     void SaberModelManager::Dispose() {
-        _lapizSaberFactory->SaberCreated -= {&SiraSaberFactory_SaberCreated, this};
+        _lapizSaberFactory->SaberCreated -= {&SaberModelManager::SiraSaberFactory_SaberCreated, this};
     }
 
     /* DesperationContract */

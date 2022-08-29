@@ -8,7 +8,7 @@ namespace Lapiz::Sabers {
         public:
             template<typename T>
             requires(std::is_convertible_v<T, GlobalNamespace::SaberModelController*>)
-            static std::shared_ptr<SaberModelRegistration> SaberModelRegistration::Create(int priority = 0) {
+            static std::shared_ptr<SaberModelRegistration> Create(int priority = 0) {
                 return std::make_shared<SaberModelRegistration>(classof(T), priority);
             }
 
