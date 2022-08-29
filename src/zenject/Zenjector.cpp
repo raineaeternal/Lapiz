@@ -6,11 +6,24 @@
 #include "internal/Delegate.hpp"
 #include "internal/MutateSet.hpp"
 #include "internal/ExposeSet.hpp"
+#include "ZenjectManager.hpp"
 
 using namespace Lapiz::Zenject::Internal;
 using namespace Lapiz::Zenject::Internal::Filters;
 
+extern "C" void load();
+
 namespace Lapiz::Zenject {
+    Zenjector::Zenjector(const ModInfo& modInfo) : modInfo(modInfo) {
+        ZenjectManager::get_instance().Add(this);
+    }
+
+    Zenjector* Zenjector::Get(const ModInfo& modInfo) {
+        load();
+        auto z = new Zenjector(modInfo);
+        return z;
+    }
+
     void Zenjector::Install(Zenject::Location location, ZenjectorCallback installCallback) {
         for (auto baseInstallerT : InstallerForLocation(location)) {
             _installInstructions.emplace(new InstallInstruction(baseInstallerT, installCallback));

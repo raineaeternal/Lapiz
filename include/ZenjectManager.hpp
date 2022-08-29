@@ -13,10 +13,10 @@ namespace Lapiz::Zenject {
         public:
             ZenjectManager();
 
-            void InstallAllMods();
-            ZenjectManager& get_instance();
+            static ZenjectManager& get_instance();
             auto get_initialSceneConstructionRegistered() { return _initialSceneConstructionRegistered; }
         private:
+            friend class Zenjector;
             static constexpr const char* _initialContextName = "AppCoreSceneContext";
             
             void Add(Zenjector* zenjector);

@@ -17,8 +17,11 @@ extern "C" void setup(ModInfo& info) {
     INFO(MOD_ID " v" VERSION " completed setup!");
 }
 
+bool loaded = false;
 // Called later on in the game loading - a good time to install function hooks
 extern "C" void load() {
+    if (loaded) return;
+    loaded = true;
     il2cpp_functions::Init();
 
     INFO("Installing Zenject bindings and hooks..");

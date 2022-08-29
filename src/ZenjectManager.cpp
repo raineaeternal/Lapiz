@@ -1,8 +1,5 @@
-#define private public
-#include "modloader/shared/modloader.hpp"
-#undef private
-
 #include "ZenjectManager.hpp"
+#include "utilitites/logging.hpp"
 
 #include "Hooks/ContextDecorator.hpp"
 
@@ -21,21 +18,13 @@ namespace Lapiz::Zenject {
     }
     
     void ZenjectManager::Add(Zenjector* zenjector) {
+        DEBUG("Registered zenjector for mod {} v{}", zenjector->modInfo.id, zenjector->modInfo.version);
         _zenjectors.emplace(zenjector);
     }
 
     ZenjectManager::ZenjectManager() {
         Internal::ContextDecorator::contextInstalling += {&ZenjectManager::ContextDecorator_ContextInstalling, this};
     }
-
-    // void ZenjectManager::InstallAllMods(Lapiz::Zenject::Zenjector zenjector) {
-    //     void (*install_func)(Zenjector&);
-    //     *(void**)(&install_func) = dlsym(handle, "install");
-
-    //     if (install_func) {
-    //         install_func(zenjector)
-    //     }
-    // }
 
     void ZenjectManager::ContextDecorator_ContextInstalling(::Zenject::Context* mainContext, Internal::ContextBindingSet installerBindings) {
         if (mainContext->get_name() == _initialContextName)

@@ -26,7 +26,6 @@ namespace Lapiz::Zenject {
 
     class Zenjector {
         public:
-
             /// @brief Installs a custom installer to a location with a backing installer(s).
             /// @tparam T The type of your custom installer.
             /// @param location The location to install it to.
@@ -90,6 +89,10 @@ namespace Lapiz::Zenject {
             /// @param contractName the contract name of the SceneDecoratorContext to search on
             void Expose(Il2CppClass* typeToExpose, std::string contractName);
 
+            /// @brief get a zenjector for your mod
+            /// @return A zenjector for you to install, expose or mutate things with
+            static Zenjector* Get(const ModInfo& modInfo = {MOD_ID, VERSION});
+
             /// @brief Install bindings to another installer without a custom installer
             static void UseMetadataBinder() {};
 
@@ -100,14 +103,21 @@ namespace Lapiz::Zenject {
             static void UseLapizSync() {};
         private:
             friend class ZenjectManager;
+            explicit Zenjector(const ModInfo& modInfo);
 
             void Install(Il2CppClass* baseInstallerT, ZenjectorCallback installCallback);
             void Install(Il2CppClass* customInstallerT, Il2CppClass* baseInstallerT, ArrayW<Il2CppObject*> parameters);
             void Install(Il2CppClass* customInstallerT, Zenject::Location location, ArrayW<Il2CppObject*> parameters);
 
+            ModInfo modInfo;
+
+            /// @brief sets for an install, made with the Install method that takes a location
             std::unordered_set<Internal::InstallSet*> _installSets;
+            /// @brief instructions for an install, made with the Install method that takes a baseInstaller
             std::unordered_set<Internal::InstallInstruction*> _installInstructions;
+            /// @brief information for types to mutate
             std::unordered_set<Internal::MutateSet*> _mutateSets;
+            /// @brief information for types to expose 😳
             std::unordered_set<Internal::ExposeSet*> _exposeSets;
     };
 }
