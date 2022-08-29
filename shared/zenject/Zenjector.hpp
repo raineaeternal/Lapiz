@@ -15,9 +15,15 @@ namespace Lapiz::Zenject {
         class InstallSet;
         class InstallInstruction;
         class MutateSet;
+        class ExposeSet;
     }
 
     typedef std::function<void(::Zenject::DiContainer*)> ZenjectorCallback;
+
+    template<typename T>
+    requires(std::is_convertible_v<T, Il2CppObject*>)
+    using MutateCallback = std::function<void(::Zenject::SceneDecoratorContext*, T)>;
+
     class Zenjector {
         public:
 
@@ -56,20 +62,33 @@ namespace Lapiz::Zenject {
             };
 
             /// @brief Searches a decorator context for the first instance that matches a type, then invokes a callback with that instance for it to be modified or mutated.
-            /// @tparam TMutableType The type to mutate.
+            /// @tparam T The type to mutate.
             /// @param contractName The contract name of the SceneDecoratorContext to search on.
             /// @param mutationCallback The callback used to mutate the object instance.
-            template<typename TMutableType>
-            requires(std::is_convertible_v<TMutableType, Il2CppObject*> && !std::is_same_v<TMutableType, Il2CppObject*>)
-            void Mutate(std::string contractName, std::function<void(::Zenject::SceneDecoratorContext*, TMutableType)> mutationCallback) {
-                Mutate(classof(TMutableType), contractName, [mutationCallback](::Zenject::SceneDecoratorContext* context, Il2CppObject* obj){ mutationCallback(context, reinterpret_cast<TMutableType>(obj)); });
+            template<typename T>
+            requires(std::is_convertible_v<T, Il2CppObject*> && !std::is_same_v<T, Il2CppObject*>)
+            void Mutate(std::string_view contractName, MutateCallback<T> mutationCallback) {
+                Mutate(classof(T), std::string(contractName.data(), contractName.size()), [mutationCallback](::Zenject::SceneDecoratorContext* context, Il2CppObject* obj){ mutationCallback(context, reinterpret_cast<T>(obj)); });
             }
 
             /// @brief Searches a decorator context for the first instance that matches a type, then invokes a callback with that instance for it to be modified or mutated.
             /// @param typeToMutate the Il2CppClass* of the type to mutate, this would be the class of the argument passed second in the mutationCallback
             /// @param contractName The contract name of the SceneDecoratorContext to search on.
             /// @param mutationCallback The callback used to mutate the object instance.
-            void Mutate(Il2CppClass* typeToMutate, std::string contractName, std::function<void(::Zenject::SceneDecoratorContext*, Il2CppObject*)> mutationCallback);
+            void Mutate(Il2CppClass* typeToMutate, std::string contractName, MutateCallback<Il2CppObject*> mutationCallback);
+
+            /// @brief Searches a decorator context for the first instance that matches a type, then automatically binds them the the active container.
+            /// @tparam T the type to expose
+            /// @param contractName the contract name of the SceneDecoratorContext to search on
+            template<typename T>
+            void Expose(std::string_view contractName) {
+                Expose(classof(T), std::string(contractName.data(), contractName.size()));
+            }
+
+            /// @brief Searches a decorator context for the first instance that matches a type, then automatically binds them the the active container.
+            /// @param typeToExpose the type to expose
+            /// @param contractName the contract name of the SceneDecoratorContext to search on
+            void Expose(Il2CppClass* typeToExpose, std::string contractName);
 
             /// @brief Install bindings to another installer without a custom installer
             static void UseMetadataBinder() {};
@@ -89,5 +108,6 @@ namespace Lapiz::Zenject {
             std::unordered_set<Internal::InstallSet*> _installSets;
             std::unordered_set<Internal::InstallInstruction*> _installInstructions;
             std::unordered_set<Internal::MutateSet*> _mutateSets;
+            std::unordered_set<Internal::ExposeSet*> _exposeSets;
     };
 }

@@ -51,11 +51,9 @@ namespace Lapiz::Zenject {
                 for (auto set : zenjector->_mutateSets) {
                     _mutatorManager.Install(set, mainContext, injectableList);
                 }
-                /* // TODO
                 for (auto set : zenjector->_exposeSets) {
-                    _exposerManager->Install(set, mainContext, injectableList);
+                    _exposerManager.Install(set, mainContext, injectableList);
                 }
-                */
             }
 
             auto& bindings = *installerBindings.get();

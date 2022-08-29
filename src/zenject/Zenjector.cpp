@@ -5,6 +5,7 @@
 #include "internal/filters/MultiTypedInstallFilter.hpp"
 #include "internal/Delegate.hpp"
 #include "internal/MutateSet.hpp"
+#include "internal/ExposeSet.hpp"
 
 using namespace Lapiz::Zenject::Internal;
 using namespace Lapiz::Zenject::Internal::Filters;
@@ -28,6 +29,10 @@ namespace Lapiz::Zenject {
     void Zenjector::Install(Il2CppClass* customInstallerT, Zenject::Location location, ArrayW<Il2CppObject*> parameters) {
         auto filter = new MultiTypedInstallFilter(InstallerForLocation(location));
         _installSets.emplace(new InstallSet(customInstallerT, filter, (parameters && parameters.size() > 0) ? parameters : nullptr));
+    }
+
+    void Zenjector::Expose(Il2CppClass* typeToExpose, std::string contractName) {
+        _exposeSets.emplace(new ExposeSet(typeToExpose, contractName));
     }
 
     void Zenjector::Mutate(Il2CppClass* typeToMutate, std::string contractName, std::function<void(::Zenject::SceneDecoratorContext*, Il2CppObject*)> mutationCallback) {
