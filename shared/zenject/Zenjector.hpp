@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Location.hpp"
-#include "utilities/logging.hpp"
 #include "System/Collections/Generic/IEnumerable_1.hpp"
 #include "../concepts.hpp"
 
