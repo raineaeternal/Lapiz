@@ -6,11 +6,6 @@
 #error "DECLARE_INJECT_METHOD is already defined! Undefine it before including macros.hpp!"
 #endif
 
-/// TODO: inject field
-/// TODO: inject field ID
-/// TODO: inject field optional
-/// TODO: inject field optional ID
-
 /// the method(s) declared with this macro will automatically get called when zenject instantiates these objects, having their arguments called with the resolved types
 #define DECLARE_INJECT_METHOD(ret, name, ...)                                                                           \
 private:                                                                                                                \
@@ -24,6 +19,10 @@ private:                                                                        
     };                                                                                                                  \
     static inline __AttributeRegistration_##name __##name##_AttributeRegistration;                                      \
 DECLARE_INSTANCE_METHOD(ret, name, __VA_ARGS__)
+
+#ifdef DECLARE_INJECT_METHOD_OPTIONAL
+#error "DECLARE_INJECT_METHOD_OPTIONAL is already defined! Undefine it before including macros.hpp!"
+#endif
 
 /// the method(s) declared with this macro will automatically get called when zenject instantiates these objects, having their arguments called with the resolved types
 #define DECLARE_INJECT_METHOD_OPTIONAL(ret, name, ...)                                                                  \
@@ -40,6 +39,10 @@ private:                                                                        
     static inline __AttributeRegistration_##name __##name##_AttributeRegistration;                                      \
 DECLARE_INSTANCE_METHOD(ret, name, __VA_ARGS__)
 
+#ifdef DECLARE_INJECT_METHOD_ID
+#error "DECLARE_INJECT_METHOD_ID is already defined! Undefine it before including macros.hpp!"
+#endif
+
 /// the method(s) declared with this macro will automatically get called when zenject instantiates these objects, having their arguments called with the resolved types
 #define DECLARE_INJECT_METHOD_ID(ret, name, ID, ...)                                                                    \
 private:                                                                                                                \
@@ -54,6 +57,10 @@ private:                                                                        
     };                                                                                                                  \
     static inline __AttributeRegistration_##name __##name##_AttributeRegistration;                                      \
 DECLARE_INSTANCE_METHOD(ret, name, __VA_ARGS__)
+
+#ifdef DECLARE_INJECT_METHOD_ID_OPTIONAL
+#error "DECLARE_INJECT_METHOD_ID_OPTIONAL is already defined! Undefine it before including macros.hpp!"
+#endif
 
 /// the method(s) declared with this macro will automatically get called when zenject instantiates these objects, having their arguments called with the resolved types
 #define DECLARE_INJECT_METHOD_ID_OPTIONAL(ret, name, ID, ...)                                                           \
@@ -71,6 +78,10 @@ private:                                                                        
     static inline __AttributeRegistration_##name __##name##_AttributeRegistration;                                      \
 DECLARE_INSTANCE_METHOD(ret, name, __VA_ARGS__)
 
+#ifdef DECLARE_INJECT_FIELD
+#error "DECLARE_INJECT_FIELD is already defined! Undefine it before including macros.hpp!"
+#endif
+
 /// the field(s) declared with this macro will automatically get filled when zenject instantiates these objects, resolving the types of these fields
 #define DECLARE_INJECT_FIELD(type_, name)                                                                               \
 private:                                                                                                                \
@@ -84,6 +95,10 @@ private:                                                                        
     };                                                                                                                  \
     static inline __AttributeRegistration_##name __##name##_AttributeRegistration;                                      \
 DECLARE_INSTANCE_FIELD(type_, name)
+
+#ifdef DECLARE_INJECT_FIELD_OPTIONAL
+#error "DECLARE_INJECT_FIELD_OPTIONAL is already defined! Undefine it before including macros.hpp!"
+#endif
 
 /// the field(s) declared with this macro will automatically get filled when zenject instantiates these objects, resolving the types of these fields
 #define DECLARE_INJECT_FIELD_OPTIONAL(type_, name)                                                                      \
@@ -100,6 +115,10 @@ private:                                                                        
     static inline __AttributeRegistration_##name __##name##_AttributeRegistration;                                      \
 DECLARE_INSTANCE_FIELD(type_, name)
 
+#ifdef DECLARE_INJECT_FIELD_ID
+#error "DECLARE_INJECT_FIELD is already defined! Undefine it before including macros.hpp!"
+#endif
+
 /// the field(s) declared with this macro will automatically get filled when zenject instantiates these objects, resolving the types of these fields
 #define DECLARE_INJECT_FIELD_ID(type_, name, ID)                                                                        \
 private:                                                                                                                \
@@ -114,6 +133,10 @@ private:                                                                        
     };                                                                                                                  \
     static inline __AttributeRegistration_##name __##name##_AttributeRegistration;                                      \
 DECLARE_INSTANCE_FIELD(type_, name)
+
+#ifdef DECLARE_INJECT_FIELD_ID_OPTIONAL
+#error "DECLARE_INJECT_FIELD_ID_OPTIONAL is already defined! Undefine it before including macros.hpp!"
+#endif
 
 /// the field(s) declared with this macro will automatically get filled when zenject instantiates these objects, resolving the types of these fields
 #define DECLARE_INJECT_FIELD_ID_OPTIONAL(type_, name, ID)                                                               \
