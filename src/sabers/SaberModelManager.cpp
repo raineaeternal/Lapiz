@@ -1,5 +1,6 @@
 #include "sabers/SaberModelManager.hpp"
 
+#include "utilities/logging.hpp"
 #include "utilities/saberutil.hpp"
 #include "UnityEngine/GameObject.hpp"
 #include "UnityEngine/Transform.hpp"
@@ -10,23 +11,26 @@ DEFINE_TYPE(Lapiz::Sabers, SaberModelManager);
 namespace Lapiz::Sabers {
     /* SaberModelManager */
     void SaberModelManager::ctor(GlobalNamespace::ColorManager* colorManager, LapizSaberFactory* lapizSaberFactory) {
+        INVOKE_CTOR();
+        DEBUG("SaberModelManager ctor");
         _lapizSaberLink = LapizSaberLink::New_ctor();
         _saberModelLink = SaberModelLink::New_ctor();
         _desperationList = List<DesperationContract*>::New_ctor();
         _salvationList = List<DesperationContract*>::New_ctor();
-        _colorUpdateQueue = decltype(_colorUpdateQueue)();
-
+        
         _colorManager = colorManager;
         _lapizSaberFactory = lapizSaberFactory;
         _lapizSaberFactory->SaberCreated += {&SaberModelManager::SiraSaberFactory_SaberCreated, this};
     }
 
     void SaberModelManager::SiraSaberFactory_SaberCreated(LapizSaber* lapizSaber) {
+        DEBUG("SaberModelManager SiraSaberFactory_SaberCreated");
         _lapizSaberLink->Add(lapizSaber->_saber, lapizSaber);
         _saberModelLink->Add(lapizSaber->_saber, lapizSaber->_saberModelController);
     }
 
     GlobalNamespace::SaberModelController* SaberModelManager::GetSaberModelController(GlobalNamespace::Saber* saber) {
+        DEBUG("SaberModelManager GetSaberModelController");
         GlobalNamespace::SaberModelController* smc = nullptr;
         if (_saberModelLink->TryGetValue(saber, byref(smc))) {
             return smc;
@@ -49,6 +53,7 @@ namespace Lapiz::Sabers {
     }
 
     UnityEngine::Color SaberModelManager::GetPhysicalSaberColor(GlobalNamespace::Saber* saber) {
+        DEBUG("SaberModelManager GetPhysicalSaberColor");
         auto saberModelController = GetSaberModelController(saber);
         if (saberModelController) {
             return SaberUtil::GetColor(saberModelController);
@@ -57,6 +62,7 @@ namespace Lapiz::Sabers {
     }
 
     void SaberModelManager::SetColor(GlobalNamespace::Saber* saber, UnityEngine::Color color) {
+        DEBUG("SaberModelManager SetColor");
         LapizSaber* lapizSaber = nullptr;
         if (_lapizSaberLink->TryGetValue(saber, byref(lapizSaber))) {
             lapizSaber->SetColor(color);

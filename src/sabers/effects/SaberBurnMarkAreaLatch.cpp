@@ -15,6 +15,7 @@ namespace Lapiz::Sabers::Effects {
     }
 
     void SaberBurnMarkAreaLatch::ctor(Lapiz::Sabers::SaberModelManager* saberModelManager, Lapiz::Sabers::LapizSaberFactory* lapizSaberFactory) {
+        INVOKE_CTOR();
         instance = this;
         _earlySabers = EarlySabers::New_ctor();
         _lineFactoryIncrement = 2;

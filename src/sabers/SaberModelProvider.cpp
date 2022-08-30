@@ -16,6 +16,7 @@ namespace Lapiz::Sabers {
     }
 
     void SaberModelProvider::ctor(Zenject::DiContainer* container, GlobalNamespace::SaberManager* saberManager, ListWrapper<SaberModelRegistrationWrapper*> saberModelRegistrations) {
+        INVOKE_CTOR();
         instance = this;
         _earlyInittingGlowColors = System::Collections::Generic::HashSet_1<GlobalNamespace::SetSaberGlowColor*>::New_ctor();
         _earlyInittingFakeGlowColors = System::Collections::Generic::HashSet_1<GlobalNamespace::SetSaberFakeGlowColor*>::New_ctor(); 

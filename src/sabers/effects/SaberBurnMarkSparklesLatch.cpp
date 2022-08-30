@@ -13,6 +13,7 @@ namespace Lapiz::Sabers::Effects {
     }
 
     void SaberBurnMarkSparklesLatch::ctor(Lapiz::Sabers::SaberModelManager* saberModelManager, Lapiz::Sabers::LapizSaberFactory* lapizSaberFactory) {
+        INVOKE_CTOR();
         _earlySabers = EarlySabers::New_ctor();
         _lapizSaberFactory = lapizSaberFactory;
         _saberModelManager = saberModelManager;

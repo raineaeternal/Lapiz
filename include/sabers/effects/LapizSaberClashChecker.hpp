@@ -13,7 +13,7 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, LapizSaberClashChecker,
     DECLARE_PRIVATE_FIELD(GlobalNamespace::Saber*, _lastSaberA);
     DECLARE_PRIVATE_FIELD(GlobalNamespace::Saber*, _lastSaberB);
     DECLARE_PRIVATE_FIELD(bool, _extraSabersDetected);
-    DECLARE_PRIVATE_FIELD(ListWrapper<GlobalNamespace::Saber*>, _sabers);
+    DECLARE_PRIVATE_FIELD_DEFAULT(ListWrapper<GlobalNamespace::Saber*>, _sabers, nullptr);
     DECLARE_PRIVATE_FIELD(::Zenject::DiContainer*, _container);
     DECLARE_PRIVATE_FIELD(GlobalNamespace::SaberManager*, _saberManager);
     DECLARE_PRIVATE_FIELD(Lapiz::Sabers::LapizSaberFactory*, _lapizSaberFactory);

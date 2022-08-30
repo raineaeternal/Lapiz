@@ -1,4 +1,5 @@
 #include "sabers/LapizSaberFactory.hpp"
+#include "utilities/logging.hpp"
 
 #include "UnityEngine/GameObject.hpp"
 
@@ -6,6 +7,8 @@ DEFINE_TYPE(Lapiz::Sabers, LapizSaberFactory);
 
 namespace Lapiz::Sabers {
     void LapizSaberFactory::ctor(::Zenject::DiContainer* container) {
+        INVOKE_CTOR();
+        DEBUG("LapizSaberFactory ctor");
         _container = container;
     }
 

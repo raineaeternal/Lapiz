@@ -33,8 +33,8 @@ ___DECLARE_TYPE_WRAPPER_INHERITANCE(Lapiz::Sabers, SaberModelManager, Il2CppType
     using SaberModelLink = System::Collections::Generic::Dictionary_2<GlobalNamespace::Saber*, GlobalNamespace::SaberModelController*>;
     DECLARE_INSTANCE_FIELD(LapizSaberLink*, _lapizSaberLink);
     DECLARE_INSTANCE_FIELD(SaberModelLink*, _saberModelLink);
-    DECLARE_INSTANCE_FIELD(ListWrapper<DesperationContract*>, _desperationList);
-    DECLARE_INSTANCE_FIELD(ListWrapper<DesperationContract*>, _salvationList);
+    DECLARE_INSTANCE_FIELD_DEFAULT(ListWrapper<DesperationContract*>, _desperationList, nullptr);
+    DECLARE_INSTANCE_FIELD_DEFAULT(ListWrapper<DesperationContract*>, _salvationList, nullptr);
 
     DECLARE_CTOR(ctor, GlobalNamespace::ColorManager* colorManager, LapizSaberFactory* lapizSaberFactory);
     DECLARE_OVERRIDE_METHOD(void, LateTick, il2cpp_utils::il2cpp_type_check::MetadataGetter<&::Zenject::ILateTickable::LateTick>::get());

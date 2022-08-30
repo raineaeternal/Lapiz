@@ -1,4 +1,5 @@
 #include "sabers/effects/LapizSaberClashChecker.hpp"
+#include "utilities/logging.hpp"
 
 #include "GlobalNamespace/SaberMovementData.hpp"
 #include "UnityEngine/Time.hpp"
@@ -6,10 +7,13 @@ DEFINE_TYPE(Lapiz::Sabers::Effects, LapizSaberClashChecker);
 
 namespace Lapiz::Sabers::Effects {
     void LapizSaberClashChecker::ctor(::Zenject::DiContainer* container, GlobalNamespace::SaberManager* saberManager, Lapiz::Sabers::LapizSaberFactory* lapizSaberFactory) {
+        INVOKE_CTOR();
+        DEBUG("LapizSaberClashChecker ctor");
         _sabers = List<GlobalNamespace::Saber*>::New_ctor();
         _container = container;
         _saberManager = saberManager;
         _lapizSaberFactory = lapizSaberFactory;
+
         _sabers->Add(_saberManager->leftSaber);
         _sabers->Add(_saberManager->rightSaber);
         _lapizSaberFactory->SaberCreated += {&LapizSaberClashChecker::LapizSaberFactory_SaberCreated, this};

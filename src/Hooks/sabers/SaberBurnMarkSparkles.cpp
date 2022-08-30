@@ -1,4 +1,5 @@
 #include "utilities/hooking.hpp"
+#include "utilities/logging.hpp"
 
 #include "sabers/effects/SaberBurnMarkSparklesLatch.hpp"
 #include "UnityEngine/GameObject.hpp"

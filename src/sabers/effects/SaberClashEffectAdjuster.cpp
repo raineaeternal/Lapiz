@@ -12,6 +12,7 @@ namespace Lapiz::Sabers::Effects {
     }
 
     void SaberClashEffectAdjuster::ctor(Lapiz::Sabers::SaberModelManager* saberModelManager, GlobalNamespace::SaberClashChecker* saberClashChecker) {
+        INVOKE_CTOR();
         instance = this;
         _saberModelManager = saberModelManager;
         _saberClashChecker = il2cpp_utils::try_cast<Lapiz::Sabers::Effects::LapizSaberClashChecker>(saberClashChecker).value_or(nullptr);

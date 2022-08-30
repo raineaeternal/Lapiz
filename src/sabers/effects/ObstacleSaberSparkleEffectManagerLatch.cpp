@@ -13,6 +13,7 @@ namespace Lapiz::Sabers::Effects {
     }
 
     void ObstacleSaberSparkleEffectManagerLatch::ctor(GlobalNamespace::ColorManager* colorManager, Lapiz::Sabers::LapizSaberFactory* lapizSaberFactory) {
+        INVOKE_CTOR();
         instance = this;
         _earlySabers = EarlySabers::New_ctor();
         _colorManager = colorManager;
