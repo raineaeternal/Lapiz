@@ -3,6 +3,7 @@
 #include "Location.hpp"
 #include "System/Collections/Generic/IEnumerable_1.hpp"
 #include "../concepts.hpp"
+#include "../arrayutils.hpp"
 
 #include "Zenject/DiContainer.hpp"
 #include "Zenject/SceneDecoratorContext.hpp"
@@ -34,7 +35,21 @@ namespace Lapiz::Zenject {
             inline void Install(Zenject::Location location, ArrayW<Il2CppObject*> parameters) {
                 Install(classof(T), location, parameters);
             };
-            
+
+            /// @brief Installs a custom installer to a location with a backing installer(s).
+            /// @tparam T The type of your custom installer.
+            /// @tparam Targs The types of the arguments to pass to the object.
+            /// @param location The location to install it to.
+            /// @param parameters Parameters for the constructor of the installer. This will override Zenject's constructor injection on this installer,
+            /// and the installer type cannot be a MonoInstaller if using this.
+            template<Lapiz::concepts::IInstaller T, typename... Targs>
+            inline void Install(Zenject::Location location, Targs&... parameters) {
+                if constexpr (sizeof...(parameters) == 0) {
+                    Install(classof(T), location, nullptr);
+                } else {
+                    Install(classof(T), location, ArrayUtils::box_array(parameters...));
+                }
+            };
 
             /// @brief Installs a custom installer to a location with a backing installer(s).
             /// @tparam TCustomInstaller The type of your custom installer.
@@ -44,6 +59,21 @@ namespace Lapiz::Zenject {
             template<Lapiz::concepts::IInstaller TCustomInstaller,  Lapiz::concepts::IInstaller TBaseInstaller>
             inline void Install(ArrayW<Il2CppObject*> parameters) {
                 Install(classof(TCustomInstaller), classof(TBaseInstaller), parameters);
+            };
+
+            /// @brief Installs a custom installer to a location with a backing installer(s).
+            /// @tparam TCustomInstaller The type of your custom installer.
+            /// @tparam TBaseInstaller The installer to install TCustomInstaller with.
+            /// @tparam Targs The types of the arguments to pass to the object.
+            /// @param parameters Parameters for the constructor of the installer. This will override Zenject's constructor injection on this installer,
+            /// and the installer type cannot be a MonoInstaller if using this.
+            template<Lapiz::concepts::IInstaller TCustomInstaller,  Lapiz::concepts::IInstaller TBaseInstaller, typename... Targs>
+            inline void Install(Targs&... parameters) {
+                if constexpr (sizeof...(parameters) == 0) {
+                    Install(classof(TCustomInstaller), classof(TBaseInstaller), nullptr);
+                } else {
+                    Install(classof(TCustomInstaller), classof(TBaseInstaller), ArrayUtils::box_array(parameters...));
+                }
             };
 
             /// @brief Install bindings to a custom location with a backing installer(s).
