@@ -6,7 +6,7 @@
 
 namespace Lapiz::concepts {
     template<typename T>
-    concept IInstaller = requires(T* t) {
+    concept IInstaller = requires(T t) {
         { t->i_IInstaller() } -> std::same_as<::Zenject::IInstaller*>;
     };
 }
