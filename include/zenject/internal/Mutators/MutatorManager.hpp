@@ -40,8 +40,7 @@ namespace Lapiz::Zenject::Internal::Mutators {
 
                 if (toMutate && toMutate->m_CachedPtr.m_value) {
                     mutateSet->get_onMutate()->Invoke(sceneDecoratorContext, toMutate);
-                }
-                else {
+                } else {
                     WARNING("Could not find {} in {}.", mutateSet->get_typeToMutate()->name, mutateSet->get_locationContractName());
                 }
             };
