@@ -16,8 +16,8 @@ DECLARE_CLASS_CODEGEN(Lapiz::Sabers, LapizSaberFactory, Il2CppObject,
         }
 
         UnorderedEventCallback<LapizSaber*> SaberCreated;
+        UnorderedEventCallback<GlobalNamespace::Saber*, UnityEngine::Color> ColorUpdated;
     private:
         void UpdateColorInternal(GlobalNamespace::Saber* saber, UnityEngine::Color color);
         LapizSaber* Spawn(System::Type* backingSaberType, GlobalNamespace::SaberType saberType);
-        UnorderedEventCallback<GlobalNamespace::Saber*, UnityEngine::Color> ColorUpdated;
 )

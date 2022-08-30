@@ -11,7 +11,7 @@
 #include "System/IDisposable.hpp"
 
 DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelProvider, Il2CppObject, classof(System::IDisposable*),
-    DECLARE_INSTANCE_FIELD(Zenject::DiContainer*, _container);
+    DECLARE_INSTANCE_FIELD(::Zenject::DiContainer*, _container);
     DECLARE_INSTANCE_FIELD(GlobalNamespace::SaberManager*, _saberManager);
     DECLARE_INSTANCE_FIELD(GlobalNamespace::SaberModelContainer*, _localLeftContainer);
     DECLARE_INSTANCE_FIELD(GlobalNamespace::SaberModelContainer*, _localRightContainer);
@@ -29,7 +29,7 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelProvider, Il2CppObject
         bool SetSaberFakeGlowColor_Start_Prefix(GlobalNamespace::SetSaberFakeGlowColor* self);
         void SaberModelContainer_Start_Prefix(GlobalNamespace::SaberModelContainer* self);
 
-        DECLARE_CTOR(ctor, Zenject::DiContainer* container, GlobalNamespace::SaberManager* saberManager, ListWrapper<SaberModelRegistrationWrapper*> saberModelRegistrations);
+        DECLARE_CTOR(ctor, ::Zenject::DiContainer* container, GlobalNamespace::SaberManager* saberManager, ListWrapper<SaberModelRegistrationWrapper*> saberModelRegistrations);
         DECLARE_SIMPLE_DTOR();
     private:
         static SaberModelProvider* instance;
