@@ -1,12 +1,12 @@
 #pragma once
 
 #include "beatsaber-hook/shared/utils/typedefs.h"
-#include "Zenject/InjectAttribute.hpp"
+#include "System/Attribute.hpp"
 
-namespace Lapiz::Zenject::Attributes {
+namespace Lapiz::Attributes {
     class AttributeRegistration;
 
-    /// @brief PreRegister an attribute registration for use with zenject
+    /// @brief PreRegister an attribute registration
     /// @param registration the registration to register
     void PreRegister(const AttributeRegistration* registration);
 
@@ -18,12 +18,10 @@ namespace Lapiz::Zenject::Attributes {
             AttributeRegistration() { PreRegister(this); }
             virtual Il2CppClass* get_declaringType() const = 0;
             virtual const char* get_name() const = 0;
-            virtual const char* get_id() const { return nullptr; }
+            virtual ::System::Attribute* get_attribute() const = 0;
             virtual bool isMethod() const { return false; }
             virtual bool isField() const { return false; }
-            virtual bool optional() const { return false; }
-            virtual ::Zenject::InjectAttribute* get_attribute() const;
-        private:
-            mutable ::Zenject::InjectAttribute* attribute;
+        protected:
+            mutable ::System::Attribute* attribute;
     };
 }

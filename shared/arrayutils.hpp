@@ -29,4 +29,17 @@ namespace Lapiz::ArrayUtils {
         box_array(res, rest...);
         return res;
     }
+
+    template<typename T, typename... Targs>
+    void SetIndexType(ArrayW<System::Type*> arr, int index) {
+        arr[index] = csTypeOf(T);
+        if constexpr (sizeof...(Targs) > 0) SetIndexType<Targs...>(arr, ++index);
+    }
+
+    template<typename... Targs>
+    ArrayW<System::Type*> TypeArray() {
+        auto res = ArrayW<System::Type*>(sizeof...(Targs));
+        if constexpr (sizeof...(Targs) > 0) SetIndexType<Targs...>(res, 0);
+        return res;
+    }
 }

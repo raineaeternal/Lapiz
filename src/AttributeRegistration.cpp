@@ -1,8 +1,8 @@
-#include "zenject/AttributeRegistration_internal.hpp"
+#include "AttributeRegistration_internal.hpp"
 
 #include <queue>
 
-namespace Lapiz::Zenject::Attributes {
+namespace Lapiz::Attributes {
     static std::queue<const AttributeRegistration*> pending;
     static std::mutex registering;
 
@@ -42,16 +42,5 @@ namespace Lapiz::Zenject::Attributes {
         }
 
         return nullptr;
-    }
-
-    ::Zenject::InjectAttribute* AttributeRegistration::get_attribute() const {
-        if (!attribute) {
-            attribute = ::Zenject::InjectAttribute::New_ctor<il2cpp_utils::CreationType::Manual>();
-            attribute->set_Optional(optional());
-            if (get_id()) {
-                attribute->set_Id(StringW(get_id()));
-            }
-        }
-        return attribute;
     }
 }

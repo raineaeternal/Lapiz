@@ -1,6 +1,6 @@
-#include "zenject/AttributeRegistration.hpp"
+#include "AttributeRegistration.hpp"
 
-namespace Lapiz::Zenject::Attributes {
+namespace Lapiz::Attributes {
     /// @brief gets an attribute registrations for a specific class and name
     /// @param klass the klass to look in for attribute registrations
     /// @param name the name of the registration (field / methodname)

@@ -6,6 +6,7 @@
 #include "zenject/Location.hpp"
 
 #include "installers/LapizGameplayInstaller.hpp"
+#include "installers/LapizGameCoreInstaller.hpp"
 #include "utilities/logging.hpp"
 
 static ModInfo modInfo; // Stores the ID and version of our mod, and is sent to the modloader upon startup
@@ -31,4 +32,5 @@ extern "C" void load() {
     using namespace Lapiz::Zenject;
     auto zenjector = Zenjector::Get();
     zenjector->Install<Lapiz::Installers::LapizGameplayInstaller*>(Location::Player | Location::Tutorial);
+    zenjector->Install<Lapiz::Installers::LapizGameCoreInstaller*>(Location::GameCore);
 }
