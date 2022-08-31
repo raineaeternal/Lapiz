@@ -11,19 +11,11 @@
 #include "GlobalNamespace/MultiplayerLocalInactivePlayerFacade.hpp"
 
 namespace Lapiz::Objects::Multiplayer {
-    using ConnectedPlayerDuelRegistration = ::Lapiz::Objects::Registration<"connectedPlayerDuelControllerPrefab", GlobalNamespace::MultiplayerConnectedPlayerFacade*, GlobalNamespace::MultiplayerPlayersManager*>;
-    using ConnectedPlayerRegistration = ::Lapiz::Objects::Registration<"connectedPlayerControllerPrefab", GlobalNamespace::MultiplayerConnectedPlayerFacade*, GlobalNamespace::MultiplayerPlayersManager*>;
-    using LobbyAvatarPlaceRegistration = ::Lapiz::Objects::Registration<"multiplayerAvatarPlacePrefab", GlobalNamespace::MultiplayerLobbyAvatarPlace*, GlobalNamespace::MultiplayerLobbyInstaller*>;
-    using LobbyAvatarRegistration = ::Lapiz::Objects::Registration<"multiplayerLobbyAvatarControllerPrefab", GlobalNamespace::MultiplayerLobbyAvatarController*, GlobalNamespace::MultiplayerLobbyInstaller*>;
-    using LocalActivePlayerDuelRegistration = ::Lapiz::Objects::Registration<"activeLocalPlayerDuelControllerPrefab", GlobalNamespace::MultiplayerLocalActivePlayerFacade*, GlobalNamespace::MultiplayerPlayersManager*>;
-    using LocalActivePlayerRegistration = ::Lapiz::Objects::Registration<"activeLocalPlayerControllerPrefab", GlobalNamespace::MultiplayerLocalActivePlayerFacade*, GlobalNamespace::MultiplayerPlayersManager*>;
-    using LocalInactivePlayerRegistration = ::Lapiz::Objects::Registration<"inactiveLocalPlayerControllerPrefab", GlobalNamespace::MultiplayerLocalInactivePlayerFacade*, GlobalNamespace::MultiplayerPlayersManager*>;
+    LAPIZ_REDECORATION_REGISTRATION_HELPER_DEFINITION(ConnectedPlayerDuelRegistration, "connectedPlayerDuelControllerPrefab", GlobalNamespace::MultiplayerConnectedPlayerFacade*, GlobalNamespace::MultiplayerPlayersManager*);
+    LAPIZ_REDECORATION_REGISTRATION_HELPER_DEFINITION(ConnectedPlayerRegistration, "connectedPlayerControllerPrefab", GlobalNamespace::MultiplayerConnectedPlayerFacade*, GlobalNamespace::MultiplayerPlayersManager*);
+    LAPIZ_REDECORATION_REGISTRATION_HELPER_DEFINITION(LobbyAvatarPlaceRegistration, "multiplayerAvatarPlacePrefab", GlobalNamespace::MultiplayerLobbyAvatarPlace*, GlobalNamespace::MultiplayerLobbyInstaller*);
+    LAPIZ_REDECORATION_REGISTRATION_HELPER_DEFINITION(LobbyAvatarRegistration, "multiplayerLobbyAvatarControllerPrefab", GlobalNamespace::MultiplayerLobbyAvatarController*, GlobalNamespace::MultiplayerLobbyInstaller*);
+    LAPIZ_REDECORATION_REGISTRATION_HELPER_DEFINITION(LocalActivePlayerDuelRegistration, "activeLocalPlayerDuelControllerPrefab", GlobalNamespace::MultiplayerLocalActivePlayerFacade*, GlobalNamespace::MultiplayerPlayersManager*);
+    LAPIZ_REDECORATION_REGISTRATION_HELPER_DEFINITION(LocalActivePlayerRegistration, "activeLocalPlayerControllerPrefab", GlobalNamespace::MultiplayerLocalActivePlayerFacade*, GlobalNamespace::MultiplayerPlayersManager*);
+    LAPIZ_REDECORATION_REGISTRATION_HELPER_DEFINITION(LocalInactivePlayerRegistration, "inactiveLocalPlayerControllerPrefab", GlobalNamespace::MultiplayerLocalInactivePlayerFacade*, GlobalNamespace::MultiplayerPlayersManager*);
 }
-
-DEFINE_IL2CPP_ARG_TYPE(Lapiz::Objects::Multiplayer::ConnectedPlayerDuelRegistration*, "Lapiz::Objects", "TemplateRedecoratorRegistration");
-DEFINE_IL2CPP_ARG_TYPE(Lapiz::Objects::Multiplayer::ConnectedPlayerRegistration*, "Lapiz::Objects", "TemplateRedecoratorRegistration");
-DEFINE_IL2CPP_ARG_TYPE(Lapiz::Objects::Multiplayer::LobbyAvatarPlaceRegistration*, "Lapiz::Objects", "TemplateRedecoratorRegistration");
-DEFINE_IL2CPP_ARG_TYPE(Lapiz::Objects::Multiplayer::LobbyAvatarRegistration*, "Lapiz::Objects", "TemplateRedecoratorRegistration");
-DEFINE_IL2CPP_ARG_TYPE(Lapiz::Objects::Multiplayer::LocalActivePlayerDuelRegistration*, "Lapiz::Objects", "TemplateRedecoratorRegistration");
-DEFINE_IL2CPP_ARG_TYPE(Lapiz::Objects::Multiplayer::LocalActivePlayerRegistration*, "Lapiz::Objects", "TemplateRedecoratorRegistration");
-DEFINE_IL2CPP_ARG_TYPE(Lapiz::Objects::Multiplayer::LocalInactivePlayerRegistration*, "Lapiz::Objects", "TemplateRedecoratorRegistration");
