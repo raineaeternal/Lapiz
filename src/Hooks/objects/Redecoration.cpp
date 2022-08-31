@@ -1,4 +1,5 @@
 #include "utilities/hooking.hpp"
+#include "utilities/logging.hpp"
 #include "arrayutils.hpp"
 /* I hate it here */
 
@@ -238,7 +239,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerLobbyInstaller_InstallBindings, &Multiplaye
 	auto container = self->get_Container();
     auto type = self->GetType();
     container->BindMemoryPool<MultiplayerLobbyAvatarPlace*, MultiplayerLobbyAvatarPlace::Pool*>()->WithInitialSize(4)->FromComponentInNewPrefab(PREFAB_INITIALIZE(multiplayerAvatarPlacePrefab));
-    container->BindFactory<IConnectedPlayer*, MultiplayerLobbyAvatarController*, MultiplayerLobbyAvatarController::Factory*>()->FromSubContainerResolve()->ByNewContextPrefab<LobbyAvatarInstaller*>(PREFAB_INITIALIZE(multiplayerLobbyAvatarControllerPrefab));
+    container->BindFactory<IConnectedPlayer*, MultiplayerLobbyAvatarController*, MultiplayerLobbyAvatarController::Factory*>()->FromSubContainerResolve()->ByNewContextPrefab(csTypeOf(LobbyAvatarInstaller*), PREFAB_INITIALIZE(multiplayerLobbyAvatarControllerPrefab));
 }
 
 /// Does not call orig! 
@@ -246,13 +247,13 @@ MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerLobbyInstaller_InstallBindings, &Multiplaye
 MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerPlayersManager_BindPlayerFactories, &MultiplayerPlayersManager::BindPlayerFactories, void, MultiplayerPlayersManager* self, ::MultiplayerPlayerLayout layout) {
     auto container = self->container;
     auto type = self->GetType();
-    container->BindFactory<MultiplayerPlayerStartState, MultiplayerLocalInactivePlayerFacade*, MultiplayerLocalInactivePlayerFacade::Factory*>()->FromSubContainerResolve()->ByNewContextPrefab<MultiplayerLocalPlayerInstaller*>(PREFAB_INITIALIZE(inactiveLocalPlayerControllerPrefab));
+    container->BindFactory<MultiplayerPlayerStartState, MultiplayerLocalInactivePlayerFacade*, MultiplayerLocalInactivePlayerFacade::Factory*>()->FromSubContainerResolve()->ByNewContextPrefab(csTypeOf(MultiplayerLocalPlayerInstaller*), PREFAB_INITIALIZE(inactiveLocalPlayerControllerPrefab));
     if (layout == MultiplayerPlayerLayout::Duel) {
-        container->BindFactory<MultiplayerPlayerStartState, MultiplayerLocalActivePlayerFacade*, MultiplayerLocalActivePlayerFacade::Factory*>()->FromSubContainerResolve()->ByNewContextPrefab<MultiplayerLocalPlayerInstaller*>(PREFAB_INITIALIZE(activeLocalPlayerDuelControllerPrefab));
-        container->BindFactory<IConnectedPlayer*, MultiplayerPlayerStartState, MultiplayerConnectedPlayerFacade*, MultiplayerConnectedPlayerFacade::Factory*>()->FromSubContainerResolve()->ByNewContextPrefab<MultiplayerConnectedPlayerInstaller*>(PREFAB_INITIALIZE(connectedPlayerDuelControllerPrefab));
+        container->BindFactory<MultiplayerPlayerStartState, MultiplayerLocalActivePlayerFacade*, MultiplayerLocalActivePlayerFacade::Factory*>()->FromSubContainerResolve()->ByNewContextPrefab(csTypeOf(MultiplayerLocalPlayerInstaller*), PREFAB_INITIALIZE(activeLocalPlayerDuelControllerPrefab));
+        container->BindFactory<IConnectedPlayer*, MultiplayerPlayerStartState, MultiplayerConnectedPlayerFacade*, MultiplayerConnectedPlayerFacade::Factory*>()->FromSubContainerResolve()->ByNewContextPrefab(csTypeOf(MultiplayerConnectedPlayerInstaller*), PREFAB_INITIALIZE(connectedPlayerDuelControllerPrefab));
     } else {
-        container->BindFactory<MultiplayerPlayerStartState, MultiplayerLocalActivePlayerFacade*, MultiplayerLocalActivePlayerFacade::Factory*>()->FromSubContainerResolve()->ByNewContextPrefab<MultiplayerLocalPlayerInstaller*>(PREFAB_INITIALIZE(activeLocalPlayerControllerPrefab));
-        container->BindFactory<IConnectedPlayer*, MultiplayerPlayerStartState, MultiplayerConnectedPlayerFacade*, MultiplayerConnectedPlayerFacade::Factory*>()->FromSubContainerResolve()->ByNewContextPrefab<MultiplayerConnectedPlayerInstaller*>(PREFAB_INITIALIZE(connectedPlayerControllerPrefab));
+        container->BindFactory<MultiplayerPlayerStartState, MultiplayerLocalActivePlayerFacade*, MultiplayerLocalActivePlayerFacade::Factory*>()->FromSubContainerResolve()->ByNewContextPrefab(csTypeOf(MultiplayerLocalPlayerInstaller*), PREFAB_INITIALIZE(activeLocalPlayerControllerPrefab));
+        container->BindFactory<IConnectedPlayer*, MultiplayerPlayerStartState, MultiplayerConnectedPlayerFacade*, MultiplayerConnectedPlayerFacade::Factory*>()->FromSubContainerResolve()->ByNewContextPrefab(csTypeOf(MultiplayerConnectedPlayerInstaller*), PREFAB_INITIALIZE(connectedPlayerControllerPrefab));
     }
     self->activeLocalPlayerFactory = container->Resolve<MultiplayerLocalActivePlayerFacade::Factory*>();
     self->inactiveLocalPlayerFactory = container->Resolve<MultiplayerLocalInactivePlayerFacade::Factory*>();
