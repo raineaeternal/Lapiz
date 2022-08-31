@@ -1,7 +1,7 @@
 #pragma once
 
 #include "custom-types/shared/macros.hpp"
-#include "macros.hpp"
+#include "../macros.hpp"
 
 DECLARE_CLASS_CODEGEN(Lapiz::Objects, RedecoratorRegistration, Il2CppObject,
     DECLARE_PRIVATE_FIELD(bool, _chain);

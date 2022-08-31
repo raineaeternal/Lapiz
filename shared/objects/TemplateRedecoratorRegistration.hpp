@@ -1,8 +1,6 @@
 #pragma once
 
 #include "custom-types/shared/macros.hpp"
-#include "macros.hpp"
-
 #include "RedecoratorRegistration.hpp"
 
 DECLARE_CLASS_CUSTOM(Lapiz::Objects, TemplateRedecoratorRegistration, RedecoratorRegistration,
