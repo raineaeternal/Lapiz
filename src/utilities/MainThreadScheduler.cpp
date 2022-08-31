@@ -24,7 +24,5 @@ namespace Lapiz::Utilities {
             scheduled.front()();
             scheduled.pop();
         }
-
-        Schedule(this, &MainThreadScheduler::Tick);
     }
 }

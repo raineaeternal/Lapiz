@@ -13,8 +13,8 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Utilities, MainThreadScheduler, Il2CppOb
     public:
         static void Schedule(std::function<void()> function);
 
-        template<typename T>
-        static void Schedule(T instance, void (std::remove_pointer_t<T>::*method)()) {
+        template<typename T, typename U>
+        static void Schedule(T instance, void (U::*method)()) {
             Schedule(std::bind(method, instance));
         }
 
