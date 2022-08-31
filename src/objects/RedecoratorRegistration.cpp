@@ -17,4 +17,10 @@ namespace Lapiz::Objects {
         if (minfo) return il2cpp_utils::RunMethod(this, (MethodInfo*)minfo, value).value_or(value);
         else return value;
     }
+
+    bool RedecoratorRegistration::get_chain() { return _chain; }
+    int RedecoratorRegistration::get_priority() { return _priority; }
+    StringW RedecoratorRegistration::get_contract() { return _contract; }
+    System::Type* RedecoratorRegistration::get_prefabType() { return _prefabType; }
+    System::Type* RedecoratorRegistration::get_containerType() { return _containerType; }
 }
