@@ -63,10 +63,8 @@ namespace Lapiz::Zenject::ZenjectExtensions {
     }
 
     ::Zenject::NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder* FromNewComponentOnNewGameObject(::Zenject::FromBinder* fromBinder, ::Zenject::GameObjectCreationParameters* gameObjectInfo) {
-        auto concreteTypes = fromBinder->get_ConcreteTypes();
-        auto iter = concreteTypes->GetEnumerator();
-        while (iter->i_IEnumerator()->MoveNext()) {
-            auto type = iter->get_Current();
+        ListWrapper<System::Type*> concreteTypes{fromBinder->get_ConcreteTypes()};
+        for (int i = 0; auto type : concreteTypes) {
             static auto componentKlass = classof(UnityEngine::Component*);
             auto klass = il2cpp_functions::class_from_system_type(reinterpret_cast<Il2CppReflectionType*>(type));
             if (!TypeUtil::hasAncestor(klass, componentKlass)) {
@@ -83,7 +81,7 @@ namespace Lapiz::Zenject::ZenjectExtensions {
             std::function<::Zenject::IProvider*(::Zenject::DiContainer*, ::System::Type*)>(
                 [fromBinder, gameObjectInfo](::Zenject::DiContainer* container, ::System::Type* type) -> ::Zenject::IProvider* {
                     return ::Zenject::AddToNewGameObjectComponentProvider::New_ctor(
-                        container, type, fromBinder->get_BindInfo()->Arguments->i_IList_1_T()->i_ICollection_1_T()->i_IEnumerable_1_T(), gameObjectInfo, fromBinder->get_BindInfo()->ConcreteIdentifier, fromBinder->get_BindInfo()->InstantiatedCallback
+                        container, type, reinterpret_cast<System::Collections::Generic::IEnumerable_1<::Zenject::TypeValuePair>*>(fromBinder->get_BindInfo()->Arguments), gameObjectInfo, fromBinder->get_BindInfo()->ConcreteIdentifier, fromBinder->get_BindInfo()->InstantiatedCallback
                     )->i_IProvider();
                 }
             )
