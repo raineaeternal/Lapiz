@@ -3,6 +3,12 @@
 #include "arrayutils.hpp"
 /* I hate it here */
 
+#include "GlobalNamespace/IntSO.hpp"
+#include "GlobalNamespace/BoolSO.hpp"
+#include "GlobalNamespace/FakeMirrorObjectsInstaller.hpp"
+#include "GlobalNamespace/NoteDebrisPoolInstaller.hpp"
+#include "GlobalNamespace/NoteDebris.hpp"
+#include "GlobalNamespace/NoteDebris_Pool.hpp"
 #include "GlobalNamespace/BeatmapObjectsInstaller.hpp"
 #include "GlobalNamespace/EffectPoolsManualInstaller.hpp"
 #include "GlobalNamespace/MultiplayerConnectedPlayerInstaller.hpp"
@@ -89,6 +95,19 @@
 #include "GlobalNamespace/MultiplayerConnectedPlayerFacade.hpp"
 #include "GlobalNamespace/MultiplayerConnectedPlayerFacade_Factory.hpp"
 
+#include "GlobalNamespace/FakeReflectionDynamicObjectsState.hpp"
+#include "GlobalNamespace/MirroredBeatmapObjectManager.hpp"
+#include "GlobalNamespace/MirroredBombNoteController.hpp"
+#include "GlobalNamespace/MirroredBombNoteController_Pool.hpp"
+#include "GlobalNamespace/MirroredObstacleController.hpp"
+#include "GlobalNamespace/MirroredObstacleController_Pool.hpp"
+#include "GlobalNamespace/MirroredGameNoteController.hpp"
+#include "GlobalNamespace/MirroredGameNoteController_Pool.hpp"
+#include "GlobalNamespace/MirroredSliderController.hpp"
+#include "GlobalNamespace/MirroredSliderController_Pool.hpp"
+#include "GlobalNamespace/MirrorRendererGraphicsSettingsPresets.hpp"
+#include "GlobalNamespace/MirrorRendererGraphicsSettingsPresets_Preset.hpp"
+
 #include "UnityEngine/GameObject.hpp"
 #include "UnityEngine/Transform.hpp"
 #include "UnityEngine/Object.hpp"
@@ -102,6 +121,7 @@
 #include "Zenject/FactorySubContainerBinder_2.hpp"
 #include "Zenject/FactoryToChoiceIdBinder_3.hpp"
 #include "Zenject/FactorySubContainerBinder_3.hpp"
+#include "Zenject/MemoryPoolIdInitialSizeMaxSizeBinder_1.hpp"
 
 #include "sombrero/shared/linq_functional.hpp"
 
@@ -149,7 +169,7 @@ static UnityEngine::Object* PrefabInitializing(UnityEngine::Object* originalPref
 }
 
 /// Does not call orig! 
-/// On game update: check if this method still matches!
+/// FIXME: On game update, check if this method still matches!
 MAKE_AUTO_HOOK_ORIG_MATCH(BeatmapObjectsInstaller_InstallBindings, &BeatmapObjectsInstaller::InstallBindings, void, BeatmapObjectsInstaller* self) {
 	bool proMode = self->sceneSetupData->gameplayModifiers->get_proMode();
     auto container = self->get_Container();
@@ -176,7 +196,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(BeatmapObjectsInstaller_InstallBindings, &BeatmapObjec
 }
 
 /// Does not call orig! 
-/// On game update: check if this method still matches!
+/// FIXME: On game update, check if this method still matches!
 MAKE_AUTO_HOOK_ORIG_MATCH(EffectPoolsManualInstaller_ManualInstallBindings, &EffectPoolsManualInstaller::ManualInstallBindings, void, EffectPoolsManualInstaller* self, ::Zenject::DiContainer* container, bool shortBeatEffect) {
     auto type = self->GetType();
 	container->BindMemoryPool<FlyingTextEffect*, FlyingTextEffect::Pool*>()->WithInitialSize(20)->FromComponentInNewPrefab(PREFAB_INITIALIZE(flyingTextEffectPrefab));
@@ -189,7 +209,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(EffectPoolsManualInstaller_ManualInstallBindings, &Eff
 }
 
 /// Does not call orig! 
-/// On game update: check if this method still matches!
+/// FIXME: On game update, check if this method still matches!
 MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerConnectedPlayerInstaller_InstallBindings, &MultiplayerConnectedPlayerInstaller::InstallBindings, void, MultiplayerConnectedPlayerInstaller* self) {
     auto container = self->get_Container();
     auto type = self->GetType();
@@ -234,7 +254,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerConnectedPlayerInstaller_InstallBindings, &
 }
 
 /// Does not call orig! 
-/// On game update: check if this method still matches!
+/// FIXME: On game update, check if this method still matches!
 MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerLobbyInstaller_InstallBindings, &MultiplayerLobbyInstaller::InstallBindings, void, MultiplayerLobbyInstaller* self) {
 	auto container = self->get_Container();
     auto type = self->GetType();
@@ -243,7 +263,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerLobbyInstaller_InstallBindings, &Multiplaye
 }
 
 /// Does not call orig! 
-/// On game update: check if this method still matches!
+/// FIXME: On game update, check if this method still matches!
 MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerPlayersManager_BindPlayerFactories, &MultiplayerPlayersManager::BindPlayerFactories, void, MultiplayerPlayersManager* self, ::MultiplayerPlayerLayout layout) {
     auto container = self->container;
     auto type = self->GetType();
@@ -258,4 +278,65 @@ MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerPlayersManager_BindPlayerFactories, &Multip
     self->activeLocalPlayerFactory = container->Resolve<MultiplayerLocalActivePlayerFacade::Factory*>();
     self->inactiveLocalPlayerFactory = container->Resolve<MultiplayerLocalInactivePlayerFacade::Factory*>();
     self->connectedPlayerFactory = container->Resolve<MultiplayerConnectedPlayerFacade::Factory*>();
+}
+
+/// Does not call orig! 
+/// FIXME: On game update, check if this method still matches!
+MAKE_AUTO_HOOK_ORIG_MATCH(NoteDebrisPoolInstaller_InstallBindings, &NoteDebrisPoolInstaller::InstallBindings, void, NoteDebrisPoolInstaller* self) {
+	auto container = self->get_Container();
+    auto type = self->GetType();
+
+    bool hd = self->noteDebrisHDConditionVariable->get_value();
+    auto Normal = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::Normal);
+    auto BurstSliderHead = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::BurstSliderHead);
+    auto BurstSliderElement = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::BurstSliderElement);
+
+    if (hd) {
+        container->BindMemoryPool<NoteDebris*, NoteDebris::Pool*>()->WithId(Normal)->WithInitialSize(40)->FromComponentInNewPrefab(PREFAB_INITIALIZE(normalNoteDebrisHDPrefab));
+        container->BindMemoryPool<NoteDebris*, NoteDebris::Pool*>()->WithId(BurstSliderHead)->WithInitialSize(40)->FromComponentInNewPrefab(PREFAB_INITIALIZE(burstSliderHeadNoteDebrisHDPrefab));
+        container->BindMemoryPool<NoteDebris*, NoteDebris::Pool*>()->WithId(BurstSliderElement)->WithInitialSize(40)->FromComponentInNewPrefab(PREFAB_INITIALIZE(burstSliderElementNoteHDPrefab));
+    } else {
+        container->BindMemoryPool<NoteDebris*, NoteDebris::Pool*>()->WithId(Normal)->WithInitialSize(40)->FromComponentInNewPrefab(PREFAB_INITIALIZE(normalNoteDebrisLWPrefab));
+        container->BindMemoryPool<NoteDebris*, NoteDebris::Pool*>()->WithId(BurstSliderHead)->WithInitialSize(40)->FromComponentInNewPrefab(PREFAB_INITIALIZE(burstSliderHeadNoteDebrisLWPrefab));
+        container->BindMemoryPool<NoteDebris*, NoteDebris::Pool*>()->WithId(BurstSliderElement)->WithInitialSize(40)->FromComponentInNewPrefab(PREFAB_INITIALIZE(burstSliderElementNoteLWPrefab));
+    }
+}
+
+/// Does not call orig! 
+/// FIXME: On game update, check if this method still matches!
+MAKE_AUTO_HOOK_ORIG_MATCH(FakeMirrorObjectsInstaller_InstallBindings, &FakeMirrorObjectsInstaller::InstallBindings, void, FakeMirrorObjectsInstaller* self) {
+	auto container = self->get_Container();
+    auto type = self->GetType();
+
+    auto Normal = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::Normal);
+    auto BurstSliderHead = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::BurstSliderHead);
+    auto BurstSliderElement = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::BurstSliderElement);
+    auto BurstSliderElementFill = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::BurstSliderElementFill);
+
+    if (self->mirrorGraphicsSettings->get_value() >= self->mirrorRendererGraphicsSettingsPresets->presets.size())
+    {
+        self->mirrorGraphicsSettings->set_value(self->mirrorRendererGraphicsSettingsPresets->presets.size() - 1);
+    }
+    bool flag = self->mirrorRendererGraphicsSettingsPresets->presets[self->mirrorGraphicsSettings->get_value()]->mirrorType == MirrorRendererGraphicsSettingsPresets::Preset::MirrorType::FakeMirror;
+    bool flag2 = false;
+    for (auto c : ListWrapper<Zenject::BindingId>{container->get_AllContracts()}) {
+        if (csTypeOf(BeatmapObjectManager*)->IsAssignableFrom(c.get_Type())) {
+            flag2 = true;
+            break;
+        }
+    }
+    if (!flag || !flag2)
+    {
+        container->Bind<FakeReflectionDynamicObjectsState>()->FromInstance(FakeReflectionDynamicObjectsState::Disabled)->AsSingle();
+        return;
+    }
+    container->Bind<FakeReflectionDynamicObjectsState>()->FromInstance(FakeReflectionDynamicObjectsState::Enabled)->AsSingle();
+    container->BindMemoryPool<MirroredGameNoteController*, MirroredGameNoteController::Pool*>()->WithId(Normal)->WithInitialSize(25)->FromComponentInNewPrefab(PREFAB_INITIALIZE(mirroredGameNoteControllerPrefab));
+    container->BindMemoryPool<MirroredGameNoteController*, MirroredGameNoteController::Pool*>()->WithId(BurstSliderHead)->WithInitialSize(10)->FromComponentInNewPrefab(PREFAB_INITIALIZE(mirroredBurstSliderHeadGameNoteControllerPrefab));
+    container->BindMemoryPool<MirroredGameNoteController*, MirroredGameNoteController::Pool*>()->WithId(BurstSliderElement)->WithInitialSize(40)->FromComponentInNewPrefab(PREFAB_INITIALIZE(mirroredBurstSliderGameNoteControllerPrefab));
+    container->BindMemoryPool<MirroredGameNoteController*, MirroredGameNoteController::Pool*>()->WithId(BurstSliderElementFill)->WithInitialSize(25)->FromComponentInNewPrefab(PREFAB_INITIALIZE(mirroredBurstSliderFillControllerPrefab));
+    container->BindMemoryPool<MirroredBombNoteController*, MirroredBombNoteController::Pool*>()->WithInitialSize(35)->FromComponentInNewPrefab(PREFAB_INITIALIZE(mirroredBombNoteControllerPrefab));
+    container->BindMemoryPool<MirroredObstacleController*, MirroredObstacleController::Pool*>()->WithInitialSize(25)->FromComponentInNewPrefab(PREFAB_INITIALIZE(mirroredObstacleControllerPrefab));
+    container->BindMemoryPool<MirroredSliderController*, MirroredSliderController::Pool*>()->WithInitialSize(10)->FromComponentInNewPrefab(PREFAB_INITIALIZE(mirroredSliderControllerPrefab));
+    container->Bind<MirroredBeatmapObjectManager*>()->To<MirroredBeatmapObjectManager*>()->AsSingle()->NonLazy();
 }
