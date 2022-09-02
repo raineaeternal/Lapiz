@@ -108,11 +108,14 @@
 #include "GlobalNamespace/MirrorRendererGraphicsSettingsPresets.hpp"
 #include "GlobalNamespace/MirrorRendererGraphicsSettingsPresets_Preset.hpp"
 
+#include "System/Collections/Generic/Dictionary_2.hpp"
+
 #include "UnityEngine/GameObject.hpp"
 #include "UnityEngine/Transform.hpp"
 #include "UnityEngine/Object.hpp"
 
 #include "Zenject/DiContainer.hpp"
+#include "Zenject/DiContainer_ProviderInfo.hpp"
 #include "Zenject/MemoryPoolIdInitialSizeMaxSizeBinder_1.hpp"
 #include "Zenject/ConcreteIdBinderGeneric_1.hpp"
 #include "Zenject/ConcreteIdBinderNonGeneric.hpp"
@@ -139,15 +142,22 @@ static UnityEngine::Object* PrefabInitializing(UnityEngine::Object* originalPref
     // get all the redecorator registrations that are installed
     auto resolved = container->get_AncestorContainers()[0]->TryResolve<ListWrapper<RedecoratorRegistration*>>();
     // if not found, just return the original prefab
-    if (!resolved) return originalPrefab;
+    if (!resolved) {
+        DEBUG("No redecorations found for contract {}", fieldName);
+        return originalPrefab;
+    }
 
     // filter for the ones that match
     auto registrations = resolved | Where([mainType, fieldName](RedecoratorRegistration* rr){
         return rr->get_containerType() == mainType && rr->get_contract() == fieldName;
     }) | ToArray();
     // if no matches, return the original prefab
-    if (registrations.size() <= 0) return originalPrefab;
+    if (registrations.size() <= 0) {
+        DEBUG("No redecorations found for contract {}", fieldName);
+        return originalPrefab;
+    }
 
+    DEBUG("Redecorating contract {}", fieldName);
     // sort by priority, check if this is the right order! (asc / desc)
     std::stable_sort(registrations.begin(), registrations.end(), [](RedecoratorRegistration* a, RedecoratorRegistration* b) -> bool{
         return a->get_priority() < b->get_priority();
@@ -171,7 +181,8 @@ static UnityEngine::Object* PrefabInitializing(UnityEngine::Object* originalPref
 /// Does not call orig! 
 /// FIXME: On game update, check if this method still matches!
 MAKE_AUTO_HOOK_ORIG_MATCH(BeatmapObjectsInstaller_InstallBindings, &BeatmapObjectsInstaller::InstallBindings, void, BeatmapObjectsInstaller* self) {
-	bool proMode = self->sceneSetupData->gameplayModifiers->get_proMode();
+	DEBUG("Redecoration BeatmapObjectsInstaller_InstallBindings");
+    bool proMode = self->sceneSetupData->gameplayModifiers->get_proMode();
     auto container = self->get_Container();
     
     auto Normal = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::Normal);
@@ -198,6 +209,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(BeatmapObjectsInstaller_InstallBindings, &BeatmapObjec
 /// Does not call orig! 
 /// FIXME: On game update, check if this method still matches!
 MAKE_AUTO_HOOK_ORIG_MATCH(EffectPoolsManualInstaller_ManualInstallBindings, &EffectPoolsManualInstaller::ManualInstallBindings, void, EffectPoolsManualInstaller* self, ::Zenject::DiContainer* container, bool shortBeatEffect) {
+    DEBUG("Redecoration EffectPoolsManualInstaller_ManualInstallBindings");
     auto type = self->GetType();
 	container->BindMemoryPool<FlyingTextEffect*, FlyingTextEffect::Pool*>()->WithInitialSize(20)->FromComponentInNewPrefab(PREFAB_INITIALIZE(flyingTextEffectPrefab));
 	container->BindMemoryPool<FlyingScoreEffect*, FlyingScoreEffect::Pool*>()->WithInitialSize(20)->FromComponentInNewPrefab(PREFAB_INITIALIZE(flyingScoreEffectPrefab));
@@ -211,6 +223,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(EffectPoolsManualInstaller_ManualInstallBindings, &Eff
 /// Does not call orig! 
 /// FIXME: On game update, check if this method still matches!
 MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerConnectedPlayerInstaller_InstallBindings, &MultiplayerConnectedPlayerInstaller::InstallBindings, void, MultiplayerConnectedPlayerInstaller* self) {
+    DEBUG("Redecoration MultiplayerConnectedPlayerInstaller_InstallBindings");
     auto container = self->get_Container();
     auto type = self->GetType();
     
@@ -256,7 +269,8 @@ MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerConnectedPlayerInstaller_InstallBindings, &
 /// Does not call orig! 
 /// FIXME: On game update, check if this method still matches!
 MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerLobbyInstaller_InstallBindings, &MultiplayerLobbyInstaller::InstallBindings, void, MultiplayerLobbyInstaller* self) {
-	auto container = self->get_Container();
+	DEBUG("Redecoration MultiplayerLobbyInstaller_InstallBindings");
+    auto container = self->get_Container();
     auto type = self->GetType();
     container->BindMemoryPool<MultiplayerLobbyAvatarPlace*, MultiplayerLobbyAvatarPlace::Pool*>()->WithInitialSize(4)->FromComponentInNewPrefab(PREFAB_INITIALIZE(multiplayerAvatarPlacePrefab));
     container->BindFactory<IConnectedPlayer*, MultiplayerLobbyAvatarController*, MultiplayerLobbyAvatarController::Factory*>()->FromSubContainerResolve()->ByNewContextPrefab(csTypeOf(LobbyAvatarInstaller*), PREFAB_INITIALIZE(multiplayerLobbyAvatarControllerPrefab));
@@ -265,6 +279,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerLobbyInstaller_InstallBindings, &Multiplaye
 /// Does not call orig! 
 /// FIXME: On game update, check if this method still matches!
 MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerPlayersManager_BindPlayerFactories, &MultiplayerPlayersManager::BindPlayerFactories, void, MultiplayerPlayersManager* self, ::MultiplayerPlayerLayout layout) {
+    DEBUG("Redecoration MultiplayerPlayersManager_BindPlayerFactories");
     auto container = self->container;
     auto type = self->GetType();
     container->BindFactory<MultiplayerPlayerStartState, MultiplayerLocalInactivePlayerFacade*, MultiplayerLocalInactivePlayerFacade::Factory*>()->FromSubContainerResolve()->ByNewContextPrefab(csTypeOf(MultiplayerLocalPlayerInstaller*), PREFAB_INITIALIZE(inactiveLocalPlayerControllerPrefab));
@@ -283,7 +298,8 @@ MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerPlayersManager_BindPlayerFactories, &Multip
 /// Does not call orig! 
 /// FIXME: On game update, check if this method still matches!
 MAKE_AUTO_HOOK_ORIG_MATCH(NoteDebrisPoolInstaller_InstallBindings, &NoteDebrisPoolInstaller::InstallBindings, void, NoteDebrisPoolInstaller* self) {
-	auto container = self->get_Container();
+	DEBUG("Redecoration NoteDebrisPoolInstaller_InstallBindings");
+    auto container = self->get_Container();
     auto type = self->GetType();
 
     bool hd = self->noteDebrisHDConditionVariable->get_value();
@@ -305,7 +321,8 @@ MAKE_AUTO_HOOK_ORIG_MATCH(NoteDebrisPoolInstaller_InstallBindings, &NoteDebrisPo
 /// Does not call orig! 
 /// FIXME: On game update, check if this method still matches!
 MAKE_AUTO_HOOK_ORIG_MATCH(FakeMirrorObjectsInstaller_InstallBindings, &FakeMirrorObjectsInstaller::InstallBindings, void, FakeMirrorObjectsInstaller* self) {
-	auto container = self->get_Container();
+	DEBUG("Redecoration FakeMirrorObjectsInstaller_InstallBindings");
+    auto container = self->get_Container();
     auto type = self->GetType();
 
     auto Normal = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::Normal);
@@ -317,14 +334,20 @@ MAKE_AUTO_HOOK_ORIG_MATCH(FakeMirrorObjectsInstaller_InstallBindings, &FakeMirro
     {
         self->mirrorGraphicsSettings->set_value(self->mirrorRendererGraphicsSettingsPresets->presets.size() - 1);
     }
+    
     bool flag = self->mirrorRendererGraphicsSettingsPresets->presets[self->mirrorGraphicsSettings->get_value()]->mirrorType == MirrorRendererGraphicsSettingsPresets::Preset::MirrorType::FakeMirror;
     bool flag2 = false;
-    for (auto c : ListWrapper<Zenject::BindingId>{container->get_AllContracts()}) {
-        if (csTypeOf(BeatmapObjectManager*)->IsAssignableFrom(c.get_Type())) {
+    using KeyCollection = System::Collections::Generic::Dictionary_2<::Zenject::BindingId, List<::Zenject::DiContainer::ProviderInfo*>*>::KeyCollection;
+    KeyCollection* contracts{(KeyCollection*)container->get_AllContracts()};
+    auto bmType = csTypeOf(BeatmapObjectManager*);
+    auto iter = contracts->GetEnumerator();
+    while (iter.MoveNext()) {
+        if (bmType->IsAssignableFrom(iter.get_Current().get_Type())) {
             flag2 = true;
             break;
         }
     }
+    iter.Dispose();
     if (!flag || !flag2)
     {
         container->Bind<FakeReflectionDynamicObjectsState>()->FromInstance(FakeReflectionDynamicObjectsState::Disabled)->AsSingle();
@@ -338,5 +361,5 @@ MAKE_AUTO_HOOK_ORIG_MATCH(FakeMirrorObjectsInstaller_InstallBindings, &FakeMirro
     container->BindMemoryPool<MirroredBombNoteController*, MirroredBombNoteController::Pool*>()->WithInitialSize(35)->FromComponentInNewPrefab(PREFAB_INITIALIZE(mirroredBombNoteControllerPrefab));
     container->BindMemoryPool<MirroredObstacleController*, MirroredObstacleController::Pool*>()->WithInitialSize(25)->FromComponentInNewPrefab(PREFAB_INITIALIZE(mirroredObstacleControllerPrefab));
     container->BindMemoryPool<MirroredSliderController*, MirroredSliderController::Pool*>()->WithInitialSize(10)->FromComponentInNewPrefab(PREFAB_INITIALIZE(mirroredSliderControllerPrefab));
-    container->Bind<MirroredBeatmapObjectManager*>()->To<MirroredBeatmapObjectManager*>()->AsSingle()->NonLazy();
+    container->Bind<MirroredBeatmapObjectManager*>()->To(TypeArray<MirroredBeatmapObjectManager*>())->AsSingle()->NonLazy();
 }
