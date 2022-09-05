@@ -29,15 +29,20 @@ namespace Lapiz::Sabers {
         auto registration = std::make_shared<SaberModelRegistration>(_localLeftContainer->saberModelControllerPrefab, _localRightContainer->saberModelControllerPrefab, -1);
         _defaultSaberModelRegistration = SaberModelRegistrationWrapper::Make(registration);
 
-        std::vector<SaberModelRegistrationWrapper*> registrations;
-        registrations.reserve(saberModelRegistrations.size() + 1);
-        registrations.push_back(_defaultSaberModelRegistration);
-        registrations.insert(registrations.begin()++, saberModelRegistrations.begin(), saberModelRegistrations.end());
+        if (!saberModelRegistrations || saberModelRegistrations.size() == 0) {
+            _activeSaberModelRegistration = _defaultSaberModelRegistration;
+        } else {
+            std::vector<SaberModelRegistrationWrapper*> registrations;
+            registrations.reserve(saberModelRegistrations.size() + 1);
+            registrations.insert(registrations.begin(), saberModelRegistrations.begin(), saberModelRegistrations.end());
+            registrations.push_back(_defaultSaberModelRegistration);
 
-        std::stable_sort(registrations.begin(), registrations.end(), [](SaberModelRegistrationWrapper* a, SaberModelRegistrationWrapper* b){
-            return a->_registration->operator <(*b->_registration);
-        });
-        _activeSaberModelRegistration = registrations[0];
+            std::stable_sort(registrations.begin(), registrations.end(), [](SaberModelRegistrationWrapper* a, SaberModelRegistrationWrapper* b){
+                return b->_registration->operator <(*a->_registration);
+            });
+
+            _activeSaberModelRegistration = registrations[0];
+        }
     }
 
     GlobalNamespace::SaberModelController* SaberModelProvider::NewModel(std::optional<GlobalNamespace::SaberType> saberType) {
