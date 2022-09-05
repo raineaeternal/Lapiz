@@ -160,7 +160,7 @@ static UnityEngine::Object* PrefabInitializing(UnityEngine::Object* originalPref
     DEBUG("Redecorating contract {}", fieldName);
     // sort by priority, check if this is the right order! (asc / desc)
     std::stable_sort(registrations.begin(), registrations.end(), [](RedecoratorRegistration* a, RedecoratorRegistration* b) -> bool{
-        return a->get_priority() < b->get_priority();
+        return b->get_priority() < a->get_priority();
     });
 
     auto irgo = GameObject::New_ctor("Lapiz | InternalRedecorator");
