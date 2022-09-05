@@ -1,6 +1,6 @@
 # Lapiz
 
-Port of [SiraUtils](https://github.com/Auros/SiraUtil) features to Quest.
+Port of [SiraUtil's](https://github.com/Auros/SiraUtil) features to Quest.
 
 ### What is Lapiz?
 
