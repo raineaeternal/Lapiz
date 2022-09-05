@@ -35,14 +35,14 @@ namespace Lapiz::Sabers {
             friend class SaberModelProvider;
             int _priority;
 
-            const Il2CppClass* _leftType;
-            const Il2CppClass* _rightType;
+            const Il2CppClass* _leftType = nullptr;
+            const Il2CppClass* _rightType = nullptr;
 
-            SafePtrUnity<GlobalNamespace::SaberModelController> _leftTemplate;
-            SafePtrUnity<GlobalNamespace::SaberModelController> _rightTemplate;
+            SafePtrUnity<GlobalNamespace::SaberModelController> _leftTemplate = nullptr;
+            SafePtrUnity<GlobalNamespace::SaberModelController> _rightTemplate = nullptr;
 
-            std::function<GlobalNamespace::SaberModelController*(void)> _leftInstruction;
-            std::function<GlobalNamespace::SaberModelController*(void)> _rightInstruction;
+            std::function<GlobalNamespace::SaberModelController*(void)> _leftInstruction = nullptr;
+            std::function<GlobalNamespace::SaberModelController*(void)> _rightInstruction = nullptr;
     };
 }
 
