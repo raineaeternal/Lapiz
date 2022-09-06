@@ -19,7 +19,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(SaberClashChecker_AreSabersClashing, &GlobalNamespace:
     if (self->klass == lapizCheckerKlass) {
         auto customChecker = reinterpret_cast<Lapiz::Sabers::Effects::LapizSaberClashChecker*>(self);
         bool result = false;
-        if (!customChecker->SaberClashChecker_AreSabersClashing_override(clashingPoint.heldRef, result)) 
+        if (customChecker->SaberClashChecker_AreSabersClashing_override(clashingPoint.heldRef, result)) 
             result = SaberClashChecker_AreSabersClashing(self, clashingPoint);
         return result;
     } else {
