@@ -15,6 +15,8 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelProvider, Il2CppObject
     DECLARE_INSTANCE_FIELD(GlobalNamespace::SaberManager*, _saberManager);
     DECLARE_INSTANCE_FIELD(GlobalNamespace::SaberModelContainer*, _localLeftContainer);
     DECLARE_INSTANCE_FIELD(GlobalNamespace::SaberModelContainer*, _localRightContainer);
+    DECLARE_INSTANCE_FIELD(GlobalNamespace::SaberModelController*, _localOriginalLeftPrefab);
+    DECLARE_INSTANCE_FIELD(GlobalNamespace::SaberModelController*, _localOriginalRightPrefab);
     DECLARE_INSTANCE_FIELD(SaberModelRegistrationWrapper*, _activeSaberModelRegistration);
     DECLARE_INSTANCE_FIELD(SaberModelRegistrationWrapper*, _defaultSaberModelRegistration);
     DECLARE_INSTANCE_FIELD(System::Collections::Generic::HashSet_1<GlobalNamespace::SetSaberGlowColor*>*, _earlyInittingGlowColors);

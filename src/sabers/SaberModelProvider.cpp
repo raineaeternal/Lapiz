@@ -26,6 +26,10 @@ namespace Lapiz::Sabers {
 
         _localLeftContainer = saberManager->get_leftSaber()->GetComponent<SaberModelContainer*>();
         _localRightContainer = saberManager->get_rightSaber()->GetComponent<SaberModelContainer*>();
+
+        _localOriginalLeftPrefab = _localLeftContainer->saberModelControllerPrefab;
+        _localOriginalRightPrefab = _localLeftContainer->saberModelControllerPrefab;
+
         auto registration = std::make_shared<SaberModelRegistration>(_localLeftContainer->saberModelControllerPrefab, _localRightContainer->saberModelControllerPrefab, -1);
         _defaultSaberModelRegistration = SaberModelRegistrationWrapper::Make(registration);
 
