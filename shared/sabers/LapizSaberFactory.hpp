@@ -12,7 +12,7 @@ DECLARE_CLASS_CODEGEN(Lapiz::Sabers, LapizSaberFactory, Il2CppObject,
         template<typename T = GlobalNamespace::Saber*>
         requires(std::is_convertible_v<T, GlobalNamespace::Saber*>)
         LapizSaber* Spawn(GlobalNamespace::SaberType saberType) {
-            Spawn(csTypeOf(T), saberType);
+            return Spawn(csTypeOf(T), saberType);
         }
 
         UnorderedEventCallback<LapizSaber*> SaberCreated;
