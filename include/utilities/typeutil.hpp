@@ -23,4 +23,12 @@ namespace TypeUtil {
     static bool hasAncestor(const Il2CppClass* instance) {
         return hasAncestor(instance, classof(T));
     }
+
+    template<typename T, typename Arr = ArrayW<T>>
+    static Arr AppendArrayOrDefault(Arr orig, T item = T{}) {
+    auto res = Arr(orig.size() + 1);
+    memcpy(res.begin(), orig.begin(), sizeof(T) * orig.size());
+    res[orig.size()] = item;
+    return res;
+}
 }

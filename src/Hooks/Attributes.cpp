@@ -4,7 +4,7 @@
 
 #include "Hooks/Attributes.hpp"
 #include "Zenject/InjectAttributeBase.hpp"
-#include "zenject/AttributeRegistration_internal.hpp"
+#include "AttributeRegistration_internal.hpp"
 
 MAKE_AUTO_HOOK_MATCH(MonoField_GetCustomAttributes, 
         static_cast<::ArrayW<::Il2CppObject*> (System::Reflection::MonoField::*)(::System::Type*, bool)>(&System::Reflection::MonoField::GetCustomAttributes),
@@ -65,7 +65,7 @@ namespace Lapiz::Zenject::Internal {
         if (!declaringType) return nullptr;
         auto declaringClass = il2cpp_functions::class_from_system_type((Il2CppReflectionType*)declaringType);
 
-        auto attrReg = Lapiz::Zenject::Attributes::Get(declaringClass, member->get_Name());
+        auto attrReg = Lapiz::Attributes::Get(declaringClass, member->get_Name());
         return attrReg ? attrReg->get_attribute() : nullptr;
     }
 }

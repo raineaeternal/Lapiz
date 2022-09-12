@@ -52,7 +52,8 @@ namespace Lapiz::Zenject {
                         auto instructor = _instructorManager.InstructorForSet(set);
                         if (!instructor) {
                             auto t = set->get_installerType();
-                            WARNING("Could not find instatiation instructor for type {}::{}", t->namespaze, t->name);
+                            WARNING("Could not find instatiation instructor for type {}::{}, skipping this set!", t->namespaze, t->name);
+                            continue;
                         }
                         instructor->Install(set, binding.get());
                     }

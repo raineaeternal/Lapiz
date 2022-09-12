@@ -1,25 +1,9 @@
 # Submitting a Pull Request?
 
 * Namespace your code by folder
-* Lowercase namespace (`Lapiz::`)
-* Follow the Clang format
-    * CLion does this automatically, no need to do anything.
-    * Download the Visual Studio Code clang extension.
+* Uppercase namespace (`Lapiz::`)
+* Follow the general code-style and folder structure of the project.
 * When we request changes, you have 1 week to respond. If not we will dismiss the PR, and close it.
-
-The current clang formatting settings are as follow:
-
-```clang
-# Style "cscpp"
-# global for actions
-BasedOnStyle: LLVM
-AllowShortBlocksOnASingleLine: true
-AllowShortCaseLabelsOnASingleLine: true
-AllowShortIfStatementsOnASingleLine: true
-Cpp11BracedListStyle: true
-IndentWidth: 4
-NamespaceIndentation: All
-```
 
 # Submitting an issue?
 

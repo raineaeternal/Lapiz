@@ -39,6 +39,11 @@
       "id": "paper",
       "versionRange": "^1.2.8",
       "additionalData": {}
+    },
+    {
+      "id": "sombrero",
+      "versionRange": "^0.1.35",
+      "additionalData": {}
     }
   ],
   "additionalData": {}

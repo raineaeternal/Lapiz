@@ -20,7 +20,7 @@ namespace Lapiz::Zenject {
 
                     if (!TypeUtil::hasAncestor<UnityEngine::Component*>(installerType) && set->get_parameters()) return _parameterizedInstructor;
                     if (TypeUtil::hasAncestor<::Zenject::MonoInstallerBase*>(installerType)) return _monoInstructor;
-                    if (TypeUtil::hasAncestor<UnityEngine::Component*>(installerType)) return _typedInstructor;
+                    if (!TypeUtil::hasAncestor<UnityEngine::Component*>(installerType)) return _typedInstructor;
 
                     return nullptr;
                 }

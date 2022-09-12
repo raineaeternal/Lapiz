@@ -9,7 +9,7 @@
 #include "ZenjectManager.hpp"
 #include "utilities/logging.hpp"
 
-#include "zenject/AttributeRegistration_internal.hpp"
+#include "AttributeRegistration_internal.hpp"
 
 using namespace Lapiz::Zenject::Internal;
 using namespace Lapiz::Zenject::Internal::Filters;
@@ -23,7 +23,7 @@ namespace Lapiz::Zenject {
 
     Zenjector* Zenjector::Get(const ModInfo& modInfo) {
         load();
-        Lapiz::Zenject::Attributes::AutoRegister();
+        Lapiz::Attributes::AutoRegister();
         auto z = new Zenjector(modInfo);
         return z;
     }

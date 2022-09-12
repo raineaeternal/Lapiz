@@ -1,10 +1,14 @@
 #include "main.hpp"
 #include "utilities/hooking.hpp"
 #include "utilities/logging.hpp"
+#include "utilities/MainThreadScheduler.hpp"
 
 #include "zenject/Zenjector.hpp"
 #include "zenject/Location.hpp"
+#include "Zenject/FromBinderNonGeneric.hpp"
 
+#include "installers/LapizGameplayInstaller.hpp"
+#include "installers/LapizGameCoreInstaller.hpp"
 #include "utilities/logging.hpp"
 
 static ModInfo modInfo; // Stores the ID and version of our mod, and is sent to the modloader upon startup
@@ -27,4 +31,9 @@ extern "C" void load() {
     INFO("Installing Zenject bindings and hooks..");
 
     Hooks::InstallHooks(Lapiz::Logging::getLogger());
+    using namespace Lapiz::Zenject;
+    auto zenjector = Zenjector::Get();
+    zenjector->Install(Location::App, [](::Zenject::DiContainer* container){ container->BindInterfacesAndSelfTo<Lapiz::Utilities::MainThreadScheduler*>()->AsSingle(); });
+    zenjector->Install<Lapiz::Installers::LapizGameplayInstaller*>(Location::Player | Location::Tutorial);
+    zenjector->Install<Lapiz::Installers::LapizGameCoreInstaller*>(Location::GameCore);
 }
