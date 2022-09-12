@@ -4,12 +4,12 @@
 
 #include "Zenject/ZenjectException.hpp"
 
-MAKE_AUTO_HOOK_FIND_INSTANCE(ZenjectException_ctor_1, classof(Zenject::ZenjectException*), ".ctor", void,  Zenject::ZenjectException* self, StringW exepMessage) {
-    ERROR("ZenjectException: {}", exepMessage);
+MAKE_AUTO_HOOK_FIND_INSTANCE(ZenjectException_ctor_1, classof(Zenject::ZenjectException*), ".ctor", void,  Zenject::ZenjectException* self, StringW exceptionMessage) {
+    ERROR("ZenjectException: {}", exceptionMessage);
     ZenjectException_ctor_1(self, exepMessage);
 }
 
-MAKE_AUTO_HOOK_FIND_INSTANCE(ZenjectException_ctor_2, classof(Zenject::ZenjectException*), ".ctor", void, Zenject::ZenjectException* self, StringW exepMessage, System::Exception* inner) {
-    ERROR("ZenjectException: {}", inner->message);
-    ZenjectException_ctor_2(self, exepMessage, inner);
+MAKE_AUTO_HOOK_FIND_INSTANCE(ZenjectException_ctor_2, classof(Zenject::ZenjectException*), ".ctor", void, Zenject::ZenjectException* self, StringW exceptionMessage, System::Exception* inner) {
+    ERROR("ZenjectException: {}", inner->innerException);
+    ZenjectException_ctor_2(self, exceptionMessage, inner);
 }
