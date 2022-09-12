@@ -9,7 +9,7 @@ MAKE_AUTO_HOOK_FIND_INSTANCE(ZenjectException_ctor_1, classof(Zenject::ZenjectEx
     ZenjectException_ctor_1(self, exepMessage);
 }
 
-MAKE_AUTO_HOOK_FIND_INSTANCE(ZenjectException_ctor_2, classof(Zenject::ZenjectException*), ".ctor", void, Zenject::ZenjectException* self, StringW exceptionMessage, System::Exception* inner) {
-    ERROR("ZenjectException: {}", inner->innerException);
-    ZenjectException_ctor_2(self, exceptionMessage, inner);
+MAKE_AUTO_HOOK_FIND_INSTANCE(ZenjectException_ctor_2, classof(Zenject::ZenjectException*), ".ctor", void, Zenject::ZenjectException* self, StringW exceptionMessage, System::Exception* innerException) {
+    ERROR("ZenjectException: {}", innerException->innerException);
+    ZenjectException_ctor_2(self, exceptionMessage, innerException);
 }
