@@ -60,7 +60,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(ObstacleSaberSparkleEffectManager_Update, &GlobalNames
 MAKE_AUTO_HOOK_MATCH(ObstacleSaberSparkleEffectManager_OnDisable, &GlobalNamespace::ObstacleSaberSparkleEffectManager::OnDisable, void, GlobalNamespace::ObstacleSaberSparkleEffectManager* self) {
     ObstacleSaberSparkleEffectManager_OnDisable(self);
     if (self->isSystemActive.size() > 2) {
-        for (int i = 2; self->isSystemActive.size(); i++) {
+        for (int i = 2; i < self->isSystemActive.size(); i++) {
             self->isSystemActive[i] = false;
         }
     }
