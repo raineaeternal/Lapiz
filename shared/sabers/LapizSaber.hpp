@@ -8,6 +8,7 @@
 #include "GlobalNamespace/ColorManager.hpp"
 #include "GlobalNamespace/SaberTypeObject.hpp"
 #include "GlobalNamespace/SaberModelController.hpp"
+#include "GlobalNamespace/SaberMovementData.hpp"
 #include "SaberModelProvider.hpp"
 
 #include "../macros.hpp"
@@ -20,6 +21,7 @@ DECLARE_CLASS_CODEGEN(Lapiz::Sabers, LapizSaber, UnityEngine::MonoBehaviour,
     DECLARE_INSTANCE_FIELD(GlobalNamespace::Saber*, _saber);
     DECLARE_INSTANCE_FIELD(GlobalNamespace::SaberTypeObject*, _saberTypeObject);
     DECLARE_INSTANCE_FIELD(GlobalNamespace::SaberModelController*, _saberModelController);
+    DECLARE_INSTANCE_FIELD(GlobalNamespace::SaberMovementData*, _trailSaberMovementData);
     DECLARE_INSTANCE_FIELD(bool, _constructedThisFrame);
     
     DECLARE_INSTANCE_METHOD(void, Update);

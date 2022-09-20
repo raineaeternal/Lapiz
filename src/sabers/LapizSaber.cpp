@@ -16,15 +16,20 @@ namespace Lapiz::Sabers {
     }
 
     void LapizSaber::Update() {
-        if (_saber && _saber->m_CachedPtr.m_value && _saber->get_gameObject()->get_activeInHierarchy() && _saber->get_enabled()) {
+        if (_saber && _saber->m_CachedPtr.m_value && _saber->get_gameObject()->get_activeInHierarchy()) {
             auto topTransform = _saber->saberBladeTopTransform;
             auto bottomTransform = _saber->saberBladeBottomTransform;
 
             auto topPosition = _saber->saberBladeTopPos = topTransform->get_position();
             auto bottomPosition = _saber->saberBladeBottomPos = bottomTransform->get_position();
 
-            _saber->get_movementData()->AddNewData(topPosition, bottomPosition, GlobalNamespace::TimeHelper::get_time());
-            _noteCutter->Cut(_saber);
+            auto time = GlobalNamespace::TimeHelper::get_time();
+            _trailSaberMovementData->AddNewData(topPosition, bottomPosition, time);
+
+            if (_saber->get_enabled()) {
+                _saber->get_movementData()->AddNewData(topPosition, bottomPosition, time);
+                _noteCutter->Cut(_saber);
+            }
         }
 
         if (!_colorProcessNextFrame.empty()) {
@@ -82,6 +87,8 @@ namespace Lapiz::Sabers {
         _saberModelController = _saberModelProvider->NewModel(saberType);
         _saberModelController->Init(get_transform(), _saber);
 
+        _trailSaberMovementData = GlobalNamespace::SaberMovementData::New_ctor();
+        _saberModelController->saberTrail->movementData = _trailSaberMovementData->i_IBladeMovementData();
         _constructedThisFrame = true;
     }
 }
