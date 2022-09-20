@@ -28,7 +28,7 @@ namespace Lapiz::Sabers {
         _localRightContainer = saberManager->get_rightSaber()->GetComponent<SaberModelContainer*>();
 
         _localOriginalLeftPrefab = _localLeftContainer->saberModelControllerPrefab;
-        _localOriginalRightPrefab = _localLeftContainer->saberModelControllerPrefab;
+        _localOriginalRightPrefab = _localRightContainer->saberModelControllerPrefab;
 
         auto registration = std::make_shared<SaberModelRegistration>(_localLeftContainer->saberModelControllerPrefab, _localRightContainer->saberModelControllerPrefab, -1);
         _defaultSaberModelRegistration = SaberModelRegistrationWrapper::Make(registration);
@@ -72,7 +72,7 @@ namespace Lapiz::Sabers {
         GlobalNamespace::SaberModelController* newModel = nullptr;
         auto reg = _activeSaberModelRegistration->_registration;
         if (reg->_leftType && reg->_rightType) {
-            auto defaultPrefab = saberType == SaberType::SaberA ? _defaultSaberModelRegistration->_registration->_leftTemplate : _defaultSaberModelRegistration->_registration->_rightTemplate;
+            auto defaultPrefab = saberType == SaberType::SaberA ? _localOriginalLeftPrefab : _localOriginalRightPrefab;
             auto t = saberType == SaberType::SaberA ? reg->_leftType : reg->_rightType;
             auto go = UnityEngine::GameObject::New_ctor(t->name);
             go->SetActive(false);
