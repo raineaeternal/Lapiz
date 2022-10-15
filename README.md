@@ -6,10 +6,6 @@ Port of [SiraUtil's](https://github.com/Auros/SiraUtil) features to Quest.
 
 Lapiz is a library that abstracts the more difficult and tedious parts of [Zenject](https://github.com/modesttree/Zenject) away from you, making your life easier. The goal of Lapiz is to make features more accessible, and have Dependency Injection more a staple feature of Quest Beat Saber mods.
 
-### When is this going to release?
-
-Soon, but you can already use the Zenject part of it! Just run `qpm-rust dependency add lapiz` to use it in your own mod.
-
 ### I got this installed... Do I need it?
 
 Probably! There might be mods that require it and uses its providers or its features to make their mod work!
