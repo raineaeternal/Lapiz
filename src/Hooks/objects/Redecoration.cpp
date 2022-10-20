@@ -137,7 +137,7 @@ using namespace Sombrero::Linq::Functional;
 using namespace Lapiz::Objects;
 using namespace Lapiz::ArrayUtils;
 
-#define PREFAB_INITIALIZE(field_) PrefabInitializing(self->field_, container, #field_, type)
+#define PREFAB_INITIALIZE(field_) (decltype(self->field_))PrefabInitializing(self->field_, container, #field_, type)
 static UnityEngine::Object* PrefabInitializing(UnityEngine::Object* originalPrefab, ::Zenject::DiContainer* container, const char* fieldName, System::Type* mainType) {
     // get all the redecorator registrations that are installed
     auto resolved = container->get_AncestorContainers()[0]->TryResolve<ListWrapper<RedecoratorRegistration*>>();
@@ -178,188 +178,261 @@ static UnityEngine::Object* PrefabInitializing(UnityEngine::Object* originalPref
     return clone;
 }
 
-/// Does not call orig! 
-/// FIXME: On game update, check if this method still matches!
 MAKE_AUTO_HOOK_ORIG_MATCH(BeatmapObjectsInstaller_InstallBindings, &BeatmapObjectsInstaller::InstallBindings, void, BeatmapObjectsInstaller* self) {
 	DEBUG("Redecoration BeatmapObjectsInstaller_InstallBindings");
     bool proMode = self->sceneSetupData->gameplayModifiers->get_proMode();
-    auto container = self->get_Container();
-    
-    auto Normal = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::Normal);
-    auto BurstSliderHead = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::BurstSliderHead);
-    auto BurstSliderElement = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::BurstSliderElement);
-    auto BurstSliderElementFill = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::BurstSliderElementFill);
-
     auto type = self->GetType();
-    if (proMode) container->BindMemoryPool<GameNoteController*, GameNoteController::Pool*>()->WithId(Normal)->WithInitialSize(25)->FromComponentInNewPrefab(PREFAB_INITIALIZE(proModeNotePrefab));
-    else container->BindMemoryPool<GameNoteController*, GameNoteController::Pool*>()->WithId(Normal)->WithInitialSize(25)->FromComponentInNewPrefab(PREFAB_INITIALIZE(normalBasicNotePrefab));
-	container->BindMemoryPool<GameNoteController*, GameNoteController::Pool*>()->WithId(BurstSliderHead)->WithInitialSize(10)->FromComponentInNewPrefab(PREFAB_INITIALIZE(burstSliderHeadNotePrefab));
-	container->BindMemoryPool<BurstSliderGameNoteController*, BurstSliderGameNoteController::Pool*>()->WithId(BurstSliderElement)->WithInitialSize(40)->FromComponentInNewPrefab(PREFAB_INITIALIZE(burstSliderNotePrefab));
-	container->BindMemoryPool<BurstSliderGameNoteController*, BurstSliderGameNoteController::Pool*>()->WithId(BurstSliderElementFill)->WithInitialSize(40)->FromComponentInNewPrefab(PREFAB_INITIALIZE(burstSliderFillPrefab));
-	container->BindMemoryPool<BombNoteController*, BombNoteController::Pool*>()->WithInitialSize(35)->FromComponentInNewPrefab(PREFAB_INITIALIZE(bombNotePrefab));
-	container->BindMemoryPool<ObstacleController*, ObstacleController::Pool*>()->WithInitialSize(25)->FromComponentInNewPrefab(PREFAB_INITIALIZE(obstaclePrefab));
-	container->BindMemoryPool<SliderController*, SliderController::Pool::Short*>()->WithInitialSize(10)->FromComponentInNewPrefab(PREFAB_INITIALIZE(sliderShortPrefab));
-	container->BindMemoryPool<SliderController*, SliderController::Pool::Medium*>()->WithInitialSize(10)->FromComponentInNewPrefab(PREFAB_INITIALIZE(sliderMediumPrefab));
-	container->BindMemoryPool<SliderController*, SliderController::Pool::Long*>()->WithInitialSize(10)->FromComponentInNewPrefab(PREFAB_INITIALIZE(sliderLongPrefab));
-	container->Bind<SliderController::Pool*>()->AsSingle();
-	container->BindMemoryPool<NoteLineConnectionController*, NoteLineConnectionController::Pool*>()->WithInitialSize(10)->FromComponentInNewPrefab(PREFAB_INITIALIZE(noteLineConnectionControllerPrefab));
-	container->BindMemoryPool<BeatLine*, BeatLine::Pool*>()->WithInitialSize(16)->FromComponentInNewPrefab(PREFAB_INITIALIZE(beatLinePrefab));
+    auto container = self->get_Container();
+
+    // save orig
+    auto orig_proModeNotePrefab = self->proModeNotePrefab;
+    auto orig_normalBasicNotePrefab = self->normalBasicNotePrefab;
+    auto orig_burstSliderHeadNotePrefab = self->burstSliderHeadNotePrefab;
+    auto orig_burstSliderNotePrefab = self->burstSliderNotePrefab;
+    auto orig_burstSliderFillPrefab = self->burstSliderFillPrefab;
+    auto orig_bombNotePrefab = self->bombNotePrefab;
+    auto orig_obstaclePrefab = self->obstaclePrefab;
+    auto orig_sliderShortPrefab = self->sliderShortPrefab;
+    auto orig_sliderMediumPrefab = self->sliderMediumPrefab;
+    auto orig_sliderLongPrefab = self->sliderLongPrefab;
+    auto orig_noteLineConnectionControllerPrefab = self->noteLineConnectionControllerPrefab;
+    auto orig_beatLinePrefab = self->beatLinePrefab;
+
+    // edit prefabs
+    if (proMode) self->proModeNotePrefab = PREFAB_INITIALIZE(proModeNotePrefab);
+    else self->normalBasicNotePrefab = PREFAB_INITIALIZE(normalBasicNotePrefab);
+    self->burstSliderHeadNotePrefab = PREFAB_INITIALIZE(burstSliderHeadNotePrefab);
+    self->burstSliderNotePrefab = PREFAB_INITIALIZE(burstSliderNotePrefab);
+    self->burstSliderFillPrefab = PREFAB_INITIALIZE(burstSliderFillPrefab);
+    self->bombNotePrefab = PREFAB_INITIALIZE(bombNotePrefab);
+    self->obstaclePrefab = PREFAB_INITIALIZE(obstaclePrefab);
+    self->sliderShortPrefab = PREFAB_INITIALIZE(sliderShortPrefab);
+    self->sliderMediumPrefab = PREFAB_INITIALIZE(sliderMediumPrefab);
+    self->sliderLongPrefab = PREFAB_INITIALIZE(sliderLongPrefab);
+    self->noteLineConnectionControllerPrefab = PREFAB_INITIALIZE(noteLineConnectionControllerPrefab);
+    self->beatLinePrefab = PREFAB_INITIALIZE(beatLinePrefab);
+
+    // run method
+    BeatmapObjectsInstaller_InstallBindings(self);
+
+    // restore fields
+    if (proMode) self->proModeNotePrefab = orig_proModeNotePrefab;
+    else self->normalBasicNotePrefab = orig_normalBasicNotePrefab;
+    self->burstSliderHeadNotePrefab = orig_burstSliderHeadNotePrefab;
+    self->burstSliderNotePrefab = orig_burstSliderNotePrefab;
+    self->burstSliderFillPrefab = orig_burstSliderFillPrefab;
+    self->bombNotePrefab = orig_bombNotePrefab;
+    self->obstaclePrefab = orig_obstaclePrefab;
+    self->sliderShortPrefab = orig_sliderShortPrefab;
+    self->sliderMediumPrefab = orig_sliderMediumPrefab;
+    self->sliderLongPrefab = orig_sliderLongPrefab;
+    self->noteLineConnectionControllerPrefab = orig_noteLineConnectionControllerPrefab;
+    self->beatLinePrefab = orig_beatLinePrefab;
 }
 
-/// Does not call orig! 
-/// FIXME: On game update, check if this method still matches!
 MAKE_AUTO_HOOK_ORIG_MATCH(EffectPoolsManualInstaller_ManualInstallBindings, &EffectPoolsManualInstaller::ManualInstallBindings, void, EffectPoolsManualInstaller* self, ::Zenject::DiContainer* container, bool shortBeatEffect) {
     DEBUG("Redecoration EffectPoolsManualInstaller_ManualInstallBindings");
     auto type = self->GetType();
-	container->BindMemoryPool<FlyingTextEffect*, FlyingTextEffect::Pool*>()->WithInitialSize(20)->FromComponentInNewPrefab(PREFAB_INITIALIZE(flyingTextEffectPrefab));
-	container->BindMemoryPool<FlyingScoreEffect*, FlyingScoreEffect::Pool*>()->WithInitialSize(20)->FromComponentInNewPrefab(PREFAB_INITIALIZE(flyingScoreEffectPrefab));
-	container->BindMemoryPool<FlyingSpriteEffect*, FlyingSpriteEffect::Pool*>()->WithInitialSize(20)->FromComponentInNewPrefab(PREFAB_INITIALIZE(flyingSpriteEffectPrefab));
-    if (shortBeatEffect) container->BindMemoryPool<BeatEffect*, BeatEffect::Pool*>()->WithInitialSize(20)->FromComponentInNewPrefab(PREFAB_INITIALIZE(shortBeatEffectPrefab));
-    else container->BindMemoryPool<BeatEffect*, BeatEffect::Pool*>()->WithInitialSize(20)->FromComponentInNewPrefab(PREFAB_INITIALIZE(beatEffectPrefab));
-	container->BindMemoryPool<NoteCutSoundEffect*, NoteCutSoundEffect::Pool*>()->WithInitialSize(80)->FromComponentInNewPrefab(PREFAB_INITIALIZE(noteCutSoundEffectPrefab));
-	container->BindMemoryPool<BombCutSoundEffect*, BombCutSoundEffect::Pool*>()->WithInitialSize(20)->FromComponentInNewPrefab(PREFAB_INITIALIZE(bombCutSoundEffectPrefab));
+
+    // save orig
+    auto orig_flyingTextEffectPrefab = self->flyingTextEffectPrefab;
+    auto orig_flyingScoreEffectPrefab = self->flyingScoreEffectPrefab;
+    auto orig_flyingSpriteEffectPrefab = self->flyingSpriteEffectPrefab;
+    auto orig_shortBeatEffectPrefab = self->shortBeatEffectPrefab;
+    auto orig_beatEffectPrefab = self->beatEffectPrefab;
+    auto orig_noteCutSoundEffectPrefab = self->noteCutSoundEffectPrefab;
+    auto orig_bombCutSoundEffectPrefab = self->bombCutSoundEffectPrefab;
+
+    // edit prefabs
+    self->flyingTextEffectPrefab = PREFAB_INITIALIZE(flyingTextEffectPrefab);
+    self->flyingScoreEffectPrefab = PREFAB_INITIALIZE(flyingScoreEffectPrefab);
+    self->flyingSpriteEffectPrefab = PREFAB_INITIALIZE(flyingSpriteEffectPrefab);
+    if (shortBeatEffect) self->shortBeatEffectPrefab = PREFAB_INITIALIZE(shortBeatEffectPrefab);
+    else self->beatEffectPrefab = PREFAB_INITIALIZE(beatEffectPrefab);
+    self->noteCutSoundEffectPrefab = PREFAB_INITIALIZE(noteCutSoundEffectPrefab);
+    self->bombCutSoundEffectPrefab = PREFAB_INITIALIZE(bombCutSoundEffectPrefab);
+
+    // run method
+    EffectPoolsManualInstaller_ManualInstallBindings(self, container, shortBeatEffect);
+
+    // restore fields
+    self->flyingTextEffectPrefab = orig_flyingTextEffectPrefab;
+    self->flyingScoreEffectPrefab = orig_flyingScoreEffectPrefab;
+    self->flyingSpriteEffectPrefab = orig_flyingSpriteEffectPrefab;
+    if (shortBeatEffect) self->shortBeatEffectPrefab = orig_shortBeatEffectPrefab;
+    else self->beatEffectPrefab = orig_beatEffectPrefab;
+    self->noteCutSoundEffectPrefab = orig_noteCutSoundEffectPrefab;
+    self->bombCutSoundEffectPrefab = orig_bombCutSoundEffectPrefab;
 }
 
-/// Does not call orig! 
-/// FIXME: On game update, check if this method still matches!
 MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerConnectedPlayerInstaller_InstallBindings, &MultiplayerConnectedPlayerInstaller::InstallBindings, void, MultiplayerConnectedPlayerInstaller* self) {
     DEBUG("Redecoration MultiplayerConnectedPlayerInstaller_InstallBindings");
     auto container = self->get_Container();
     auto type = self->GetType();
-    
-    auto playerSpecificSettingsForUserId = self->playersSpecificSettingsAtGameStartModel->GetPlayerSpecificSettingsForUserId(self->connectedPlayer->get_userId());
 
-    auto difficultyBeatmap = self->sceneSetupData ? self->sceneSetupData->difficultyBeatmap : EmptyDifficultyBeatmap::New_ctor()->i_IDifficultyBeatmap();
-    auto level = difficultyBeatmap->get_level();
-    auto practiceSettings = self->sceneSetupData->practiceSettings;
-    auto gameplayModifiers = self->sceneSetupData->gameplayModifiers;
-    float songSpeedMul = gameplayModifiers->get_songSpeedMul();
-    float startSongTime = 0.0f;
-    if (practiceSettings)
-    {
-        startSongTime = (practiceSettings->startInAdvanceAndClearNotes ? std::max(0.0f, practiceSettings->startSongTime - 1.0f) : practiceSettings->startSongTime);
-        songSpeedMul = practiceSettings->songSpeedMul;
-    }
-    container->Bind<ColorScheme*>()->FromInstance(ColorSchemeConverter::FromNetSerializable(playerSpecificSettingsForUserId->colorScheme))->AsSingle();
-    container->Bind<ColorManager*>()->AsSingle();
-    container->Bind<MultiplayerPlayerStartState>()->FromInstance(self->localPlayerStartState)->AsSingle();
-    container->BindInstance<IConnectedPlayer*>(self->connectedPlayer);
-    container->Bind<IConnectedPlayerBeatmapObjectEventManager*>()->FromComponentInNewPrefab(PREFAB_INITIALIZE(connectedPlayerBeatmapObjectEventManagerPrefab))->AsSingle();
-    container->Bind(TypeArray<BeatmapObjectManager*, IBeatmapObjectSpawner*, System::IDisposable*>())->To(TypeArray<MultiplayerConnectedPlayerBeatmapObjectManager*>())->AsSingle();
-    container->Bind<MultiplayerConnectedPlayerBeatmapObjectManager::InitData*>()->FromInstance(MultiplayerConnectedPlayerBeatmapObjectManager::InitData::New_ctor(gameplayModifiers->disappearingArrows, gameplayModifiers->ghostNotes, gameplayModifiers->get_notesUniformScale()))->AsSingle();
-    container->Bind(TypeArray<IAudioTimeSource*, MultiplayerConnectedPlayerSongTimeSyncController*>())->FromComponentInNewPrefab(PREFAB_INITIALIZE(connectedPlayerAudioTimeSyncControllerPrefab))->AsSingle();
-    container->Bind<MultiplayerConnectedPlayerSongTimeSyncController::InitData*>()->FromInstance(MultiplayerConnectedPlayerSongTimeSyncController::InitData::New_ctor(startSongTime, level->i_IPreviewBeatmapLevel()->get_songTimeOffset(), songSpeedMul))->AsSingle();
-    bool oneSaberMode = difficultyBeatmap->get_parentDifficultyBeatmapSet() && difficultyBeatmap->get_parentDifficultyBeatmapSet()->get_beatmapCharacteristic()->get_numberOfColors() == 1;
-    container->Bind<SaberManager::InitData*>()->FromInstance(SaberManager::InitData::New_ctor(oneSaberMode, SaberTypeExtensions::MainSaber(playerSpecificSettingsForUserId->leftHanded)))->AsSingle();
-    container->Bind<SaberModelController::InitData*>()->FromInstance(SaberModelController::InitData::New_ctor({1.0f, 1.0f, 1.0f, self->sceneSetupData->playerSpecificSettings->saberTrailIntensity}))->AsSingle();
+    // save orig
+    auto orig_connectedPlayerBeatmapObjectEventManagerPrefab = self->connectedPlayerBeatmapObjectEventManagerPrefab;
+    auto orig_connectedPlayerAudioTimeSyncControllerPrefab = self->connectedPlayerAudioTimeSyncControllerPrefab;
+    auto orig_multiplayerGameNoteControllerPrefab = self->multiplayerGameNoteControllerPrefab;
+    auto orig_multiplayerBurstSliderHeadGameNoteControllerPrefab = self->multiplayerBurstSliderHeadGameNoteControllerPrefab;
+    auto orig_multiplayerBurstSliderGameNoteControllerPrefab = self->multiplayerBurstSliderGameNoteControllerPrefab;
+    auto orig_multiplayerBurstSliderFillControllerPrefab = self->multiplayerBurstSliderFillControllerPrefab;
+    auto orig_multiplayerBombNoteControllerPrefab = self->multiplayerBombNoteControllerPrefab;
+    auto orig_multiplayerObstacleControllerPrefab = self->multiplayerObstacleControllerPrefab;
 
-    auto Normal = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::Normal);
-    auto BurstSliderHead = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::BurstSliderHead);
-    auto BurstSliderElement = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::BurstSliderElement);
-    auto BurstSliderElementFill = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::BurstSliderElementFill);
+    // edit prefabs
+    self->connectedPlayerBeatmapObjectEventManagerPrefab = PREFAB_INITIALIZE(connectedPlayerBeatmapObjectEventManagerPrefab);
+    self->connectedPlayerAudioTimeSyncControllerPrefab = PREFAB_INITIALIZE(connectedPlayerAudioTimeSyncControllerPrefab);
+    self->multiplayerGameNoteControllerPrefab = PREFAB_INITIALIZE(multiplayerGameNoteControllerPrefab);
+    self->multiplayerBurstSliderHeadGameNoteControllerPrefab = PREFAB_INITIALIZE(multiplayerBurstSliderHeadGameNoteControllerPrefab);
+    self->multiplayerBurstSliderGameNoteControllerPrefab = PREFAB_INITIALIZE(multiplayerBurstSliderGameNoteControllerPrefab);
+    self->multiplayerBurstSliderFillControllerPrefab = PREFAB_INITIALIZE(multiplayerBurstSliderFillControllerPrefab);
+    self->multiplayerBombNoteControllerPrefab = PREFAB_INITIALIZE(multiplayerBombNoteControllerPrefab);
+    self->multiplayerObstacleControllerPrefab = PREFAB_INITIALIZE(multiplayerObstacleControllerPrefab);
 
-    container->BindMemoryPool<MultiplayerConnectedPlayerGameNoteController*, MultiplayerConnectedPlayerGameNoteController::Pool*>()->WithId(Normal)->WithInitialSize(50)->FromComponentInNewPrefab(PREFAB_INITIALIZE(multiplayerGameNoteControllerPrefab));
-    container->BindMemoryPool<MultiplayerConnectedPlayerGameNoteController*, MultiplayerConnectedPlayerGameNoteController::Pool*>()->WithId(BurstSliderHead)->WithInitialSize(10)->FromComponentInNewPrefab(PREFAB_INITIALIZE(multiplayerBurstSliderHeadGameNoteControllerPrefab));
-    container->BindMemoryPool<MultiplayerConnectedPlayerGameNoteController*, MultiplayerConnectedPlayerGameNoteController::Pool*>()->WithId(BurstSliderElement)->WithInitialSize(40)->FromComponentInNewPrefab(PREFAB_INITIALIZE(multiplayerBurstSliderGameNoteControllerPrefab));
-    container->BindMemoryPool<MultiplayerConnectedPlayerGameNoteController*, MultiplayerConnectedPlayerGameNoteController::Pool*>()->WithId(BurstSliderElementFill)->WithInitialSize(20)->FromComponentInNewPrefab(PREFAB_INITIALIZE(multiplayerBurstSliderFillControllerPrefab));
-    container->BindMemoryPool<MultiplayerConnectedPlayerBombNoteController*, MultiplayerConnectedPlayerBombNoteController::Pool*>()->WithInitialSize(6)->FromComponentInNewPrefab(PREFAB_INITIALIZE(multiplayerBombNoteControllerPrefab));
-    container->BindMemoryPool<MultiplayerConnectedPlayerObstacleController*, MultiplayerConnectedPlayerObstacleController::Pool*>()->WithInitialSize(4)->FromComponentInNewPrefab(PREFAB_INITIALIZE(multiplayerObstacleControllerPrefab));
+    // run method
+    MultiplayerConnectedPlayerInstaller_InstallBindings(self);
+
+    // restore fields
+    self->connectedPlayerBeatmapObjectEventManagerPrefab = orig_connectedPlayerBeatmapObjectEventManagerPrefab;
+    self->connectedPlayerAudioTimeSyncControllerPrefab = orig_connectedPlayerAudioTimeSyncControllerPrefab;
+    self->multiplayerGameNoteControllerPrefab = orig_multiplayerGameNoteControllerPrefab;
+    self->multiplayerBurstSliderHeadGameNoteControllerPrefab = orig_multiplayerBurstSliderHeadGameNoteControllerPrefab;
+    self->multiplayerBurstSliderGameNoteControllerPrefab = orig_multiplayerBurstSliderGameNoteControllerPrefab;
+    self->multiplayerBurstSliderFillControllerPrefab = orig_multiplayerBurstSliderFillControllerPrefab;
+    self->multiplayerBombNoteControllerPrefab = orig_multiplayerBombNoteControllerPrefab;
+    self->multiplayerObstacleControllerPrefab = orig_multiplayerObstacleControllerPrefab;
 }
 
-/// Does not call orig! 
-/// FIXME: On game update, check if this method still matches!
 MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerLobbyInstaller_InstallBindings, &MultiplayerLobbyInstaller::InstallBindings, void, MultiplayerLobbyInstaller* self) {
 	DEBUG("Redecoration MultiplayerLobbyInstaller_InstallBindings");
     auto container = self->get_Container();
     auto type = self->GetType();
-    container->BindMemoryPool<MultiplayerLobbyAvatarPlace*, MultiplayerLobbyAvatarPlace::Pool*>()->WithInitialSize(4)->FromComponentInNewPrefab(PREFAB_INITIALIZE(multiplayerAvatarPlacePrefab));
-    container->BindFactory<IConnectedPlayer*, MultiplayerLobbyAvatarController*, MultiplayerLobbyAvatarController::Factory*>()->FromSubContainerResolve()->ByNewContextPrefab(csTypeOf(LobbyAvatarInstaller*), PREFAB_INITIALIZE(multiplayerLobbyAvatarControllerPrefab));
+
+    // save orig
+    auto orig_multiplayerAvatarPlacePrefab = self->multiplayerAvatarPlacePrefab;
+    auto orig_multiplayerLobbyAvatarControllerPrefab = self->multiplayerLobbyAvatarControllerPrefab;
+
+    // edit prefabs
+    self->multiplayerAvatarPlacePrefab = PREFAB_INITIALIZE(multiplayerAvatarPlacePrefab);
+    self->multiplayerLobbyAvatarControllerPrefab = PREFAB_INITIALIZE(multiplayerLobbyAvatarControllerPrefab);
+
+    // run method
+    MultiplayerLobbyInstaller_InstallBindings(self);
+
+    // restore fields
+    self->multiplayerAvatarPlacePrefab = orig_multiplayerAvatarPlacePrefab;
+    self->multiplayerLobbyAvatarControllerPrefab = orig_multiplayerLobbyAvatarControllerPrefab;
 }
 
-/// Does not call orig! 
-/// FIXME: On game update, check if this method still matches!
 MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerPlayersManager_BindPlayerFactories, &MultiplayerPlayersManager::BindPlayerFactories, void, MultiplayerPlayersManager* self, ::MultiplayerPlayerLayout layout) {
     DEBUG("Redecoration MultiplayerPlayersManager_BindPlayerFactories");
     auto container = self->container;
     auto type = self->GetType();
-    container->BindFactory<MultiplayerPlayerStartState, MultiplayerLocalInactivePlayerFacade*, MultiplayerLocalInactivePlayerFacade::Factory*>()->FromSubContainerResolve()->ByNewContextPrefab(csTypeOf(MultiplayerLocalPlayerInstaller*), PREFAB_INITIALIZE(inactiveLocalPlayerControllerPrefab));
+
+    // save orig
+    auto orig_inactiveLocalPlayerControllerPrefab = self->inactiveLocalPlayerControllerPrefab;
+    auto orig_activeLocalPlayerDuelControllerPrefab = self->activeLocalPlayerDuelControllerPrefab;
+    auto orig_connectedPlayerDuelControllerPrefab = self->connectedPlayerDuelControllerPrefab;
+    auto orig_activeLocalPlayerControllerPrefab = self->activeLocalPlayerControllerPrefab;
+    auto orig_connectedPlayerControllerPrefab = self->connectedPlayerControllerPrefab;
+
+    // edit prefabs
+    self->inactiveLocalPlayerControllerPrefab = PREFAB_INITIALIZE(inactiveLocalPlayerControllerPrefab);
     if (layout == MultiplayerPlayerLayout::Duel) {
-        container->BindFactory<MultiplayerPlayerStartState, MultiplayerLocalActivePlayerFacade*, MultiplayerLocalActivePlayerFacade::Factory*>()->FromSubContainerResolve()->ByNewContextPrefab(csTypeOf(MultiplayerLocalPlayerInstaller*), PREFAB_INITIALIZE(activeLocalPlayerDuelControllerPrefab));
-        container->BindFactory<IConnectedPlayer*, MultiplayerPlayerStartState, MultiplayerConnectedPlayerFacade*, MultiplayerConnectedPlayerFacade::Factory*>()->FromSubContainerResolve()->ByNewContextPrefab(csTypeOf(MultiplayerConnectedPlayerInstaller*), PREFAB_INITIALIZE(connectedPlayerDuelControllerPrefab));
+        self->activeLocalPlayerDuelControllerPrefab = PREFAB_INITIALIZE(activeLocalPlayerDuelControllerPrefab);
+        self->connectedPlayerDuelControllerPrefab = PREFAB_INITIALIZE(connectedPlayerDuelControllerPrefab);
     } else {
-        container->BindFactory<MultiplayerPlayerStartState, MultiplayerLocalActivePlayerFacade*, MultiplayerLocalActivePlayerFacade::Factory*>()->FromSubContainerResolve()->ByNewContextPrefab(csTypeOf(MultiplayerLocalPlayerInstaller*), PREFAB_INITIALIZE(activeLocalPlayerControllerPrefab));
-        container->BindFactory<IConnectedPlayer*, MultiplayerPlayerStartState, MultiplayerConnectedPlayerFacade*, MultiplayerConnectedPlayerFacade::Factory*>()->FromSubContainerResolve()->ByNewContextPrefab(csTypeOf(MultiplayerConnectedPlayerInstaller*), PREFAB_INITIALIZE(connectedPlayerControllerPrefab));
+        self->activeLocalPlayerControllerPrefab = PREFAB_INITIALIZE(activeLocalPlayerControllerPrefab);
+        self->connectedPlayerControllerPrefab = PREFAB_INITIALIZE(connectedPlayerControllerPrefab);
     }
-    self->activeLocalPlayerFactory = container->Resolve<MultiplayerLocalActivePlayerFacade::Factory*>();
-    self->inactiveLocalPlayerFactory = container->Resolve<MultiplayerLocalInactivePlayerFacade::Factory*>();
-    self->connectedPlayerFactory = container->Resolve<MultiplayerConnectedPlayerFacade::Factory*>();
+
+    // run method
+    MultiplayerPlayersManager_BindPlayerFactories(self, layout);
+
+    // restore fields
+    self->inactiveLocalPlayerControllerPrefab = orig_inactiveLocalPlayerControllerPrefab;
+    if (layout == MultiplayerPlayerLayout::Duel) {
+        self->activeLocalPlayerDuelControllerPrefab = orig_activeLocalPlayerDuelControllerPrefab;
+        self->connectedPlayerDuelControllerPrefab = orig_connectedPlayerDuelControllerPrefab;
+    } else {
+        self->activeLocalPlayerControllerPrefab = orig_activeLocalPlayerControllerPrefab;
+        self->connectedPlayerControllerPrefab = orig_connectedPlayerControllerPrefab;
+    }
 }
 
-/// Does not call orig! 
-/// FIXME: On game update, check if this method still matches!
 MAKE_AUTO_HOOK_ORIG_MATCH(NoteDebrisPoolInstaller_InstallBindings, &NoteDebrisPoolInstaller::InstallBindings, void, NoteDebrisPoolInstaller* self) {
 	DEBUG("Redecoration NoteDebrisPoolInstaller_InstallBindings");
     auto container = self->get_Container();
     auto type = self->GetType();
-
     bool hd = self->noteDebrisHDConditionVariable->get_value();
-    auto Normal = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::Normal);
-    auto BurstSliderHead = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::BurstSliderHead);
-    auto BurstSliderElement = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::BurstSliderElement);
 
+    // save orig
+    auto orig_normalNoteDebrisHDPrefab = self->normalNoteDebrisHDPrefab;
+    auto orig_burstSliderHeadNoteDebrisHDPrefab = self->burstSliderHeadNoteDebrisHDPrefab;
+    auto orig_burstSliderElementNoteHDPrefab = self->burstSliderElementNoteHDPrefab;
+    auto orig_normalNoteDebrisLWPrefab = self->normalNoteDebrisLWPrefab;
+    auto orig_burstSliderHeadNoteDebrisLWPrefab = self->burstSliderHeadNoteDebrisLWPrefab;
+    auto orig_burstSliderElementNoteLWPrefab = self->burstSliderElementNoteLWPrefab;
+
+    // edit prefabs
     if (hd) {
-        container->BindMemoryPool<NoteDebris*, NoteDebris::Pool*>()->WithId(Normal)->WithInitialSize(40)->FromComponentInNewPrefab(PREFAB_INITIALIZE(normalNoteDebrisHDPrefab));
-        container->BindMemoryPool<NoteDebris*, NoteDebris::Pool*>()->WithId(BurstSliderHead)->WithInitialSize(40)->FromComponentInNewPrefab(PREFAB_INITIALIZE(burstSliderHeadNoteDebrisHDPrefab));
-        container->BindMemoryPool<NoteDebris*, NoteDebris::Pool*>()->WithId(BurstSliderElement)->WithInitialSize(40)->FromComponentInNewPrefab(PREFAB_INITIALIZE(burstSliderElementNoteHDPrefab));
+        self->normalNoteDebrisHDPrefab = PREFAB_INITIALIZE(normalNoteDebrisHDPrefab);
+        self->burstSliderHeadNoteDebrisHDPrefab = PREFAB_INITIALIZE(burstSliderHeadNoteDebrisHDPrefab);
+        self->burstSliderElementNoteHDPrefab = PREFAB_INITIALIZE(burstSliderElementNoteHDPrefab);
     } else {
-        container->BindMemoryPool<NoteDebris*, NoteDebris::Pool*>()->WithId(Normal)->WithInitialSize(40)->FromComponentInNewPrefab(PREFAB_INITIALIZE(normalNoteDebrisLWPrefab));
-        container->BindMemoryPool<NoteDebris*, NoteDebris::Pool*>()->WithId(BurstSliderHead)->WithInitialSize(40)->FromComponentInNewPrefab(PREFAB_INITIALIZE(burstSliderHeadNoteDebrisLWPrefab));
-        container->BindMemoryPool<NoteDebris*, NoteDebris::Pool*>()->WithId(BurstSliderElement)->WithInitialSize(40)->FromComponentInNewPrefab(PREFAB_INITIALIZE(burstSliderElementNoteLWPrefab));
+        self->normalNoteDebrisLWPrefab = PREFAB_INITIALIZE(normalNoteDebrisLWPrefab);
+        self->burstSliderHeadNoteDebrisLWPrefab = PREFAB_INITIALIZE(burstSliderHeadNoteDebrisLWPrefab);
+        self->burstSliderElementNoteLWPrefab = PREFAB_INITIALIZE(burstSliderElementNoteLWPrefab);
+    }
+
+    // run method
+    NoteDebrisPoolInstaller_InstallBindings(self);
+
+    // restore fields
+    if (hd) {
+        self->normalNoteDebrisHDPrefab = orig_normalNoteDebrisHDPrefab;
+        self->burstSliderHeadNoteDebrisHDPrefab = orig_burstSliderHeadNoteDebrisHDPrefab;
+        self->burstSliderElementNoteHDPrefab = orig_burstSliderElementNoteHDPrefab;
+    } else {
+        self->normalNoteDebrisLWPrefab = orig_normalNoteDebrisLWPrefab;
+        self->burstSliderHeadNoteDebrisLWPrefab = orig_burstSliderHeadNoteDebrisLWPrefab;
+        self->burstSliderElementNoteLWPrefab = orig_burstSliderElementNoteLWPrefab;
     }
 }
 
-/// Does not call orig! 
-/// FIXME: On game update, check if this method still matches!
 MAKE_AUTO_HOOK_ORIG_MATCH(FakeMirrorObjectsInstaller_InstallBindings, &FakeMirrorObjectsInstaller::InstallBindings, void, FakeMirrorObjectsInstaller* self) {
 	DEBUG("Redecoration FakeMirrorObjectsInstaller_InstallBindings");
     auto container = self->get_Container();
     auto type = self->GetType();
 
-    auto Normal = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::Normal);
-    auto BurstSliderHead = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::BurstSliderHead);
-    auto BurstSliderElement = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::BurstSliderElement);
-    auto BurstSliderElementFill = il2cpp_functions::value_box(classof(NoteData::GameplayType), (void*)&NoteData::GameplayType::BurstSliderElementFill);
+    // save orig
+    auto orig_mirroredGameNoteControllerPrefab = self->mirroredGameNoteControllerPrefab;
+    auto orig_mirroredBurstSliderHeadGameNoteControllerPrefab = self->mirroredBurstSliderHeadGameNoteControllerPrefab;
+    auto orig_mirroredBurstSliderGameNoteControllerPrefab = self->mirroredBurstSliderGameNoteControllerPrefab;
+    auto orig_mirroredBurstSliderFillControllerPrefab = self->mirroredBurstSliderFillControllerPrefab;
+    auto orig_mirroredBombNoteControllerPrefab = self->mirroredBombNoteControllerPrefab;
+    auto orig_mirroredObstacleControllerPrefab = self->mirroredObstacleControllerPrefab;
+    auto orig_mirroredSliderControllerPrefab = self->mirroredSliderControllerPrefab;
 
-    if (self->mirrorGraphicsSettings->get_value() >= self->mirrorRendererGraphicsSettingsPresets->presets.size())
-    {
-        self->mirrorGraphicsSettings->set_value(self->mirrorRendererGraphicsSettingsPresets->presets.size() - 1);
-    }
-    
-    bool flag = self->mirrorRendererGraphicsSettingsPresets->presets[self->mirrorGraphicsSettings->get_value()]->mirrorType == MirrorRendererGraphicsSettingsPresets::Preset::MirrorType::FakeMirror;
-    bool flag2 = false;
-    using KeyCollection = System::Collections::Generic::Dictionary_2<::Zenject::BindingId, List<::Zenject::DiContainer::ProviderInfo*>*>::KeyCollection;
-    KeyCollection* contracts{(KeyCollection*)container->get_AllContracts()};
-    auto bmType = csTypeOf(BeatmapObjectManager*);
-    auto iter = contracts->GetEnumerator();
-    while (iter.MoveNext()) {
-        if (bmType->IsAssignableFrom(iter.get_Current().get_Type())) {
-            flag2 = true;
-            break;
-        }
-    }
-    iter.Dispose();
-    if (!flag || !flag2)
-    {
-        container->Bind<FakeReflectionDynamicObjectsState>()->FromInstance(FakeReflectionDynamicObjectsState::Disabled)->AsSingle();
-        return;
-    }
-    container->Bind<FakeReflectionDynamicObjectsState>()->FromInstance(FakeReflectionDynamicObjectsState::Enabled)->AsSingle();
-    container->BindMemoryPool<MirroredGameNoteController*, MirroredGameNoteController::Pool*>()->WithId(Normal)->WithInitialSize(25)->FromComponentInNewPrefab(PREFAB_INITIALIZE(mirroredGameNoteControllerPrefab));
-    container->BindMemoryPool<MirroredGameNoteController*, MirroredGameNoteController::Pool*>()->WithId(BurstSliderHead)->WithInitialSize(10)->FromComponentInNewPrefab(PREFAB_INITIALIZE(mirroredBurstSliderHeadGameNoteControllerPrefab));
-    container->BindMemoryPool<MirroredGameNoteController*, MirroredGameNoteController::Pool*>()->WithId(BurstSliderElement)->WithInitialSize(40)->FromComponentInNewPrefab(PREFAB_INITIALIZE(mirroredBurstSliderGameNoteControllerPrefab));
-    container->BindMemoryPool<MirroredGameNoteController*, MirroredGameNoteController::Pool*>()->WithId(BurstSliderElementFill)->WithInitialSize(25)->FromComponentInNewPrefab(PREFAB_INITIALIZE(mirroredBurstSliderFillControllerPrefab));
-    container->BindMemoryPool<MirroredBombNoteController*, MirroredBombNoteController::Pool*>()->WithInitialSize(35)->FromComponentInNewPrefab(PREFAB_INITIALIZE(mirroredBombNoteControllerPrefab));
-    container->BindMemoryPool<MirroredObstacleController*, MirroredObstacleController::Pool*>()->WithInitialSize(25)->FromComponentInNewPrefab(PREFAB_INITIALIZE(mirroredObstacleControllerPrefab));
-    container->BindMemoryPool<MirroredSliderController*, MirroredSliderController::Pool*>()->WithInitialSize(10)->FromComponentInNewPrefab(PREFAB_INITIALIZE(mirroredSliderControllerPrefab));
-    container->Bind<MirroredBeatmapObjectManager*>()->To(TypeArray<MirroredBeatmapObjectManager*>())->AsSingle()->NonLazy();
+    // edit prefabs
+    self->mirroredGameNoteControllerPrefab = PREFAB_INITIALIZE(mirroredGameNoteControllerPrefab);
+    self->mirroredBurstSliderHeadGameNoteControllerPrefab = PREFAB_INITIALIZE(mirroredBurstSliderHeadGameNoteControllerPrefab);
+    self->mirroredBurstSliderGameNoteControllerPrefab = PREFAB_INITIALIZE(mirroredBurstSliderGameNoteControllerPrefab);
+    self->mirroredBurstSliderFillControllerPrefab = PREFAB_INITIALIZE(mirroredBurstSliderFillControllerPrefab);
+    self->mirroredBombNoteControllerPrefab = PREFAB_INITIALIZE(mirroredBombNoteControllerPrefab);
+    self->mirroredObstacleControllerPrefab = PREFAB_INITIALIZE(mirroredObstacleControllerPrefab);
+    self->mirroredSliderControllerPrefab = PREFAB_INITIALIZE(mirroredSliderControllerPrefab);
+
+    // run method
+    FakeMirrorObjectsInstaller_InstallBindings(self);
+
+    // restore fields
+    self->mirroredGameNoteControllerPrefab = orig_mirroredGameNoteControllerPrefab;
+    self->mirroredBurstSliderHeadGameNoteControllerPrefab = orig_mirroredBurstSliderHeadGameNoteControllerPrefab;
+    self->mirroredBurstSliderGameNoteControllerPrefab = orig_mirroredBurstSliderGameNoteControllerPrefab;
+    self->mirroredBurstSliderFillControllerPrefab = orig_mirroredBurstSliderFillControllerPrefab;
+    self->mirroredBombNoteControllerPrefab = orig_mirroredBombNoteControllerPrefab;
+    self->mirroredObstacleControllerPrefab = orig_mirroredObstacleControllerPrefab;
+    self->mirroredSliderControllerPrefab = orig_mirroredSliderControllerPrefab;
 }
