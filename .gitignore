@@ -1,4 +1,5 @@
 build/
+cmake-build-debug/
 extern/
 extern.cmake
 qpm_defines.cmake
@@ -10,3 +11,5 @@ mod.json
 *.psd
 .vscode/
 .idea/
+.fleet/
+.cache/
