@@ -12,6 +12,7 @@
 #include "GlobalNamespace/GameCoreSceneSetup.hpp"
 #include "GlobalNamespace/MultiplayerConnectedPlayerInstaller.hpp"
 #include "GlobalNamespace/MultiplayerLocalPlayerInstaller.hpp"
+#include "GlobalNamespace/MultiplayerLocalActivePlayerInstaller.hpp"
 #include "GlobalNamespace/MultiplayerLocalInactivePlayerInstaller.hpp"
 
 namespace Lapiz::Zenject {
@@ -89,7 +90,7 @@ namespace Lapiz::Zenject {
         if (HasFlag(location, Location::CampaignPlayer))
             installerTypes.emplace(classof(GlobalNamespace::MissionGameplayInstaller* ));
         if (HasFlag(location, Location::Multi))
-            installerTypes.emplace(classof(GlobalNamespace::MultiplayerLocalPlayerInstaller* ));
+            installerTypes.emplace(classof(GlobalNamespace::MultiplayerLocalActivePlayerInstaller* ));
         if (HasFlag(location, Location::Tutorial))
             installerTypes.emplace(classof(GlobalNamespace::TutorialInstaller* ));
         if (HasFlag(location, Location::GameCore))
