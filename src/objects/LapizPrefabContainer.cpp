@@ -3,7 +3,6 @@
 #include "UnityEngine/Transform.hpp"
 
 DEFINE_TYPE(Lapiz::Objects, LapizPrefabContainer);
-DEFINE_TYPE(Lapiz::Objects, LapizPrefabContainerPool);
 
 namespace Lapiz::Objects {
     UnityEngine::GameObject* LapizPrefabContainer::get_prefab() {
@@ -22,4 +21,3 @@ namespace Lapiz::Objects {
         }
     }
 }
-
