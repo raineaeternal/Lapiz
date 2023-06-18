@@ -23,9 +23,7 @@ DECLARE_CLASS_CODEGEN(Lapiz::Sabers, DesperationContract, Il2CppObject,
     friend class SaberModelManager;
 )
 
-#define SaberModelManager_INTERFACES {classof(::Zenject::ILateTickable*), classof(::System::IDisposable*)}
-
-___DECLARE_TYPE_WRAPPER_INHERITANCE(Lapiz::Sabers, SaberModelManager, Il2CppTypeEnum::IL2CPP_TYPE_CLASS, Il2CppObject, "Lapiz::Sabers", SaberModelManager_INTERFACES, 0, nullptr,
+DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelManager, Il2CppObject, std::vector<Il2CppClass*>({classof(::Zenject::ILateTickable*), classof(::System::IDisposable*)}),
     DECLARE_INSTANCE_FIELD(GlobalNamespace::ColorManager*, _colorManager);
     DECLARE_INSTANCE_FIELD(LapizSaberFactory*, _lapizSaberFactory);
 

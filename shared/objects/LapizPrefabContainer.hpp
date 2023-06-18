@@ -14,7 +14,3 @@ DECLARE_CLASS_CODEGEN(Lapiz::Objects, LapizPrefabContainer, UnityEngine::MonoBeh
 
     DECLARE_INSTANCE_METHOD(void, Start);
 )
-
-DECLARE_CLASS_CODEGEN(Lapiz::Objects, LapizPrefabContainerPool, ::Zenject::MonoMemoryPool_1<::Lapiz::Objects::LapizPrefabContainer*>,
-    DECLARE_DEFAULT_CTOR();
-)
