@@ -37,5 +37,6 @@ MAKE_AUTO_HOOK_MATCH(GameplayCoreInstaller_InstallBindings, &GlobalNamespace::Ga
 MAKE_AUTO_HOOK_MATCH(TutorialInstaller_InstallBindings, &GlobalNamespace::TutorialInstaller::InstallBindings, void, GlobalNamespace::TutorialInstaller* self) {
     TutorialInstaller_InstallBindings(self);
     auto container = self->get_Container();
+    container->Unbind<GlobalNamespace::SaberClashChecker*>();
     container->Bind<GlobalNamespace::SaberClashChecker*>()->To(Lapiz::ArrayUtils::TypeArray<Lapiz::Sabers::Effects::LapizSaberClashChecker*>())->AsSingle();
 }
