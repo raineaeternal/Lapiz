@@ -19,7 +19,7 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, ObstacleSaberSparkleEff
     DECLARE_PRIVATE_FIELD(EarlySabers*, _earlySabers);
     DECLARE_PRIVATE_FIELD(GlobalNamespace::ObstacleSaberSparkleEffectManager*, _obstacleSaberSparkleEffectManager);
     
-    DECLARE_OVERRIDE_METHOD(void, Dispose, il2cpp_utils::il2cpp_type_check::MetadataGetter<&::System::IDisposable::Dispose>::get());
+    DECLARE_OVERRIDE_METHOD_MATCH(void, Dispose, &::System::IDisposable::Dispose);
     DECLARE_INSTANCE_METHOD(void, LapizSaberFactory_SaberCreated, Lapiz::Sabers::LapizSaber* lapizSaber);
     DECLARE_PRIVATE_METHOD(void, AddSaber, GlobalNamespace::Saber* saber);
     DECLARE_PRIVATE_METHOD(GlobalNamespace::ObstacleSaberSparkleEffect*, CreateNewObstacleSaberSparkleEffect);

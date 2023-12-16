@@ -32,8 +32,8 @@ namespace Lapiz::Objects {
             }
 
             void ObjectStateContainer::ObjectState::Revert() {
-                if (transform && transform->m_CachedPtr.m_value) {
-                    if (parent && parent->m_CachedPtr.m_value) transform->SetParent(parent);
+                if (transform && transform->m_CachedPtr) {
+                    if (parent && parent->m_CachedPtr) transform->SetParent(parent);
                     transform->set_localScale(scale);
                     transform->get_gameObject()->SetActive(active);
                     transform->set_localPosition(pose.position);

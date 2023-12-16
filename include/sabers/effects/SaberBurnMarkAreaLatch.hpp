@@ -22,7 +22,7 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, SaberBurnMarkAreaLatch,
     DECLARE_PRIVATE_FIELD(GlobalNamespace::SaberBurnMarkArea*, _saberBurnMarkArea);
     DECLARE_PRIVATE_FIELD(int, _lineFactoryIncrement);
 
-    DECLARE_OVERRIDE_METHOD(void, Dispose, il2cpp_utils::il2cpp_type_check::MetadataGetter<&::System::IDisposable::Dispose>::get());
+    DECLARE_OVERRIDE_METHOD_MATCH(void, Dispose, &::System::IDisposable::Dispose);
     DECLARE_INSTANCE_METHOD(void, LapizSaberFactory_SaberCreated, Lapiz::Sabers::LapizSaber* lapizSaber);
     DECLARE_INSTANCE_METHOD(void, ColorUpdated, GlobalNamespace::Saber* saber, UnityEngine::Color color);
     DECLARE_PRIVATE_METHOD(void, AddSaber, GlobalNamespace::Saber* saber);

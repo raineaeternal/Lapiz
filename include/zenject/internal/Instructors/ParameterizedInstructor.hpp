@@ -9,7 +9,7 @@ namespace Lapiz::Zenject::Internal::Instructors {
         public:
             void Install(InstallSet* set, ContextBinding* binding) override {
                 auto container = binding->get_context()->get_Container();
-                auto args = reinterpret_cast<::System::Collections::Generic::IEnumerable_1<::Il2CppObject*>*>(set->get_parameters().convert());
+                auto args = reinterpret_cast<::System::Collections::Generic::IEnumerable_1<::System::Object*>*>(set->get_parameters().convert());
                 auto type = il2cpp_utils::GetSystemType(set->get_installerType());
                 auto installerBase = reinterpret_cast<::Zenject::InstallerBase*>(container->Instantiate(type, args));
                 if (installerBase)

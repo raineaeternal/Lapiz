@@ -120,7 +120,7 @@ namespace Lapiz::Zenject {
 
             /// @brief get a zenjector for your mod
             /// @return A zenjector for you to install, expose or mutate things with
-            static Zenjector* Get(const ModInfo& modInfo = {MOD_ID, VERSION});
+            static Zenjector* Get(const modloader::ModInfo& modInfo = {MOD_ID, VERSION, 0});
 
             /// @brief Install bindings to another installer without a custom installer
             static void UseMetadataBinder() {};
@@ -132,13 +132,13 @@ namespace Lapiz::Zenject {
             static void UseLapizSync() {};
         private:
             friend class ZenjectManager;
-            explicit Zenjector(const ModInfo& modInfo);
+            explicit Zenjector(const modloader::ModInfo& modInfo);
 
             void Install(Il2CppClass* baseInstallerT, ZenjectorCallback installCallback);
             void Install(Il2CppClass* customInstallerT, Il2CppClass* baseInstallerT, ArrayW<Il2CppObject*> parameters);
             void Install(Il2CppClass* customInstallerT, Zenject::Location location, ArrayW<Il2CppObject*> parameters);
 
-            ModInfo modInfo;
+            modloader::ModInfo modInfo;
 
             /// @brief sets for an install, made with the Install method that takes a location
             std::unordered_set<Internal::InstallSet*> _installSets;

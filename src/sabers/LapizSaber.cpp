@@ -3,9 +3,11 @@
 #include "UnityEngine/Transform.hpp"
 #include "UnityEngine/GameObject.hpp"
 #include "UnityEngine/LayerMask.hpp"
+#include "UnityEngine/Vector3.hpp"
 #include "GlobalNamespace/TimeHelper.hpp"
 #include "GlobalNamespace/SaberMovementData.hpp"
 #include "utilities/saberutil.hpp"
+
 DEFINE_TYPE(Lapiz::Sabers, LapizSaber);
 
 namespace Lapiz::Sabers {
@@ -16,18 +18,20 @@ namespace Lapiz::Sabers {
     }
 
     void LapizSaber::Update() {
-        if (_saber && _saber->m_CachedPtr.m_value && _saber->get_gameObject()->get_activeInHierarchy()) {
-            auto topTransform = _saber->saberBladeTopTransform;
-            auto bottomTransform = _saber->saberBladeBottomTransform;
+        if (_saber && _saber->m_CachedPtr && _saber->gameObject->activeInHierarchy) {
+            auto topTransform = _saber->_saberBladeTopTransform;
+            auto bottomTransform = _saber->_saberBladeBottomTransform;
 
-            auto topPosition = _saber->saberBladeTopPos = topTransform->get_position();
-            auto bottomPosition = _saber->saberBladeBottomPos = bottomTransform->get_position();
+            auto topPosition = topTransform->position;
+            _saber->_saberBladeTopPos = topPosition;
+            auto bottomPosition = bottomTransform->position;
+            _saber->_saberBladeBottomPos = bottomPosition;
 
             auto time = GlobalNamespace::TimeHelper::get_time();
             _trailSaberMovementData->AddNewData(topPosition, bottomPosition, time);
 
-            if (_saber->get_enabled()) {
-                _saber->get_movementData()->AddNewData(topPosition, bottomPosition, time);
+            if (_saber->enabled) {
+                _saber->movementData->AddNewData(topPosition, bottomPosition, time);
                 _noteCutter->Cut(_saber);
             }
         }
@@ -37,13 +41,13 @@ namespace Lapiz::Sabers {
             _colorProcessNextFrame.pop();
         }
     }
-    
+
     void LapizSaber::LateUpdate() {
         _constructedThisFrame = false;
     }
 
     void LapizSaber::SetType(GlobalNamespace::SaberType saberType) {
-        _saberTypeObject->saberType = saberType;
+        _saberTypeObject->_saberType = saberType;
         SaberUtil::SetColor(_saberModelController, _colorManager->ColorForSaberType(saberType));
     }
 
@@ -60,35 +64,35 @@ namespace Lapiz::Sabers {
     }
 
     void LapizSaber::Setup(System::Type* backingType, GlobalNamespace::SaberType saberType) {
-        auto gameObject = get_gameObject();
+        auto gameObject = this->gameObject;
         _saberTypeObject = gameObject->AddComponent<GlobalNamespace::SaberTypeObject*>();
         _saber = reinterpret_cast<GlobalNamespace::Saber*>(gameObject->AddComponent(backingType));
         static int layer = UnityEngine::LayerMask::NameToLayer("Saber");
         gameObject->set_layer(layer);
 
-        _saber->saberType = _saberTypeObject;
+        _saber->_saberType = _saberTypeObject;
 
-        auto top = UnityEngine::GameObject::New_ctor("Top")->get_transform();
-        auto bottom = UnityEngine::GameObject::New_ctor("Bottom")->get_transform();
+        auto top = UnityEngine::GameObject::New_ctor("Top")->transform;
+        auto bottom = UnityEngine::GameObject::New_ctor("Bottom")->transform;
 
-        top->SetParent(get_transform());
-        bottom->SetParent(get_transform());
+        top->SetParent(this->transform);
+        bottom->SetParent(this->transform);
 
-        top->set_position({0, 0, 1});
+        top->position = {0, 0, 1};
 
-        _saber->saberBladeTopTransform = top;
-        _saber->handleTransform = bottom;
-        _saber->saberBladeBottomTransform = bottom;
+        _saber->_saberBladeTopTransform = top;
+        _saber->_handleTransform = bottom;
+        _saber->_saberBladeBottomTransform = bottom;
 
-        _saber->saberBladeTopPos = top->get_position();
-        _saber->saberBladeBottomPos = bottom->get_position();
+        _saber->_saberBladeTopPos = top->position;
+        _saber->_saberBladeBottomPos = bottom->position;
 
-        _saberTypeObject->saberType = saberType;
+        _saberTypeObject->_saberType = saberType;
         _saberModelController = _saberModelProvider->NewModel(saberType);
-        _saberModelController->Init(get_transform(), _saber);
+        _saberModelController->Init(this->transform, _saber);
 
         _trailSaberMovementData = GlobalNamespace::SaberMovementData::New_ctor();
-        _saberModelController->saberTrail->movementData = _trailSaberMovementData->i_IBladeMovementData();
+        _saberModelController->_saberTrail->_movementData = *_trailSaberMovementData;
         _constructedThisFrame = true;
     }
 }

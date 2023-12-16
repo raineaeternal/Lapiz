@@ -11,7 +11,7 @@ namespace Lapiz::Zenject::Internal {
     std::set<::Zenject::Context*> ContextDecorator::recentlyInstalledDecorators;
     UnorderedEventCallback<::Zenject::Context*, ContextBindingSet> ContextDecorator::contextInstalling;
 
-    void ContextDecorator::Context_InstallInstallers_Prefix(::Zenject::Context* self, ListWrapper<::Zenject::InstallerBase*> normalInstallers, ListWrapper<::System::Type*> normalInstallerTypes, ListWrapper<::Zenject::ScriptableObjectInstaller*> scriptableObjectInstallers, ListWrapper<::Zenject::MonoInstaller*> installers, ListWrapper<::Zenject::MonoInstaller*> installerPrefabs) {
+    void ContextDecorator::Context_InstallInstallers_Prefix(::Zenject::Context* self, ListW<::Zenject::InstallerBase*> normalInstallers, ListW<::System::Type*> normalInstallerTypes, ListW<::Zenject::ScriptableObjectInstaller*> scriptableObjectInstallers, ListW<::Zenject::MonoInstaller*> installers, ListW<::Zenject::MonoInstaller*> installerPrefabs) {
         if (recentlyInstalledDecorators.find(self) != recentlyInstalledDecorators.end()) {
             recentlyInstalledDecorators.erase(self);
             return;

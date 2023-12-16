@@ -17,8 +17,8 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, SaberClashEffectAdjuste
     DECLARE_PRIVATE_FIELD(Lapiz::Sabers::SaberModelManager*, _saberModelManager);
     DECLARE_PRIVATE_FIELD(Lapiz::Sabers::Effects::LapizSaberClashChecker*, _saberClashChecker);
 
-    DECLARE_OVERRIDE_METHOD(void, Initialize, il2cpp_utils::il2cpp_type_check::MetadataGetter<&::Zenject::IInitializable::Initialize>::get());
-    DECLARE_OVERRIDE_METHOD(void, Dispose, il2cpp_utils::il2cpp_type_check::MetadataGetter<&::System::IDisposable::Dispose>::get());
+    DECLARE_OVERRIDE_METHOD_MATCH(void, Initialize, &::Zenject::IInitializable::Initialize);
+    DECLARE_OVERRIDE_METHOD_MATCH(void, Dispose, &::System::IDisposable::Dispose);
     DECLARE_CTOR(ctor, Lapiz::Sabers::SaberModelManager* saberModelManager, GlobalNamespace::SaberClashChecker* saberClashChecker);
     DECLARE_PRIVATE_METHOD(void, SaberClashChecker_NewSabersClashed, GlobalNamespace::Saber* saberA, GlobalNamespace::Saber* saberB);
     public:

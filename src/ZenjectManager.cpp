@@ -7,7 +7,7 @@
 #include "zenject/internal/InstallSet.hpp"
 #include "Zenject/SceneDecoratorContext.hpp"
 
-#include "modloader/shared/modloader.hpp"
+#include "scotland2/shared/modloader.h"
 
 namespace Lapiz::Zenject {
     static ZenjectManager instance;
@@ -16,7 +16,7 @@ namespace Lapiz::Zenject {
     ZenjectManager& ZenjectManager::get_instance() {
         return instance;
     }
-    
+
     void ZenjectManager::Add(Zenjector* zenjector) {
         DEBUG("Registered zenjector for mod {} v{}", zenjector->modInfo.id, zenjector->modInfo.version);
         _zenjectors.emplace(zenjector);

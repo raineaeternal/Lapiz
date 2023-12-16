@@ -31,12 +31,12 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelManager, Il2CppObject,
     using SaberModelLink = System::Collections::Generic::Dictionary_2<GlobalNamespace::Saber*, GlobalNamespace::SaberModelController*>;
     DECLARE_INSTANCE_FIELD(LapizSaberLink*, _lapizSaberLink);
     DECLARE_INSTANCE_FIELD(SaberModelLink*, _saberModelLink);
-    DECLARE_INSTANCE_FIELD_DEFAULT(ListWrapper<DesperationContract*>, _desperationList, nullptr);
-    DECLARE_INSTANCE_FIELD_DEFAULT(ListWrapper<DesperationContract*>, _salvationList, nullptr);
+    DECLARE_INSTANCE_FIELD_DEFAULT(ListW<DesperationContract*>, _desperationList, nullptr);
+    DECLARE_INSTANCE_FIELD_DEFAULT(ListW<DesperationContract*>, _salvationList, nullptr);
 
     DECLARE_CTOR(ctor, GlobalNamespace::ColorManager* colorManager, LapizSaberFactory* lapizSaberFactory);
-    DECLARE_OVERRIDE_METHOD(void, LateTick, il2cpp_utils::il2cpp_type_check::MetadataGetter<&::Zenject::ILateTickable::LateTick>::get());
-    DECLARE_OVERRIDE_METHOD(void, Dispose, il2cpp_utils::il2cpp_type_check::MetadataGetter<&::System::IDisposable::Dispose>::get());
+    DECLARE_OVERRIDE_METHOD_MATCH(void, LateTick, &::Zenject::ILateTickable::LateTick);
+    DECLARE_OVERRIDE_METHOD_MATCH(void, Dispose, &::System::IDisposable::Dispose);
 
     DECLARE_INSTANCE_METHOD(GlobalNamespace::SaberModelController*, GetSaberModelController, GlobalNamespace::Saber* saber);
     DECLARE_INSTANCE_METHOD(UnityEngine::Color, GetPhysicalSaberColor, GlobalNamespace::Saber* saber);

@@ -10,7 +10,7 @@ namespace Lapiz::Objects {
             SerializableAttribute() : Lapiz::Attributes::AttributeRegistration() {}
             ::System::Attribute* get_attribute() const override {
                 if (!attribute) {
-                    attribute = ::System::SerializableAttribute::New_ctor<il2cpp_utils::CreationType::Manual>();
+                    attribute = *il2cpp_utils::New<::System::SerializableAttribute*, il2cpp_utils::CreationType::Manual>();
                 }
                 return attribute;
             }

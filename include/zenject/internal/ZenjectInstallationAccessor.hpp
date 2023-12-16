@@ -7,7 +7,7 @@
 namespace Lapiz::Zenject::Internal {
     class ZenjectInstallationAccessor {
         public:
-            ZenjectInstallationAccessor(ListWrapper<::Zenject::InstallerBase*> normalInstallers, ListWrapper<System::Type*> normalInstallerTypes, ListWrapper<::Zenject::MonoInstaller*> installers) 
+            ZenjectInstallationAccessor(ListW<::Zenject::InstallerBase*> normalInstallers, ListW<System::Type*> normalInstallerTypes, ListW<::Zenject::MonoInstaller*> installers) 
             : _installers(installers), _normalInstallers(normalInstallers), _normalInstallerTypes(normalInstallerTypes) {};
         
             auto get_installers() const { return _installers; }
@@ -15,8 +15,8 @@ namespace Lapiz::Zenject::Internal {
             auto get_normalInstallerTypes() const { return _normalInstallerTypes; }
         
         private:
-            ListWrapper<::Zenject::MonoInstaller*> _installers;
-            ListWrapper<::Zenject::InstallerBase*> _normalInstallers;
-            ListWrapper<System::Type*> _normalInstallerTypes;
+            ListW<::Zenject::MonoInstaller*> _installers;
+            ListW<::Zenject::InstallerBase*> _normalInstallers;
+            ListW<System::Type*> _normalInstallerTypes;
     };
 }

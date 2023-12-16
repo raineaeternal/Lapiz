@@ -13,7 +13,7 @@ namespace Lapiz::Zenject {
 
             ::System::Attribute* get_attribute() const override {
                 if (!attribute) {
-                    auto zenjectAttribute = ::Zenject::InjectAttribute::New_ctor<il2cpp_utils::CreationType::Manual>();
+                    auto zenjectAttribute = *il2cpp_utils::New<::Zenject::InjectAttribute*, il2cpp_utils::CreationType::Manual>();
                     zenjectAttribute->set_Optional(optional());
                     if (get_id()) {
                         zenjectAttribute->set_Id(StringW(get_id()));

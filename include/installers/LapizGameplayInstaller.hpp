@@ -4,6 +4,6 @@
 #include "Zenject/Installer.hpp"
 
 DECLARE_CLASS_CODEGEN(Lapiz::Installers, LapizGameplayInstaller, ::Zenject::Installer,
-    DECLARE_OVERRIDE_METHOD(void, InstallBindings, il2cpp_utils::il2cpp_type_check::MetadataGetter<&::Zenject::InstallerBase::InstallBindings>::get());
+    DECLARE_OVERRIDE_METHOD_MATCH(void, InstallBindings, &::Zenject::InstallerBase::InstallBindings);
     DECLARE_DEFAULT_CTOR();
 )

@@ -3,6 +3,7 @@
 #include "utilities/saberutil.hpp"
 #include "GlobalNamespace/Saber.hpp"
 #include "GlobalNamespace/SaberTypeObject.hpp"
+#include "GlobalNamespace/SaberType.hpp"
 #include "UnityEngine/GameObject.hpp"
 
 DEFINE_TYPE(Lapiz::Sabers, SaberModelProvider);
@@ -15,22 +16,22 @@ namespace Lapiz::Sabers {
         return instance;
     }
 
-    void SaberModelProvider::ctor(Zenject::DiContainer* container, GlobalNamespace::SaberManager* saberManager, ListWrapper<SaberModelRegistrationWrapper*> saberModelRegistrations) {
+    void SaberModelProvider::ctor(Zenject::DiContainer* container, GlobalNamespace::SaberManager* saberManager, ListW<SaberModelRegistrationWrapper*> saberModelRegistrations) {
         INVOKE_CTOR();
         instance = this;
         _earlyInittingGlowColors = System::Collections::Generic::HashSet_1<GlobalNamespace::SetSaberGlowColor*>::New_ctor();
-        _earlyInittingFakeGlowColors = System::Collections::Generic::HashSet_1<GlobalNamespace::SetSaberFakeGlowColor*>::New_ctor(); 
-        
+        _earlyInittingFakeGlowColors = System::Collections::Generic::HashSet_1<GlobalNamespace::SetSaberFakeGlowColor*>::New_ctor();
+
         _container = container;
         _saberManager = saberManager;
 
         _localLeftContainer = saberManager->get_leftSaber()->GetComponent<SaberModelContainer*>();
         _localRightContainer = saberManager->get_rightSaber()->GetComponent<SaberModelContainer*>();
 
-        _localOriginalLeftPrefab = _localLeftContainer->saberModelControllerPrefab;
-        _localOriginalRightPrefab = _localRightContainer->saberModelControllerPrefab;
+        _localOriginalLeftPrefab = _localLeftContainer->_saberModelControllerPrefab;
+        _localOriginalRightPrefab = _localRightContainer->_saberModelControllerPrefab;
 
-        auto registration = std::make_shared<SaberModelRegistration>(_localLeftContainer->saberModelControllerPrefab, _localRightContainer->saberModelControllerPrefab, -1);
+        auto registration = std::make_shared<SaberModelRegistration>(_localLeftContainer->_saberModelControllerPrefab, _localRightContainer->_saberModelControllerPrefab, -1);
         _defaultSaberModelRegistration = SaberModelRegistrationWrapper::Make(registration);
 
         if (!saberModelRegistrations || saberModelRegistrations.size() == 0) {
@@ -51,13 +52,13 @@ namespace Lapiz::Sabers {
 
     GlobalNamespace::SaberModelController* SaberModelProvider::NewModel(std::optional<GlobalNamespace::SaberType> saberType) {
         auto newModel = CreateNew(saberType.value_or(SaberType::SaberA));
-        for (auto glow : newModel->setSaberGlowColors) {
+        for (auto glow : newModel->_setSaberGlowColors) {
             if (!saberType.has_value())
                 _earlyInittingGlowColors->Add(glow);
             glow->saberType = saberType.value_or(SaberType::SaberA);
         }
 
-        for (auto fakeGlow : newModel->setSaberFakeGlowColors) {
+        for (auto fakeGlow : newModel->_setSaberFakeGlowColors) {
             if (!saberType.has_value())
                 _earlyInittingFakeGlowColors->Add(fakeGlow);
             fakeGlow->saberType = saberType.value_or(SaberType::SaberA);
@@ -77,20 +78,20 @@ namespace Lapiz::Sabers {
             auto go = UnityEngine::GameObject::New_ctor(t->name);
             go->SetActive(false);
 
-            auto defaultTrail = defaultPrefab->saberTrail;
+            auto defaultTrail = defaultPrefab->_saberTrail;
             auto pseudoTrail = go->AddComponent<SaberTrail*>();
 
-            pseudoTrail->granularity = defaultTrail->granularity;
-            pseudoTrail->trailDuration = defaultTrail->trailDuration;
-            pseudoTrail->samplingFrequency = defaultTrail->samplingFrequency;
-            pseudoTrail->whiteSectionMaxDuration = defaultTrail->whiteSectionMaxDuration;
-            pseudoTrail->trailRendererPrefab = defaultTrail->trailRendererPrefab;
+            pseudoTrail->_granularity = defaultTrail->_granularity;
+            pseudoTrail->_trailDuration = defaultTrail->_trailDuration;
+            pseudoTrail->_samplingFrequency = defaultTrail->_samplingFrequency;
+            pseudoTrail->_whiteSectionMaxDuration = defaultTrail->_whiteSectionMaxDuration;
+            pseudoTrail->_trailRendererPrefab = defaultTrail->_trailRendererPrefab;
             pseudoTrail->set_enabled(false);
 
             newModel = reinterpret_cast<SaberModelController*>(_container->InstantiateComponent(il2cpp_utils::GetSystemType(t), go));
-            newModel->saberTrail = pseudoTrail;
-            newModel->setSaberGlowColors = ArrayW<SetSaberGlowColor*>(il2cpp_array_size_t(0));
-            newModel->setSaberFakeGlowColors = ArrayW<SetSaberFakeGlowColor*>(il2cpp_array_size_t(0));
+            newModel->_saberTrail = pseudoTrail;
+            newModel->_setSaberGlowColors = ArrayW<SetSaberGlowColor*>(il2cpp_array_size_t(0));
+            newModel->_setSaberFakeGlowColors = ArrayW<SetSaberFakeGlowColor*>(il2cpp_array_size_t(0));
             go->SetActive(true);
         } else if (reg->_leftTemplate && reg->_rightTemplate) {
             newModel = _container->InstantiatePrefab(saberType == SaberType::SaberA ? reg->_leftTemplate.ptr() : reg->_rightTemplate.ptr())->GetComponent<SaberModelController*>();
@@ -118,9 +119,9 @@ namespace Lapiz::Sabers {
 
     bool SaberModelProvider::SetSaberFakeGlowColor_Start_Prefix(GlobalNamespace::SetSaberFakeGlowColor* self) {
         if (_earlyInittingFakeGlowColors->Contains(self)) {
-            if (self->saberTypeObject)
-                self->saberType = self->saberTypeObject->get_saberType();
-            
+            if (self->_saberTypeObject)
+                self->_saberType = self->_saberTypeObject->get_saberType();
+
             _earlyInittingFakeGlowColors->Remove(self);
             return false;
         }
@@ -131,6 +132,6 @@ namespace Lapiz::Sabers {
         if (self != _localLeftContainer && self != _localRightContainer) return;
         if (_activeSaberModelRegistration == _defaultSaberModelRegistration) return;
 
-        self->saberModelControllerPrefab = NewModel(self->saber->get_saberType());
+        self->_saberModelControllerPrefab = NewModel(self->_saber->get_saberType());
     }
 }

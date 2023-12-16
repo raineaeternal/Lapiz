@@ -17,11 +17,11 @@ using namespace Lapiz::Zenject::Internal::Filters;
 extern "C" void load();
 
 namespace Lapiz::Zenject {
-    Zenjector::Zenjector(const ModInfo& modInfo) : modInfo(modInfo) {
+    Zenjector::Zenjector(const modloader::ModInfo& modInfo) : modInfo(modInfo) {
         ZenjectManager::get_instance().Add(this);
     }
 
-    Zenjector* Zenjector::Get(const ModInfo& modInfo) {
+    Zenjector* Zenjector::Get(const modloader::ModInfo& modInfo) {
         load();
         Lapiz::Attributes::AutoRegister();
         auto z = new Zenjector(modInfo);
