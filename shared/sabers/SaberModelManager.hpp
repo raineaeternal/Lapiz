@@ -12,7 +12,7 @@
 
 namespace Lapiz::Sabers { class SaberModelManager; }
 
-DECLARE_CLASS_CODEGEN(Lapiz::Sabers, DesperationContract, Il2CppObject,
+DECLARE_CLASS_CODEGEN(Lapiz::Sabers, DesperationContract, System::Object,
     DECLARE_PRIVATE_FIELD(GlobalNamespace::Saber*, _saber);
     DECLARE_PRIVATE_FIELD(UnityEngine::Color, _color);
     DECLARE_PRIVATE_FIELD(int, _accessed);
@@ -23,7 +23,7 @@ DECLARE_CLASS_CODEGEN(Lapiz::Sabers, DesperationContract, Il2CppObject,
     friend class SaberModelManager;
 )
 
-DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelManager, Il2CppObject, std::vector<Il2CppClass*>({classof(::Zenject::ILateTickable*), classof(::System::IDisposable*)}),
+DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelManager, System::Object, std::vector<Il2CppClass*>({classof(::Zenject::ILateTickable*), classof(::System::IDisposable*)}),
     DECLARE_INSTANCE_FIELD(GlobalNamespace::ColorManager*, _colorManager);
     DECLARE_INSTANCE_FIELD(LapizSaberFactory*, _lapizSaberFactory);
 

@@ -38,12 +38,12 @@ namespace Lapiz::Zenject {
         _installInstructions.emplace(new InstallInstruction(baseInstallerT, installCallback));
     }
 
-    void Zenjector::Install(Il2CppClass* customInstallerT, Il2CppClass* baseInstallerT, ArrayW<Il2CppObject*> parameters) {
+    void Zenjector::Install(Il2CppClass* customInstallerT, Il2CppClass* baseInstallerT, ArrayW<System::Object*> parameters) {
         auto filter = new TypedInstallFilter(baseInstallerT);
         _installSets.emplace(new InstallSet(customInstallerT, filter, (parameters && parameters.size() > 0) ? parameters : nullptr));
     }
 
-    void Zenjector::Install(Il2CppClass* customInstallerT, Zenject::Location location, ArrayW<Il2CppObject*> parameters) {
+    void Zenjector::Install(Il2CppClass* customInstallerT, Zenject::Location location, ArrayW<System::Object*> parameters) {
         auto filter = new MultiTypedInstallFilter(InstallerForLocation(location));
         _installSets.emplace(new InstallSet(customInstallerT, filter, (parameters && parameters.size() > 0) ? parameters : nullptr));
     }
@@ -52,7 +52,7 @@ namespace Lapiz::Zenject {
         _exposeSets.emplace(new ExposeSet(typeToExpose, contractName));
     }
 
-    void Zenjector::Mutate(Il2CppClass* typeToMutate, std::string contractName, std::function<void(::Zenject::SceneDecoratorContext*, Il2CppObject*)> mutationCallback) {
+    void Zenjector::Mutate(Il2CppClass* typeToMutate, std::string contractName, std::function<void(::Zenject::SceneDecoratorContext*, System::Object*)> mutationCallback) {
         auto wrapper = new ZenjectDelegate();
         wrapper->Wrap(mutationCallback);
         _mutateSets.emplace(new MutateSet(typeToMutate, contractName, wrapper));

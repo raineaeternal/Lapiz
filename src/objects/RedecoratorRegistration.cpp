@@ -13,8 +13,8 @@ namespace Lapiz::Objects {
         _chain = chain;
     }
 
-    Il2CppObject* RedecoratorRegistration::Redecorate_internal(Il2CppObject* value) {
-        if (minfo) return il2cpp_utils::RunMethod(this, (MethodInfo*)minfo, value).value_or(value);
+    System::Object* RedecoratorRegistration::Redecorate_internal(System::Object* value) {
+        if (minfo) return il2cpp_utils::RunMethod<System::Object*>(this, (MethodInfo*)minfo, value).value_or(value);
         else return value;
     }
 

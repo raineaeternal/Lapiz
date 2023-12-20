@@ -18,7 +18,7 @@ namespace Lapiz::Zenject::ZenjectExtensions {
     /// @param binder The binder.
     /// @param onInstantiated The callback when the view controller is instantiated.
     /// @return
-    ::Zenject::ScopeConcreteIdArgConditionCopyNonLazyBinder* FromNewComponentAsViewController(::Zenject::FromBinder* binder, std::function<void(::Zenject::InjectContext*, Il2CppObject*)> onInstantiated = nullptr);
+    ::Zenject::ScopeConcreteIdArgConditionCopyNonLazyBinder* FromNewComponentAsViewController(::Zenject::FromBinder* binder, std::function<void(::Zenject::InjectContext*, System::Object*)> onInstantiated = nullptr);
 
     /// @brief Creates a new component on a new GameObject
     /// @param binder

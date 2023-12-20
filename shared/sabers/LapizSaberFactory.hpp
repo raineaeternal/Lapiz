@@ -5,7 +5,7 @@
 
 #include "../macros.hpp"
 
-DECLARE_CLASS_CODEGEN(Lapiz::Sabers, LapizSaberFactory, Il2CppObject,
+DECLARE_CLASS_CODEGEN(Lapiz::Sabers, LapizSaberFactory, System::Object,
     DECLARE_PRIVATE_FIELD(::Zenject::DiContainer*, _container);
     DECLARE_CTOR(ctor, ::Zenject::DiContainer* container);
     public:

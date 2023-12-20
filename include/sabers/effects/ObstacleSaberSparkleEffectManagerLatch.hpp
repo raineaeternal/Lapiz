@@ -12,7 +12,7 @@
 
 #include "System/Collections/Generic/Queue_1.hpp"
 
-DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, ObstacleSaberSparkleEffectManagerLatch, Il2CppObject, classof(System::IDisposable*),
+DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, ObstacleSaberSparkleEffectManagerLatch, System::Object, classof(System::IDisposable*),
     DECLARE_PRIVATE_FIELD(GlobalNamespace::ColorManager*, _colorManager);
     DECLARE_PRIVATE_FIELD(Lapiz::Sabers::LapizSaberFactory*, _lapizSaberFactory);
     using EarlySabers = System::Collections::Generic::Queue_1<Lapiz::Sabers::LapizSaber*>;

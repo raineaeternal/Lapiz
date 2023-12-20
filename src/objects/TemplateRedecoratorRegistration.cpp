@@ -5,7 +5,7 @@
 DEFINE_TYPE(Lapiz::Objects, TemplateRedecoratorRegistration);
 
 namespace Lapiz::Objects {
-    Il2CppObject* TemplateRedecoratorRegistration::Redecorate(Il2CppObject* value) {
+    System::Object* TemplateRedecoratorRegistration::Redecorate(System::Object* value) {
         if (_redecorateCall) return _redecorateCall(value);
         else return value;
     }

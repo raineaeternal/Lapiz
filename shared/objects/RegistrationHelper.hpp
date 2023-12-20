@@ -4,7 +4,7 @@
 
 namespace Lapiz::Objects {
     template<typename TPrefab, typename TParent>
-    requires(std::is_convertible_v<TPrefab, Il2CppObject*> && std::is_convertible_v<TParent, Il2CppObject*>)
+    requires(std::is_convertible_v<TPrefab, System::Object*> && std::is_convertible_v<TParent, System::Object*>)
     struct Registration {
         public:
             using Self = Registration<TPrefab, TParent>;

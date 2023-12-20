@@ -30,7 +30,7 @@ static inline AdditionalCanvasShaderChannels operator |(AdditionalCanvasShaderCh
 }
 
 namespace Lapiz::Zenject::ZenjectExtensions {
-    ::Zenject::ScopeConcreteIdArgConditionCopyNonLazyBinder* FromNewComponentAsViewController(::Zenject::FromBinder* binder, std::function<void(::Zenject::InjectContext*, Il2CppObject*)> onInstantiated) {
+    ::Zenject::ScopeConcreteIdArgConditionCopyNonLazyBinder* FromNewComponentAsViewController(::Zenject::FromBinder* binder, std::function<void(::Zenject::InjectContext*, System::Object*)> onInstantiated) {
         auto go = GameObject::New_ctor("ViewController");
 
         go->SetActive(false);
@@ -41,9 +41,9 @@ namespace Lapiz::Zenject::ZenjectExtensions {
         auto componentBinding = binder->FromNewComponentOn(go);
         raycaster->set_enabled(false);
 
-        auto delegate = custom_types::MakeDelegate<System::Action_2<::Zenject::InjectContext*, Il2CppObject*>*>(
-            std::function<void(::Zenject::InjectContext*, Il2CppObject*)>(
-                [onInstantiated, raycaster, go](::Zenject::InjectContext* ctx, Il2CppObject* obj){
+        auto delegate = custom_types::MakeDelegate<System::Action_2<::Zenject::InjectContext*, System::Object*>*>(
+            std::function<void(::Zenject::InjectContext*, System::Object*)>(
+                [onInstantiated, raycaster, go](::Zenject::InjectContext* ctx, System::Object* obj){
                     auto vc = il2cpp_utils::try_cast<HMUI::ViewController>(obj).value_or(nullptr);
                     if (vc && vc->m_CachedPtr)
                     {
