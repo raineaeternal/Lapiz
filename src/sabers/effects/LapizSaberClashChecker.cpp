@@ -11,7 +11,7 @@ namespace Lapiz::Sabers::Effects {
     void LapizSaberClashChecker::ctor(::Zenject::DiContainer* container, GlobalNamespace::SaberManager* saberManager, Lapiz::Sabers::LapizSaberFactory* lapizSaberFactory) {
         INVOKE_CTOR();
         DEBUG("LapizSaberClashChecker ctor");
-        _sabers = List<GlobalNamespace::Saber*>::New_ctor();
+        _sabers = ListW<GlobalNamespace::Saber*>::New();
         _container = container;
         _saberManager = saberManager;
         _lapizSaberFactory = lapizSaberFactory;

@@ -5,6 +5,7 @@
 
 #include "zenject/internal/ContextBinding.hpp"
 #include "Zenject/SceneDecoratorContext.hpp"
+#include "Zenject/Context.hpp"
 
 
 namespace Lapiz::Zenject::Internal {
@@ -35,24 +36,25 @@ namespace Lapiz::Zenject::Internal {
         for (auto installerPrefab : installerPrefabs)
             bindings->emplace(std::make_shared<ContextBinding>(self, installerPrefab->klass, accessor));
 
-        if (il2cpp_utils::IsConvertibleFrom(&classof(::Zenject::SceneDecoratorContext*)->byval_arg, &self->klass->byval_arg, false)) 
+        if (il2cpp_utils::IsConvertibleFrom(&classof(::Zenject::SceneDecoratorContext*)->byval_arg, &self->klass->byval_arg, false))
             recentlyInstalledDecorators.emplace(self);
 
-        if (contextInstalling.size() > 0) 
+        if (contextInstalling.size() > 0)
             contextInstalling.invoke(self, bindings);
     }
 }
 
 using namespace Lapiz::Zenject::Internal;
+using namespace System::Collections::Generic;
 
-MAKE_AUTO_HOOK_MATCH(Context_InstallInstallers, static_cast<void (Zenject::Context::*)(List<::Zenject::InstallerBase*>*, List<::System::Type*>*, List<::Zenject::ScriptableObjectInstaller*>*, List<::Zenject::MonoInstaller*>*, List<::Zenject::MonoInstaller*>*)>(&Zenject::Context::InstallInstallers), 
-    void, 
-    Zenject::Context* self, 
-    List<::Zenject::InstallerBase*>* normalInstallers, 
-    List<::System::Type*>* normalInstallerTypes, 
-    List<::Zenject::ScriptableObjectInstaller*>* scriptableObjectInstallers, 
-    List<::Zenject::MonoInstaller*>* installers, 
-    List<::Zenject::MonoInstaller*>* installerPrefabs) {
+MAKE_AUTO_HOOK_MATCH(Context_InstallInstallers, static_cast<void (Zenject::Context::*)(List_1<::Zenject::InstallerBase*>*, List_1<::System::Type*>*, List_1<::Zenject::ScriptableObjectInstaller*>*, List_1<::Zenject::MonoInstaller*>*, List_1<::Zenject::MonoInstaller*>*)>(&Zenject::Context::InstallInstallers),
+    void,
+    Zenject::Context* self,
+    List_1<::Zenject::InstallerBase*>* normalInstallers,
+    List_1<::System::Type*>* normalInstallerTypes,
+    List_1<::Zenject::ScriptableObjectInstaller*>* scriptableObjectInstallers,
+    List_1<::Zenject::MonoInstaller*>* installers,
+    List_1<::Zenject::MonoInstaller*>* installerPrefabs) {
 
     ContextDecorator::Context_InstallInstallers_Prefix(self, normalInstallers, normalInstallerTypes, scriptableObjectInstallers, installers, installerPrefabs);
     Context_InstallInstallers(self, normalInstallers, normalInstallerTypes, scriptableObjectInstallers, installers, installerPrefabs);

@@ -20,7 +20,7 @@ namespace Lapiz::Zenject::Internal::Mutators {
                 }
 
                 if (mutateSet->get_locationContractName() != sceneDecoratorContext->_decoratedContractName ||
-                    Il2CppString::IsNullOrEmpty(sceneDecoratorContext->_decoratedContractName) ||
+                    System::String::IsNullOrEmpty(sceneDecoratorContext->_decoratedContractName) ||
                     mutateSet->get_locationContractName().empty()) {
                     return;
                 }

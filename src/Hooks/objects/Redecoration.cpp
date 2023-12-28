@@ -101,7 +101,7 @@ using namespace Sombrero::Linq::Functional;
 using namespace Lapiz::Objects;
 using namespace Lapiz::ArrayUtils;
 
-#define PREFAB_INITIALIZE(field_) (decltype(self->field_))PrefabInitializing(self->field_, container, #field_, type)
+#define PREFAB_INITIALIZE(field_) (std::decay_t<decltype(self->field_)>)PrefabInitializing(self->field_, container, #field_, type)
 static UnityEngine::Object* PrefabInitializing(UnityEngine::Object* originalPrefab, ::Zenject::DiContainer* container, const char* fieldName, System::Type* mainType) {
     // get all the redecorator registrations that are installed
     auto resolved = container->get_AncestorContainers()[0]->TryResolve<ListW<RedecoratorRegistration*>>();
@@ -123,7 +123,7 @@ static UnityEngine::Object* PrefabInitializing(UnityEngine::Object* originalPref
 
     DEBUG("Redecorating contract {}", fieldName);
     // sort by priority, check if this is the right order! (asc / desc)
-    std::stable_sort(registrations.begin(), registrations.end(), [](RedecoratorRegistration* a, RedecoratorRegistration* b) -> bool{
+    std::stable_sort(registrations.begin(), registrations.end(), [](RedecoratorRegistration* a, RedecoratorRegistration* b) -> bool {
         return b->get_priority() < a->get_priority();
     });
 

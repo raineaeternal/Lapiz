@@ -16,7 +16,8 @@ namespace Lapiz::Zenject {
                     auto zenjectAttribute = *il2cpp_utils::New<::Zenject::InjectAttribute*, il2cpp_utils::CreationType::Manual>();
                     zenjectAttribute->set_Optional(optional());
                     if (get_id()) {
-                        zenjectAttribute->set_Id(StringW(get_id()));
+                        auto id = StringW(get_id());
+                        zenjectAttribute->set_Id(static_cast<System::String*>(id.convert()));
                     }
                     attribute = zenjectAttribute;
                 }

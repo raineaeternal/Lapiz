@@ -23,8 +23,8 @@ namespace Lapiz::Sabers {
         DEBUG("SaberModelManager ctor");
         _lapizSaberLink = LapizSaberLink::New_ctor();
         _saberModelLink = SaberModelLink::New_ctor();
-        _desperationList = List<DesperationContract*>::New_ctor();
-        _salvationList = List<DesperationContract*>::New_ctor();
+        _desperationList = ListW<DesperationContract*>::New();
+        _salvationList = ListW<DesperationContract*>::New();
 
         _colorManager = colorManager;
         _lapizSaberFactory = lapizSaberFactory;

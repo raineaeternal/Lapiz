@@ -21,7 +21,7 @@ namespace Lapiz::Zenject::Internal::Exposers {
                 }
 
                 if (exposeSet->get_locationContractName() != sceneDecoratorContext->_decoratedContractName ||
-                    Il2CppString::IsNullOrEmpty(sceneDecoratorContext->_decoratedContractName) ||
+                    System::String::IsNullOrEmpty(sceneDecoratorContext->_decoratedContractName) ||
                     exposeSet->get_locationContractName().empty()) {
                     return;
                 }

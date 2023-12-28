@@ -9,9 +9,9 @@ namespace Lapiz::Zenject::Internal::Instructors {
     class MonoInstructor : public IInstructor {
         public:
             void Install(InstallSet* set, ContextBinding* binding) override {
-                auto type = il2cpp_utils::GetSystemType(set->get_installerType());
+                auto type = reinterpret_cast<System::Type*>(il2cpp_utils::GetSystemType(set->get_installerType()));
                 auto installer = reinterpret_cast<::Zenject::MonoInstaller*>(binding->get_context()->get_gameObject()->AddComponent(type));
-                if (installer) 
+                if (installer)
                     binding->AddInstaller(installer);
             }
         private:
