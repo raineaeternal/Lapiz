@@ -20,6 +20,7 @@
 #include "custom-types/shared/delegate.hpp"
 #include "System/Action_2.hpp"
 #include "System/Func_3.hpp"
+#include "System/Type.hpp"
 
 DEFINE_TYPE(Lapiz::Zenject::ZenjectExtensions, DummyRaycaster);
 using namespace UnityEngine;
