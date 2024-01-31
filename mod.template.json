@@ -5,10 +5,12 @@
   "author": "Raine",
   "version": "${version}",
   "packageId": "com.beatgames.beatsaber",
-  "packageVersion": "1.28.0_4124311467",
-  "description": "Lapiz makes modders' lives easier by exposing utilities to them cleanly. This mod does nothing on it's own.",
+  "packageVersion": "1.34.2_7115288407",
+  "description": "Lapiz makes modders' lives easier by exposing utilities to them cleanly. This mod does nothing on its own.",
   "dependencies": [],
-  "modFiles": [],
+  "modFiles": [
+    "${binary}"
+  ],
   "libraryFiles": [],
   "fileCopies": [],
   "copyExtensions": []

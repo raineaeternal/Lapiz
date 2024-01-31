@@ -4,10 +4,11 @@
   "info": {
     "name": "Lapiz",
     "id": "lapiz",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "url": "https://github.com/raineio/Lapiz",
     "additionalData": {
-      "overrideSoName": "liblapiz.so"
+      "overrideSoName": "liblapiz.so",
+      "cmake": true
     }
   },
   "dependencies": [
@@ -19,11 +20,7 @@
     {
       "id": "beatsaber-hook",
       "versionRange": "^5.0.0",
-      "additionalData": {
-        "extraFiles": [
-          "src/inline-hook"
-        ]
-      }
+      "additionalData": {}
     },
     {
       "id": "scotland2",
@@ -31,13 +28,13 @@
       "additionalData": {}
     },
     {
-      "id": "cordl",
-      "versionRange": "^0.1.0",
+      "id": "bs-cordl",
+      "versionRange": "^3402.*",
       "additionalData": {}
     },
     {
       "id": "custom-types",
-      "versionRange": "^0.20.0",
+      "versionRange": "^0.16.0",
       "additionalData": {}
     },
     {
