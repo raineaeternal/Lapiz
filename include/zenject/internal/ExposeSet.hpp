@@ -8,8 +8,11 @@ namespace Lapiz::Zenject::Internal {
         public:
             ExposeSet(Il2CppClass* typeToExpose, std::string locationContractName) : _typeToExpose(typeToExpose), _locationContractName(locationContractName) {}
 
+            __declspec(property(get=get_typeToExpose)) Il2CppClass* TypeToExpose;
+            __declspec(property(get=get_locationContractName)) std::string_view LocationContractName;
+
             auto get_typeToExpose() const { return _typeToExpose; }
-            auto get_locationContractName() const { return _locationContractName; }
+            std::string_view get_locationContractName() const { return _locationContractName; }
 
         private:
             const Il2CppClass* _typeToExpose;

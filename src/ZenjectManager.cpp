@@ -48,10 +48,10 @@ namespace Lapiz::Zenject {
             auto& bindings = *installerBindings.get();
             for (auto set : zenjector->_installSets) {
                 for (auto binding : bindings) {
-                    if (set->get_filter()->ShouldInstall(binding.get())) {
+                    if (set->Filter->ShouldInstall(binding.get())) {
                         auto instructor = _instructorManager.InstructorForSet(set);
                         if (!instructor) {
-                            auto t = set->get_installerType();
+                            auto t = set->InstallerType;
                             WARNING("Could not find instatiation instructor for type {}::{}, skipping this set!", t->namespaze, t->name);
                             continue;
                         }
@@ -62,8 +62,9 @@ namespace Lapiz::Zenject {
 
             for (auto instruction : zenjector->_installInstructions) {
                 for (auto binding : bindings) {
-                    if (instruction->get_baseInstaller() == binding->get_installerType()) {
-                        instruction->onInstall(binding->get_context()->get_Container());
+                    if (instruction->BaseInstaller == binding->InstallerType) {
+                        auto container = THROW_UNLESS(il2cpp_utils::RunMethod<::Zenject::DiContainer*>(binding->Context, "get_Container"));
+                        instruction->onInstall(container);
                     }
                 }
             }
