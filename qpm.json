@@ -48,5 +48,13 @@
       "additionalData": {}
     }
   ],
-  "additionalData": {}
+  "workspace": {
+    "scripts": {
+      "qmod": [
+        "pwsh ./build.ps1",
+        "qpm qmod build --isLibrary true",
+        "pwsh ./qmod.ps1 Lapiz -clean"
+      ]
+    }
+  }
 }

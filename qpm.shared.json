@@ -9,11 +9,18 @@
       "version": "0.2.0",
       "url": "https://github.com/raineio/Lapiz",
       "additionalData": {
-        "overrideSoName": "liblapiz.so"
+        "overrideSoName": "liblapiz.so",
+        "cmake": true
       }
     },
     "workspace": {
-      "scripts": {}
+      "scripts": {
+        "qmod": [
+          "pwsh ./build.ps1",
+          "qpm qmod build --isLibrary true",
+          "pwsh ./qmod.ps1 Lapiz -clean"
+        ]
+      }
     },
     "dependencies": [
       {
