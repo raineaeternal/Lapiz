@@ -1,10 +1,11 @@
 #pragma once
 
+#include "../_config.h"
 #include "custom-types/shared/macros.hpp"
 #include "GlobalNamespace/SaberModelController.hpp"
 
 namespace Lapiz::Sabers {
-    class SaberModelRegistration {
+    class LAPIZ_EXPORT SaberModelRegistration {
         public:
             template<typename T>
             requires(std::is_convertible_v<T, GlobalNamespace::SaberModelController*>)
@@ -18,19 +19,19 @@ namespace Lapiz::Sabers {
             SaberModelRegistration(GlobalNamespace::SaberModelController* leftModelPrefab, GlobalNamespace::SaberModelController* rightModelPrefab, int priority = 0);
             SaberModelRegistration(std::function<GlobalNamespace::SaberModelController*(void)> instruction, int priority = 0);
             SaberModelRegistration(std::function<GlobalNamespace::SaberModelController*(void)> leftInstruction, std::function<GlobalNamespace::SaberModelController*(void)> rightInstruction, int priority = 0);
-            
+
             bool operator >=(const SaberModelRegistration& other) const { return _priority >= other._priority; }
             bool operator >(const SaberModelRegistration& other) const { return _priority > other._priority; }
             bool operator <=(const SaberModelRegistration& other) const { return _priority <= other._priority; }
             bool operator <(const SaberModelRegistration& other) const { return _priority < other._priority; }
-        
+
             auto get_leftType() const { return _leftType; }
             auto get_rightType() const { return _rightType; }
             auto get_leftTemplate() const { return _leftTemplate; }
             auto get_rightTemplate() const { return _rightTemplate; }
             auto get_leftInstruction() const { return _leftInstruction; }
             auto get_rightInstruction() const { return _rightInstruction; }
-        
+
         private:
             friend class SaberModelProvider;
             int _priority;

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../_config.h"
 #include "Zenject/FromBinder.hpp"
 #include "Zenject/ScopeConcreteIdArgConditionCopyNonLazyBinder.hpp"
 #include "Zenject/NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder.hpp"
@@ -18,13 +19,13 @@ namespace Lapiz::Zenject::ZenjectExtensions {
     /// @param binder The binder.
     /// @param onInstantiated The callback when the view controller is instantiated.
     /// @return
-    ::Zenject::ScopeConcreteIdArgConditionCopyNonLazyBinder* FromNewComponentAsViewController(::Zenject::FromBinder* binder, std::function<void(::Zenject::InjectContext*, System::Object*)> onInstantiated = nullptr);
+    LAPIZ_EXPORT ::Zenject::ScopeConcreteIdArgConditionCopyNonLazyBinder* FromNewComponentAsViewController(::Zenject::FromBinder* binder, std::function<void(::Zenject::InjectContext*, System::Object*)> onInstantiated = nullptr);
 
     /// @brief Creates a new component on a new GameObject
     /// @param binder
     /// @param gameObjectInfo
     /// @return
-    ::Zenject::NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder* FromNewComponentOnNewGameObject(::Zenject::FromBinder* binder, ::Zenject::GameObjectCreationParameters* gameObjectInfo);
+    LAPIZ_EXPORT ::Zenject::NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder* FromNewComponentOnNewGameObject(::Zenject::FromBinder* binder, ::Zenject::GameObjectCreationParameters* gameObjectInfo);
 
     /// @brief Creates a new component on a new GameObject
     /// @param binder

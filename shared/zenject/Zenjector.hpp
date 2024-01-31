@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../_config.h"
 #include "Location.hpp"
 #include "System/Collections/Generic/IEnumerable_1.hpp"
 #include "../concepts.hpp"
@@ -24,7 +25,7 @@ namespace Lapiz::Zenject {
     requires(std::is_convertible_v<T, System::Object*>)
     using MutateCallback = std::function<void(::Zenject::SceneDecoratorContext*, T)>;
 
-    class Zenjector {
+    class LAPIZ_EXPORT Zenjector {
         public:
             /// @brief Installs a custom installer to a location with a backing installer(s).
             /// @tparam T The type of your custom installer.

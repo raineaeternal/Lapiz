@@ -13,9 +13,9 @@
 namespace Lapiz::Sabers { class SaberModelManager; }
 
 DECLARE_CLASS_CODEGEN(Lapiz::Sabers, DesperationContract, System::Object,
-    DECLARE_PRIVATE_FIELD(GlobalNamespace::Saber*, _saber);
-    DECLARE_PRIVATE_FIELD(UnityEngine::Color, _color);
-    DECLARE_PRIVATE_FIELD(int, _accessed);
+    DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::Saber*, _saber);
+    DECLARE_INSTANCE_FIELD_PRIVATE(UnityEngine::Color, _color);
+    DECLARE_INSTANCE_FIELD_PRIVATE(int, _accessed);
     DECLARE_INSTANCE_METHOD(GlobalNamespace::Saber*, get_saber);
 
     DECLARE_CTOR(ctor, GlobalNamespace::Saber* saber, UnityEngine::Color color);

@@ -1,11 +1,12 @@
 #pragma once
 
+#include "../_config.h"
 #include "beatsaber-hook/shared/utils/typedefs.h"
 #include "Zenject/InjectAttribute.hpp"
 #include "../AttributeRegistration.hpp"
 
 namespace Lapiz::Zenject {
-    class InjectAttribute : public Lapiz::Attributes::AttributeRegistration {
+    class LAPIZ_EXPORT InjectAttribute : public Lapiz::Attributes::AttributeRegistration {
         public:
             InjectAttribute() : Lapiz::Attributes::AttributeRegistration() {}
             virtual const char* get_id() const = 0;

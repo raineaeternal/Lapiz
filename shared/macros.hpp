@@ -1,5 +1,6 @@
 #pragma once
 
+#include "./_config.h"
 #include "zenject/LapizInjectAttribute.hpp"
 #include "objects/LapizSerializableAttribute.hpp"
 
@@ -94,52 +95,6 @@ DECLARE_INSTANCE_FIELD(type_, name_)
 __MAKE_INJECT_ATTRIBUTE(name_, false, true, false, id_);      \
 DECLARE_INSTANCE_FIELD(type_, name_)
 
-#ifdef DECLARE_PRIVATE_FIELD
-#error "DECLARE_PRIVATE_FIELD is already defined! Undefine it before including macros.hpp!"
-#endif
-
-#define DECLARE_PRIVATE_FIELD(type_, name_)                                                                                  \
-private:                                                                                                                     \
-    struct ___FieldRegistrator_##name_ : ::custom_types::FieldRegistrator {                                                  \
-        ___FieldRegistrator_##name_() {                                                                                      \
-            ___TargetType::___TypeRegistration::addField(this);                                                              \
-        }                                                                                                                    \
-        constexpr const char* name() const override { return #name_; }                                                       \
-        const Il2CppType* type() const override {                                                                            \
-            ::il2cpp_functions::Init();                                                                                      \
-            return ::il2cpp_functions::class_get_type(::il2cpp_utils::il2cpp_type_check::il2cpp_no_arg_class<type_>::get()); \
-        }                                                                                                                    \
-        constexpr uint16_t fieldAttributes() const override { return FIELD_ATTRIBUTE_PUBLIC; }                               \
-        constexpr size_t size() const override { return sizeof(type_); }                                                     \
-        int32_t offset() const override { return offsetof(___TargetType, name_); }                                           \
-    };                                                                                                                       \
-    static inline ___FieldRegistrator_##name_ ___##name_##_FieldRegistrator;                                                 \
-private:                                                                                                                     \
-    type_ name_
-
-#ifdef DECLARE_PRIVATE_FIELD_DEFAULT
-#error "DECLARE_PRIVATE_FIELD_DEFAULT is already defined! Undefine it before including macros.hpp!"
-#endif
-
-#define DECLARE_PRIVATE_FIELD_DEFAULT(type_, name_, default_)                                                                \
-private:                                                                                                                     \
-    struct ___FieldRegistrator_##name_ : ::custom_types::FieldRegistrator {                                                  \
-        ___FieldRegistrator_##name_() {                                                                                      \
-            ___TargetType::___TypeRegistration::addField(this);                                                              \
-        }                                                                                                                    \
-        constexpr const char* name() const override { return #name_; }                                                       \
-        const Il2CppType* type() const override {                                                                            \
-            ::il2cpp_functions::Init();                                                                                      \
-            return ::il2cpp_functions::class_get_type(::il2cpp_utils::il2cpp_type_check::il2cpp_no_arg_class<type_>::get()); \
-        }                                                                                                                    \
-        constexpr uint16_t fieldAttributes() const override { return FIELD_ATTRIBUTE_PUBLIC; }                               \
-        constexpr size_t size() const override { return sizeof(type_); }                                                     \
-        int32_t offset() const override { return offsetof(___TargetType, name_); }                                           \
-    };                                                                                                                       \
-    static inline ___FieldRegistrator_##name_ ___##name_##_FieldRegistrator;                                                 \
-private:                                                                                                                     \
-    type_ name_ = default_
-
 #ifdef DECLARE_PRIVATE_METHOD
 #error "DECLARE_PRIVATE_METHOD is already defined! Undefine it before including macros.hpp!"
 #endif
@@ -180,4 +135,4 @@ DECLARE_INSTANCE_FIELD(type_, name_)
 
 #define DECLARE_PRIVATE_SERIALIZABLE_FIELD(type_, name_)  \
 __MAKE_SERIALIZABLE_ATTRIBUTE(type_, name_);      \
-DECLARE_PRIVATE_FIELD(type_, name_)
+DECLARE_INSTANCE_FIELD_PRIVATE(type_, name_)

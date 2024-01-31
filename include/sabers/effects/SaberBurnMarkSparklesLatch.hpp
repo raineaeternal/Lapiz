@@ -12,13 +12,13 @@
 #include "System/Collections/Generic/Queue_1.hpp"
 
 DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, SaberBurnMarkSparklesLatch, System::Object, classof(System::IDisposable*),
-    DECLARE_PRIVATE_FIELD(Lapiz::Sabers::LapizSaberFactory*, _lapizSaberFactory);
-    DECLARE_PRIVATE_FIELD(Lapiz::Sabers::SaberModelManager*, _saberModelManager);
+    DECLARE_INSTANCE_FIELD_PRIVATE(Lapiz::Sabers::LapizSaberFactory*, _lapizSaberFactory);
+    DECLARE_INSTANCE_FIELD_PRIVATE(Lapiz::Sabers::SaberModelManager*, _saberModelManager);
     using EarlySabers = System::Collections::Generic::Queue_1<Lapiz::Sabers::LapizSaber*>;
-    DECLARE_PRIVATE_FIELD(EarlySabers*, _earlySabers);
-    DECLARE_PRIVATE_FIELD(GlobalNamespace::SaberBurnMarkSparkles*, _saberBurnMarkSparkles);
-    DECLARE_PRIVATE_FIELD(bool, _sisterLoopActive);
-    DECLARE_PRIVATE_FIELD(int, _activeSaberIndex);
+    DECLARE_INSTANCE_FIELD_PRIVATE(EarlySabers*, _earlySabers);
+    DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::SaberBurnMarkSparkles*, _saberBurnMarkSparkles);
+    DECLARE_INSTANCE_FIELD_PRIVATE(bool, _sisterLoopActive);
+    DECLARE_INSTANCE_FIELD_PRIVATE(int, _activeSaberIndex);
 
     DECLARE_OVERRIDE_METHOD_MATCH(void, Dispose, &::System::IDisposable::Dispose);
     DECLARE_INSTANCE_METHOD(void, LapizSaberFactory_SaberCreated, Lapiz::Sabers::LapizSaber* lapizSaber);

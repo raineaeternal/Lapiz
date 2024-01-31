@@ -10,13 +10,13 @@
 #include "sabers/LapizSaberFactory.hpp"
 
 DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, LapizSaberClashChecker, GlobalNamespace::SaberClashChecker, classof(System::IDisposable*),
-    DECLARE_PRIVATE_FIELD(GlobalNamespace::Saber*, _lastSaberA);
-    DECLARE_PRIVATE_FIELD(GlobalNamespace::Saber*, _lastSaberB);
-    DECLARE_PRIVATE_FIELD(bool, _extraSabersDetected);
-    DECLARE_PRIVATE_FIELD_DEFAULT(ListW<GlobalNamespace::Saber*>, _sabers, nullptr);
-    DECLARE_PRIVATE_FIELD(::Zenject::DiContainer*, _container);
-    DECLARE_PRIVATE_FIELD(GlobalNamespace::SaberManager*, _saberManager);
-    DECLARE_PRIVATE_FIELD(Lapiz::Sabers::LapizSaberFactory*, _lapizSaberFactory);
+    DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::Saber*, _lastSaberA);
+    DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::Saber*, _lastSaberB);
+    DECLARE_INSTANCE_FIELD_PRIVATE(bool, _extraSabersDetected);
+    DECLARE_INSTANCE_FIELD_PRIVATE_DEFAULT(ListW<GlobalNamespace::Saber*>, _sabers, nullptr);
+    DECLARE_INSTANCE_FIELD_PRIVATE(::Zenject::DiContainer*, _container);
+    DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::SaberManager*, _saberManager);
+    DECLARE_INSTANCE_FIELD_PRIVATE(Lapiz::Sabers::LapizSaberFactory*, _lapizSaberFactory);
     
     DECLARE_INSTANCE_METHOD(void, LapizSaberFactory_SaberCreated, Lapiz::Sabers::LapizSaber* lapizSaber);
     DECLARE_OVERRIDE_METHOD_MATCH(void, Dispose, &::System::IDisposable::Dispose);

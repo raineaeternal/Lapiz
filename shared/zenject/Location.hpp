@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../_config.h"
 #include "beatsaber-hook/shared/utils/il2cpp-utils.hpp"
 
 #include "GlobalNamespace/QuestAppInit.hpp"
@@ -17,7 +18,7 @@
 
 namespace Lapiz::Zenject {
     /// @brief Beat Saber specific locations, which points to a place install Zenject bindings.
-    enum class Location {
+    enum class LAPIZ_EXPORT Location {
         /// @brief Represents no binding.
         None = 0,
 
@@ -76,7 +77,7 @@ namespace Lapiz::Zenject {
         return (location & flag) == flag;
     }
 
-    static std::unordered_set<Il2CppClass*> InstallerForLocation(Location location) {
+    inline std::unordered_set<Il2CppClass*> InstallerForLocation(Location location) {
         using namespace GlobalNamespace;
 
         std::unordered_set < Il2CppClass * > installerTypes;

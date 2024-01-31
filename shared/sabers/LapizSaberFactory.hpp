@@ -6,7 +6,7 @@
 #include "../macros.hpp"
 
 DECLARE_CLASS_CODEGEN(Lapiz::Sabers, LapizSaberFactory, System::Object,
-    DECLARE_PRIVATE_FIELD(::Zenject::DiContainer*, _container);
+    DECLARE_INSTANCE_FIELD_PRIVATE(::Zenject::DiContainer*, _container);
     DECLARE_CTOR(ctor, ::Zenject::DiContainer* container);
     public:
         template<typename T = GlobalNamespace::Saber*>

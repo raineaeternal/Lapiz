@@ -1,11 +1,12 @@
 #pragma once
 
+#include "../_config.h"
 #include "beatsaber-hook/shared/utils/typedefs.h"
 #include "System/SerializableAttribute.hpp"
 #include "../AttributeRegistration.hpp"
 
 namespace Lapiz::Objects {
-    class SerializableAttribute : public Lapiz::Attributes::AttributeRegistration {
+    class LAPIZ_EXPORT SerializableAttribute : public Lapiz::Attributes::AttributeRegistration {
         public:
             SerializableAttribute() : Lapiz::Attributes::AttributeRegistration() {}
             ::System::Attribute* get_attribute() const override {

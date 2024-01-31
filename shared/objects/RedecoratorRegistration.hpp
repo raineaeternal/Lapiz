@@ -4,13 +4,13 @@
 #include "../macros.hpp"
 
 DECLARE_CLASS_CODEGEN(Lapiz::Objects, RedecoratorRegistration, System::Object,
-    DECLARE_PRIVATE_FIELD(bool, _chain);
-    DECLARE_PRIVATE_FIELD(int, _priority);
-    DECLARE_PRIVATE_FIELD(StringW, _contract);
+    DECLARE_INSTANCE_FIELD_PRIVATE(bool, _chain);
+    DECLARE_INSTANCE_FIELD_PRIVATE(int, _priority);
+    DECLARE_INSTANCE_FIELD_PRIVATE(StringW, _contract);
 
-    DECLARE_PRIVATE_FIELD(System::Type*, _prefabType);
-    DECLARE_PRIVATE_FIELD(System::Type*, _containerType);
-    DECLARE_PRIVATE_FIELD(void*, minfo);
+    DECLARE_INSTANCE_FIELD_PRIVATE(System::Type*, _prefabType);
+    DECLARE_INSTANCE_FIELD_PRIVATE(System::Type*, _containerType);
+    DECLARE_INSTANCE_FIELD_PRIVATE(void*, minfo);
 
     DECLARE_INSTANCE_METHOD(bool, get_chain);
     DECLARE_INSTANCE_METHOD(int, get_priority);

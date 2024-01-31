@@ -11,11 +11,11 @@
 #include "System/IDisposable.hpp"
 
 DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, SaberClashEffectAdjuster, System::Object, std::vector<Il2CppClass*>({classof(::Zenject::IInitializable*), classof(::System::IDisposable*)}),
-    DECLARE_PRIVATE_FIELD(GlobalNamespace::SaberClashEffect*, _saberClashEffect);
-    DECLARE_PRIVATE_FIELD(UnityEngine::ParticleSystem*, _glowParticleSystem);
-    DECLARE_PRIVATE_FIELD(UnityEngine::ParticleSystem*, _sparkleParticleSystem);
-    DECLARE_PRIVATE_FIELD(Lapiz::Sabers::SaberModelManager*, _saberModelManager);
-    DECLARE_PRIVATE_FIELD(Lapiz::Sabers::Effects::LapizSaberClashChecker*, _saberClashChecker);
+    DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::SaberClashEffect*, _saberClashEffect);
+    DECLARE_INSTANCE_FIELD_PRIVATE(UnityEngine::ParticleSystem*, _glowParticleSystem);
+    DECLARE_INSTANCE_FIELD_PRIVATE(UnityEngine::ParticleSystem*, _sparkleParticleSystem);
+    DECLARE_INSTANCE_FIELD_PRIVATE(Lapiz::Sabers::SaberModelManager*, _saberModelManager);
+    DECLARE_INSTANCE_FIELD_PRIVATE(Lapiz::Sabers::Effects::LapizSaberClashChecker*, _saberClashChecker);
 
     DECLARE_OVERRIDE_METHOD_MATCH(void, Initialize, &::Zenject::IInitializable::Initialize);
     DECLARE_OVERRIDE_METHOD_MATCH(void, Dispose, &::System::IDisposable::Dispose);

@@ -13,11 +13,11 @@
 #include "System/Collections/Generic/Queue_1.hpp"
 
 DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, ObstacleSaberSparkleEffectManagerLatch, System::Object, classof(System::IDisposable*),
-    DECLARE_PRIVATE_FIELD(GlobalNamespace::ColorManager*, _colorManager);
-    DECLARE_PRIVATE_FIELD(Lapiz::Sabers::LapizSaberFactory*, _lapizSaberFactory);
+    DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::ColorManager*, _colorManager);
+    DECLARE_INSTANCE_FIELD_PRIVATE(Lapiz::Sabers::LapizSaberFactory*, _lapizSaberFactory);
     using EarlySabers = System::Collections::Generic::Queue_1<Lapiz::Sabers::LapizSaber*>;
-    DECLARE_PRIVATE_FIELD(EarlySabers*, _earlySabers);
-    DECLARE_PRIVATE_FIELD(GlobalNamespace::ObstacleSaberSparkleEffectManager*, _obstacleSaberSparkleEffectManager);
+    DECLARE_INSTANCE_FIELD_PRIVATE(EarlySabers*, _earlySabers);
+    DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::ObstacleSaberSparkleEffectManager*, _obstacleSaberSparkleEffectManager);
     
     DECLARE_OVERRIDE_METHOD_MATCH(void, Dispose, &::System::IDisposable::Dispose);
     DECLARE_INSTANCE_METHOD(void, LapizSaberFactory_SaberCreated, Lapiz::Sabers::LapizSaber* lapizSaber);

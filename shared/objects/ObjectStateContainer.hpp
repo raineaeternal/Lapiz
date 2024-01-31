@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../_config.h"
 #include "beatsaber-hook/shared/utils/typedefs.h"
 
 #include "UnityEngine/GameObject.hpp"
@@ -8,7 +9,7 @@
 #include "UnityEngine/Vector3.hpp"
 
 namespace Lapiz::Objects {
-    class ObjectStateContainer {
+    class LAPIZ_EXPORT ObjectStateContainer {
         public:
             inline explicit ObjectStateContainer(UnityEngine::GameObject* mainParent) : ObjectStateContainer((mainParent && mainParent->m_CachedPtr) ? mainParent->get_transform() : nullptr) {}
             explicit ObjectStateContainer(UnityEngine::Transform* mainParent);

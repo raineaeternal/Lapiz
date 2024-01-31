@@ -1,11 +1,12 @@
 #pragma once
 
+#include "../_config.h"
 #include "TemplateRedecoratorRegistration.hpp"
 
 namespace Lapiz::Objects {
     template<typename TPrefab, typename TParent>
     requires(std::is_convertible_v<TPrefab, System::Object*> && std::is_convertible_v<TParent, System::Object*>)
-    struct Registration {
+    struct LAPIZ_EXPORT Registration {
         public:
             using Self = Registration<TPrefab, TParent>;
             Registration(const Self& other) = delete;
@@ -29,7 +30,7 @@ namespace Lapiz::Objects {
             }
         private:
             TemplateRedecoratorRegistration* v;
-        
+
             Registration(std::string_view fieldName, std::function<TPrefab(TPrefab)> redecorateCall, int priority = 0, bool chain = true) {
                 v = ::Lapiz::Objects::TemplateRedecoratorRegistration::Make<TPrefab, TParent>(fieldName, redecorateCall, priority, chain);
             }
@@ -41,7 +42,7 @@ namespace Lapiz::Objects {
 #endif
 
 #define LAPIZ_REDECORATION_REGISTRATION_HELPER_DEFINITION(name_, field_, TPrefab_, TParent_)                                     \
-struct name_ {                                                                                                                   \
+struct LAPIZ_EXPORT name_ {                                                                                                                   \
     using TPrefab = TPrefab_;                                                                                                    \
     using TParent = TParent_;                                                                                                    \
     using Registration = ::Lapiz::Objects::Registration<TPrefab, TParent>;                                                       \
