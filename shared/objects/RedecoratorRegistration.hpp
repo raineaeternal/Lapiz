@@ -22,4 +22,10 @@ DECLARE_CLASS_CODEGEN(Lapiz::Objects, RedecoratorRegistration, System::Object,
     DECLARE_INSTANCE_METHOD(System::Object*, Redecorate_internal, System::Object* value);
     DECLARE_CTOR(ctor, StringW contract, System::Type* prefabType, System::Type* containerType, int priority, bool chain);
 
+    public:
+        __declspec(property(get=get_chain)) bool Chain;
+        __declspec(property(get=get_priority)) int Priority;
+        __declspec(property(get=get_contract)) StringW Contract;
+        __declspec(property(get=get_prefabType)) System::Type* PrefabType;
+        __declspec(property(get=get_containerType)) System::Type* ContainerType;
 )

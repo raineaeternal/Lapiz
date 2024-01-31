@@ -2,7 +2,7 @@
 
 #include "../_config.h"
 #include "TemplateRedecoratorRegistration.hpp"
-
+#include "Zenject/DiContainer.hpp"
 namespace Lapiz::Objects {
     template<typename TPrefab, typename TParent>
     requires(std::is_convertible_v<TPrefab, System::Object*> && std::is_convertible_v<TParent, System::Object*>)

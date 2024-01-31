@@ -47,14 +47,14 @@ namespace Lapiz::Zenject::Internal {
 using namespace Lapiz::Zenject::Internal;
 using namespace System::Collections::Generic;
 
-MAKE_AUTO_HOOK_MATCH(Context_InstallInstallers, static_cast<void (Zenject::Context::*)(List_1<::Zenject::InstallerBase*>*, List_1<::System::Type*>*, List_1<::Zenject::ScriptableObjectInstaller*>*, List_1<::Zenject::MonoInstaller*>*, List_1<::Zenject::MonoInstaller*>*)>(&Zenject::Context::InstallInstallers),
+MAKE_AUTO_HOOK_MATCH(Context_InstallInstallers, static_cast<void (Zenject::Context::*)(List_1<::Zenject::InstallerBase*>*, List_1<::System::Type*>*, List_1<UnityW<::Zenject::ScriptableObjectInstaller>>*, List_1<UnityW<::Zenject::MonoInstaller>>*, List_1<UnityW<::Zenject::MonoInstaller>>*)>(&Zenject::Context::InstallInstallers),
     void,
     Zenject::Context* self,
     List_1<::Zenject::InstallerBase*>* normalInstallers,
     List_1<::System::Type*>* normalInstallerTypes,
-    List_1<::Zenject::ScriptableObjectInstaller*>* scriptableObjectInstallers,
-    List_1<::Zenject::MonoInstaller*>* installers,
-    List_1<::Zenject::MonoInstaller*>* installerPrefabs) {
+    List_1<UnityW<::Zenject::ScriptableObjectInstaller>>* scriptableObjectInstallers,
+    List_1<UnityW<::Zenject::MonoInstaller>>* installers,
+    List_1<UnityW<::Zenject::MonoInstaller>>* installerPrefabs) {
 
     ContextDecorator::Context_InstallInstallers_Prefix(self, normalInstallers, normalInstallerTypes, scriptableObjectInstallers, installers, installerPrefabs);
     Context_InstallInstallers(self, normalInstallers, normalInstallerTypes, scriptableObjectInstallers, installers, installerPrefabs);

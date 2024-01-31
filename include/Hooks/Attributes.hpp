@@ -15,7 +15,7 @@ namespace Lapiz::Zenject::Internal {
             static void MethodInfo_GetCustomAttributes(ArrayW<::System::Attribute*>& retval, System::Reflection::MethodInfo* self, System::Type* attributeType, bool inherit);
         private:
             static bool DerivesFromInjectAttributeBase(System::Type* type);
-            static ArrayW<System::Object*> InsertCustomAttribute(::ArrayW<System::Attribute*> arr, System::Attribute* attribute);
+            static ArrayW<System::Attribute*> InsertCustomAttribute(::ArrayW<System::Attribute*> arr, System::Attribute* attribute);
             static System::Attribute* GetInjectAttribute(System::Reflection::MemberInfo* member);
     };
 }

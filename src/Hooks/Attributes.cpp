@@ -46,7 +46,7 @@ namespace Lapiz::Zenject::Internal {
         return TypeUtil::hasAncestor(klass, ancestor);
     }
 
-    ArrayW<System::Object*> Attributes::InsertCustomAttribute(::ArrayW<System::Attribute*> arr, System::Attribute* attribute) {
+    ArrayW<System::Attribute*> Attributes::InsertCustomAttribute(::ArrayW<System::Attribute*> arr, System::Attribute* attribute) {
         auto newArr = ArrayW<System::Attribute*>(arr.size() + 1);
         memcpy(newArr.begin(), arr.begin(), arr.size() * sizeof(System::Attribute*));
         newArr[arr.size()] = attribute;

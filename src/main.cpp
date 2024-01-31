@@ -1,3 +1,4 @@
+#include "_config.h"
 #include "main.hpp"
 #include "utilities/hooking.hpp"
 #include "utilities/logging.hpp"
@@ -14,7 +15,7 @@
 static modloader::ModInfo modInfo{MOD_ID, VERSION, 0}; // Stores the ID and version of our mod, and is sent to the modloader upon startup
 
 // Called at the early stages of game loading
-extern "C" void setup(CModInfo* info) {
+LAPIZ_EXPORT_FUNC void setup(CModInfo* info) {
     info->id = MOD_ID;
     info->version = VERSION;
     info->version_long = 0;
@@ -24,7 +25,7 @@ extern "C" void setup(CModInfo* info) {
 
 bool loaded = false;
 // Called later on in the game loading - a good time to install function hooks
-extern "C" void load() {
+LAPIZ_EXPORT_FUNC void load() {
     if (loaded) return;
     loaded = true;
     il2cpp_functions::Init();

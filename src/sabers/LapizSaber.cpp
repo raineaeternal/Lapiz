@@ -66,7 +66,7 @@ namespace Lapiz::Sabers {
     void LapizSaber::Setup(System::Type* backingType, GlobalNamespace::SaberType saberType) {
         auto gameObject = this->gameObject;
         _saberTypeObject = gameObject->AddComponent<GlobalNamespace::SaberTypeObject*>();
-        _saber = reinterpret_cast<GlobalNamespace::Saber*>(gameObject->AddComponent(backingType));
+        _saber = gameObject->AddComponent(backingType).cast<GlobalNamespace::Saber>();
         static int layer = UnityEngine::LayerMask::NameToLayer("Saber");
         gameObject->set_layer(layer);
 

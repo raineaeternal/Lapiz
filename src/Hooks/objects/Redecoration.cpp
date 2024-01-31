@@ -102,7 +102,7 @@ using namespace Lapiz::Objects;
 using namespace Lapiz::ArrayUtils;
 
 #define PREFAB_INITIALIZE(field_) (std::decay_t<decltype(self->field_)>)PrefabInitializing(self->field_, container, #field_, type)
-static UnityEngine::Object* PrefabInitializing(UnityEngine::Object* originalPrefab, ::Zenject::DiContainer* container, const char* fieldName, System::Type* mainType) {
+static UnityEngine::Object* PrefabInitializing(UnityEngine::Object* originalPrefab, ::Zenject::DiContainer* container, std::string_view fieldName, System::Type* mainType) {
     // get all the redecorator registrations that are installed
     auto resolved = container->get_AncestorContainers()[0]->TryResolve<ListW<RedecoratorRegistration*>>();
     // if not found, just return the original prefab
@@ -112,9 +112,11 @@ static UnityEngine::Object* PrefabInitializing(UnityEngine::Object* originalPref
     }
 
     // filter for the ones that match
-    auto registrations = resolved | Where([mainType, fieldName](RedecoratorRegistration* rr){
-        return rr->get_containerType() == mainType && rr->get_contract() == fieldName;
-    }) | ToArray();
+    auto registrations = resolved | Where(
+        [&mainType, &fieldName](auto rr){
+            return rr->ContainerType == mainType && rr->Contract == fieldName;
+        }
+    ) | ToArray();
     // if no matches, return the original prefab
     if (registrations.size() <= 0) {
         DEBUG("No redecorations found for contract {}", fieldName);
@@ -123,19 +125,23 @@ static UnityEngine::Object* PrefabInitializing(UnityEngine::Object* originalPref
 
     DEBUG("Redecorating contract {}", fieldName);
     // sort by priority, check if this is the right order! (asc / desc)
-    std::stable_sort(registrations.begin(), registrations.end(), [](RedecoratorRegistration* a, RedecoratorRegistration* b) -> bool {
-        return b->get_priority() < a->get_priority();
-    });
+    std::stable_sort(
+        registrations.begin(),
+        registrations.end(),
+        [](auto a, auto b) -> bool {
+            return b->Priority < a->Priority;
+        }
+    );
 
     auto irgo = GameObject::New_ctor("Lapiz | InternalRedecorator");
     irgo->SetActive(false);
-    Object::Instantiate(originalPrefab, irgo->get_transform());
-    auto clone = irgo->GetComponentInChildren(registrations.First()->get_prefabType(), true);
+    Object::Instantiate(originalPrefab, irgo->transform);
+    auto clone = irgo->GetComponentInChildren(registrations->First()->PrefabType, true);
 
     // apply all redecorations
     for (auto reg : registrations) {
         reg->Redecorate_internal(clone);
-        if (!reg->get_chain()) break;
+        if (!reg->Chain) break;
     }
 
     container->LazyInject(Lapiz::Objects::ObjectDiffuser::New_ctor(irgo));

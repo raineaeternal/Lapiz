@@ -63,7 +63,7 @@ namespace Lapiz::Zenject {
             for (auto instruction : zenjector->_installInstructions) {
                 for (auto binding : bindings) {
                     if (instruction->BaseInstaller == binding->InstallerType) {
-                        auto container = THROW_UNLESS(il2cpp_utils::RunMethod<::Zenject::DiContainer*>(binding->Context, "get_Container"));
+                        auto container = binding->Context->Container;
                         instruction->onInstall(container);
                     }
                 }
