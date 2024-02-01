@@ -10,6 +10,6 @@ MAKE_AUTO_HOOK_FIND_INSTANCE(ZenjectException_ctor_1, classof(::Zenject::Zenject
 }
 
 MAKE_AUTO_HOOK_FIND_INSTANCE(ZenjectException_ctor_2, classof(::Zenject::ZenjectException*), ".ctor", void, Zenject::ZenjectException* self, StringW exceptionMessage, System::Exception* innerException) {
-    ERROR("ZenjectException: {}", innerException->message->ToString());
+    ERROR("ZenjectException: {}", innerException->_message->ToString());
     ZenjectException_ctor_2(self, exceptionMessage, innerException);
 }

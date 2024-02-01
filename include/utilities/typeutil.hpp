@@ -19,7 +19,7 @@ namespace TypeUtil {
     /// @param instance the type to check ancestors for
     /// @return true if found, false if not found
     template<typename T>
-    requires(std::is_convertible_v<T, Il2CppObject*>)
+    requires(std::is_convertible_v<T, System::Object*>)
     static bool hasAncestor(const Il2CppClass* instance) {
         return hasAncestor(instance, classof(T));
     }

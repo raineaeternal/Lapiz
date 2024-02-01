@@ -1,11 +1,12 @@
 #pragma once
 
+#include "../_config.h"
 #include "beatsaber-hook/shared/utils/typedefs.h"
 #include "Zenject/InjectAttribute.hpp"
 #include "../AttributeRegistration.hpp"
 
 namespace Lapiz::Zenject {
-    class InjectAttribute : public Lapiz::Attributes::AttributeRegistration {
+    class LAPIZ_EXPORT InjectAttribute : public Lapiz::Attributes::AttributeRegistration {
         public:
             InjectAttribute() : Lapiz::Attributes::AttributeRegistration() {}
             virtual const char* get_id() const = 0;
@@ -13,10 +14,11 @@ namespace Lapiz::Zenject {
 
             ::System::Attribute* get_attribute() const override {
                 if (!attribute) {
-                    auto zenjectAttribute = ::Zenject::InjectAttribute::New_ctor<il2cpp_utils::CreationType::Manual>();
+                    auto zenjectAttribute = *il2cpp_utils::New<::Zenject::InjectAttribute*, il2cpp_utils::CreationType::Manual>();
                     zenjectAttribute->set_Optional(optional());
                     if (get_id()) {
-                        zenjectAttribute->set_Id(StringW(get_id()));
+                        auto id = StringW(get_id());
+                        zenjectAttribute->set_Id(static_cast<System::String*>(id.convert()));
                     }
                     attribute = zenjectAttribute;
                 }

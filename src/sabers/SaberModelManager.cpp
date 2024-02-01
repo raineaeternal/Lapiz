@@ -8,6 +8,14 @@
 DEFINE_TYPE(Lapiz::Sabers, DesperationContract);
 DEFINE_TYPE(Lapiz::Sabers, SaberModelManager);
 
+static inline bool operator==(UnityEngine::Color a, UnityEngine::Color b) {
+    return !(
+        a.r != b.r ||
+        a.g != b.g ||
+        a.b != b.b ||
+        a.a != b.a
+    );
+}
 namespace Lapiz::Sabers {
     /* SaberModelManager */
     void SaberModelManager::ctor(GlobalNamespace::ColorManager* colorManager, LapizSaberFactory* lapizSaberFactory) {
@@ -15,9 +23,9 @@ namespace Lapiz::Sabers {
         DEBUG("SaberModelManager ctor");
         _lapizSaberLink = LapizSaberLink::New_ctor();
         _saberModelLink = SaberModelLink::New_ctor();
-        _desperationList = List<DesperationContract*>::New_ctor();
-        _salvationList = List<DesperationContract*>::New_ctor();
-        
+        _desperationList = ListW<DesperationContract*>::New();
+        _salvationList = ListW<DesperationContract*>::New();
+
         _colorManager = colorManager;
         _lapizSaberFactory = lapizSaberFactory;
         _lapizSaberFactory->SaberCreated += {&SaberModelManager::SiraSaberFactory_SaberCreated, this};
@@ -68,7 +76,7 @@ namespace Lapiz::Sabers {
             lapizSaber->SetColor(color);
         } else {
             auto saberModelController = GetSaberModelController(saber);
-            if (saberModelController && saberModelController->m_CachedPtr.m_value) {
+            if (saberModelController && saberModelController->m_CachedPtr) {
                 _colorUpdateQueue.push([saber, saberModelController, color, this](){
                     SaberUtil::SetColor(saberModelController, color);
                     if (ColorUpdated.size() > 0) ColorUpdated.invoke(saber, color);

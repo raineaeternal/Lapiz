@@ -3,6 +3,7 @@
 #include "utilities/typeutil.hpp"
 
 #include "UnityEngine/Transform.hpp"
+#include "GlobalNamespace/SaberType.hpp"
 
 DEFINE_TYPE(Lapiz::Sabers::Effects, ObstacleSaberSparkleEffectManagerLatch);
 
@@ -27,7 +28,7 @@ namespace Lapiz::Sabers::Effects {
     }
 
     void ObstacleSaberSparkleEffectManagerLatch::LapizSaberFactory_SaberCreated(Lapiz::Sabers::LapizSaber* lapizSaber) {
-        if (!_obstacleSaberSparkleEffectManager || !_obstacleSaberSparkleEffectManager->m_CachedPtr.m_value) {
+        if (!_obstacleSaberSparkleEffectManager || !_obstacleSaberSparkleEffectManager->m_CachedPtr) {
             _earlySabers->Enqueue(lapizSaber);
         } else {
             AddSaber(lapizSaber->_saber);
@@ -35,21 +36,21 @@ namespace Lapiz::Sabers::Effects {
     }
 
     void ObstacleSaberSparkleEffectManagerLatch::AddSaber(GlobalNamespace::Saber* saber) {
-        if (!_obstacleSaberSparkleEffectManager || !_obstacleSaberSparkleEffectManager->m_CachedPtr.m_value) return;
-        
-        _obstacleSaberSparkleEffectManager->sabers = TypeUtil::AppendArrayOrDefault(_obstacleSaberSparkleEffectManager->sabers, saber);
-        _obstacleSaberSparkleEffectManager->isSystemActive = TypeUtil::AppendArrayOrDefault<bool>(_obstacleSaberSparkleEffectManager->isSystemActive);
-        _obstacleSaberSparkleEffectManager->wasSystemActive = TypeUtil::AppendArrayOrDefault<bool>(_obstacleSaberSparkleEffectManager->wasSystemActive);
-        _obstacleSaberSparkleEffectManager->burnMarkPositions = TypeUtil::AppendArrayOrDefault<UnityEngine::Vector3>(_obstacleSaberSparkleEffectManager->burnMarkPositions);
+        if (!_obstacleSaberSparkleEffectManager || !_obstacleSaberSparkleEffectManager->m_CachedPtr) return;
+
+        _obstacleSaberSparkleEffectManager->_sabers = TypeUtil::AppendArrayOrDefault(_obstacleSaberSparkleEffectManager->_sabers, saber);
+        _obstacleSaberSparkleEffectManager->_isSystemActive = TypeUtil::AppendArrayOrDefault<bool>(_obstacleSaberSparkleEffectManager->_isSystemActive);
+        _obstacleSaberSparkleEffectManager->_wasSystemActive = TypeUtil::AppendArrayOrDefault<bool>(_obstacleSaberSparkleEffectManager->_wasSystemActive);
+        _obstacleSaberSparkleEffectManager->_burnMarkPositions = TypeUtil::AppendArrayOrDefault<UnityEngine::Vector3>(_obstacleSaberSparkleEffectManager->_burnMarkPositions);
 
         auto effect = CreateNewObstacleSaberSparkleEffect();
-        _obstacleSaberSparkleEffectManager->effectsTransforms = TypeUtil::AppendArrayOrDefault(_obstacleSaberSparkleEffectManager->effectsTransforms, effect->get_transform());
-        _obstacleSaberSparkleEffectManager->effects = TypeUtil::AppendArrayOrDefault(_obstacleSaberSparkleEffectManager->effects, effect);
+        _obstacleSaberSparkleEffectManager->_effectsTransforms = TypeUtil::AppendArrayOrDefault(_obstacleSaberSparkleEffectManager->_effectsTransforms, effect->get_transform());
+        _obstacleSaberSparkleEffectManager->_effects = TypeUtil::AppendArrayOrDefault(_obstacleSaberSparkleEffectManager->_effects, effect);
 
     }
 
     GlobalNamespace::ObstacleSaberSparkleEffect* ObstacleSaberSparkleEffectManagerLatch::CreateNewObstacleSaberSparkleEffect() {
-        auto obstacleSaberSparkleEffect = UnityEngine::Object::Instantiate(_obstacleSaberSparkleEffectManager->obstacleSaberSparkleEffectPrefab);
+        auto obstacleSaberSparkleEffect = UnityEngine::Object::Instantiate(_obstacleSaberSparkleEffectManager->_obstacleSaberSparkleEffectPrefab);
         obstacleSaberSparkleEffect->set_name(fmt::format("Lapiz | {}", obstacleSaberSparkleEffect->get_name()));
         obstacleSaberSparkleEffect->set_color(_colorManager->GetObstacleEffectColor());
         return obstacleSaberSparkleEffect;
@@ -65,12 +66,12 @@ namespace Lapiz::Sabers::Effects {
     }
 
     void ObstacleSaberSparkleEffectManagerLatch::ObstacleSaberSparkleEffectManager_Update_Prefix(GlobalNamespace::ObstacleSaberSparkleEffectManager* self) {
-        int isSize = self->isSystemActive.size();
-        int wasSize = self->wasSystemActive.size();
+        int isSize = self->_isSystemActive.size();
+        int wasSize = self->_wasSystemActive.size();
         if (isSize > 2 && wasSize > 2 && isSize == wasSize) {
             for (int i = 2; i < isSize; i++) {
-                self->wasSystemActive[i] = self->isSystemActive[i];
-                self->isSystemActive[i] = false;
+                self->_wasSystemActive[i] = self->_isSystemActive[i];
+                self->_isSystemActive[i] = false;
             }
         }
     }

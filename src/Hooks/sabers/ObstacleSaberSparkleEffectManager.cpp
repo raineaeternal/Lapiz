@@ -3,7 +3,9 @@
 #include "sabers/effects/ObstacleSaberSparkleEffectManagerLatch.hpp"
 #include "GlobalNamespace/BeatmapObjectManager.hpp"
 #include "GlobalNamespace/ObstacleController.hpp"
-#include "GlobalNamespace/HapticFeedbackController.hpp"
+#include "GlobalNamespace/HapticFeedbackManager.hpp"
+#include "GlobalNamespace/SaberType.hpp"
+#include "UnityEngine/XR/XRNode.hpp"
 #include "System/Action_1.hpp"
 
 using namespace Lapiz::Sabers::Effects;
@@ -21,36 +23,36 @@ MAKE_AUTO_HOOK_ORIG_MATCH(ObstacleSaberSparkleEffectManager_Update, &GlobalNames
     if (instance) {
         instance->ObstacleSaberSparkleEffectManager_Update_Prefix(self);
     }
-    
-    self->wasSystemActive[0] = self->isSystemActive[0];
-	self->wasSystemActive[1] = self->isSystemActive[1];
-	self->isSystemActive[0] = false;
-	self->isSystemActive[1] = false;
 
-    int len = self->wasSystemActive.size();
-	for (auto obstacleController : ListWrapper<GlobalNamespace::ObstacleController*>(self->beatmapObjectManager->get_activeObstacleControllers())) {
+    self->_wasSystemActive[0] = self->_isSystemActive[0];
+	self->_wasSystemActive[1] = self->_isSystemActive[1];
+	self->_isSystemActive[0] = false;
+	self->_isSystemActive[1] = false;
+
+    int len = self->_wasSystemActive.size();
+	for (auto obstacleController : ListW<GlobalNamespace::ObstacleController*>(self->_beatmapObjectManager->get_activeObstacleControllers())) {
 		UnityEngine::Bounds bounds = obstacleController->get_bounds();
 		for (int i = 0; i < len; i++) {
 			UnityEngine::Vector3 vector;
-			auto saber = self->sabers[i];
+			auto saber = self->_sabers[i];
 			if (saber->get_isActiveAndEnabled() && self->GetBurnMarkPos(bounds, obstacleController->get_transform(), saber->saberBladeBottomPos, saber->saberBladeTopPos, byref(vector)))
 			{
-				self->isSystemActive[i] = true;
-				self->burnMarkPositions[i] = vector;
-				self->effects[i]->SetPositionAndRotation(vector, self->GetEffectRotation(vector, obstacleController->get_transform(), bounds));
-				self->hapticFeedbackController->PlayHapticFeedback(saber->get_saberType() != GlobalNamespace::SaberType::SaberA ? UnityEngine::XR::XRNode::RightHand : UnityEngine::XR::XRNode::LeftHand, self->rumblePreset);
-				if (!self->wasSystemActive[i])
+				self->_isSystemActive[i] = true;
+				self->_burnMarkPositions[i] = vector;
+				self->_effects[i]->SetPositionAndRotation(vector, self->GetEffectRotation(vector, obstacleController->get_transform(), bounds));
+				self->_hapticFeedbackManager->PlayHapticFeedback(saber->get_saberType() != GlobalNamespace::SaberType::SaberA ? UnityEngine::XR::XRNode::RightHand : UnityEngine::XR::XRNode::LeftHand, self->_rumblePreset);
+				if (!self->_wasSystemActive[i])
 				{
-					self->effects[i]->StartEmission();
+					self->_effects[i]->StartEmission();
 					if (self->sparkleEffectDidStartEvent) self->sparkleEffectDidStartEvent->Invoke(saber->get_saberType());
 				}
 			}
 		}
 	}
 	for (int j = 0; j < len; j++) {
-		if (!self->isSystemActive[j] && self->wasSystemActive[j]) {
-			self->effects[j]->StopEmission();
-			if (self->sparkleEffectDidEndEvent) self->sparkleEffectDidEndEvent->Invoke(self->sabers[j]->get_saberType());
+		if (!self->_isSystemActive[j] && self->_wasSystemActive[j]) {
+			self->_effects[j]->StopEmission();
+			if (self->sparkleEffectDidEndEvent) self->sparkleEffectDidEndEvent->Invoke(self->_sabers[j]->get_saberType());
 		}
 	}
 
@@ -59,10 +61,9 @@ MAKE_AUTO_HOOK_ORIG_MATCH(ObstacleSaberSparkleEffectManager_Update, &GlobalNames
 
 MAKE_AUTO_HOOK_MATCH(ObstacleSaberSparkleEffectManager_OnDisable, &GlobalNamespace::ObstacleSaberSparkleEffectManager::OnDisable, void, GlobalNamespace::ObstacleSaberSparkleEffectManager* self) {
     ObstacleSaberSparkleEffectManager_OnDisable(self);
-    if (self->isSystemActive.size() > 2) {
-        for (int i = 2; i < self->isSystemActive.size(); i++) {
-            self->isSystemActive[i] = false;
+    if (self->_isSystemActive.size() > 2) {
+        for (int i = 2; i < self->_isSystemActive.size(); i++) {
+            self->_isSystemActive[i] = false;
         }
     }
 }
-

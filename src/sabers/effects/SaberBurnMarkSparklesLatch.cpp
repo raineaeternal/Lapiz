@@ -3,6 +3,10 @@
 #include "utilities/typeutil.hpp"
 
 #include "UnityEngine/Transform.hpp"
+#include "UnityEngine/Color.hpp"
+#include "UnityEngine/Quaternion.hpp"
+#include "UnityEngine/Vector3.hpp"
+#include "UnityEngine/ParticleSystem.hpp"
 
 DEFINE_TYPE(Lapiz::Sabers::Effects, SaberBurnMarkSparklesLatch);
 
@@ -27,27 +31,27 @@ namespace Lapiz::Sabers::Effects {
     }
 
     void SaberBurnMarkSparklesLatch::LapizSaberFactory_SaberCreated(Lapiz::Sabers::LapizSaber* lapizSaber) {
-        if (!_saberBurnMarkSparkles || !_saberBurnMarkSparkles->m_CachedPtr.m_value)
+        if (!_saberBurnMarkSparkles || !_saberBurnMarkSparkles->m_CachedPtr)
             _earlySabers->Enqueue(lapizSaber);
         else
             AddSaber(lapizSaber->_saber);
     }
 
     void SaberBurnMarkSparklesLatch::AddSaber(GlobalNamespace::Saber* saber) {
-        if (!_saberBurnMarkSparkles || !_saberBurnMarkSparkles->m_CachedPtr.m_value) return;
+        if (!_saberBurnMarkSparkles || !_saberBurnMarkSparkles->m_CachedPtr) return;
 
-        _saberBurnMarkSparkles->sabers = TypeUtil::AppendArrayOrDefault(_saberBurnMarkSparkles->sabers, saber);
-        _saberBurnMarkSparkles->prevBurnMarkPos = TypeUtil::AppendArrayOrDefault<UnityEngine::Vector3>(_saberBurnMarkSparkles->prevBurnMarkPos);
-        _saberBurnMarkSparkles->prevBurnMarkPosValid = TypeUtil::AppendArrayOrDefault<bool>(_saberBurnMarkSparkles->prevBurnMarkPosValid);
+        _saberBurnMarkSparkles->_sabers = TypeUtil::AppendArrayOrDefault(_saberBurnMarkSparkles->_sabers, saber);
+        _saberBurnMarkSparkles->_prevBurnMarkPos = TypeUtil::AppendArrayOrDefault<UnityEngine::Vector3>(_saberBurnMarkSparkles->_prevBurnMarkPos);
+        _saberBurnMarkSparkles->_prevBurnMarkPosValid = TypeUtil::AppendArrayOrDefault<bool>(_saberBurnMarkSparkles->_prevBurnMarkPosValid);
 
         auto newPs = CreateNewBurnMarkParticles();
-        _saberBurnMarkSparkles->burnMarksPS = TypeUtil::AppendArrayOrDefault(_saberBurnMarkSparkles->burnMarksPS, newPs);
-        _saberBurnMarkSparkles->burnMarksEmissionModules = TypeUtil::AppendArrayOrDefault(_saberBurnMarkSparkles->burnMarksEmissionModules, newPs->get_emission());
+        _saberBurnMarkSparkles->_burnMarksPS = TypeUtil::AppendArrayOrDefault(_saberBurnMarkSparkles->_burnMarksPS, newPs);
+        _saberBurnMarkSparkles->_burnMarksEmissionModules = TypeUtil::AppendArrayOrDefault(_saberBurnMarkSparkles->_burnMarksEmissionModules, newPs->get_emission());
     }
 
     UnityEngine::ParticleSystem* SaberBurnMarkSparklesLatch::CreateNewBurnMarkParticles() {
         static UnityEngine::Quaternion rotation = UnityEngine::Quaternion::Euler({-90.0f, 0.0f, 0.0f});
-        auto ps = UnityEngine::Object::Instantiate(_saberBurnMarkSparkles->burnMarksPSPrefab, {0, 0, 0}, rotation, nullptr);
+        auto ps = UnityEngine::Object::Instantiate(_saberBurnMarkSparkles->_burnMarksPSPrefab, {0, 0, 0}, rotation, nullptr);
         ps->set_name(fmt::format("SiraUtil | {}", ps->get_name()));
         return ps;
     }
@@ -72,10 +76,10 @@ namespace Lapiz::Sabers::Effects {
     }
 
     bool SaberBurnMarkSparklesLatch::ColorManager_ColorForSaberType_Prefix(UnityEngine::Color& result) {
-        if (!_sisterLoopActive || (!_saberBurnMarkSparkles || !_saberBurnMarkSparkles->m_CachedPtr.m_value))
+        if (!_sisterLoopActive || (!_saberBurnMarkSparkles || !_saberBurnMarkSparkles->m_CachedPtr))
             return true;
 
-        auto sabers = _saberBurnMarkSparkles->sabers;
+        auto sabers = _saberBurnMarkSparkles->_sabers;
         if (_activeSaberIndex >= sabers.size())
             return true;
 

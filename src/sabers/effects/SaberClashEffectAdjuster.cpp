@@ -1,7 +1,7 @@
 #include "sabers/effects/SaberClashEffectAdjuster.hpp"
 
-#include "UnityEngine/ParticleSystem_MainModule.hpp"
-#include "UnityEngine/ParticleSystem_MinMaxGradient.hpp"
+#include "UnityEngine/Color.hpp"
+#include "UnityEngine/ParticleSystem.hpp"
 
 DEFINE_TYPE(Lapiz::Sabers::Effects, SaberClashEffectAdjuster);
 
@@ -28,9 +28,9 @@ namespace Lapiz::Sabers::Effects {
     }
 
     void SaberClashEffectAdjuster::SaberClashChecker_NewSabersClashed(GlobalNamespace::Saber* saberA, GlobalNamespace::Saber* saberB) {
-        if (!_glowParticleSystem || !_glowParticleSystem->m_CachedPtr.m_value) return;
-        if (!_sparkleParticleSystem || !_sparkleParticleSystem->m_CachedPtr.m_value) return;
-        if (!_saberClashEffect || !_saberClashEffect->m_CachedPtr.m_value) return;
+        if (!_glowParticleSystem || !_glowParticleSystem->m_CachedPtr) return;
+        if (!_sparkleParticleSystem || !_sparkleParticleSystem->m_CachedPtr) return;
+        if (!_saberClashEffect || !_saberClashEffect->m_CachedPtr) return;
 
         auto colorA = _saberModelManager->GetPhysicalSaberColor(saberA);
         auto colorB = _saberModelManager->GetPhysicalSaberColor(saberB);
@@ -38,13 +38,16 @@ namespace Lapiz::Sabers::Effects {
         auto combined = UnityEngine::Color::Lerp(colorA, colorB, 0.5f);
         combined.a = 1.0f;
 
-        _glowParticleSystem->get_main().set_startColor(combined);
-        _sparkleParticleSystem->get_main().set_startColor(combined);
+        auto gradient = UnityEngine::ParticleSystem::MinMaxGradient();
+        gradient._ctor(combined);
+
+        _glowParticleSystem->get_main().set_startColor(gradient);
+        _sparkleParticleSystem->get_main().set_startColor(gradient);
     }
 
     void SaberClashEffectAdjuster::SaberClashEffect_Start_Postfix(GlobalNamespace::SaberClashEffect* self) {
         _saberClashEffect = self;
-        _glowParticleSystem = self->glowParticleSystem;
-        _sparkleParticleSystem = self->sparkleParticleSystem;
+        _glowParticleSystem = self->_glowParticleSystem;
+        _sparkleParticleSystem = self->_sparkleParticleSystem;
     }
 }

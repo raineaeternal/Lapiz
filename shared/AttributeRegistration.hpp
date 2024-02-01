@@ -1,5 +1,6 @@
 #pragma once
 
+#include "./_config.h"
 #include "beatsaber-hook/shared/utils/typedefs.h"
 #include "System/Attribute.hpp"
 
@@ -8,12 +9,12 @@ namespace Lapiz::Attributes {
 
     /// @brief PreRegister an attribute registration
     /// @param registration the registration to register
-    void PreRegister(const AttributeRegistration* registration);
+    LAPIZ_EXPORT_FUNC void PreRegister(const AttributeRegistration* registration);
 
     /// @brief register any current pre registered attribute registrations
-    void AutoRegister();
+    LAPIZ_EXPORT_FUNC void AutoRegister();
 
-    class AttributeRegistration {
+    class LAPIZ_EXPORT AttributeRegistration {
         public:
             AttributeRegistration() { PreRegister(this); }
             virtual Il2CppClass* get_declaringType() const = 0;

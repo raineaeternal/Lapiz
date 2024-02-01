@@ -7,7 +7,7 @@
 #include "zenject/internal/InstallSet.hpp"
 #include "Zenject/SceneDecoratorContext.hpp"
 
-#include "modloader/shared/modloader.hpp"
+#include "scotland2/shared/modloader.h"
 
 namespace Lapiz::Zenject {
     static ZenjectManager instance;
@@ -16,7 +16,7 @@ namespace Lapiz::Zenject {
     ZenjectManager& ZenjectManager::get_instance() {
         return instance;
     }
-    
+
     void ZenjectManager::Add(Zenjector* zenjector) {
         DEBUG("Registered zenjector for mod {} v{}", zenjector->modInfo.id, zenjector->modInfo.version);
         _zenjectors.emplace(zenjector);
@@ -48,10 +48,10 @@ namespace Lapiz::Zenject {
             auto& bindings = *installerBindings.get();
             for (auto set : zenjector->_installSets) {
                 for (auto binding : bindings) {
-                    if (set->get_filter()->ShouldInstall(binding.get())) {
+                    if (set->Filter->ShouldInstall(binding.get())) {
                         auto instructor = _instructorManager.InstructorForSet(set);
                         if (!instructor) {
-                            auto t = set->get_installerType();
+                            auto t = set->InstallerType;
                             WARNING("Could not find instatiation instructor for type {}::{}, skipping this set!", t->namespaze, t->name);
                             continue;
                         }
@@ -62,8 +62,9 @@ namespace Lapiz::Zenject {
 
             for (auto instruction : zenjector->_installInstructions) {
                 for (auto binding : bindings) {
-                    if (instruction->get_baseInstaller() == binding->get_installerType()) {
-                        instruction->onInstall(binding->get_context()->get_Container());
+                    if (instruction->BaseInstaller == binding->InstallerType) {
+                        auto container = binding->Context->Container;
+                        instruction->onInstall(container);
                     }
                 }
             }

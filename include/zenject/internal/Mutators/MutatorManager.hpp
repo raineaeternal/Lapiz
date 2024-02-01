@@ -15,20 +15,20 @@ namespace Lapiz::Zenject::Internal::Mutators {
         public:
             void Install(Internal::MutateSet* mutateSet, ::Zenject::Context* ctx, std::set<UnityEngine::MonoBehaviour*> iterlist) {
                 ::Zenject::SceneDecoratorContext* sceneDecoratorContext = il2cpp_utils::try_cast<::Zenject::SceneDecoratorContext>(ctx).value_or(nullptr);
-                if (!sceneDecoratorContext || !sceneDecoratorContext->m_CachedPtr.m_value) {
+                if (!sceneDecoratorContext || !sceneDecoratorContext->m_CachedPtr) {
                     return;
                 }
 
-                if (mutateSet->get_locationContractName() != sceneDecoratorContext->decoratedContractName ||
-                    Il2CppString::IsNullOrEmpty(sceneDecoratorContext->decoratedContractName) ||
+                if (mutateSet->get_locationContractName() != sceneDecoratorContext->_decoratedContractName ||
+                    System::String::IsNullOrEmpty(sceneDecoratorContext->_decoratedContractName) ||
                     mutateSet->get_locationContractName().empty()) {
                     return;
                 }
 
                 if (iterlist.size() == 0) {
-                    ListWrapper<UnityEngine::MonoBehaviour*> injectables(sceneDecoratorContext->injectableMonoBehaviours);
+                    ListW<UnityEngine::MonoBehaviour*> injectables(sceneDecoratorContext->_injectableMonoBehaviours);
                     iterlist.insert(injectables.begin(), injectables.end());
-                }   
+                }
 
                 UnityEngine::MonoBehaviour* toMutate = nullptr;
                 for (auto il : iterlist) {
@@ -38,7 +38,7 @@ namespace Lapiz::Zenject::Internal::Mutators {
                     }
                 }
 
-                if (toMutate && toMutate->m_CachedPtr.m_value) {
+                if (toMutate && toMutate->m_CachedPtr) {
                     mutateSet->get_onMutate()->Invoke(sceneDecoratorContext, toMutate);
                 } else {
                     WARNING("Could not find {} in {}.", mutateSet->get_typeToMutate()->name, mutateSet->get_locationContractName());

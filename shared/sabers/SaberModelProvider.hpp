@@ -10,7 +10,7 @@
 #include "System/Collections/Generic/HashSet_1.hpp"
 #include "System/IDisposable.hpp"
 
-DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelProvider, Il2CppObject, classof(System::IDisposable*),
+DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelProvider, System::Object, classof(System::IDisposable*),
     DECLARE_INSTANCE_FIELD(::Zenject::DiContainer*, _container);
     DECLARE_INSTANCE_FIELD(GlobalNamespace::SaberManager*, _saberManager);
     DECLARE_INSTANCE_FIELD(GlobalNamespace::SaberModelContainer*, _localLeftContainer);
@@ -22,7 +22,7 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelProvider, Il2CppObject
     DECLARE_INSTANCE_FIELD(System::Collections::Generic::HashSet_1<GlobalNamespace::SetSaberGlowColor*>*, _earlyInittingGlowColors);
     DECLARE_INSTANCE_FIELD(System::Collections::Generic::HashSet_1<GlobalNamespace::SetSaberFakeGlowColor*>*, _earlyInittingFakeGlowColors);
 
-    DECLARE_OVERRIDE_METHOD(void, Dispose, il2cpp_utils::il2cpp_type_check::MetadataGetter<&::System::IDisposable::Dispose>::get());
+    DECLARE_OVERRIDE_METHOD_MATCH(void, Dispose, &::System::IDisposable::Dispose);
     public:
         static SaberModelProvider* get_instance();
         GlobalNamespace::SaberModelController* NewModel(std::optional<GlobalNamespace::SaberType> saberType = std::nullopt);
@@ -31,7 +31,7 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelProvider, Il2CppObject
         bool SetSaberFakeGlowColor_Start_Prefix(GlobalNamespace::SetSaberFakeGlowColor* self);
         void SaberModelContainer_Start_Prefix(GlobalNamespace::SaberModelContainer* self);
 
-        DECLARE_CTOR(ctor, ::Zenject::DiContainer* container, GlobalNamespace::SaberManager* saberManager, ListWrapper<SaberModelRegistrationWrapper*> saberModelRegistrations);
+        DECLARE_CTOR(ctor, ::Zenject::DiContainer* container, GlobalNamespace::SaberManager* saberManager, ListW<SaberModelRegistrationWrapper*> saberModelRegistrations);
         DECLARE_SIMPLE_DTOR();
     private:
         static SaberModelProvider* instance;

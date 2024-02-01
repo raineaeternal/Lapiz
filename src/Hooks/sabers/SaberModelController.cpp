@@ -19,7 +19,7 @@ MAKE_AUTO_HOOK_MATCH(SaberModelController_Init, &GlobalNamespace::SaberModelCont
         if (minfo) {
             currentlyInvoking.emplace(self);
             if (minfo->return_type->type == Il2CppTypeEnum::IL2CPP_TYPE_BOOLEAN) {
-                if (il2cpp_utils::RunMethod<bool>(self, minfo, parent, saber).value_or(false)) {
+                if (il2cpp_utils::RunMethodRethrow<bool>(self, minfo, parent, saber)) {
                     SaberModelController_Init(self, parent, saber);
                 }
             } else {

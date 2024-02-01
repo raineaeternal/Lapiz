@@ -16,20 +16,20 @@ namespace Lapiz::Zenject::Internal::Exposers {
         public:
             void Install(Internal::ExposeSet* exposeSet, ::Zenject::Context* ctx, std::set<UnityEngine::MonoBehaviour*> iterlist) {
                 ::Zenject::SceneDecoratorContext* sceneDecoratorContext = il2cpp_utils::try_cast<::Zenject::SceneDecoratorContext>(ctx).value_or(nullptr);
-                if (!sceneDecoratorContext || !sceneDecoratorContext->m_CachedPtr.m_value) {
+                if (!sceneDecoratorContext || !sceneDecoratorContext->m_CachedPtr) {
                     return;
                 }
 
-                if (exposeSet->get_locationContractName() != sceneDecoratorContext->decoratedContractName ||
-                    Il2CppString::IsNullOrEmpty(sceneDecoratorContext->decoratedContractName) ||
+                if (exposeSet->get_locationContractName() != sceneDecoratorContext->_decoratedContractName ||
+                    System::String::IsNullOrEmpty(sceneDecoratorContext->_decoratedContractName) ||
                     exposeSet->get_locationContractName().empty()) {
                     return;
                 }
 
                 if (iterlist.size() == 0) {
-                    ListWrapper<UnityEngine::MonoBehaviour*> injectables(sceneDecoratorContext->injectableMonoBehaviours);
+                    ListW<UnityEngine::MonoBehaviour*> injectables(sceneDecoratorContext->_injectableMonoBehaviours);
                     iterlist.insert(injectables.begin(), injectables.end());
-                }   
+                }
 
                 UnityEngine::MonoBehaviour* toExpose = nullptr;
                 for (auto il : iterlist) {
@@ -39,7 +39,7 @@ namespace Lapiz::Zenject::Internal::Exposers {
                     }
                 }
 
-                if (toExpose && toExpose->m_CachedPtr.m_value) {
+                if (toExpose && toExpose->m_CachedPtr) {
                     auto t = il2cpp_utils::GetSystemType(exposeSet->get_typeToExpose());
                     sceneDecoratorContext->get_Container()->Bind(t)->FromInstance(toExpose)->AsSingle();
                 }

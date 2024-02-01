@@ -11,7 +11,7 @@
 namespace Lapiz::Zenject::Internal {
     class ContextDecorator {
         public:
-            static void Context_InstallInstallers_Prefix(::Zenject::Context* self, ListWrapper<::Zenject::InstallerBase*> normalInstallers, ListWrapper<::System::Type*> normalInstallerTypes, ListWrapper<::Zenject::ScriptableObjectInstaller*> scriptableObjectInstallers, ListWrapper<::Zenject::MonoInstaller*> installers, ListWrapper<::Zenject::MonoInstaller*> installerPrefabs);
+            static void Context_InstallInstallers_Prefix(::Zenject::Context* self, ListW<::Zenject::InstallerBase*> normalInstallers, ListW<::System::Type*> normalInstallerTypes, ListW<::Zenject::ScriptableObjectInstaller*> scriptableObjectInstallers, ListW<::Zenject::MonoInstaller*> installers, ListW<::Zenject::MonoInstaller*> installerPrefabs);
             static UnorderedEventCallback<::Zenject::Context*, ContextBindingSet> contextInstalling;
         private:
             static std::set<::Zenject::Context*> recentlyInstalledDecorators;

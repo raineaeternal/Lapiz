@@ -6,9 +6,9 @@
 #include <functional>
 #include <queue>
 
-DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Utilities, MainThreadScheduler, Il2CppObject, classof(::Zenject::ITickable*),
+DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Utilities, MainThreadScheduler, System::Object, classof(::Zenject::ITickable*),
     DECLARE_DEFAULT_CTOR();
-    DECLARE_OVERRIDE_METHOD(void, Tick, il2cpp_utils::il2cpp_type_check::MetadataGetter<&::Zenject::ITickable::Tick>::get());
+    DECLARE_OVERRIDE_METHOD_MATCH(void, Tick, &::Zenject::ITickable::Tick);
 
     public:
         static void Schedule(std::function<void()> function);
