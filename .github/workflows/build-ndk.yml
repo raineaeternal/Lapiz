@@ -173,7 +173,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Notify webhook
-      if: ${{ ${{ env.WEBHOOK != '' }} && startsWith(github.ref, 'refs/tags/v') }}
+      if: ${{ env.WEBHOOK != '' && startsWith(github.ref, 'refs/tags/v') }}
       uses: tsickert/discord-webhook@v3.2.0
       with:
         webhook-url: ${{ env.WEBHOOK }}
