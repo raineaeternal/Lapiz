@@ -48,10 +48,12 @@ namespace Lapiz::Zenject::ZenjectExtensions {
                     auto vc = il2cpp_utils::try_cast<HMUI::ViewController>(obj).value_or(nullptr);
                     if (vc && vc->m_CachedPtr)
                     {
+                        Object::DestroyImmediate(raycaster);
                         auto newRaycaster = go->AddComponent<VRGraphicRaycaster*>();
-                        Object::Destroy(raycaster);
                         auto cache = ctx->get_Container()->Resolve<PhysicsRaycasterWithCache*>();
                         newRaycaster->_physicsRaycaster = cache;
+                        vc->_graphicRaycaster = newRaycaster;
+
                         go->set_name(vc->GetType()->get_Name());
                         auto rt = vc->get_rectTransform();
                         rt->set_localEulerAngles({0, 0, 0});
