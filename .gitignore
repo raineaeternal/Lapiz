@@ -4,7 +4,6 @@ extern/
 extern.cmake
 qpm_defines.cmake
 tombstone_*
-qpm.shared.json
 mod.json
 *.log
 *.qmod
