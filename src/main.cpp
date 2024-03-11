@@ -29,6 +29,7 @@ LAPIZ_EXPORT_FUNC void load() {
     if (loaded) return;
     loaded = true;
     il2cpp_functions::Init();
+    custom_types::Register::AutoRegister();
 
     INFO("Installing Zenject bindings and hooks..");
 
