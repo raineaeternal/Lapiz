@@ -37,7 +37,6 @@
 
 #include "GlobalNamespace/PlayersSpecificSettingsAtGameStartModel.hpp"
 #include "GlobalNamespace/IConnectedPlayer.hpp"
-#include "GlobalNamespace/EmptyDifficultyBeatmap.hpp"
 #include "GlobalNamespace/PracticeSettings.hpp"
 #include "GlobalNamespace/ColorScheme.hpp"
 #include "GlobalNamespace/ColorManager.hpp"
@@ -50,8 +49,6 @@
 #include "GlobalNamespace/BeatmapObjectManager.hpp"
 #include "GlobalNamespace/IBeatmapObjectSpawner.hpp"
 #include "GlobalNamespace/MultiplayerConnectedPlayerSongTimeSyncController.hpp"
-#include "GlobalNamespace/IBeatmapLevel.hpp"
-#include "GlobalNamespace/IDifficultyBeatmapSet.hpp"
 #include "GlobalNamespace/BeatmapCharacteristicSO.hpp"
 #include "GlobalNamespace/SaberManager.hpp"
 #include "GlobalNamespace/SaberTypeExtensions.hpp"
@@ -159,7 +156,6 @@ MAKE_AUTO_HOOK_ORIG_MATCH(BeatmapObjectsInstaller_InstallBindings, &BeatmapObjec
     auto orig_normalBasicNotePrefab = self->_normalBasicNotePrefab;
     auto orig_burstSliderHeadNotePrefab = self->_burstSliderHeadNotePrefab;
     auto orig_burstSliderNotePrefab = self->_burstSliderNotePrefab;
-    auto orig_burstSliderFillPrefab = self->_burstSliderFillPrefab;
     auto orig_bombNotePrefab = self->_bombNotePrefab;
     auto orig_obstaclePrefab = self->_obstaclePrefab;
     auto orig_sliderShortPrefab = self->_sliderShortPrefab;
@@ -173,7 +169,6 @@ MAKE_AUTO_HOOK_ORIG_MATCH(BeatmapObjectsInstaller_InstallBindings, &BeatmapObjec
     else self->_normalBasicNotePrefab = PREFAB_INITIALIZE(_normalBasicNotePrefab);
     self->_burstSliderHeadNotePrefab = PREFAB_INITIALIZE(_burstSliderHeadNotePrefab);
     self->_burstSliderNotePrefab = PREFAB_INITIALIZE(_burstSliderNotePrefab);
-    self->_burstSliderFillPrefab = PREFAB_INITIALIZE(_burstSliderFillPrefab);
     self->_bombNotePrefab = PREFAB_INITIALIZE(_bombNotePrefab);
     self->_obstaclePrefab = PREFAB_INITIALIZE(_obstaclePrefab);
     self->_sliderShortPrefab = PREFAB_INITIALIZE(_sliderShortPrefab);
@@ -190,7 +185,6 @@ MAKE_AUTO_HOOK_ORIG_MATCH(BeatmapObjectsInstaller_InstallBindings, &BeatmapObjec
     else self->_normalBasicNotePrefab = orig_normalBasicNotePrefab;
     self->_burstSliderHeadNotePrefab = orig_burstSliderHeadNotePrefab;
     self->_burstSliderNotePrefab = orig_burstSliderNotePrefab;
-    self->_burstSliderFillPrefab = orig_burstSliderFillPrefab;
     self->_bombNotePrefab = orig_bombNotePrefab;
     self->_obstaclePrefab = orig_obstaclePrefab;
     self->_sliderShortPrefab = orig_sliderShortPrefab;
@@ -246,7 +240,6 @@ MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerConnectedPlayerInstaller_InstallBindings, &
     auto orig_multiplayerGameNoteControllerPrefab = self->_multiplayerGameNoteControllerPrefab;
     auto orig_multiplayerBurstSliderHeadGameNoteControllerPrefab = self->_multiplayerBurstSliderHeadGameNoteControllerPrefab;
     auto orig_multiplayerBurstSliderGameNoteControllerPrefab = self->_multiplayerBurstSliderGameNoteControllerPrefab;
-    auto orig_multiplayerBurstSliderFillControllerPrefab = self->_multiplayerBurstSliderFillControllerPrefab;
     auto orig_multiplayerBombNoteControllerPrefab = self->_multiplayerBombNoteControllerPrefab;
     auto orig_multiplayerObstacleControllerPrefab = self->_multiplayerObstacleControllerPrefab;
 
@@ -256,7 +249,6 @@ MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerConnectedPlayerInstaller_InstallBindings, &
     self->_multiplayerGameNoteControllerPrefab = PREFAB_INITIALIZE(_multiplayerGameNoteControllerPrefab);
     self->_multiplayerBurstSliderHeadGameNoteControllerPrefab = PREFAB_INITIALIZE(_multiplayerBurstSliderHeadGameNoteControllerPrefab);
     self->_multiplayerBurstSliderGameNoteControllerPrefab = PREFAB_INITIALIZE(_multiplayerBurstSliderGameNoteControllerPrefab);
-    self->_multiplayerBurstSliderFillControllerPrefab = PREFAB_INITIALIZE(_multiplayerBurstSliderFillControllerPrefab);
     self->_multiplayerBombNoteControllerPrefab = PREFAB_INITIALIZE(_multiplayerBombNoteControllerPrefab);
     self->_multiplayerObstacleControllerPrefab = PREFAB_INITIALIZE(_multiplayerObstacleControllerPrefab);
 
@@ -269,7 +261,6 @@ MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerConnectedPlayerInstaller_InstallBindings, &
     self->_multiplayerGameNoteControllerPrefab = orig_multiplayerGameNoteControllerPrefab;
     self->_multiplayerBurstSliderHeadGameNoteControllerPrefab = orig_multiplayerBurstSliderHeadGameNoteControllerPrefab;
     self->_multiplayerBurstSliderGameNoteControllerPrefab = orig_multiplayerBurstSliderGameNoteControllerPrefab;
-    self->_multiplayerBurstSliderFillControllerPrefab = orig_multiplayerBurstSliderFillControllerPrefab;
     self->_multiplayerBombNoteControllerPrefab = orig_multiplayerBombNoteControllerPrefab;
     self->_multiplayerObstacleControllerPrefab = orig_multiplayerObstacleControllerPrefab;
 }
@@ -380,7 +371,6 @@ MAKE_AUTO_HOOK_ORIG_MATCH(FakeMirrorObjectsInstaller_InstallBindings, &FakeMirro
     auto orig_mirroredGameNoteControllerPrefab = self->_mirroredGameNoteControllerPrefab;
     auto orig_mirroredBurstSliderHeadGameNoteControllerPrefab = self->_mirroredBurstSliderHeadGameNoteControllerPrefab;
     auto orig_mirroredBurstSliderGameNoteControllerPrefab = self->_mirroredBurstSliderGameNoteControllerPrefab;
-    auto orig_mirroredBurstSliderFillControllerPrefab = self->_mirroredBurstSliderFillControllerPrefab;
     auto orig_mirroredBombNoteControllerPrefab = self->_mirroredBombNoteControllerPrefab;
     auto orig_mirroredObstacleControllerPrefab = self->_mirroredObstacleControllerPrefab;
     auto orig_mirroredSliderControllerPrefab = self->_mirroredSliderControllerPrefab;
@@ -389,7 +379,6 @@ MAKE_AUTO_HOOK_ORIG_MATCH(FakeMirrorObjectsInstaller_InstallBindings, &FakeMirro
     self->_mirroredGameNoteControllerPrefab = PREFAB_INITIALIZE(_mirroredGameNoteControllerPrefab);
     self->_mirroredBurstSliderHeadGameNoteControllerPrefab = PREFAB_INITIALIZE(_mirroredBurstSliderHeadGameNoteControllerPrefab);
     self->_mirroredBurstSliderGameNoteControllerPrefab = PREFAB_INITIALIZE(_mirroredBurstSliderGameNoteControllerPrefab);
-    self->_mirroredBurstSliderFillControllerPrefab = PREFAB_INITIALIZE(_mirroredBurstSliderFillControllerPrefab);
     self->_mirroredBombNoteControllerPrefab = PREFAB_INITIALIZE(_mirroredBombNoteControllerPrefab);
     self->_mirroredObstacleControllerPrefab = PREFAB_INITIALIZE(_mirroredObstacleControllerPrefab);
     self->_mirroredSliderControllerPrefab = PREFAB_INITIALIZE(_mirroredSliderControllerPrefab);
@@ -401,7 +390,6 @@ MAKE_AUTO_HOOK_ORIG_MATCH(FakeMirrorObjectsInstaller_InstallBindings, &FakeMirro
     self->_mirroredGameNoteControllerPrefab = orig_mirroredGameNoteControllerPrefab;
     self->_mirroredBurstSliderHeadGameNoteControllerPrefab = orig_mirroredBurstSliderHeadGameNoteControllerPrefab;
     self->_mirroredBurstSliderGameNoteControllerPrefab = orig_mirroredBurstSliderGameNoteControllerPrefab;
-    self->_mirroredBurstSliderFillControllerPrefab = orig_mirroredBurstSliderFillControllerPrefab;
     self->_mirroredBombNoteControllerPrefab = orig_mirroredBombNoteControllerPrefab;
     self->_mirroredObstacleControllerPrefab = orig_mirroredObstacleControllerPrefab;
     self->_mirroredSliderControllerPrefab = orig_mirroredSliderControllerPrefab;

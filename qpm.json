@@ -19,22 +19,22 @@
     },
     {
       "id": "beatsaber-hook",
-      "versionRange": "^5.0.0",
+      "versionRange": "^5.1.1",
       "additionalData": {}
     },
     {
       "id": "scotland2",
-      "versionRange": "^0.1.2",
+      "versionRange": "^0.1.4",
       "additionalData": {}
     },
     {
       "id": "bs-cordl",
-      "versionRange": "^3402.*",
+      "versionRange": "^3500.*",
       "additionalData": {}
     },
     {
       "id": "custom-types",
-      "versionRange": "^0.16.0",
+      "versionRange": "^0.17.0",
       "additionalData": {}
     },
     {
