@@ -33,7 +33,7 @@ LAPIZ_EXPORT_FUNC void load() {
 
     INFO("Installing Zenject bindings and hooks..");
 
-    Hooks::InstallHooks(Lapiz::Logging::getLogger());
+    Hooks::InstallHooks();
     using namespace Lapiz::Zenject;
     auto zenjector = Zenjector::Get();
     zenjector->Install(Location::App, [](::Zenject::DiContainer* container){ container->BindInterfacesAndSelfTo<Lapiz::Utilities::MainThreadScheduler*>()->AsSingle(); });

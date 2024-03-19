@@ -5,17 +5,6 @@
 
 #include "paper/shared/logger.hpp"
 
-namespace Lapiz
-{
-    class Logging {
-        public:
-            static Logger& getLogger() {
-                static Logger* logger = new Logger({MOD_ID, VERSION, VERSION_LONG}, LoggerOptions(false, true));
-                return *logger;
-            }
-    };
-}
-
 template <> struct fmt::formatter<::StringW> : formatter<string_view> {
     // parse is inherited from formatter<string_view>.
     template <typename FormatContext>
