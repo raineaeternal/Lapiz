@@ -30,7 +30,7 @@
       },
       {
         "id": "beatsaber-hook",
-        "versionRange": "^5.1.1",
+        "versionRange": "^5.1.2",
         "additionalData": {}
       },
       {
@@ -45,7 +45,7 @@
       },
       {
         "id": "custom-types",
-        "versionRange": "^0.17.0",
+        "versionRange": "^0.17.2",
         "additionalData": {}
       },
       {
@@ -94,9 +94,13 @@
     {
       "dependency": {
         "id": "custom-types",
-        "versionRange": "=0.17.0",
+        "versionRange": "=0.17.2",
         "additionalData": {
+          "soLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.2/libcustom-types.so",
+          "debugSoLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.2/debug_libcustom-types.so",
           "overrideSoName": "libcustom-types.so",
+          "modLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.2/CustomTypes.qmod",
+          "branchName": "version/v0_17_2",
           "compileOptions": {
             "cppFlags": [
               "-Wno-invalid-offsetof"
@@ -105,7 +109,7 @@
           "cmake": true
         }
       },
-      "version": "0.17.0"
+      "version": "0.17.2"
     },
     {
       "dependency": {
@@ -144,15 +148,15 @@
     {
       "dependency": {
         "id": "beatsaber-hook",
-        "versionRange": "=5.1.1",
+        "versionRange": "=5.1.2",
         "additionalData": {
-          "soLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v5.1.1/libbeatsaber-hook_5_1_1.so",
-          "debugSoLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v5.1.1/debug_libbeatsaber-hook_5_1_1.so",
-          "branchName": "version/v5_1_1",
+          "soLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v5.1.2/libbeatsaber-hook_5_1_2.so",
+          "debugSoLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v5.1.2/debug_libbeatsaber-hook_5_1_2.so",
+          "branchName": "version/v5_1_2",
           "cmake": true
         }
       },
-      "version": "5.1.1"
+      "version": "5.1.2"
     },
     {
       "dependency": {
