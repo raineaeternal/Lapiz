@@ -19,7 +19,7 @@
     },
     {
       "id": "beatsaber-hook",
-      "versionRange": "^5.1.2",
+      "versionRange": "^5.1.5",
       "additionalData": {}
     },
     {
@@ -34,7 +34,7 @@
     },
     {
       "id": "custom-types",
-      "versionRange": "^0.17.2",
+      "versionRange": "^0.17.4",
       "additionalData": {}
     },
     {
