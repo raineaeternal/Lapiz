@@ -29,7 +29,7 @@
     },
     {
       "id": "bs-cordl",
-      "versionRange": "^3500.*",
+      "versionRange": "^3600.0.0",
       "additionalData": {}
     },
     {
