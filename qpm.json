@@ -25,7 +25,9 @@
     {
       "id": "scotland2",
       "versionRange": "^0.1.4",
-      "additionalData": {}
+      "additionalData": {
+        "includeQmod": false
+      }
     },
     {
       "id": "bs-cordl",
@@ -52,7 +54,7 @@
     "scripts": {
       "qmod": [
         "pwsh ./build.ps1",
-        "qpm qmod build --isLibrary true",
+        "qpm qmod build",
         "pwsh ./qmod.ps1 Lapiz -clean"
       ]
     }
