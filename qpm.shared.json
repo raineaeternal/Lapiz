@@ -17,7 +17,7 @@
       "scripts": {
         "qmod": [
           "pwsh ./build.ps1",
-          "qpm qmod build --isLibrary true",
+          "qpm qmod build",
           "pwsh ./qmod.ps1 Lapiz -clean"
         ]
       }
@@ -36,7 +36,9 @@
       {
         "id": "scotland2",
         "versionRange": "^0.1.4",
-        "additionalData": {}
+        "additionalData": {
+          "includeQmod": false
+        }
       },
       {
         "id": "bs-cordl",
@@ -94,13 +96,13 @@
     {
       "dependency": {
         "id": "custom-types",
-        "versionRange": "=0.17.6",
+        "versionRange": "=0.17.7",
         "additionalData": {
-          "soLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.6/libcustom-types.so",
-          "debugSoLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.6/debug_libcustom-types.so",
+          "soLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.7/libcustom-types.so",
+          "debugSoLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.7/debug_libcustom-types.so",
           "overrideSoName": "libcustom-types.so",
-          "modLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.6/CustomTypes.qmod",
-          "branchName": "version/v0_17_6",
+          "modLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.7/CustomTypes.qmod",
+          "branchName": "version/v0_17_7",
           "compileOptions": {
             "cppFlags": [
               "-Wno-invalid-offsetof"
@@ -109,7 +111,7 @@
           "cmake": true
         }
       },
-      "version": "0.17.6"
+      "version": "0.17.7"
     },
     {
       "dependency": {
