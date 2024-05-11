@@ -6,7 +6,7 @@
     "info": {
       "name": "Lapiz",
       "id": "lapiz",
-      "version": "0.2.0",
+      "version": "0.2.10",
       "url": "https://github.com/raineio/Lapiz",
       "additionalData": {
         "overrideSoName": "liblapiz.so",
@@ -20,7 +20,10 @@
           "qpm qmod build",
           "pwsh ./qmod.ps1 Lapiz -clean"
         ]
-      }
+      },
+      "qmodIncludeDirs": [],
+      "qmodIncludeFiles": [],
+      "qmodOutput": null
     },
     "dependencies": [
       {
@@ -42,7 +45,7 @@
       },
       {
         "id": "bs-cordl",
-        "versionRange": "^3600.0.0",
+        "versionRange": "^3602.0.0",
         "additionalData": {}
       },
       {
@@ -86,12 +89,13 @@
     {
       "dependency": {
         "id": "libil2cpp",
-        "versionRange": "=0.3.1",
+        "versionRange": "=0.3.2",
         "additionalData": {
-          "headersOnly": true
+          "headersOnly": true,
+          "cmake": false
         }
       },
-      "version": "0.3.1"
+      "version": "0.3.2"
     },
     {
       "dependency": {
@@ -127,10 +131,10 @@
     {
       "dependency": {
         "id": "bs-cordl",
-        "versionRange": "=3600.0.0",
+        "versionRange": "=3602.0.0",
         "additionalData": {
           "headersOnly": true,
-          "branchName": "version/v3600_0_0",
+          "branchName": "version/v3602_0_0",
           "compileOptions": {
             "includePaths": [
               "include"
@@ -145,7 +149,7 @@
           }
         }
       },
-      "version": "3600.0.0"
+      "version": "3602.0.0"
     },
     {
       "dependency": {
