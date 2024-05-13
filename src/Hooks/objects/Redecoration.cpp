@@ -3,7 +3,6 @@
 #include "arrayutils.hpp"
 /* I hate it here */
 
-#include "GlobalNamespace/IntSO.hpp"
 #include "GlobalNamespace/BoolSO.hpp"
 #include "GlobalNamespace/FakeMirrorObjectsInstaller.hpp"
 #include "GlobalNamespace/NoteDebrisPoolInstaller.hpp"
