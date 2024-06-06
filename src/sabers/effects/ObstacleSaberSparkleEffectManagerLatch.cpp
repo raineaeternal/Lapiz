@@ -28,7 +28,7 @@ namespace Lapiz::Sabers::Effects {
     }
 
     void ObstacleSaberSparkleEffectManagerLatch::LapizSaberFactory_SaberCreated(Lapiz::Sabers::LapizSaber* lapizSaber) {
-        if (!_obstacleSaberSparkleEffectManager || !_obstacleSaberSparkleEffectManager->m_CachedPtr) {
+        if (!_obstacleSaberSparkleEffectManager || !_obstacleSaberSparkleEffectManager->m_CachedPtr.m_value) {
             _earlySabers->Enqueue(lapizSaber);
         } else {
             AddSaber(lapizSaber->_saber);
@@ -36,15 +36,11 @@ namespace Lapiz::Sabers::Effects {
     }
 
     void ObstacleSaberSparkleEffectManagerLatch::AddSaber(GlobalNamespace::Saber* saber) {
-        if (!_obstacleSaberSparkleEffectManager || !_obstacleSaberSparkleEffectManager->m_CachedPtr) return;
+        if (!_obstacleSaberSparkleEffectManager || !_obstacleSaberSparkleEffectManager->m_CachedPtr.m_value) return;
 
         _obstacleSaberSparkleEffectManager->_sabers = TypeUtil::AppendArrayOrDefault(_obstacleSaberSparkleEffectManager->_sabers, saber);
-        _obstacleSaberSparkleEffectManager->_isSystemActive = TypeUtil::AppendArrayOrDefault<bool>(_obstacleSaberSparkleEffectManager->_isSystemActive);
-        _obstacleSaberSparkleEffectManager->_wasSystemActive = TypeUtil::AppendArrayOrDefault<bool>(_obstacleSaberSparkleEffectManager->_wasSystemActive);
-        _obstacleSaberSparkleEffectManager->_burnMarkPositions = TypeUtil::AppendArrayOrDefault<UnityEngine::Vector3>(_obstacleSaberSparkleEffectManager->_burnMarkPositions);
 
         auto effect = CreateNewObstacleSaberSparkleEffect();
-        _obstacleSaberSparkleEffectManager->_effectsTransforms = TypeUtil::AppendArrayOrDefault(_obstacleSaberSparkleEffectManager->_effectsTransforms, effect->get_transform());
         _obstacleSaberSparkleEffectManager->_effects = TypeUtil::AppendArrayOrDefault(_obstacleSaberSparkleEffectManager->_effects, effect);
 
     }
@@ -63,16 +59,5 @@ namespace Lapiz::Sabers::Effects {
             AddSaber(iter.get_Current()->_saber);
         }
         _earlySabers->Clear();
-    }
-
-    void ObstacleSaberSparkleEffectManagerLatch::ObstacleSaberSparkleEffectManager_Update_Prefix(GlobalNamespace::ObstacleSaberSparkleEffectManager* self) {
-        int isSize = self->_isSystemActive.size();
-        int wasSize = self->_wasSystemActive.size();
-        if (isSize > 2 && wasSize > 2 && isSize == wasSize) {
-            for (int i = 2; i < isSize; i++) {
-                self->_wasSystemActive[i] = self->_isSystemActive[i];
-                self->_isSystemActive[i] = false;
-            }
-        }
     }
 }

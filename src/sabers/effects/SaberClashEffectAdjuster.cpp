@@ -28,9 +28,9 @@ namespace Lapiz::Sabers::Effects {
     }
 
     void SaberClashEffectAdjuster::SaberClashChecker_NewSabersClashed(GlobalNamespace::Saber* saberA, GlobalNamespace::Saber* saberB) {
-        if (!_glowParticleSystem || !_glowParticleSystem->m_CachedPtr) return;
-        if (!_sparkleParticleSystem || !_sparkleParticleSystem->m_CachedPtr) return;
-        if (!_saberClashEffect || !_saberClashEffect->m_CachedPtr) return;
+        if (!_glowParticleSystem || !_glowParticleSystem->m_CachedPtr.m_value) return;
+        if (!_sparkleParticleSystem || !_sparkleParticleSystem->m_CachedPtr.m_value) return;
+        if (!_saberClashEffect || !_saberClashEffect->m_CachedPtr.m_value) return;
 
         auto colorA = _saberModelManager->GetPhysicalSaberColor(saberA);
         auto colorB = _saberModelManager->GetPhysicalSaberColor(saberB);

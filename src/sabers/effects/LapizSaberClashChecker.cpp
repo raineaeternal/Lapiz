@@ -53,8 +53,8 @@ namespace Lapiz::Sabers::Effects {
                     auto saberB = _sabers[h];
                     if (
                         saberA == saberB || // if same saber
-                        (!saberA || !saberA->m_CachedPtr) || // if null
-                        (!saberB || !saberB->m_CachedPtr)) { // if null
+                        (!saberA || !saberA->m_CachedPtr.m_value) || // if null
+                        (!saberB || !saberB->m_CachedPtr.m_value)) { // if null
                         break;
                     }
                     auto saberBladeTopPos = saberA->saberBladeTopPos;
@@ -64,7 +64,7 @@ namespace Lapiz::Sabers::Effects {
                     UnityEngine::Vector3 clashingPoint2;
                     if (saberA->get_isActiveAndEnabled() && saberB->get_isActiveAndEnabled() && SegmentToSegmentDist(saberBladeBottomPos, saberBladeTopPos, saberBladeBottomPos2, saberBladeTopPos2, byref(clashingPoint2)) < 0.08f)
                     {
-                        if ((!_lastSaberA || !_lastSaberA->m_CachedPtr) && (!_lastSaberB || !_lastSaberB->m_CachedPtr))
+                        if ((!_lastSaberA || !_lastSaberA->m_CachedPtr.m_value) && (!_lastSaberB || !_lastSaberB->m_CachedPtr.m_value))
                         {
                             _lastSaberA = saberA;
                             _lastSaberB = saberB;

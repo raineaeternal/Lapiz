@@ -46,7 +46,7 @@ namespace Lapiz::Zenject::ZenjectExtensions {
             std::function<void(::Zenject::InjectContext*, System::Object*)>(
                 [onInstantiated, raycaster, go](::Zenject::InjectContext* ctx, System::Object* obj){
                     auto vc = il2cpp_utils::try_cast<HMUI::ViewController>(obj).value_or(nullptr);
-                    if (vc && vc->m_CachedPtr)
+                    if (vc && vc->m_CachedPtr.m_value)
                     {
                         Object::DestroyImmediate(raycaster);
                         auto newRaycaster = go->AddComponent<VRGraphicRaycaster*>();

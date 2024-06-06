@@ -27,7 +27,6 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, ObstacleSaberSparkleEff
     DECLARE_CTOR(ctor, GlobalNamespace::ColorManager* colorManager, Lapiz::Sabers::LapizSaberFactory* lapizSaberFactory);
     public:
         void ObstacleSaberSparkleEffectManager_Start_Postfix(GlobalNamespace::ObstacleSaberSparkleEffectManager* self);
-        void ObstacleSaberSparkleEffectManager_Update_Prefix(GlobalNamespace::ObstacleSaberSparkleEffectManager* self);
         static ObstacleSaberSparkleEffectManagerLatch* get_instance();
     private:
         static ObstacleSaberSparkleEffectManagerLatch* instance;

@@ -31,14 +31,14 @@ namespace Lapiz::Sabers::Effects {
     }
 
     void SaberBurnMarkSparklesLatch::LapizSaberFactory_SaberCreated(Lapiz::Sabers::LapizSaber* lapizSaber) {
-        if (!_saberBurnMarkSparkles || !_saberBurnMarkSparkles->m_CachedPtr)
+        if (!_saberBurnMarkSparkles || !_saberBurnMarkSparkles->m_CachedPtr.m_value)
             _earlySabers->Enqueue(lapizSaber);
         else
             AddSaber(lapizSaber->_saber);
     }
 
     void SaberBurnMarkSparklesLatch::AddSaber(GlobalNamespace::Saber* saber) {
-        if (!_saberBurnMarkSparkles || !_saberBurnMarkSparkles->m_CachedPtr) return;
+        if (!_saberBurnMarkSparkles || !_saberBurnMarkSparkles->m_CachedPtr.m_value) return;
 
         _saberBurnMarkSparkles->_sabers = TypeUtil::AppendArrayOrDefault(_saberBurnMarkSparkles->_sabers, saber);
         _saberBurnMarkSparkles->_prevBurnMarkPos = TypeUtil::AppendArrayOrDefault<UnityEngine::Vector3>(_saberBurnMarkSparkles->_prevBurnMarkPos);
@@ -76,7 +76,7 @@ namespace Lapiz::Sabers::Effects {
     }
 
     bool SaberBurnMarkSparklesLatch::ColorManager_ColorForSaberType_Prefix(UnityEngine::Color& result) {
-        if (!_sisterLoopActive || (!_saberBurnMarkSparkles || !_saberBurnMarkSparkles->m_CachedPtr))
+        if (!_sisterLoopActive || (!_saberBurnMarkSparkles || !_saberBurnMarkSparkles->m_CachedPtr.m_value))
             return true;
 
         auto sabers = _saberBurnMarkSparkles->_sabers;

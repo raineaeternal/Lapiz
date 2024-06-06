@@ -29,7 +29,7 @@ namespace Lapiz::Sabers {
         }
 
         SaberModelRegistration::SaberModelRegistration(GlobalNamespace::SaberModelController* prefab, int priority) {
-            if (!prefab || !prefab->m_CachedPtr) {
+            if (!prefab || !prefab->m_CachedPtr.m_value) {
                 throw std::invalid_argument("Prefab was not valid!");
             }
 
@@ -39,11 +39,11 @@ namespace Lapiz::Sabers {
         }
 
         SaberModelRegistration::SaberModelRegistration(GlobalNamespace::SaberModelController* leftModelPrefab, GlobalNamespace::SaberModelController* rightModelPrefab, int priority) {
-            if (!leftModelPrefab || !leftModelPrefab->m_CachedPtr) {
+            if (!leftModelPrefab || !leftModelPrefab->m_CachedPtr.m_value) {
                 throw std::invalid_argument("Left prefab was not valid!");
             }
             
-            if (!rightModelPrefab || !rightModelPrefab->m_CachedPtr) {
+            if (!rightModelPrefab || !rightModelPrefab->m_CachedPtr.m_value) {
                 throw std::invalid_argument("Right prefab was not valid!");
             }
 
