@@ -41,7 +41,7 @@ namespace SaberUtil {
             auto materialPropertyBlock = setSaberGlowColor->_materialPropertyBlock;
             auto propertyTintPairs = setSaberGlowColor->_propertyTintColorPairs;
 
-            if (!materialPropertyBlock || !materialPropertyBlock->m_Ptr) {
+            if (!materialPropertyBlock || !materialPropertyBlock->m_Ptr.m_value) {
                 materialPropertyBlock = UnityEngine::MaterialPropertyBlock::New_ctor();
                 setSaberGlowColor->_materialPropertyBlock = materialPropertyBlock;
             }
@@ -65,7 +65,7 @@ namespace SaberUtil {
             SetColors(glow, color);
         for (auto fakeGlow : fakeGlowColors)
             SetColors(fakeGlow, color);
-        if (light && light->m_CachedPtr)
+        if (light && light->m_CachedPtr.m_value)
             light->set_color(color);
     }
 }

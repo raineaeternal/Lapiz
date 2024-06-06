@@ -18,7 +18,7 @@ namespace Lapiz::Sabers {
     }
 
     void LapizSaber::Update() {
-        if (_saber && _saber->m_CachedPtr && _saber->gameObject->activeInHierarchy) {
+        if (_saber && _saber->m_CachedPtr.m_value && _saber->gameObject->activeInHierarchy) {
             auto topTransform = _saber->_saberBladeTopTransform;
             auto bottomTransform = _saber->_saberBladeBottomTransform;
 

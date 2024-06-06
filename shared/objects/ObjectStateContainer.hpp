@@ -11,7 +11,7 @@
 namespace Lapiz::Objects {
     class LAPIZ_EXPORT ObjectStateContainer {
         public:
-            inline explicit ObjectStateContainer(UnityEngine::GameObject* mainParent) : ObjectStateContainer((mainParent && mainParent->m_CachedPtr) ? mainParent->get_transform() : nullptr) {}
+            inline explicit ObjectStateContainer(UnityEngine::GameObject* mainParent) : ObjectStateContainer((mainParent && mainParent->m_CachedPtr.m_value) ? mainParent->get_transform() : nullptr) {}
             explicit ObjectStateContainer(UnityEngine::Transform* mainParent);
             void Revert();
         private:

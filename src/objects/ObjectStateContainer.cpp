@@ -2,7 +2,7 @@
 
 namespace Lapiz::Objects {
             ObjectStateContainer::ObjectStateContainer(UnityEngine::Transform* mainParent) {
-                if (!mainParent || !mainParent->m_CachedPtr) {
+                if (!mainParent || !mainParent->m_CachedPtr.m_value) {
                     throw std::invalid_argument("Null transform passed!");
                 }
                 Snapshot(mainParent, objects);
@@ -32,8 +32,8 @@ namespace Lapiz::Objects {
             }
 
             void ObjectStateContainer::ObjectState::Revert() {
-                if (transform && transform->m_CachedPtr) {
-                    if (parent && parent->m_CachedPtr) transform->SetParent(parent);
+                if (transform && transform->m_CachedPtr.m_value) {
+                    if (parent && parent->m_CachedPtr.m_value) transform->SetParent(parent);
                     transform->set_localScale(scale);
                     transform->get_gameObject()->SetActive(active);
                     transform->set_localPosition(pose.position);

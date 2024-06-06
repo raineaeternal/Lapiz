@@ -94,7 +94,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(ColorManager_ColorForSaberType, &GlobalNamespace::Colo
 MAKE_AUTO_HOOK_ORIG_MATCH(SaberBurnMarkSparkles_OnEnable, &GlobalNamespace::SaberBurnMarkSparkles::OnEnable, void, GlobalNamespace::SaberBurnMarkSparkles* self) {
 	if (!self->_burnMarksPS) return;
     for (auto ps : self->_burnMarksPS) {
-        if (ps && ps->m_CachedPtr) {
+        if (ps && ps->m_CachedPtr.m_value) {
             ps->get_gameObject()->SetActive(true);
         }
 	}
@@ -104,7 +104,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(SaberBurnMarkSparkles_OnEnable, &GlobalNamespace::Sabe
 MAKE_AUTO_HOOK_ORIG_MATCH(SaberBurnMarkSparkles_OnDisable, &GlobalNamespace::SaberBurnMarkSparkles::OnDisable, void, GlobalNamespace::SaberBurnMarkSparkles* self) {
 	if (!self->_burnMarksPS) return;
     for (auto ps : self->_burnMarksPS) {
-        if (ps && ps->m_CachedPtr) {
+        if (ps && ps->m_CachedPtr.m_value) {
             ps->get_gameObject()->SetActive(false);
         }
 	}

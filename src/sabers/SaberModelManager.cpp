@@ -76,7 +76,7 @@ namespace Lapiz::Sabers {
             lapizSaber->SetColor(color);
         } else {
             auto saberModelController = GetSaberModelController(saber);
-            if (saberModelController && saberModelController->m_CachedPtr) {
+            if (saberModelController && saberModelController->m_CachedPtr.m_value) {
                 _colorUpdateQueue.push([saber, saberModelController, color, this](){
                     SaberUtil::SetColor(saberModelController, color);
                     if (ColorUpdated.size() > 0) ColorUpdated.invoke(saber, color);

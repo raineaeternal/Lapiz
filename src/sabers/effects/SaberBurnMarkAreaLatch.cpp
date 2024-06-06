@@ -38,14 +38,14 @@ namespace Lapiz::Sabers::Effects {
     }
 
     void SaberBurnMarkAreaLatch::LapizSaberFactory_SaberCreated(Lapiz::Sabers::LapizSaber* lapizSaber) {
-        if (!_saberBurnMarkArea || !_saberBurnMarkArea->m_CachedPtr)
+        if (!_saberBurnMarkArea || !_saberBurnMarkArea->m_CachedPtr.m_value)
             _earlySabers->Enqueue(lapizSaber);
         else
             AddSaber(lapizSaber->_saber);
     }
 
     void SaberBurnMarkAreaLatch::ColorUpdated(GlobalNamespace::Saber* saber, UnityEngine::Color color) {
-        if (!_saberBurnMarkArea || !_saberBurnMarkArea->m_CachedPtr) return;
+        if (!_saberBurnMarkArea || !_saberBurnMarkArea->m_CachedPtr.m_value) return;
 
         int index = _saberBurnMarkArea->_sabers->IndexOf(saber);
 
@@ -62,7 +62,7 @@ namespace Lapiz::Sabers::Effects {
     }
 
     void SaberBurnMarkAreaLatch::AddSaber(GlobalNamespace::Saber* saber) {
-        if (!_saberBurnMarkArea || !_saberBurnMarkArea->m_CachedPtr) return;
+        if (!_saberBurnMarkArea || !_saberBurnMarkArea->m_CachedPtr.m_value) return;
 
         _saberBurnMarkArea->_sabers = TypeUtil::AppendArrayOrDefault(_saberBurnMarkArea->_sabers, saber);
         _saberBurnMarkArea->_prevBurnMarkPos = TypeUtil::AppendArrayOrDefault<UnityEngine::Vector3>(_saberBurnMarkArea->_prevBurnMarkPos);

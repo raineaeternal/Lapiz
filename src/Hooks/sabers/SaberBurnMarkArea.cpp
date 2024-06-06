@@ -116,13 +116,13 @@ MAKE_AUTO_HOOK_MATCH(SaberBurnMarkArea_OnDisable, &GlobalNamespace::SaberBurnMar
 
 // DOESN'T CALL ORIG ON PURPOSE
 MAKE_AUTO_HOOK_ORIG_MATCH(SaberBurnMarkArea_OnDestroy, &GlobalNamespace::SaberBurnMarkArea::OnDestroy, void, GlobalNamespace::SaberBurnMarkArea* self) {
-    if (self->_camera && self->_camera->m_CachedPtr) {
+    if (self->_camera && self->_camera->m_CachedPtr.m_value) {
 		UnityEngine::Object::Destroy(self->_camera->get_gameObject());
 	}
     // destroy all line renderers as per DynamicDestroy
 	if (self->_lineRenderers) {
         for (auto line : self->_lineRenderers) {
-            if (line && line->m_CachedPtr) {
+            if (line && line->m_CachedPtr.m_value) {
                 UnityEngine::Object::Destroy(line);
             }
         }
@@ -130,7 +130,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(SaberBurnMarkArea_OnDestroy, &GlobalNamespace::SaberBu
 	GlobalNamespace::EssentialHelpers::SafeDestroy(self->_fadeOutMaterial);
 	if (self->_renderTextures) {
 		for (auto renderTexture : self->_renderTextures) {
-			if (renderTexture && renderTexture->m_CachedPtr) {
+			if (renderTexture && renderTexture->m_CachedPtr.m_value) {
 				renderTexture->Release();
 				GlobalNamespace::EssentialHelpers::SafeDestroy(renderTexture);
 			}
