@@ -54,7 +54,7 @@
     "scripts": {
       "qmod": [
         "pwsh ./build.ps1",
-        "qpm qmod build",
+        "qpm qmod manifest",
         "pwsh ./qmod.ps1 Lapiz -clean"
       ]
     }
