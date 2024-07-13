@@ -6,7 +6,7 @@
     "info": {
       "name": "Lapiz",
       "id": "lapiz",
-      "version": "0.2.10",
+      "version": "0.2.13",
       "url": "https://github.com/raineio/Lapiz",
       "additionalData": {
         "overrideSoName": "liblapiz.so",
@@ -17,7 +17,7 @@
       "scripts": {
         "qmod": [
           "pwsh ./build.ps1",
-          "qpm qmod build",
+          "qpm qmod manifest",
           "pwsh ./qmod.ps1 Lapiz -clean"
         ]
       },
@@ -45,7 +45,7 @@
       },
       {
         "id": "bs-cordl",
-        "versionRange": "^3700.0.0",
+        "versionRange": "^3701.0.0",
         "additionalData": {}
       },
       {
@@ -69,13 +69,13 @@
     {
       "dependency": {
         "id": "paper",
-        "versionRange": "=3.6.3",
+        "versionRange": "=3.6.4",
         "additionalData": {
-          "soLink": "https://github.com/Fernthedev/paperlog/releases/download/v3.6.3/libpaperlog.so",
-          "debugSoLink": "https://github.com/Fernthedev/paperlog/releases/download/v3.6.3/debug_libpaperlog.so",
+          "soLink": "https://github.com/Fernthedev/paperlog/releases/download/v3.6.4/libpaperlog.so",
+          "debugSoLink": "https://github.com/Fernthedev/paperlog/releases/download/v3.6.4/debug_libpaperlog.so",
           "overrideSoName": "libpaperlog.so",
-          "modLink": "https://github.com/Fernthedev/paperlog/releases/download/v3.6.3/paperlog.qmod",
-          "branchName": "version/v3_6_3",
+          "modLink": "https://github.com/Fernthedev/paperlog/releases/download/v3.6.4/paperlog.qmod",
+          "branchName": "version/v3_6_4",
           "compileOptions": {
             "systemIncludes": [
               "shared/utfcpp/source"
@@ -84,7 +84,7 @@
           "cmake": false
         }
       },
-      "version": "3.6.3"
+      "version": "3.6.4"
     },
     {
       "dependency": {
@@ -120,21 +120,21 @@
     {
       "dependency": {
         "id": "sombrero",
-        "versionRange": "=0.1.40",
+        "versionRange": "=0.1.42",
         "additionalData": {
           "headersOnly": true,
-          "branchName": "version/v0_1_40"
+          "branchName": "version/v0_1_42"
         }
       },
-      "version": "0.1.40"
+      "version": "0.1.42"
     },
     {
       "dependency": {
         "id": "bs-cordl",
-        "versionRange": "=3700.0.0",
+        "versionRange": "=3701.0.0",
         "additionalData": {
           "headersOnly": true,
-          "branchName": "version/v3700_0_0",
+          "branchName": "version/v3701_0_0",
           "compileOptions": {
             "includePaths": [
               "include"
@@ -149,7 +149,7 @@
           }
         }
       },
-      "version": "3700.0.0"
+      "version": "3701.0.0"
     },
     {
       "dependency": {
