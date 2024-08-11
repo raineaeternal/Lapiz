@@ -3,6 +3,7 @@
   "name": "${mod_name}",
   "id": "${mod_id}",
   "author": "Raine",
+  "isLibrary": true,
   "version": "${version}",
   "packageId": "com.beatgames.beatsaber",
   "packageVersion": "1.37.1_9895289101",
