@@ -10,7 +10,7 @@
 #include "System/Collections/Generic/HashSet_1.hpp"
 #include "System/IDisposable.hpp"
 
-DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelProvider, System::Object, classof(System::IDisposable*),
+DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelProvider, System::Object, System::IDisposable*) {
     DECLARE_INSTANCE_FIELD(::Zenject::DiContainer*, _container);
     DECLARE_INSTANCE_FIELD(GlobalNamespace::SaberManager*, _saberManager);
     DECLARE_INSTANCE_FIELD(GlobalNamespace::SaberModelContainer*, _localLeftContainer);
@@ -36,4 +36,4 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelProvider, System::Obje
     private:
         static SaberModelProvider* instance;
         GlobalNamespace::SaberModelController* CreateNew(GlobalNamespace::SaberType saberType);
-)
+};

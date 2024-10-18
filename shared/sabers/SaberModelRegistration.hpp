@@ -47,7 +47,7 @@ namespace Lapiz::Sabers {
     };
 }
 
-DECLARE_CLASS_CODEGEN(Lapiz::Sabers, SaberModelRegistrationWrapper, System::Object,
+DECLARE_CLASS_CODEGEN(Lapiz::Sabers, SaberModelRegistrationWrapper, System::Object) {
     public:
         static SaberModelRegistrationWrapper* Make(std::shared_ptr<SaberModelRegistration> registration);
         DECLARE_DEFAULT_CTOR();
@@ -55,4 +55,4 @@ DECLARE_CLASS_CODEGEN(Lapiz::Sabers, SaberModelRegistrationWrapper, System::Obje
     private:
         friend class SaberModelProvider;
         std::shared_ptr<SaberModelRegistration> _registration;
-)
+};

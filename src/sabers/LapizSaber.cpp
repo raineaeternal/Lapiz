@@ -31,7 +31,7 @@ namespace Lapiz::Sabers {
             _trailSaberMovementData->AddNewData(topPosition, bottomPosition, time);
 
             if (_saber->enabled) {
-                _saber->movementData->AddNewData(topPosition, bottomPosition, time);
+                _saber->_movementData->AddNewData(topPosition, bottomPosition, time);
                 _noteCutter->Cut(_saber);
             }
         }
@@ -89,7 +89,7 @@ namespace Lapiz::Sabers {
 
         _saberTypeObject->_saberType = saberType;
         _saberModelController = _saberModelProvider->NewModel(saberType);
-        _saberModelController->Init(this->transform, _saber);
+        _saberModelController->Init(this->transform, _saber, _saberModelController->____colorManager->ColorForSaberType(saberType));
 
         _trailSaberMovementData = GlobalNamespace::SaberMovementData::New_ctor();
         _saberModelController->_saberTrail->_movementData = *_trailSaberMovementData;

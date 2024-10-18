@@ -35,7 +35,7 @@ namespace Lapiz::Zenject::ZenjectExtensions {
     }
 }
 
-DECLARE_CLASS_CODEGEN(Lapiz::Zenject::ZenjectExtensions, DummyRaycaster, UnityEngine::EventSystems::BaseRaycaster,
+DECLARE_CLASS_CODEGEN(Lapiz::Zenject::ZenjectExtensions, DummyRaycaster, UnityEngine::EventSystems::BaseRaycaster) {
     DECLARE_OVERRIDE_METHOD_MATCH(UnityEngine::Camera*, get_eventCamera, &::UnityEngine::EventSystems::BaseRaycaster::get_eventCamera);
     DECLARE_OVERRIDE_METHOD_MATCH(void, Raycast, &::UnityEngine::EventSystems::BaseRaycaster::Raycast, UnityEngine::EventSystems::PointerEventData* pointerEventData, ListW<UnityEngine::EventSystems::RaycastResult> resultAppendList);
-)
+};

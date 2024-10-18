@@ -3,7 +3,7 @@
 #include "custom-types/shared/macros.hpp"
 #include "RedecoratorRegistration.hpp"
 
-DECLARE_CLASS_CUSTOM(Lapiz::Objects, TemplateRedecoratorRegistration, RedecoratorRegistration,
+DECLARE_CLASS_CUSTOM(Lapiz::Objects, TemplateRedecoratorRegistration, RedecoratorRegistration) {
     DECLARE_INSTANCE_METHOD(System::Object*, Redecorate, System::Object* value);
     DECLARE_CTOR(ctor, StringW contract, System::Type* prefabType, System::Type* containerType, int priority, bool chain);
 
@@ -19,4 +19,4 @@ DECLARE_CLASS_CUSTOM(Lapiz::Objects, TemplateRedecoratorRegistration, Redecorato
 
     private:
         std::function<System::Object*(System::Object*)> _redecorateCall;
-)
+};

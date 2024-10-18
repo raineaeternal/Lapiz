@@ -14,7 +14,7 @@
 
 #include "System/Collections/Generic/Queue_1.hpp"
 
-DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, SaberBurnMarkAreaLatch, System::Object, classof(System::IDisposable*),
+DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, SaberBurnMarkAreaLatch, System::Object, System::IDisposable*) {
     DECLARE_INSTANCE_FIELD_PRIVATE(Lapiz::Sabers::LapizSaberFactory*, _lapizSaberFactory);
     DECLARE_INSTANCE_FIELD_PRIVATE(Lapiz::Sabers::SaberModelManager*, _saberModelManager);
     using EarlySabers = System::Collections::Generic::Queue_1<Lapiz::Sabers::LapizSaber*>;
@@ -37,4 +37,4 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, SaberBurnMarkAreaLatch,
         static SaberBurnMarkAreaLatch* get_instance();
     private:
         static SaberBurnMarkAreaLatch* instance;
-)
+};

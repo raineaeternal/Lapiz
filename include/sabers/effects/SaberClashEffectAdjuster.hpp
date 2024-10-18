@@ -10,7 +10,7 @@
 #include "Zenject/IInitializable.hpp"
 #include "System/IDisposable.hpp"
 
-DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, SaberClashEffectAdjuster, System::Object, std::vector<Il2CppClass*>({classof(::Zenject::IInitializable*), classof(::System::IDisposable*)}),
+DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, SaberClashEffectAdjuster, System::Object, ::Zenject::IInitializable*, System::IDisposable*) {
     DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::SaberClashEffect*, _saberClashEffect);
     DECLARE_INSTANCE_FIELD_PRIVATE(UnityEngine::ParticleSystem*, _glowParticleSystem);
     DECLARE_INSTANCE_FIELD_PRIVATE(UnityEngine::ParticleSystem*, _sparkleParticleSystem);
@@ -26,4 +26,4 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, SaberClashEffectAdjuste
         static SaberClashEffectAdjuster* get_instance();
     private:
         static SaberClashEffectAdjuster* instance;
-)
+};
