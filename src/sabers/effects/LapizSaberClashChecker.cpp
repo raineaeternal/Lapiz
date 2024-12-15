@@ -32,7 +32,7 @@ namespace Lapiz::Sabers::Effects {
 
     bool LapizSaberClashChecker::SaberClashChecker_AreSabersClashing_override(UnityEngine::Vector3& clashingPoint, bool& result) {
         if (!_extraSabersDetected) return true;
-        if (_leftSaber->_movementData->get_lastAddedData().time < 0.1f) {
+        if (_leftSaber->movementDataForLogic->get_lastAddedData().time < 0.1f) {
             clashingPoint = this->_clashingPoint;
             result = false;
             return false;

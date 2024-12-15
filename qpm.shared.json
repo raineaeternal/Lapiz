@@ -40,7 +40,7 @@
       },
       {
         "id": "bs-cordl",
-        "versionRange": "^3800.0.0",
+        "versionRange": "^4000.0.0",
         "additionalData": {}
       },
       {
@@ -100,13 +100,13 @@
     {
       "dependency": {
         "id": "custom-types",
-        "versionRange": "=0.17.12",
+        "versionRange": "=0.17.13",
         "additionalData": {
-          "soLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.12/libcustom-types.so",
-          "debugSoLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.12/debug_libcustom-types.so",
+          "soLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.13/libcustom-types.so",
+          "debugSoLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.13/debug_libcustom-types.so",
           "overrideSoName": "libcustom-types.so",
-          "modLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.12/CustomTypes.qmod",
-          "branchName": "version/v0_17_12",
+          "modLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.13/CustomTypes.qmod",
+          "branchName": "version/v0_17_13",
           "compileOptions": {
             "cppFlags": [
               "-Wno-invalid-offsetof"
@@ -115,7 +115,7 @@
           "cmake": true
         }
       },
-      "version": "0.17.12"
+      "version": "0.17.13"
     },
     {
       "dependency": {
@@ -131,10 +131,10 @@
     {
       "dependency": {
         "id": "bs-cordl",
-        "versionRange": "=3800.0.0",
+        "versionRange": "=4000.1.0",
         "additionalData": {
           "headersOnly": true,
-          "branchName": "version/v3800_0_0",
+          "branchName": "version/v4000_1_0",
           "compileOptions": {
             "includePaths": [
               "include"
@@ -150,7 +150,7 @@
           }
         }
       },
-      "version": "3800.0.0"
+      "version": "4000.1.0"
     },
     {
       "dependency": {
