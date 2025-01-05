@@ -103,7 +103,7 @@ jobs:
       run: mv "./build/debug/${{ steps.libname.outputs.NAME }}" "./build/debug_${{ steps.libname.outputs.NAME }}"
 
     - name: Upload non-debug artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ steps.libname.outputs.NAME }}
         path: ./build/${{ steps.libname.outputs.NAME }}
@@ -120,7 +120,7 @@ jobs:
         filename: ./build/${{ steps.libname.outputs.NAME }}
 
     - name: Upload debug artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: debug_${{ steps.libname.outputs.NAME }}
         path: ./build/debug_${{ steps.libname.outputs.NAME }}
@@ -137,7 +137,7 @@ jobs:
         filename: ./build/debug_${{ steps.libname.outputs.NAME }}
 
     - name: Upload qmod artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: ${{env.qmod_name}}.qmod
         path: ./${{ env.qmod_name }}.qmod
