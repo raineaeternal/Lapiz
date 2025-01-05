@@ -20,7 +20,6 @@
 #include "GlobalNamespace/BombNoteController.hpp"
 #include "GlobalNamespace/ObstacleController.hpp"
 #include "GlobalNamespace/SliderController.hpp"
-#include "GlobalNamespace/NoteLineConnectionController.hpp"
 #include "GlobalNamespace/BeatLine.hpp"
 
 #include "GlobalNamespace/FlyingTextEffect.hpp"
@@ -160,7 +159,6 @@ MAKE_AUTO_HOOK_ORIG_MATCH(BeatmapObjectsInstaller_InstallBindings, &BeatmapObjec
     auto orig_sliderShortPrefab = self->_sliderShortPrefab;
     auto orig_sliderMediumPrefab = self->_sliderMediumPrefab;
     auto orig_sliderLongPrefab = self->_sliderLongPrefab;
-    auto orig_noteLineConnectionControllerPrefab = self->_noteLineConnectionControllerPrefab;
     auto orig_beatLinePrefab = self->_beatLinePrefab;
 
     // edit prefabs
@@ -173,7 +171,6 @@ MAKE_AUTO_HOOK_ORIG_MATCH(BeatmapObjectsInstaller_InstallBindings, &BeatmapObjec
     self->_sliderShortPrefab = PREFAB_INITIALIZE(_sliderShortPrefab);
     self->_sliderMediumPrefab = PREFAB_INITIALIZE(_sliderMediumPrefab);
     self->_sliderLongPrefab = PREFAB_INITIALIZE(_sliderLongPrefab);
-    self->_noteLineConnectionControllerPrefab = PREFAB_INITIALIZE(_noteLineConnectionControllerPrefab);
     self->_beatLinePrefab = PREFAB_INITIALIZE(_beatLinePrefab);
 
     // run method
@@ -189,7 +186,6 @@ MAKE_AUTO_HOOK_ORIG_MATCH(BeatmapObjectsInstaller_InstallBindings, &BeatmapObjec
     self->_sliderShortPrefab = orig_sliderShortPrefab;
     self->_sliderMediumPrefab = orig_sliderMediumPrefab;
     self->_sliderLongPrefab = orig_sliderLongPrefab;
-    self->_noteLineConnectionControllerPrefab = orig_noteLineConnectionControllerPrefab;
     self->_beatLinePrefab = orig_beatLinePrefab;
 }
 

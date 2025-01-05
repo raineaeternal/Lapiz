@@ -1,25 +1,37 @@
 {
+  "version": "0.1.0",
   "sharedDir": "shared",
   "dependenciesDir": "extern",
   "info": {
     "name": "Lapiz",
     "id": "lapiz",
-    "version": "0.2.13",
+    "version": "0.3.0",
     "url": "https://github.com/raineio/Lapiz",
     "additionalData": {
       "overrideSoName": "liblapiz.so",
       "cmake": true
     }
   },
+  "workspace": {
+    "scripts": {
+      "build": [
+        "pwsh ./build.ps1"
+      ],
+      "qmod": [
+        "qpm qmod zip"
+      ]
+    },
+    "qmodIncludeDirs": [
+      "./build",
+      "./extern/libs"
+    ],
+    "qmodIncludeFiles": [],
+    "qmodOutput": "Lapiz"
+  },
   "dependencies": [
     {
-      "id": "libil2cpp",
-      "versionRange": "^0.3.0",
-      "additionalData": {}
-    },
-    {
       "id": "beatsaber-hook",
-      "versionRange": "^5.1.9",
+      "versionRange": "^6.2.0",
       "additionalData": {}
     },
     {
@@ -31,32 +43,23 @@
     },
     {
       "id": "bs-cordl",
-      "versionRange": "^3701.0.0",
+      "versionRange": "^4000.0.0",
       "additionalData": {}
     },
     {
       "id": "custom-types",
-      "versionRange": "^0.17.10",
-      "additionalData": {}
-    },
-    {
-      "id": "paper",
-      "versionRange": "^3.0.0",
+      "versionRange": "^0.18.0",
       "additionalData": {}
     },
     {
       "id": "sombrero",
       "versionRange": "^0.1.37",
       "additionalData": {}
+    },
+    {
+      "id": "paper2_scotland2",
+      "versionRange": "^4.1.5",
+      "additionalData": {}
     }
-  ],
-  "workspace": {
-    "scripts": {
-      "qmod": [
-        "pwsh ./build.ps1",
-        "qpm qmod manifest",
-        "pwsh ./qmod.ps1 Lapiz -clean"
-      ]
-    }
-  }
+  ]
 }

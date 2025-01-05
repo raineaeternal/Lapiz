@@ -12,7 +12,7 @@
 
 namespace Lapiz::Sabers { class SaberModelManager; }
 
-DECLARE_CLASS_CODEGEN(Lapiz::Sabers, DesperationContract, System::Object,
+DECLARE_CLASS_CODEGEN(Lapiz::Sabers, DesperationContract, System::Object) {
     DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::Saber*, _saber);
     DECLARE_INSTANCE_FIELD_PRIVATE(UnityEngine::Color, _color);
     DECLARE_INSTANCE_FIELD_PRIVATE(int, _accessed);
@@ -21,9 +21,9 @@ DECLARE_CLASS_CODEGEN(Lapiz::Sabers, DesperationContract, System::Object,
     DECLARE_CTOR(ctor, GlobalNamespace::Saber* saber, UnityEngine::Color color);
     static constexpr const int _maxAccessTimes = 10;
     friend class SaberModelManager;
-)
+};
 
-DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelManager, System::Object, std::vector<Il2CppClass*>({classof(::Zenject::ILateTickable*), classof(::System::IDisposable*)}),
+DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelManager, System::Object, ::Zenject::ILateTickable*, ::System::IDisposable*) {
     DECLARE_INSTANCE_FIELD(GlobalNamespace::ColorManager*, _colorManager);
     DECLARE_INSTANCE_FIELD(LapizSaberFactory*, _lapizSaberFactory);
 
@@ -45,4 +45,4 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelManager, System::Objec
     public:
         std::queue<std::function<void()>> _colorUpdateQueue;
         UnorderedEventCallback<GlobalNamespace::Saber*, UnityEngine::Color> ColorUpdated;
-)
+};

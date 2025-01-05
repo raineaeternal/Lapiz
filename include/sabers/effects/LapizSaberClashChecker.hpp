@@ -9,7 +9,7 @@
 #include "Zenject/DiContainer.hpp"
 #include "sabers/LapizSaberFactory.hpp"
 
-DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, LapizSaberClashChecker, GlobalNamespace::SaberClashChecker, classof(System::IDisposable*),
+DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, LapizSaberClashChecker, GlobalNamespace::SaberClashChecker, System::IDisposable*) {
     DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::Saber*, _lastSaberA);
     DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::Saber*, _lastSaberB);
     DECLARE_INSTANCE_FIELD_PRIVATE(bool, _extraSabersDetected);
@@ -24,4 +24,4 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, LapizSaberClashChecker,
     public:
         bool SaberClashChecker_AreSabersClashing_override(UnityEngine::Vector3& clashingPoint, bool& result);
         UnorderedEventCallback<GlobalNamespace::Saber*, GlobalNamespace::Saber*> NewSabersClashed;
-)
+};

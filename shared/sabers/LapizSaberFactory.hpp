@@ -5,7 +5,7 @@
 
 #include "../macros.hpp"
 
-DECLARE_CLASS_CODEGEN(Lapiz::Sabers, LapizSaberFactory, System::Object,
+DECLARE_CLASS_CODEGEN(Lapiz::Sabers, LapizSaberFactory, System::Object) {
     DECLARE_INSTANCE_FIELD_PRIVATE(::Zenject::DiContainer*, _container);
     DECLARE_CTOR(ctor, ::Zenject::DiContainer* container);
     public:
@@ -20,4 +20,4 @@ DECLARE_CLASS_CODEGEN(Lapiz::Sabers, LapizSaberFactory, System::Object,
     private:
         void UpdateColorInternal(GlobalNamespace::Saber* saber, UnityEngine::Color color);
         LapizSaber* Spawn(System::Type* backingSaberType, GlobalNamespace::SaberType saberType);
-)
+};

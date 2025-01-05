@@ -14,7 +14,7 @@
 #include "../macros.hpp"
 #include <queue>
 
-DECLARE_CLASS_CODEGEN(Lapiz::Sabers, LapizSaber, UnityEngine::MonoBehaviour,
+DECLARE_CLASS_CODEGEN(Lapiz::Sabers, LapizSaber, UnityEngine::MonoBehaviour) {
     DECLARE_INSTANCE_FIELD(GlobalNamespace::NoteCutter*, _noteCutter);
     DECLARE_INSTANCE_FIELD(GlobalNamespace::ColorManager*, _colorManager);
     DECLARE_INSTANCE_FIELD(SaberModelProvider*, _saberModelProvider);
@@ -40,4 +40,4 @@ DECLARE_CLASS_CODEGEN(Lapiz::Sabers, LapizSaber, UnityEngine::MonoBehaviour,
         std::function<void(GlobalNamespace::Saber*, UnityEngine::Color)> colorUpdated;
         std::queue<std::function<void(void)>> _colorProcessNextFrame;
         void Setup(System::Type* backingType, GlobalNamespace::SaberType saberType);
-)   
+};

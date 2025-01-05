@@ -3,7 +3,7 @@
 #include "custom-types/shared/macros.hpp"
 #include "../macros.hpp"
 
-DECLARE_CLASS_CODEGEN(Lapiz::Objects, RedecoratorRegistration, System::Object,
+DECLARE_CLASS_CODEGEN(Lapiz::Objects, RedecoratorRegistration, System::Object) {
     DECLARE_INSTANCE_FIELD_PRIVATE(bool, _chain);
     DECLARE_INSTANCE_FIELD_PRIVATE(int, _priority);
     DECLARE_INSTANCE_FIELD_PRIVATE(StringW, _contract);
@@ -28,4 +28,4 @@ DECLARE_CLASS_CODEGEN(Lapiz::Objects, RedecoratorRegistration, System::Object,
         __declspec(property(get=get_contract)) StringW Contract;
         __declspec(property(get=get_prefabType)) System::Type* PrefabType;
         __declspec(property(get=get_containerType)) System::Type* ContainerType;
-)
+};
