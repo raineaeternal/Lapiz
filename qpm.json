@@ -1,4 +1,5 @@
 {
+  "version": "0.1.0",
   "sharedDir": "shared",
   "dependenciesDir": "extern",
   "info": {
@@ -10,6 +11,18 @@
       "overrideSoName": "liblapiz.so",
       "cmake": true
     }
+  },
+  "workspace": {
+    "scripts": {
+      "qmod": [
+        "pwsh ./build.ps1",
+        "qpm qmod manifest",
+        "pwsh ./qmod.ps1 Lapiz -clean"
+      ]
+    },
+    "qmodIncludeDirs": [],
+    "qmodIncludeFiles": [],
+    "qmodOutput": null
   },
   "dependencies": [
     {
@@ -35,23 +48,14 @@
       "additionalData": {}
     },
     {
-      "id": "paper",
-      "versionRange": "^3.7.0",
-      "additionalData": {}
-    },
-    {
       "id": "sombrero",
       "versionRange": "^0.1.37",
       "additionalData": {}
+    },
+    {
+      "id": "paper2_scotland2",
+      "versionRange": "^4.1.5",
+      "additionalData": {}
     }
-  ],
-  "workspace": {
-    "scripts": {
-      "qmod": [
-        "pwsh ./build.ps1",
-        "qpm qmod manifest",
-        "pwsh ./qmod.ps1 Lapiz -clean"
-      ]
-    }
-  }
+  ]
 }

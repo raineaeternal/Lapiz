@@ -49,13 +49,13 @@
         "additionalData": {}
       },
       {
-        "id": "paper",
-        "versionRange": "^3.7.0",
+        "id": "sombrero",
+        "versionRange": "^0.1.37",
         "additionalData": {}
       },
       {
-        "id": "sombrero",
-        "versionRange": "^0.1.37",
+        "id": "paper2_scotland2",
+        "versionRange": "^4.1.5",
         "additionalData": {}
       }
     ]
@@ -63,14 +63,13 @@
   "restoredDependencies": [
     {
       "dependency": {
-        "id": "paper",
-        "versionRange": "=3.7.0",
+        "id": "paper2_scotland2",
+        "versionRange": "=4.3.0",
         "additionalData": {
-          "soLink": "https://github.com/Fernthedev/paperlog/releases/download/v3.7.0/libpaperlog.so",
-          "debugSoLink": "https://github.com/Fernthedev/paperlog/releases/download/v3.7.0/debug_libpaperlog.so",
-          "overrideSoName": "libpaperlog.so",
-          "modLink": "https://github.com/Fernthedev/paperlog/releases/download/v3.7.0/paperlog.qmod",
-          "branchName": "version/v3_7_0",
+          "soLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.3.0/libpaper2_scotland2.so",
+          "overrideSoName": "libpaper2_scotland2.so",
+          "modLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.3.0/paper2_scotland2.qmod",
+          "branchName": "version/v4_3_0",
           "compileOptions": {
             "systemIncludes": [
               "shared/utfcpp/source"
@@ -79,7 +78,7 @@
           "cmake": false
         }
       },
-      "version": "3.7.0"
+      "version": "4.3.0"
     },
     {
       "dependency": {
@@ -100,13 +99,13 @@
     {
       "dependency": {
         "id": "custom-types",
-        "versionRange": "=0.18.0",
+        "versionRange": "=0.18.1",
         "additionalData": {
-          "soLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.18.0/libcustom-types.so",
-          "debugSoLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.18.0/debug_libcustom-types.so",
+          "soLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.18.1/libcustom-types.so",
+          "debugSoLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.18.1/debug_libcustom-types.so",
           "overrideSoName": "libcustom-types.so",
-          "modLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.18.0/CustomTypes.qmod",
-          "branchName": "version/v0_18_0",
+          "modLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.18.1/CustomTypes.qmod",
+          "branchName": "version/v0_18_1",
           "compileOptions": {
             "cppFlags": [
               "-Wno-invalid-offsetof"
@@ -115,7 +114,7 @@
           "cmake": true
         }
       },
-      "version": "0.18.0"
+      "version": "0.18.1"
     },
     {
       "dependency": {
@@ -155,17 +154,17 @@
     {
       "dependency": {
         "id": "beatsaber-hook",
-        "versionRange": "=6.2.0",
+        "versionRange": "=6.3.0",
         "additionalData": {
-          "soLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v6.2.0/libbeatsaber-hook.so",
-          "debugSoLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v6.2.0/debug_libbeatsaber-hook.so",
+          "soLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v6.3.0/libbeatsaber-hook.so",
+          "debugSoLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v6.3.0/debug_libbeatsaber-hook.so",
           "overrideSoName": "libbeatsaber-hook.so",
-          "modLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v6.2.0/beatsaber-hook.qmod",
-          "branchName": "version/v6_2_0",
+          "modLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v6.3.0/beatsaber-hook.qmod",
+          "branchName": "version/v6_3_0",
           "cmake": true
         }
       },
-      "version": "6.2.0"
+      "version": "6.3.0"
     },
     {
       "dependency": {
