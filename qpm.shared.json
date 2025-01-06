@@ -54,7 +54,7 @@
       },
       {
         "id": "sombrero",
-        "versionRange": "^0.1.37",
+        "versionRange": "^0.1.43",
         "additionalData": {}
       },
       {
@@ -68,12 +68,12 @@
     {
       "dependency": {
         "id": "paper2_scotland2",
-        "versionRange": "=4.3.0",
+        "versionRange": "=4.3.1",
         "additionalData": {
-          "soLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.3.0/libpaper2_scotland2.so",
+          "soLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.3.1/libpaper2_scotland2.so",
           "overrideSoName": "libpaper2_scotland2.so",
-          "modLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.3.0/paper2_scotland2.qmod",
-          "branchName": "version/v4_3_0",
+          "modLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.3.1/paper2_scotland2.qmod",
+          "branchName": "version/v4_3_1",
           "compileOptions": {
             "systemIncludes": [
               "shared/utfcpp/source"
@@ -82,7 +82,7 @@
           "cmake": false
         }
       },
-      "version": "4.3.0"
+      "version": "4.3.1"
     },
     {
       "dependency": {
@@ -123,13 +123,13 @@
     {
       "dependency": {
         "id": "sombrero",
-        "versionRange": "=0.1.42",
+        "versionRange": "=0.1.43",
         "additionalData": {
           "headersOnly": true,
-          "branchName": "version/v0_1_42"
+          "branchName": "version/v0_1_43"
         }
       },
-      "version": "0.1.42"
+      "version": "0.1.43"
     },
     {
       "dependency": {
