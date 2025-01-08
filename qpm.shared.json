@@ -68,12 +68,12 @@
     {
       "dependency": {
         "id": "paper2_scotland2",
-        "versionRange": "=4.3.0",
+        "versionRange": "=4.4.0",
         "additionalData": {
-          "soLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.3.0/libpaper2_scotland2.so",
+          "soLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.4.0/libpaper2_scotland2.so",
           "overrideSoName": "libpaper2_scotland2.so",
-          "modLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.3.0/paper2_scotland2.qmod",
-          "branchName": "version/v4_3_0",
+          "modLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.4.0/paper2_scotland2.qmod",
+          "branchName": "version/v4_4_0",
           "compileOptions": {
             "systemIncludes": [
               "shared/utfcpp/source"
@@ -82,7 +82,7 @@
           "cmake": false
         }
       },
-      "version": "4.3.0"
+      "version": "4.4.0"
     },
     {
       "dependency": {
@@ -103,13 +103,13 @@
     {
       "dependency": {
         "id": "custom-types",
-        "versionRange": "=0.18.1",
+        "versionRange": "=0.18.2",
         "additionalData": {
-          "soLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.18.1/libcustom-types.so",
-          "debugSoLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.18.1/debug_libcustom-types.so",
+          "soLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.18.2/libcustom-types.so",
+          "debugSoLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.18.2/debug_libcustom-types.so",
           "overrideSoName": "libcustom-types.so",
-          "modLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.18.1/CustomTypes.qmod",
-          "branchName": "version/v0_18_1",
+          "modLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.18.2/CustomTypes.qmod",
+          "branchName": "version/v0_18_2",
           "compileOptions": {
             "cppFlags": [
               "-Wno-invalid-offsetof"
@@ -118,26 +118,26 @@
           "cmake": true
         }
       },
-      "version": "0.18.1"
+      "version": "0.18.2"
     },
     {
       "dependency": {
         "id": "sombrero",
-        "versionRange": "=0.1.42",
+        "versionRange": "=0.1.43",
         "additionalData": {
           "headersOnly": true,
-          "branchName": "version/v0_1_42"
+          "branchName": "version/v0_1_43"
         }
       },
-      "version": "0.1.42"
+      "version": "0.1.43"
     },
     {
       "dependency": {
         "id": "bs-cordl",
-        "versionRange": "=4000.1.0",
+        "versionRange": "=4000.1.1",
         "additionalData": {
           "headersOnly": true,
-          "branchName": "version/v4000_1_0",
+          "branchName": "version/v4000_1_1",
           "compileOptions": {
             "includePaths": [
               "include"
@@ -153,22 +153,22 @@
           }
         }
       },
-      "version": "4000.1.0"
+      "version": "4000.1.1"
     },
     {
       "dependency": {
         "id": "beatsaber-hook",
-        "versionRange": "=6.3.0",
+        "versionRange": "=6.4.0",
         "additionalData": {
-          "soLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v6.3.0/libbeatsaber-hook.so",
-          "debugSoLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v6.3.0/debug_libbeatsaber-hook.so",
+          "soLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v6.4.0/libbeatsaber-hook.so",
+          "debugSoLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v6.4.0/debug_libbeatsaber-hook.so",
           "overrideSoName": "libbeatsaber-hook.so",
-          "modLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v6.3.0/beatsaber-hook.qmod",
-          "branchName": "version/v6_3_0",
+          "modLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v6.4.0/beatsaber-hook.qmod",
+          "branchName": "version/v6_4_0",
           "cmake": true
         }
       },
-      "version": "6.3.0"
+      "version": "6.4.0"
     },
     {
       "dependency": {
