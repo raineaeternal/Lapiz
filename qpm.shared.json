@@ -44,7 +44,7 @@
       },
       {
         "id": "bs-cordl",
-        "versionRange": "^4000.0.0",
+        "versionRange": "^4020.0.0",
         "additionalData": {}
       },
       {
@@ -68,12 +68,12 @@
     {
       "dependency": {
         "id": "paper2_scotland2",
-        "versionRange": "=4.4.0",
+        "versionRange": "=4.5.0",
         "additionalData": {
-          "soLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.4.0/libpaper2_scotland2.so",
+          "soLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.5.0/libpaper2_scotland2.so",
           "overrideSoName": "libpaper2_scotland2.so",
-          "modLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.4.0/paper2_scotland2.qmod",
-          "branchName": "version/v4_4_0",
+          "modLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.5.0/paper2_scotland2.qmod",
+          "branchName": "version/v4_5_0",
           "compileOptions": {
             "systemIncludes": [
               "shared/utfcpp/source"
@@ -82,7 +82,7 @@
           "cmake": false
         }
       },
-      "version": "4.4.0"
+      "version": "4.5.0"
     },
     {
       "dependency": {
@@ -134,10 +134,10 @@
     {
       "dependency": {
         "id": "bs-cordl",
-        "versionRange": "=4000.1.1",
+        "versionRange": "=4020.0.0",
         "additionalData": {
           "headersOnly": true,
-          "branchName": "version/v4000_1_1",
+          "branchName": "version/v4020_0_0",
           "compileOptions": {
             "includePaths": [
               "include"
@@ -153,7 +153,7 @@
           }
         }
       },
-      "version": "4000.1.1"
+      "version": "4020.0.0"
     },
     {
       "dependency": {
