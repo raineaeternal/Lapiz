@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/QuestPackageManager/QPM.Package/refs/heads/main/qpm.shared.schema.json",
   "config": {
     "version": "0.1.0",
     "sharedDir": "shared",
@@ -32,34 +33,34 @@
     "dependencies": [
       {
         "id": "beatsaber-hook",
-        "versionRange": "^6.2.0",
+        "versionRange": "^6.4.0",
         "additionalData": {}
       },
       {
         "id": "scotland2",
-        "versionRange": "^0.1.4",
+        "versionRange": "^0.1.6",
         "additionalData": {
           "includeQmod": false
         }
       },
       {
         "id": "bs-cordl",
-        "versionRange": "^4020.0.0",
+        "versionRange": "^4030.0.0",
         "additionalData": {}
       },
       {
         "id": "custom-types",
-        "versionRange": "^0.18.0",
+        "versionRange": "^0.18.2",
         "additionalData": {}
       },
       {
         "id": "sombrero",
-        "versionRange": "^0.1.37",
+        "versionRange": "^0.1.43",
         "additionalData": {}
       },
       {
         "id": "paper2_scotland2",
-        "versionRange": "^4.1.5",
+        "versionRange": "^4.6.1",
         "additionalData": {}
       }
     ]
@@ -68,12 +69,12 @@
     {
       "dependency": {
         "id": "paper2_scotland2",
-        "versionRange": "=4.5.0",
+        "versionRange": "=4.6.1",
         "additionalData": {
-          "soLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.5.0/libpaper2_scotland2.so",
+          "soLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.6.1/libpaper2_scotland2.so",
           "overrideSoName": "libpaper2_scotland2.so",
-          "modLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.5.0/paper2_scotland2.qmod",
-          "branchName": "version/v4_5_0",
+          "modLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.6.1/paper2_scotland2.qmod",
+          "branchName": "version/v4_6_1",
           "compileOptions": {
             "systemIncludes": [
               "shared/utfcpp/source"
@@ -82,7 +83,7 @@
           "cmake": false
         }
       },
-      "version": "4.5.0"
+      "version": "4.6.1"
     },
     {
       "dependency": {
@@ -134,10 +135,10 @@
     {
       "dependency": {
         "id": "bs-cordl",
-        "versionRange": "=4020.0.0",
+        "versionRange": "=4030.0.0",
         "additionalData": {
           "headersOnly": true,
-          "branchName": "version/v4020_0_0",
+          "branchName": "version/v4030_0_0",
           "compileOptions": {
             "includePaths": [
               "include"
@@ -153,7 +154,7 @@
           }
         }
       },
-      "version": "4020.0.0"
+      "version": "4030.0.0"
     },
     {
       "dependency": {
