@@ -5,7 +5,7 @@
   "info": {
     "name": "Lapiz",
     "id": "lapiz",
-    "version": "0.3.0",
+    "version": "0.2.20",
     "url": "https://github.com/raineio/Lapiz",
     "additionalData": {
       "overrideSoName": "liblapiz.so",
@@ -43,7 +43,7 @@
     },
     {
       "id": "bs-cordl",
-      "versionRange": "^4004.0.0",
+      "versionRange": "^4005.0.0",
       "additionalData": {}
     },
     {
