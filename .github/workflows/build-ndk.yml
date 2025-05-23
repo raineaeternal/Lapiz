@@ -34,8 +34,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
 
     steps:
     - uses: FranzDiebold/github-env-vars-action@v2
@@ -109,16 +107,6 @@ jobs:
         path: ./build/${{ steps.libname.outputs.NAME }}
         if-no-files-found: error
 
-    - name: Upload non-debug artifact to discord
-      if: "${{ env.WEBHOOK != '' }}"
-      uses: tsickert/discord-webhook@v3.2.0
-      with:
-        webhook-url: ${{ env.WEBHOOK }}
-        content: "${{ env.CI_SHA_SHORT }} - `${{ github.event.head_commit.message }}`"
-        username: "${{ github.repository }}"
-        avatar-url: "http://github.com/${{ env.CI_ACTOR }}.png"
-        filename: ./build/${{ steps.libname.outputs.NAME }}
-
     - name: Upload debug artifact
       uses: actions/upload-artifact@v4
       with:
@@ -126,32 +114,12 @@ jobs:
         path: ./build/debug_${{ steps.libname.outputs.NAME }}
         if-no-files-found: error
 
-    - name: Upload debug artifact to discord
-      if: "${{ env.WEBHOOK != '' }}"
-      uses: tsickert/discord-webhook@v3.2.0
-      with:
-        webhook-url: ${{ env.WEBHOOK }}
-        content: "${{ env.CI_SHA_SHORT }} - `${{ github.event.head_commit.message }}`"
-        username: "${{ github.repository }}"
-        avatar-url: "http://github.com/${{ env.CI_ACTOR }}.png"
-        filename: ./build/debug_${{ steps.libname.outputs.NAME }}
-
     - name: Upload qmod artifact
       uses: actions/upload-artifact@v4
       with:
         name: ${{env.qmod_name}}.qmod
         path: ./${{ env.qmod_name }}.qmod
         if-no-files-found: error
-
-    - name: Upload qmod artifact to discord
-      if: "${{ env.WEBHOOK != '' }}"
-      uses: tsickert/discord-webhook@v3.2.0
-      with:
-        webhook-url: ${{ env.WEBHOOK }}
-        content: "${{ env.CI_SHA_SHORT }} - `${{ github.event.head_commit.message }}`"
-        username: "${{ github.repository }}"
-        avatar-url: "http://github.com/${{ env.CI_ACTOR }}.png"
-        filename: ./build/${{ steps.libname.outputs.NAME }}
 
     # if we had a tag, we should make a release
     - name: Upload release artifacts
