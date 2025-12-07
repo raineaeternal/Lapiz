@@ -28,7 +28,7 @@ static inline UnityEngine::Vector3 operator-(UnityEngine::Vector3 a, UnityEngine
     return { a.x - b.x, a.y - b.y, a.z - b.z };
 }
 
-MAKE_AUTO_HOOK_MATCH(SaberBurnMarkArea_Start, &GlobalNamespace::SaberBurnMarkArea::Start, void, GlobalNamespace::SaberBurnMarkArea* self) {
+/*MAKE_AUTO_HOOK_MATCH(SaberBurnMarkArea_Start, &GlobalNamespace::SaberBurnMarkArea::Start, void, GlobalNamespace::SaberBurnMarkArea* self) {
     SaberBurnMarkArea_Start(self);
     auto instance = Lapiz::Sabers::Effects::SaberBurnMarkAreaLatch::get_instance();
     if (instance) {
@@ -45,12 +45,12 @@ MAKE_AUTO_HOOK_ORIG_MATCH(SaberBurnMarkArea_LateUpdate, &GlobalNamespace::SaberB
         {
             UnityEngine::Vector3 zero{0, 0, 0};
             auto saber = self->_sabers[i];
-            auto lineRenderer = self->_lineRenderers[i];
+            auto lineRenderer = self->____lineRenderers[i];
 
             bool flag = saber->isActiveAndEnabled && self->GetBurnMarkPos(saber->saberBladeBottomPos, saber->saberBladeTopPos, byref(zero));
             if (flag && self->_prevBurnMarkPosValid[i]) {
                 UnityEngine::Vector3 vector = zero - self->_prevBurnMarkPos[i];
-                float magnitude = vector.magnitude;
+                float magnitude = vector.get_magnitude();
                 float num = 0.01f;
                 int num2 = (int)(magnitude / num);
                 int num3 = (num2 > 0) ? num2 : 1;
@@ -58,7 +58,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(SaberBurnMarkArea_LateUpdate, &GlobalNamespace::SaberB
                 int num4 = 0;
                 while (num4 <= num3 && num4 < self->_linePoints.size()) {
         			UnityEngine::Vector3 vector2 = self->_prevBurnMarkPos[i] + vector * (float)num4 / (float)num3;
-        			vector2 = vector2 + normalized * UnityEngine::Random::Range(-self->_blackMarkLineRandomOffset, self->_blackMarkLineRandomOffset);
+        			vector2 = vector2 + normalized * UnityEngine::Random::Range(-self->____blackMarkLineRandomOffset, self->____blackMarkLineRandomOffset);
                     self->_linePoints[num4] = self->WorldToCameraBurnMarkPos(vector2);
                     num4++;
                 }
@@ -116,24 +116,24 @@ MAKE_AUTO_HOOK_MATCH(SaberBurnMarkArea_OnDisable, &GlobalNamespace::SaberBurnMar
 
 // DOESN'T CALL ORIG ON PURPOSE
 MAKE_AUTO_HOOK_ORIG_MATCH(SaberBurnMarkArea_OnDestroy, &GlobalNamespace::SaberBurnMarkArea::OnDestroy, void, GlobalNamespace::SaberBurnMarkArea* self) {
-    if (self->_camera && self->_camera->m_CachedPtr.m_value) {
+    if (self->____Cam && self->_camera->m_CachedPtr.m_value) {
 		UnityEngine::Object::Destroy(self->_camera->get_gameObject());
 	}
     // destroy all line renderers as per DynamicDestroy
-	if (self->_lineRenderers) {
-        for (auto line : self->_lineRenderers) {
+	if (self->____lineRenderers) {
+        for (auto line : self->____lineRenderers) {
             if (line && line->m_CachedPtr.m_value) {
                 UnityEngine::Object::Destroy(line);
             }
         }
 	}
 	GlobalNamespace::EssentialHelpers::SafeDestroy(self->_fadeOutMaterial);
-	if (self->_renderTextures) {
-		for (auto renderTexture : self->_renderTextures) {
+	if (self->____renderTextures) {
+		for (auto renderTexture : self->____renderTextures) {
 			if (renderTexture && renderTexture->m_CachedPtr.m_value) {
 				renderTexture->Release();
 				GlobalNamespace::EssentialHelpers::SafeDestroy(renderTexture);
 			}
 		}
 	}
-}
+}*/
