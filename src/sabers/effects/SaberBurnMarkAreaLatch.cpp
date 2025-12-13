@@ -73,7 +73,7 @@ namespace Lapiz::Sabers::Effects {
 
     UnityEngine::LineRenderer* SaberBurnMarkAreaLatch::CreateNewLineRenderer(UnityEngine::Color initialColor) {
         static auto identity = UnityEngine::Quaternion::get_identity();
-        auto newLine = UnityEngine::Object::Instantiate(_saberBurnMarkArea->_saberBurnMarkLinePrefab, {0, 0, 0}, identity, nullptr);
+        UnityW<UnityEngine::LineRenderer> newLine = UnityEngine::Object::Instantiate(_saberBurnMarkArea->_saberBurnMarkLinePrefab, {0, 0, 0}, identity, nullptr);
         newLine->set_name(fmt::format("Lapiz | {}", newLine->get_name()));
         newLine->set_startColor(initialColor);
         newLine->set_endColor(initialColor);

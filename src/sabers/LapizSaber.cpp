@@ -27,7 +27,7 @@ namespace Lapiz::Sabers {
             auto bottomPosition = bottomTransform->position;
             _saber->_saberBladeBottomPos = bottomPosition;
 
-            auto time = GlobalNamespace::TimeHelper::get_time();
+            auto time = _saber->_timeHelper->get_Time();
             _trailSaberMovementData->AddNewData(topPosition, bottomPosition, time);
 
             if (_saber->enabled) {

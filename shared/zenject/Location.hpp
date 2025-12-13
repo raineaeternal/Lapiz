@@ -3,7 +3,7 @@
 #include "../_config.h"
 #include "beatsaber-hook/shared/utils/il2cpp-utils.hpp"
 
-#include "GlobalNamespace/QuestAppInit.hpp"
+#include "GlobalNamespace/BeatSaberInit.hpp"
 #include "GlobalNamespace/MainSettingsMenuViewControllersInstaller.hpp"
 #include "GlobalNamespace/StandardGameplayInstaller.hpp"
 #include "GlobalNamespace/MissionGameplayInstaller.hpp"
@@ -83,7 +83,7 @@ namespace Lapiz::Zenject {
         std::unordered_set < Il2CppClass * > installerTypes;
 
         if (HasFlag(location, Location::App))
-            installerTypes.emplace(classof(GlobalNamespace::QuestAppInit* ));
+            installerTypes.emplace(classof(GlobalNamespace::BeatSaberInit* ));
         if (HasFlag(location, Location::Menu))
             installerTypes.emplace(classof(GlobalNamespace::MainSettingsMenuViewControllersInstaller* ));
         if (HasFlag(location, Location::StandardPlayer))
