@@ -56,7 +56,7 @@ namespace Lapiz::Sabers::Effects {
         UnityEngine::Color::RGBToHSV(color, byref(h), byref(s), byref(_));
         color = UnityEngine::Color::HSVToRGB(h, s, 1.0f);
 
-        auto line = _saberBurnMarkArea->____lineRenderers[index];
+        auto line = _saberBurnMarkArea->_lineRenderers[index];
         line->set_startColor(color);
         line->set_endColor(color);
     }
@@ -68,7 +68,7 @@ namespace Lapiz::Sabers::Effects {
         _saberBurnMarkArea->_prevBurnMarkPos = TypeUtil::AppendArrayOrDefault<UnityEngine::Vector3>(_saberBurnMarkArea->_prevBurnMarkPos);
         _saberBurnMarkArea->_prevBurnMarkPosValid = TypeUtil::AppendArrayOrDefault<bool>(_saberBurnMarkArea->_prevBurnMarkPosValid);
 
-        _saberBurnMarkArea->____lineRenderers = TypeUtil::AppendArrayOrDefault(_saberBurnMarkArea->____lineRenderers, CreateNewLineRenderer(_saberModelManager->GetPhysicalSaberColor(saber)));
+        _saberBurnMarkArea->_lineRenderers = TypeUtil::AppendArrayOrDefault(_saberBurnMarkArea->_lineRenderers, CreateNewLineRenderer(_saberModelManager->GetPhysicalSaberColor(saber)));
     }
 
     UnityEngine::LineRenderer* SaberBurnMarkAreaLatch::CreateNewLineRenderer(UnityEngine::Color initialColor) {
@@ -82,7 +82,7 @@ namespace Lapiz::Sabers::Effects {
     }
 
     UnityEngine::RenderTexture* SaberBurnMarkAreaLatch::CreateNewRenderTexture() {
-        auto renderTexture = UnityEngine::RenderTexture::New_ctor(_saberBurnMarkArea->____textureWidth, _saberBurnMarkArea->____textureHeight, 0, UnityEngine::RenderTextureFormat::ARGB32, UnityEngine::RenderTextureReadWrite::Default);
+        auto renderTexture = UnityEngine::RenderTexture::New_ctor(_saberBurnMarkArea->_textureWidth, _saberBurnMarkArea->_textureHeight, 0, UnityEngine::RenderTextureFormat::ARGB32, UnityEngine::RenderTextureReadWrite::Default);
         renderTexture->set_name(fmt::format("Lapiz | SaberBurnMarkArea Texture {}", _lineFactoryIncrement++));
         renderTexture->set_hideFlags(UnityEngine::HideFlags::DontSave);
         return renderTexture;
@@ -98,7 +98,7 @@ namespace Lapiz::Sabers::Effects {
     }
 
     void SaberBurnMarkAreaLatch::SaberBurnMarkArea_LateUpdate_Postfix(GlobalNamespace::SaberBurnMarkArea* self) {
-        auto rt = self->____renderTextures;
+        auto rt = self->_renderTextures;
         auto lastTexture = rt[rt.size() - 1];
         for (int i = rt.size() - 1; i > 0; i--)
         {
