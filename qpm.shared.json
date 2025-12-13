@@ -34,7 +34,7 @@
     "dependencies": [
       {
         "id": "beatsaber-hook",
-        "versionRange": "^7.3.0",
+        "versionRange": "^7.4.0",
         "additionalData": {}
       },
       {
@@ -77,7 +77,11 @@
         "id": "custom-types",
         "versionRange": "=0.19.0",
         "additionalData": {
+          "soLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.19.0/libcustom-types.so",
+          "debugSoLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.19.0/debug_libcustom-types.so",
           "overrideSoName": "libcustom-types.so",
+          "modLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.19.0/CustomTypes.qmod",
+          "branchName": "version/v0_19_0",
           "compileOptions": {
             "cppFlags": [
               "-Wno-invalid-offsetof"
@@ -164,12 +168,13 @@
     {
       "dependency": {
         "id": "beatsaber-hook",
-        "versionRange": "=7.3.0",
+        "versionRange": "=7.4.1",
         "additionalData": {
-          "soLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v5.0.0/libbeatsaber-hook.so",
-          "debugSoLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v5.0.0/debug_libbeatsaber-hook.so",
+          "soLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v7.4.1/libbeatsaber-hook.so",
+          "debugSoLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v7.4.1/debug_libbeatsaber-hook.so",
           "overrideSoName": "libbeatsaber-hook.so",
-          "branchName": "master",
+          "modLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v7.4.1/beatsaber-hook.qmod",
+          "branchName": "version/v7_4_1",
           "compileOptions": {
             "cppFlags": [
               "-Wno-extra-qualification"
@@ -178,7 +183,7 @@
           "cmake": true
         }
       },
-      "version": "7.3.0"
+      "version": "7.4.1"
     },
     {
       "dependency": {
