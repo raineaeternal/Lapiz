@@ -46,7 +46,7 @@
       },
       {
         "id": "bs-cordl",
-        "versionRange": "^4100.0.0",
+        "versionRange": "^4200.0.0",
         "additionalData": {}
       },
       {
@@ -106,10 +106,10 @@
     {
       "dependency": {
         "id": "bs-cordl",
-        "versionRange": "=4100.0.1",
+        "versionRange": "=4200.0.0",
         "additionalData": {
           "headersOnly": true,
-          "branchName": "version/v4100_0_1",
+          "branchName": "version/v4200_0_0",
           "compileOptions": {
             "includePaths": [
               "include"
@@ -125,7 +125,7 @@
           }
         }
       },
-      "version": "4100.0.1"
+      "version": "4200.0.0"
     },
     {
       "dependency": {
@@ -168,13 +168,13 @@
     {
       "dependency": {
         "id": "beatsaber-hook",
-        "versionRange": "=7.4.1",
+        "versionRange": "=7.4.2",
         "additionalData": {
-          "soLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v7.4.1/libbeatsaber-hook.so",
-          "debugSoLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v7.4.1/debug_libbeatsaber-hook.so",
+          "soLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v7.4.2/libbeatsaber-hook.so",
+          "debugSoLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v7.4.2/debug_libbeatsaber-hook.so",
           "overrideSoName": "libbeatsaber-hook.so",
-          "modLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v7.4.1/beatsaber-hook.qmod",
-          "branchName": "version/v7_4_1",
+          "modLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v7.4.2/beatsaber-hook.qmod",
+          "branchName": "version/v7_4_2",
           "compileOptions": {
             "cppFlags": [
               "-Wno-extra-qualification"
@@ -183,20 +183,23 @@
           "cmake": true
         }
       },
-      "version": "7.4.1"
+      "version": "7.4.2"
     },
     {
       "dependency": {
-        "id": "scotland2",
-        "versionRange": "=0.1.6",
+        "id": "libil2cpp",
+        "versionRange": "=0.5.0",
         "additionalData": {
-          "soLink": "https://github.com/sc2ad/scotland2/releases/download/v0.1.6/libsl2.so",
-          "debugSoLink": "https://github.com/sc2ad/scotland2/releases/download/v0.1.6/debug_libsl2.so",
-          "overrideSoName": "libsl2.so",
-          "branchName": "version/v0_1_6"
+          "headersOnly": true,
+          "compileOptions": {
+            "systemIncludes": [
+              "il2cpp/external/baselib/Include",
+              "il2cpp/external/baselib/Platforms/Android/Include"
+            ]
+          }
         }
       },
-      "version": "0.1.6"
+      "version": "0.5.0"
     },
     {
       "dependency": {
@@ -214,19 +217,16 @@
     },
     {
       "dependency": {
-        "id": "libil2cpp",
-        "versionRange": "=0.5.0",
+        "id": "scotland2",
+        "versionRange": "=0.1.7",
         "additionalData": {
-          "headersOnly": true,
-          "compileOptions": {
-            "systemIncludes": [
-              "il2cpp/external/baselib/Include",
-              "il2cpp/external/baselib/Platforms/Android/Include"
-            ]
-          }
+          "soLink": "https://github.com/sc2ad/scotland2/releases/download/v0.1.7/libsl2.so",
+          "debugSoLink": "https://github.com/sc2ad/scotland2/releases/download/v0.1.7/debug_libsl2.so",
+          "overrideSoName": "libsl2.so",
+          "branchName": "version/v0_1_7"
         }
       },
-      "version": "0.5.0"
+      "version": "0.1.7"
     }
   ]
 }
