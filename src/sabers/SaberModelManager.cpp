@@ -40,7 +40,7 @@ namespace Lapiz::Sabers {
     GlobalNamespace::SaberModelController* SaberModelManager::GetSaberModelController(GlobalNamespace::Saber* saber) {
         DEBUG("SaberModelManager GetSaberModelController");
         GlobalNamespace::SaberModelController* smc = nullptr;
-        if (_saberModelLink->TryGetValue(saber, byref(smc))) {
+        if (_saberModelLink->TryGetValue(saber, by_ref(smc))) {
             return smc;
         } else {
             auto t = saber->get_transform();
@@ -72,7 +72,7 @@ namespace Lapiz::Sabers {
     void SaberModelManager::SetColor(GlobalNamespace::Saber* saber, UnityEngine::Color color) {
         DEBUG("SaberModelManager SetColor");
         LapizSaber* lapizSaber = nullptr;
-        if (_lapizSaberLink->TryGetValue(saber, byref(lapizSaber))) {
+        if (_lapizSaberLink->TryGetValue(saber, by_ref(lapizSaber))) {
             lapizSaber->SetColor(color);
         } else {
             auto saberModelController = GetSaberModelController(saber);

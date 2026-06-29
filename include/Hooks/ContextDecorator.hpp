@@ -8,11 +8,14 @@
 #include "Zenject/MonoInstaller.hpp"
 #include "System/Type.hpp"
 
+#include "beatsaber-hook/shared/listw.hpp"
+#include "beatsaber-hook/shared/callback.hpp"
+
 namespace Lapiz::Zenject::Internal {
     class ContextDecorator {
         public:
             static void Context_InstallInstallers_Prefix(::Zenject::Context* self, ListW<::Zenject::InstallerBase*> normalInstallers, ListW<::System::Type*> normalInstallerTypes, ListW<::Zenject::ScriptableObjectInstaller*> scriptableObjectInstallers, ListW<::Zenject::MonoInstaller*> installers, ListW<::Zenject::MonoInstaller*> installerPrefabs);
-            static UnorderedEventCallback<::Zenject::Context*, ContextBindingSet> contextInstalling;
+            static unordered_event_callback<::Zenject::Context*, ContextBindingSet> contextInstalling;
         private:
             static std::set<::Zenject::Context*> recentlyInstalledDecorators;
     };

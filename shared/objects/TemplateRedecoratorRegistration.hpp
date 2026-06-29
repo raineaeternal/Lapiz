@@ -10,7 +10,7 @@ DECLARE_CLASS_CUSTOM(Lapiz::Objects, TemplateRedecoratorRegistration, Redecorato
     public:
         template<typename TPrefabType, typename TParentType>
         static TemplateRedecoratorRegistration* Make(std::string_view contract, std::function<TPrefabType(TPrefabType)> redecorateCall, int priority = 0, bool chain = true) {
-            auto res = TemplateRedecoratorRegistration::New_ctor(contract, csTypeOf(TPrefabType), csTypeOf(TParentType), priority, chain);
+            auto res = TemplateRedecoratorRegistration::New_ctor(contract, i2c::cs_type_of<TPrefabType>(), i2c::cs_type_of<TParentType>(), priority, chain);
             res->_redecorateCall = [redecorateCall](System::Object* value) -> System::Object* {
                 return redecorateCall(reinterpret_cast<TPrefabType>(value));
             };

@@ -10,7 +10,7 @@
 
 namespace Lapiz::Zenject::Internal {
     std::set<::Zenject::Context*> ContextDecorator::recentlyInstalledDecorators;
-    UnorderedEventCallback<::Zenject::Context*, ContextBindingSet> ContextDecorator::contextInstalling;
+    unordered_event_callback<::Zenject::Context*, ContextBindingSet> ContextDecorator::contextInstalling;
 
     void ContextDecorator::Context_InstallInstallers_Prefix(::Zenject::Context* self, ListW<::Zenject::InstallerBase*> normalInstallers, ListW<::System::Type*> normalInstallerTypes, ListW<::Zenject::ScriptableObjectInstaller*> scriptableObjectInstallers, ListW<::Zenject::MonoInstaller*> installers, ListW<::Zenject::MonoInstaller*> installerPrefabs) {
         if (recentlyInstalledDecorators.find(self) != recentlyInstalledDecorators.end()) {
@@ -24,7 +24,7 @@ namespace Lapiz::Zenject::Internal {
             bindings->emplace(std::make_shared<ContextBinding>(self, normalInstaller->klass, accessor));
 
         for (auto normalInstallerType : normalInstallerTypes) {
-            bindings->emplace(std::make_shared<ContextBinding>(self, il2cpp_functions::class_from_system_type((Il2CppReflectionType*)normalInstallerType), accessor));
+            bindings->emplace(std::make_shared<ContextBinding>(self, i2c::functions::class_from_system_type((Il2CppReflectionType*)normalInstallerType), accessor));
         }
 
         for (auto scriptableObjectInstaller : scriptableObjectInstallers)
@@ -36,7 +36,7 @@ namespace Lapiz::Zenject::Internal {
         for (auto installerPrefab : installerPrefabs)
             bindings->emplace(std::make_shared<ContextBinding>(self, installerPrefab->klass, accessor));
 
-        if (il2cpp_utils::IsConvertibleFrom(&classof(::Zenject::SceneDecoratorContext*)->byval_arg, &self->klass->byval_arg, false))
+        if (i2c::is_convertible_from(&i2c::class_of<::Zenject::SceneDecoratorContext*>()->byval_arg, &self->klass->byval_arg, false))
             recentlyInstalledDecorators.emplace(self);
 
         if (contextInstalling.size() > 0)

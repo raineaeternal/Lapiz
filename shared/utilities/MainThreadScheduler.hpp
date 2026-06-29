@@ -1,6 +1,7 @@
 #pragma once
 
 #include "custom-types/shared/macros.hpp"
+#include "System/Object.hpp"
 #include "Zenject/ITickable.hpp"
 
 #include <functional>

@@ -85,14 +85,13 @@
 #include "Zenject/FactorySubContainerBinder_3.hpp"
 #include "Zenject/MemoryPoolIdInitialSizeMaxSizeBinder_1.hpp"
 
-#include "sombrero/shared/linq_functional.hpp"
+#include "beatsaber-hook/shared/listw.hpp"
 
 #include "objects/RedecoratorRegistration.hpp"
 #include "objects/ObjectDiffuser.hpp"
 
 using namespace GlobalNamespace;
 using namespace UnityEngine;
-using namespace Sombrero::Linq::Functional;
 using namespace Lapiz::Objects;
 using namespace Lapiz::ArrayUtils;
 
@@ -107,11 +106,11 @@ static UnityEngine::Object* PrefabInitializing(UnityEngine::Object* originalPref
     }
 
     // filter for the ones that match
-    auto registrations = resolved | Where(
-        [&mainType, &fieldName](auto rr){
-            return rr->ContainerType == mainType && rr->Contract == fieldName;
-        }
-    ) | ToArray();
+    std::vector<RedecoratorRegistration*> registrations;
+    for (auto rr : resolved) {
+        if (rr->ContainerType == mainType && rr->Contract == fieldName)
+            registrations.emplace_back(rr);
+    }
     // if no matches, return the original prefab
     if (registrations.size() <= 0) {
         DEBUG("No redecorations found for contract {}", fieldName);
@@ -131,7 +130,7 @@ static UnityEngine::Object* PrefabInitializing(UnityEngine::Object* originalPref
     auto irgo = GameObject::New_ctor("Lapiz | InternalRedecorator");
     irgo->SetActive(false);
     Object::Instantiate(originalPrefab, irgo->transform);
-    auto clone = irgo->GetComponentInChildren(registrations->First()->PrefabType, true);
+    auto clone = irgo->GetComponentInChildren(registrations.front()->PrefabType, true);
 
     // apply all redecorations
     for (auto reg : registrations) {
@@ -143,7 +142,7 @@ static UnityEngine::Object* PrefabInitializing(UnityEngine::Object* originalPref
     return clone;
 }
 
-MAKE_AUTO_HOOK_ORIG_MATCH(BeatmapObjectsInstaller_InstallBindings, &BeatmapObjectsInstaller::InstallBindings, void, BeatmapObjectsInstaller* self) {
+MAKE_AUTO_ORIG_HOOK_MATCH(BeatmapObjectsInstaller_InstallBindings, &BeatmapObjectsInstaller::InstallBindings, void, BeatmapObjectsInstaller* self) {
 	DEBUG("Redecoration BeatmapObjectsInstaller_InstallBindings");
     bool proMode = self->_sceneSetupData->gameplayModifiers->get_proMode();
     auto type = self->GetType();
@@ -189,7 +188,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(BeatmapObjectsInstaller_InstallBindings, &BeatmapObjec
     self->_beatLinePrefab = orig_beatLinePrefab;
 }
 
-MAKE_AUTO_HOOK_ORIG_MATCH(EffectPoolsManualInstaller_ManualInstallBindings, &EffectPoolsManualInstaller::ManualInstallBindings, void, EffectPoolsManualInstaller* self, ::Zenject::DiContainer* container, bool shortBeatEffect) {
+MAKE_AUTO_ORIG_HOOK_MATCH(EffectPoolsManualInstaller_ManualInstallBindings, &EffectPoolsManualInstaller::ManualInstallBindings, void, EffectPoolsManualInstaller* self, ::Zenject::DiContainer* container, bool shortBeatEffect) {
     DEBUG("Redecoration EffectPoolsManualInstaller_ManualInstallBindings");
     auto type = self->GetType();
 
@@ -224,7 +223,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(EffectPoolsManualInstaller_ManualInstallBindings, &Eff
     self->_bombCutSoundEffectPrefab = orig_bombCutSoundEffectPrefab;
 }
 
-MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerConnectedPlayerInstaller_InstallBindings, &MultiplayerConnectedPlayerInstaller::InstallBindings, void, MultiplayerConnectedPlayerInstaller* self) {
+MAKE_AUTO_ORIG_HOOK_MATCH(MultiplayerConnectedPlayerInstaller_InstallBindings, &MultiplayerConnectedPlayerInstaller::InstallBindings, void, MultiplayerConnectedPlayerInstaller* self) {
     DEBUG("Redecoration MultiplayerConnectedPlayerInstaller_InstallBindings");
     auto container = self->get_Container();
     auto type = self->GetType();
@@ -260,7 +259,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerConnectedPlayerInstaller_InstallBindings, &
     self->_multiplayerObstacleControllerPrefab = orig_multiplayerObstacleControllerPrefab;
 }
 
-MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerLobbyInstaller_InstallBindings, &MultiplayerLobbyInstaller::InstallBindings, void, MultiplayerLobbyInstaller* self) {
+MAKE_AUTO_ORIG_HOOK_MATCH(MultiplayerLobbyInstaller_InstallBindings, &MultiplayerLobbyInstaller::InstallBindings, void, MultiplayerLobbyInstaller* self) {
 	DEBUG("Redecoration MultiplayerLobbyInstaller_InstallBindings");
     auto container = self->get_Container();
     auto type = self->GetType();
@@ -281,7 +280,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerLobbyInstaller_InstallBindings, &Multiplaye
     self->_multiplayerLobbyAvatarControllerPrefab = orig_multiplayerLobbyAvatarControllerPrefab;
 }
 
-MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerPlayersManager_BindPlayerFactories, &MultiplayerPlayersManager::BindPlayerFactories, void, MultiplayerPlayersManager* self, ::MultiplayerPlayerLayout layout) {
+MAKE_AUTO_ORIG_HOOK_MATCH(MultiplayerPlayersManager_BindPlayerFactories, &MultiplayerPlayersManager::BindPlayerFactories, void, MultiplayerPlayersManager* self, ::MultiplayerPlayerLayout layout) {
     DEBUG("Redecoration MultiplayerPlayersManager_BindPlayerFactories");
     auto container = self->_container;
     auto type = self->GetType();
@@ -317,7 +316,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(MultiplayerPlayersManager_BindPlayerFactories, &Multip
     }
 }
 
-MAKE_AUTO_HOOK_ORIG_MATCH(NoteDebrisPoolInstaller_InstallBindings, &NoteDebrisPoolInstaller::InstallBindings, void, NoteDebrisPoolInstaller* self) {
+MAKE_AUTO_ORIG_HOOK_MATCH(NoteDebrisPoolInstaller_InstallBindings, &NoteDebrisPoolInstaller::InstallBindings, void, NoteDebrisPoolInstaller* self) {
 	DEBUG("Redecoration NoteDebrisPoolInstaller_InstallBindings");
     auto container = self->get_Container();
     auto type = self->GetType();
@@ -357,7 +356,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(NoteDebrisPoolInstaller_InstallBindings, &NoteDebrisPo
     }
 }
 
-MAKE_AUTO_HOOK_ORIG_MATCH(FakeMirrorObjectsInstaller_InstallBindings, &FakeMirrorObjectsInstaller::InstallBindings, void, FakeMirrorObjectsInstaller* self) {
+MAKE_AUTO_ORIG_HOOK_MATCH(FakeMirrorObjectsInstaller_InstallBindings, &FakeMirrorObjectsInstaller::InstallBindings, void, FakeMirrorObjectsInstaller* self) {
 	DEBUG("Redecoration FakeMirrorObjectsInstaller_InstallBindings");
     auto container = self->get_Container();
     auto type = self->GetType();

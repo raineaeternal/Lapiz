@@ -1,6 +1,7 @@
 #include "AttributeRegistration_internal.hpp"
 
 #include <queue>
+#include <set>
 
 namespace Lapiz::Attributes {
     static std::queue<const AttributeRegistration*> pending;

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../_config.h"
-#include "beatsaber-hook/shared/utils/typedefs.h"
 #include "Zenject/InjectAttribute.hpp"
 #include "../AttributeRegistration.hpp"
 
@@ -14,11 +13,11 @@ namespace Lapiz::Zenject {
 
             ::System::Attribute* get_attribute() const override {
                 if (!attribute) {
-                    auto zenjectAttribute = *il2cpp_utils::New<::Zenject::InjectAttribute*, il2cpp_utils::CreationType::Manual>();
+                    auto zenjectAttribute = i2c::new_ctor<::Zenject::InjectAttribute*, true>();
                     zenjectAttribute->set_Optional(optional());
                     if (get_id()) {
                         auto id = StringW(get_id());
-                        zenjectAttribute->set_Id(static_cast<System::String*>(id.convert()));
+                        zenjectAttribute->set_Id(static_cast<System::Object*>(id.convert()));
                     }
                     attribute = zenjectAttribute;
                 }

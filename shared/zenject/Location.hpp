@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../_config.h"
-#include "beatsaber-hook/shared/utils/il2cpp-utils.hpp"
 
 #include "GlobalNamespace/BeatSaberInit.hpp"
 #include "GlobalNamespace/MainSettingsMenuViewControllersInstaller.hpp"
@@ -83,27 +82,27 @@ namespace Lapiz::Zenject {
         std::unordered_set < Il2CppClass * > installerTypes;
 
         if (HasFlag(location, Location::App))
-            installerTypes.emplace(classof(GlobalNamespace::BeatSaberInit* ));
+            installerTypes.emplace(i2c::class_of<GlobalNamespace::BeatSaberInit* >());
         if (HasFlag(location, Location::Menu))
-            installerTypes.emplace(classof(GlobalNamespace::MainSettingsMenuViewControllersInstaller* ));
+            installerTypes.emplace(i2c::class_of<GlobalNamespace::MainSettingsMenuViewControllersInstaller* >());
         if (HasFlag(location, Location::StandardPlayer))
-            installerTypes.emplace(classof(GlobalNamespace::StandardGameplayInstaller* ));
+            installerTypes.emplace(i2c::class_of<GlobalNamespace::StandardGameplayInstaller* >());
         if (HasFlag(location, Location::CampaignPlayer))
-            installerTypes.emplace(classof(GlobalNamespace::MissionGameplayInstaller* ));
+            installerTypes.emplace(i2c::class_of<GlobalNamespace::MissionGameplayInstaller* >());
         if (HasFlag(location, Location::Multi))
-            installerTypes.emplace(classof(GlobalNamespace::MultiplayerLocalActivePlayerInstaller* ));
+            installerTypes.emplace(i2c::class_of<GlobalNamespace::MultiplayerLocalActivePlayerInstaller* >());
         if (HasFlag(location, Location::Tutorial))
-            installerTypes.emplace(classof(GlobalNamespace::TutorialInstaller* ));
+            installerTypes.emplace(i2c::class_of<GlobalNamespace::TutorialInstaller* >());
         if (HasFlag(location, Location::GameCore))
-            installerTypes.emplace(classof(GlobalNamespace::GameCoreSceneSetup* ));
+            installerTypes.emplace(i2c::class_of<GlobalNamespace::GameCoreSceneSetup* >());
         if (HasFlag(location, Location::MultiplayerCore))
-            installerTypes.emplace(classof(GlobalNamespace::MultiplayerCoreInstaller* ));
+            installerTypes.emplace(i2c::class_of<GlobalNamespace::MultiplayerCoreInstaller* >());
         if (HasFlag(location, Location::ConnectedPlayer))
-            installerTypes.emplace(classof(GlobalNamespace::MultiplayerConnectedPlayerInstaller* ));
+            installerTypes.emplace(i2c::class_of<GlobalNamespace::MultiplayerConnectedPlayerInstaller* >());
         if (HasFlag(location, Location::AlwaysMultiPlayer))
-            installerTypes.emplace(classof(GlobalNamespace::MultiplayerLocalPlayerInstaller* ));
+            installerTypes.emplace(i2c::class_of<GlobalNamespace::MultiplayerLocalPlayerInstaller* >());
         if (HasFlag(location, Location::InactiveMultiPlayer))
-            installerTypes.emplace(classof(GlobalNamespace::MultiplayerLocalInactivePlayerInstaller* ));
+            installerTypes.emplace(i2c::class_of<GlobalNamespace::MultiplayerLocalInactivePlayerInstaller* >());
         return installerTypes;
     }
 }

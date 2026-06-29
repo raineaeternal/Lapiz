@@ -15,7 +15,7 @@ namespace Lapiz::Sabers::Effects {
         INVOKE_CTOR();
         instance = this;
         _saberModelManager = saberModelManager;
-        _saberClashChecker = il2cpp_utils::try_cast<Lapiz::Sabers::Effects::LapizSaberClashChecker>(saberClashChecker).value_or(nullptr);
+        _saberClashChecker = i2c::try_cast<Lapiz::Sabers::Effects::LapizSaberClashChecker*>(saberClashChecker);
     }
 
     void SaberClashEffectAdjuster::Initialize() {

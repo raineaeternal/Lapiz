@@ -1,6 +1,7 @@
 #pragma once
 
-#include "beatsaber-hook/shared/utils/typedefs.h"
+#include "beatsaber-hook/shared/arrayw.hpp"
+#include "beatsaber-hook/shared/types.hpp"
 
 namespace TypeUtil {
 
@@ -21,7 +22,7 @@ namespace TypeUtil {
     template<typename T>
     requires(std::is_convertible_v<T, System::Object*>)
     static bool hasAncestor(const Il2CppClass* instance) {
-        return hasAncestor(instance, classof(T));
+        return hasAncestor(instance, i2c::class_of<T>());
     }
 
     template<typename T, typename Arr = ArrayW<T>>

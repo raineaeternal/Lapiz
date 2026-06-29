@@ -8,14 +8,14 @@ namespace Lapiz::ArrayUtils {
     requires(std::is_convertible<T, System::Object*>::value || std::is_arithmetic<T>::value)
     static inline void box_array(ArrayW<System::Object*> arr, int index, T val)  {
         if constexpr (std::is_pointer_v<T>) arr[index] = val;
-        else arr[index] = il2cpp_functions::value_box(classof(T), &val);
+        else arr[index] = i2c::functions::value_box(i2c::class_of<T>(), &val);
     }
 
     template <typename First, typename... Rest>
     requires(std::is_convertible<First, System::Object*>::value || std::is_arithmetic<First>::value)
     static inline void box_array(ArrayW<System::Object*> arr, int index, First& first, Rest&... rest) {
         if constexpr (std::is_pointer_v<First>) arr[index] = first;
-        else arr[index] = il2cpp_functions::value_box(classof(First), &first);
+        else arr[index] = i2c::functions::value_box(i2c::class_of<First>(), &first);
 
         box_array(arr, ++index, rest...);
     }
@@ -35,7 +35,7 @@ namespace Lapiz::ArrayUtils {
 
     template<typename T, typename... Targs>
     static void inline SetIndexType(ArrayW<System::Type*> arr, int index) {
-        arr[index] = csTypeOf(T);
+        arr[index] = i2c::cs_type_of<T>();
         if constexpr (sizeof...(Targs) > 0) SetIndexType<Targs...>(arr, ++index);
     }
 

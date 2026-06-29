@@ -37,7 +37,7 @@ static inline UnityEngine::Vector3 operator-(UnityEngine::Vector3 a, UnityEngine
 }
 
 // DOESN'T CALL ORIG ON PURPOSE
-MAKE_AUTO_HOOK_ORIG_MATCH(SaberBurnMarkArea_LateUpdate, &GlobalNamespace::SaberBurnMarkArea::LateUpdate, void, GlobalNamespace::SaberBurnMarkArea* self) {
+MAKE_AUTO_ORIG_HOOK_MATCH(SaberBurnMarkArea_LateUpdate, &GlobalNamespace::SaberBurnMarkArea::LateUpdate, void, GlobalNamespace::SaberBurnMarkArea* self) {
     if (self->_sabers && self->_sabers[0])
 	{
         // use sabers size as per TwoToLength
@@ -47,7 +47,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(SaberBurnMarkArea_LateUpdate, &GlobalNamespace::SaberB
             auto saber = self->_sabers[i];
             auto lineRenderer = self->____lineRenderers[i];
 
-            bool flag = saber->isActiveAndEnabled && self->GetBurnMarkPos(saber->saberBladeBottomPos, saber->saberBladeTopPos, byref(zero));
+            bool flag = saber->isActiveAndEnabled && self->GetBurnMarkPos(saber->saberBladeBottomPos, saber->saberBladeTopPos, by_ref(zero));
             if (flag && self->_prevBurnMarkPosValid[i]) {
                 UnityEngine::Vector3 vector = zero - self->_prevBurnMarkPos[i];
                 float magnitude = vector.get_magnitude();
@@ -115,7 +115,7 @@ MAKE_AUTO_HOOK_MATCH(SaberBurnMarkArea_OnDisable, &GlobalNamespace::SaberBurnMar
 }
 
 // DOESN'T CALL ORIG ON PURPOSE
-MAKE_AUTO_HOOK_ORIG_MATCH(SaberBurnMarkArea_OnDestroy, &GlobalNamespace::SaberBurnMarkArea::OnDestroy, void, GlobalNamespace::SaberBurnMarkArea* self) {
+MAKE_AUTO_ORIG_HOOK_MATCH(SaberBurnMarkArea_OnDestroy, &GlobalNamespace::SaberBurnMarkArea::OnDestroy, void, GlobalNamespace::SaberBurnMarkArea* self) {
     if (self->____Cam && self->_camera->m_CachedPtr.m_value) {
 		UnityEngine::Object::Destroy(self->_camera->get_gameObject());
 	}
