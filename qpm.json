@@ -62,7 +62,7 @@
     },
     {
       "id": "bs-cordl",
-      "versionRange": "^4203.0.0",
+      "versionRange": "^4401.1.0",
       "additionalData": {}
     },
     {
@@ -83,7 +83,9 @@
     {
       "id": "mod-scripts",
       "versionRange": "^1.0.1",
-      "additionalData": {}
+      "additionalData": {
+        "private": true
+      }
     }
   ]
 }
