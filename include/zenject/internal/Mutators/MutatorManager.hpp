@@ -3,6 +3,7 @@
 #include "../MutateSet.hpp"
 #include "UnityEngine/MonoBehaviour.hpp"
 
+#include <set>
 
 namespace Lapiz::Zenject::Internal::Mutators {
     class MutatorManager {

@@ -1,5 +1,4 @@
 #include "_config.h"
-#include "main.hpp"
 #include "utilities/hooking.hpp"
 #include "utilities/logging.hpp"
 #include "utilities/MainThreadScheduler.hpp"
@@ -28,7 +27,7 @@ bool loaded = false;
 LAPIZ_EXPORT_FUNC void load() {
     if (loaded) return;
     loaded = true;
-    il2cpp_functions::Init();
+    i2c::functions::initialize();
     custom_types::Register::AutoRegister();
 
     INFO("Installing Zenject bindings and hooks..");

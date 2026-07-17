@@ -1,7 +1,6 @@
 #pragma once
 
 #include "./_config.h"
-#include "beatsaber-hook/shared/utils/typedefs.h"
 #include "System/Attribute.hpp"
 
 namespace Lapiz::Attributes {

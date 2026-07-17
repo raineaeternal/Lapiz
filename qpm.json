@@ -6,7 +6,7 @@
   "info": {
     "name": "Lapiz",
     "id": "lapiz",
-    "version": "0.3.0",
+    "version": "0.3.2",
     "url": "https://github.com/raineio/Lapiz",
     "additionalData": {
       "overrideSoName": "liblapiz.so",
@@ -16,13 +16,29 @@
   "workspace": {
     "scripts": {
       "build": [
-        "pwsh ./build.ps1"
+        "python ./extern/includes/mod-scripts/shared/build.py $0:?"
+      ],
+      "copy": [
+        "qpm s build",
+        "python ./extern/includes/mod-scripts/shared/cpy.py $0:?"
+      ],
+      "debug": [
+        "python ./extern/includes/mod-scripts/shared/dbg.py $0:?"
+      ],
+      "log": [
+        "python ./extern/includes/mod-scripts/shared/log.py $0:?"
+      ],
+      "profile": [
+        "python ./extern/includes/mod-scripts/shared/profile.py $0:?"
       ],
       "qmod": [
-        "qpm qmod zip"
+        "qpm qmod zip $0:?"
+      ],
+      "restart": [
+        "python ./extern/includes/mod-scripts/shared/restart.py $0:?"
       ]
     },
-    "ndk": "^27.3.13750724",
+    "ndk": "^29.0.14206865",
     "qmodIncludeDirs": [
       "./build",
       "./extern/libs"
@@ -33,40 +49,43 @@
   "dependencies": [
     {
       "id": "beatsaber-hook",
-      "versionRange": "^7.4.0",
+      "versionRange": "^8.0.0",
       "additionalData": {}
     },
     {
       "id": "scotland2",
-      "versionRange": "^0.1.6",
+      "versionRange": "^0.1.7",
       "additionalData": {
-        "includeQmod": false
+        "includeQmod": false,
+        "private": true
       }
     },
     {
       "id": "bs-cordl",
-      "versionRange": "^4200.0.0",
+      "versionRange": "^4401.1.0",
       "additionalData": {}
     },
     {
       "id": "custom-types",
-      "versionRange": "^0.19.0",
-      "additionalData": {}
-    },
-    {
-      "id": "sombrero",
-      "versionRange": "^0.1.43",
+      "versionRange": "^0.20.0",
       "additionalData": {}
     },
     {
       "id": "paper2_scotland2",
-      "versionRange": "^4.6.1",
+      "versionRange": "^4.7.0",
       "additionalData": {}
     },
     {
       "id": "flamingo",
       "versionRange": "^1.1.2",
       "additionalData": {}
+    },
+    {
+      "id": "mod-scripts",
+      "versionRange": "^1.0.1",
+      "additionalData": {
+        "private": true
+      }
     }
   ]
 }

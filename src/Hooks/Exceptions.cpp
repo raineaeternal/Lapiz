@@ -23,6 +23,6 @@ MAKE_AUTO_HOOK_MATCH(
     StringW exceptionMessage,
     System::Exception* innerException
 ) {
-    ERROR("ZenjectException: {}", innerException->_message->ToString());
+    ERROR("ZenjectException: {}", innerException->_message);
     ZenjectException_ctor_2(self, exceptionMessage, innerException);
 }

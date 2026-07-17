@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../_config.h"
-#include "beatsaber-hook/shared/utils/typedefs.h"
 #include "System/SerializableAttribute.hpp"
 #include "../AttributeRegistration.hpp"
 
@@ -11,7 +10,7 @@ namespace Lapiz::Objects {
             SerializableAttribute() : Lapiz::Attributes::AttributeRegistration() {}
             ::System::Attribute* get_attribute() const override {
                 if (!attribute) {
-                    attribute = *il2cpp_utils::New<::System::SerializableAttribute*, il2cpp_utils::CreationType::Manual>();
+                    attribute = i2c::new_ctor<::System::SerializableAttribute*, true>();
                 }
                 return attribute;
             }

@@ -23,7 +23,7 @@ DECLARE_CLASS_CODEGEN(Lapiz::Sabers, LapizSaber, UnityEngine::MonoBehaviour) {
     DECLARE_INSTANCE_FIELD(GlobalNamespace::SaberModelController*, _saberModelController);
     DECLARE_INSTANCE_FIELD(GlobalNamespace::SaberMovementData*, _trailSaberMovementData);
     DECLARE_INSTANCE_FIELD(bool, _constructedThisFrame);
-    
+
     DECLARE_INSTANCE_METHOD(void, Update);
     DECLARE_INSTANCE_METHOD(void, LateUpdate);
     DECLARE_INJECT_METHOD(void, Construct, GlobalNamespace::NoteCutter* noteCutter, GlobalNamespace::ColorManager* colorManager, SaberModelProvider* saberModelProvider);
@@ -31,7 +31,7 @@ DECLARE_CLASS_CODEGEN(Lapiz::Sabers, LapizSaber, UnityEngine::MonoBehaviour) {
     public:
         template<typename T>
         requires(std::is_convertible_v<T, GlobalNamespace::Saber*>)
-        void Setup(GlobalNamespace::SaberType saberType) { Setup(csTypeOf(T), saberType); }
+        void Setup(GlobalNamespace::SaberType saberType) { Setup(i2c::cs_type_of<T>(), saberType); }
         void SetType(GlobalNamespace::SaberType saberType);
         void SetColor(UnityEngine::Color color);
         DECLARE_DEFAULT_CTOR();

@@ -51,8 +51,8 @@ namespace Lapiz::Zenject::Internal {
     }
 
     bool Attributes::DerivesFromInjectAttributeBase(System::Type* type) {
-        auto klass = il2cpp_functions::class_from_system_type((Il2CppReflectionType*)type);
-        static auto ancestor = classof(::Zenject::InjectAttributeBase*);
+        auto klass = i2c::functions::class_from_system_type((Il2CppReflectionType*)type);
+        static auto ancestor = i2c::class_of<::Zenject::InjectAttributeBase*>();
         return TypeUtil::hasAncestor(klass, ancestor);
     }
 
@@ -68,7 +68,7 @@ namespace Lapiz::Zenject::Internal {
         // declaring type is the type of the class that has this member
         auto declaringType = member->get_DeclaringType();
         if (!declaringType) return nullptr;
-        auto declaringClass = il2cpp_functions::class_from_system_type((Il2CppReflectionType*)declaringType);
+        auto declaringClass = i2c::functions::class_from_system_type((Il2CppReflectionType*)declaringType);
 
         auto attrReg = Lapiz::Attributes::Get(declaringClass, member->get_Name());
         return attrReg ? attrReg->get_attribute() : nullptr;

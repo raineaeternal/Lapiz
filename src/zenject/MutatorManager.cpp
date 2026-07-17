@@ -2,13 +2,15 @@
 
 #include "utilities/logging.hpp"
 #include "utilities/typeutil.hpp"
+#include "System/Collections/Generic/List_1.hpp"
+#include "System/String.hpp"
 #include "Zenject/Context.hpp"
 #include "Zenject/SceneDecoratorContext.hpp"
 #include "Zenject/Context.hpp"
 
 namespace Lapiz::Zenject::Internal::Mutators {
     void MutatorManager::Install(Internal::MutateSet* mutateSet, ::Zenject::Context* ctx, std::set<UnityEngine::MonoBehaviour*> iterlist) {
-        ::Zenject::SceneDecoratorContext* sceneDecoratorContext = il2cpp_utils::try_cast<::Zenject::SceneDecoratorContext>(ctx).value_or(nullptr);
+        ::Zenject::SceneDecoratorContext* sceneDecoratorContext = i2c::try_cast<::Zenject::SceneDecoratorContext*>(ctx);
         if (!sceneDecoratorContext || !sceneDecoratorContext->m_CachedPtr.m_value) {
             return;
         }

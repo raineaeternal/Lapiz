@@ -10,6 +10,8 @@
 #include "System/Collections/Generic/Dictionary_2.hpp"
 #include "../macros.hpp"
 
+#include "beatsaber-hook/shared/callback.hpp"
+
 namespace Lapiz::Sabers { class SaberModelManager; }
 
 DECLARE_CLASS_CODEGEN(Lapiz::Sabers, DesperationContract, System::Object) {
@@ -44,5 +46,5 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelManager, System::Objec
     DECLARE_PRIVATE_METHOD(void, SiraSaberFactory_SaberCreated, LapizSaber* lapizSaber);
     public:
         std::queue<std::function<void()>> _colorUpdateQueue;
-        UnorderedEventCallback<GlobalNamespace::Saber*, UnityEngine::Color> ColorUpdated;
+        unordered_event_callback<GlobalNamespace::Saber*, UnityEngine::Color> ColorUpdated;
 };

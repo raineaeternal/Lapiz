@@ -3,6 +3,8 @@
 #include "Zenject/Context.hpp"
 #include "ZenjectInstallationAccessor.hpp"
 
+#include <set>
+
 namespace Lapiz::Zenject::Internal {
     struct ContextBinding {
             ContextBinding(::Zenject::Context* context, Il2CppClass* installerType, std::shared_ptr<ZenjectInstallationAccessor> accessor)
@@ -19,7 +21,7 @@ namespace Lapiz::Zenject::Internal {
                 _accessor->get_installers()->Add(monoInstaller);
             }
             void AddInstaller(const Il2CppClass* klass) {
-                AddInstaller(reinterpret_cast<System::Type*>(il2cpp_utils::GetSystemType(klass)));
+                AddInstaller(reinterpret_cast<System::Type*>(i2c::get_system_type(klass)));
             }
             void AddInstaller(System::Type* type) {
                 // TODO: Assert derives from installer base?

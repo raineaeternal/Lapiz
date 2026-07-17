@@ -1,7 +1,5 @@
 #pragma once
 
-#include "beatsaber-hook/shared/utils/typedefs.h"
-
 #include "System/Reflection/FieldInfo.hpp"
 #include "System/Reflection/MethodInfo.hpp"
 

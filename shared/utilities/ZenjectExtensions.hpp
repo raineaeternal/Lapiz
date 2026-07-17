@@ -14,6 +14,8 @@
 
 #include "custom-types/shared/macros.hpp"
 
+#include "beatsaber-hook/shared/listw.hpp"
+
 namespace Lapiz::Zenject::ZenjectExtensions {
     /// @brief Binds a view controller to the container.
     /// @param binder The binder.

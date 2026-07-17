@@ -3,6 +3,7 @@
 #include "../_config.h"
 #include "TemplateRedecoratorRegistration.hpp"
 #include "Zenject/DiContainer.hpp"
+
 namespace Lapiz::Objects {
     template<typename TPrefab, typename TParent>
     requires(std::is_convertible_v<TPrefab, System::Object*> && std::is_convertible_v<TParent, System::Object*>)
@@ -10,7 +11,7 @@ namespace Lapiz::Objects {
         public:
             using Self = Registration<TPrefab, TParent>;
             Registration(const Self& other) = delete;
-            Registration(const Self&& other) {
+            Registration(Self&& other) {
                 v = other.v;
                 other.v = nullptr;
             }

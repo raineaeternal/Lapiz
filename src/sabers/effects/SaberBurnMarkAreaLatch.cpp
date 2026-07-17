@@ -47,13 +47,13 @@ namespace Lapiz::Sabers::Effects {
     void SaberBurnMarkAreaLatch::ColorUpdated(GlobalNamespace::Saber* saber, UnityEngine::Color color) {
         if (!_saberBurnMarkArea || !_saberBurnMarkArea->m_CachedPtr.m_value) return;
 
-        int index = _saberBurnMarkArea->_sabers->IndexOf(saber);
+        int index = _saberBurnMarkArea->_sabers.index_of(saber);
 
         if (index == -1)
             return;
         float h, s, _;
         color.a = 1.0f;
-        UnityEngine::Color::RGBToHSV(color, byref(h), byref(s), byref(_));
+        UnityEngine::Color::RGBToHSV(color, by_ref(h), by_ref(s), by_ref(_));
         color = UnityEngine::Color::HSVToRGB(h, s, 1.0f);
 
         auto line = _saberBurnMarkArea->_lineRenderers[index];

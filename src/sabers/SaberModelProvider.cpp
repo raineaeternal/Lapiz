@@ -88,7 +88,7 @@ namespace Lapiz::Sabers {
             pseudoTrail->_trailRendererPrefab = defaultTrail->_trailRendererPrefab;
             pseudoTrail->set_enabled(false);
 
-            newModel = _container->InstantiateComponent(reinterpret_cast<System::Type*>(il2cpp_utils::GetSystemType(t)), go).cast<SaberModelController>();
+            newModel = _container->InstantiateComponent(reinterpret_cast<System::Type*>(i2c::get_system_type(t)), go).cast<SaberModelController>();
             newModel->_saberTrail = pseudoTrail;
             newModel->_setSaberGlowColors = ArrayW<UnityW<SetSaberGlowColor>>(il2cpp_array_size_t(0));
             newModel->_setSaberFakeGlowColors = ArrayW<UnityW<SetSaberFakeGlowColor>>(il2cpp_array_size_t(0));

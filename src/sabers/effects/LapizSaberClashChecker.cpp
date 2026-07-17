@@ -5,6 +5,7 @@
 #include "GlobalNamespace/BladeMovementDataElement.hpp"
 
 #include "UnityEngine/Time.hpp"
+
 DEFINE_TYPE(Lapiz::Sabers::Effects, LapizSaberClashChecker);
 
 namespace Lapiz::Sabers::Effects {
@@ -62,7 +63,7 @@ namespace Lapiz::Sabers::Effects {
                     auto saberBladeBottomPos = saberA->saberBladeBottomPos;
                     auto saberBladeBottomPos2 = saberB->saberBladeBottomPos;
                     UnityEngine::Vector3 clashingPoint2;
-                    if (saberA->get_isActiveAndEnabled() && saberB->get_isActiveAndEnabled() && SegmentToSegmentDist(saberBladeBottomPos, saberBladeTopPos, saberBladeBottomPos2, saberBladeTopPos2, byref(clashingPoint2)) < 0.08f)
+                    if (saberA->get_isActiveAndEnabled() && saberB->get_isActiveAndEnabled() && SegmentToSegmentDist(saberBladeBottomPos, saberBladeTopPos, saberBladeBottomPos2, saberBladeTopPos2, by_ref(clashingPoint2)) < 0.08f)
                     {
                         if ((!_lastSaberA || !_lastSaberA->m_CachedPtr.m_value) && (!_lastSaberB || !_lastSaberB->m_CachedPtr.m_value))
                         {

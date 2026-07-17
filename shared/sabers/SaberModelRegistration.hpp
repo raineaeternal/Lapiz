@@ -4,13 +4,15 @@
 #include "custom-types/shared/macros.hpp"
 #include "GlobalNamespace/SaberModelController.hpp"
 
+#include "beatsaber-hook/shared/safeptr.hpp"
+
 namespace Lapiz::Sabers {
     class LAPIZ_EXPORT SaberModelRegistration {
         public:
             template<typename T>
             requires(std::is_convertible_v<T, GlobalNamespace::SaberModelController*>)
             static std::shared_ptr<SaberModelRegistration> Create(int priority = 0) {
-                return std::make_shared<SaberModelRegistration>(classof(T), priority);
+                return std::make_shared<SaberModelRegistration>(i2c::class_of<T>(), priority);
             }
 
             SaberModelRegistration(const Il2CppClass* type, int priority = 0);
@@ -39,8 +41,8 @@ namespace Lapiz::Sabers {
             const Il2CppClass* _leftType = nullptr;
             const Il2CppClass* _rightType = nullptr;
 
-            SafePtrUnity<GlobalNamespace::SaberModelController> _leftTemplate = nullptr;
-            SafePtrUnity<GlobalNamespace::SaberModelController> _rightTemplate = nullptr;
+            safe_ptr<GlobalNamespace::SaberModelController*> _leftTemplate = nullptr;
+            safe_ptr<GlobalNamespace::SaberModelController*> _rightTemplate = nullptr;
 
             std::function<GlobalNamespace::SaberModelController*(void)> _leftInstruction = nullptr;
             std::function<GlobalNamespace::SaberModelController*(void)> _rightInstruction = nullptr;

@@ -33,7 +33,7 @@ namespace Lapiz::Zenject {
         if (!_initialSceneConstructionRegistered) return;
 
         std::set<UnityEngine::MonoBehaviour*> injectableList;
-        bool isDecorator = il2cpp_utils::IsConvertibleFrom(&classof(::Zenject::SceneDecoratorContext*)->byval_arg, &mainContext->klass->byval_arg, false);
+        bool isDecorator = i2c::is_convertible_from(&i2c::class_of<::Zenject::SceneDecoratorContext*>()->byval_arg, &mainContext->klass->byval_arg, false);
 
         for (auto zenjector : _zenjectors) {
             if (isDecorator) {

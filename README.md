@@ -19,14 +19,13 @@ With that out of the way, this is how you use Zenject through Lapiz.
 First, you'll need an installer class. To do this, we'll use Custom Types.
 
 ```cpp
-#include "custom-types/macros.hpp"
-#include "GlobalNamespace/Zenject/IInstaller.hpp"
+#include "custom-types/shared/macros.hpp"
+#include "Zenject/IInstaller.hpp"
 
-DECLARE_CLASS_CODEGEN_INTERFACE(Lapiz, MenuInstaller, classof(Zenject::IInstaller*),
+DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz, MenuInstaller, Zenject::IInstaller*) {
     DECLARE_OVERRIDE_METHOD();
     DECLARE_OVERRIDE_METHOD();
-)
-
+};
 ```
 
 To properly install the installer class we just made, you need to use the first of these provided install methods.

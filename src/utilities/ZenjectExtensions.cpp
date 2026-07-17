@@ -45,7 +45,7 @@ namespace Lapiz::Zenject::ZenjectExtensions {
         auto delegate = custom_types::MakeDelegate<System::Action_2<::Zenject::InjectContext*, System::Object*>*>(
             std::function<void(::Zenject::InjectContext*, System::Object*)>(
                 [onInstantiated, raycaster, go](::Zenject::InjectContext* ctx, System::Object* obj){
-                    auto vc = il2cpp_utils::try_cast<HMUI::ViewController>(obj).value_or(nullptr);
+                    auto vc = i2c::try_cast<HMUI::ViewController*>(obj);
                     if (vc && vc->m_CachedPtr.m_value)
                     {
                         Object::DestroyImmediate(raycaster);
@@ -74,8 +74,8 @@ namespace Lapiz::Zenject::ZenjectExtensions {
     ::Zenject::NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder* FromNewComponentOnNewGameObject(::Zenject::FromBinder* fromBinder, ::Zenject::GameObjectCreationParameters* gameObjectInfo) {
         ListW<System::Type*> concreteTypes{fromBinder->get_ConcreteTypes()};
         for (int i = 0; auto type : concreteTypes) {
-            static auto componentKlass = classof(UnityEngine::Component*);
-            auto klass = il2cpp_functions::class_from_system_type(reinterpret_cast<Il2CppReflectionType*>(type));
+            static auto componentKlass = i2c::class_of<UnityEngine::Component*>();
+            auto klass = i2c::functions::class_from_system_type(reinterpret_cast<Il2CppReflectionType*>(type));
             if (!TypeUtil::hasAncestor(klass, componentKlass)) {
                 throw std::runtime_error(fmt::format("Invalid type given during bind command.  Expected type '{}' to derive from UnityEngine.Component", klass->name));
             }

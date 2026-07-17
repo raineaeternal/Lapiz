@@ -13,13 +13,13 @@
 #include "Zenject/BindStatement.hpp"
 #include "Zenject/FromBinderNonGeneric.hpp"
 
-MAKE_AUTO_HOOK_ORIG_MATCH(SaberClashChecker_AreSabersClashing, &GlobalNamespace::SaberClashChecker::AreSabersClashing, bool, GlobalNamespace::SaberClashChecker* self, ByRef<::UnityEngine::Vector3> clashingPoint) {
-    static auto lapizCheckerKlass = classof(Lapiz::Sabers::Effects::LapizSaberClashChecker*);
+MAKE_AUTO_ORIG_HOOK_MATCH(SaberClashChecker_AreSabersClashing, &GlobalNamespace::SaberClashChecker::AreSabersClashing, bool, GlobalNamespace::SaberClashChecker* self, by_ref<::UnityEngine::Vector3> clashingPoint) {
+    static auto lapizCheckerKlass = i2c::class_of<Lapiz::Sabers::Effects::LapizSaberClashChecker*>();
     // if this object is of our own klass, so we can override the method call
     if (self->klass == lapizCheckerKlass) {
         auto customChecker = reinterpret_cast<Lapiz::Sabers::Effects::LapizSaberClashChecker*>(self);
         bool result = false;
-        if (customChecker->SaberClashChecker_AreSabersClashing_override(clashingPoint.heldRef, result)) 
+        if (customChecker->SaberClashChecker_AreSabersClashing_override(*clashingPoint, result))
             result = SaberClashChecker_AreSabersClashing(self, clashingPoint);
         return result;
     } else {

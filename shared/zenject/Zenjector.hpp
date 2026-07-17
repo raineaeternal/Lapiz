@@ -34,7 +34,7 @@ namespace Lapiz::Zenject {
             /// and the installer type cannot be a MonoInstaller if using this.
             template<Lapiz::concepts::IInstaller T>
             inline void Install(Zenject::Location location, ArrayW<System::Object*> parameters) {
-                Install(classof(T), location, parameters);
+                Install(i2c::class_of<T>(), location, parameters);
             };
 
             /// @brief Installs a custom installer to a location with a backing installer(s).
@@ -46,9 +46,9 @@ namespace Lapiz::Zenject {
             template<Lapiz::concepts::IInstaller T, typename... Targs>
             inline void Install(Zenject::Location location, Targs&... parameters) {
                 if constexpr (sizeof...(parameters) == 0) {
-                    Install(classof(T), location, nullptr);
+                    Install(i2c::class_of<T>(), location, nullptr);
                 } else {
-                    Install(classof(T), location, ArrayUtils::box_array(parameters...));
+                    Install(i2c::class_of<T>(), location, ArrayUtils::box_array(parameters...));
                 }
             };
 
@@ -59,7 +59,7 @@ namespace Lapiz::Zenject {
             /// and the installer type cannot be a MonoInstaller if using this.
             template<Lapiz::concepts::IInstaller TCustomInstaller,  Lapiz::concepts::IInstaller TBaseInstaller>
             inline void Install(ArrayW<System::Object*> parameters) {
-                Install(classof(TCustomInstaller), classof(TBaseInstaller), parameters);
+                Install(i2c::class_of<TCustomInstaller>(), i2c::class_of<TBaseInstaller>(), parameters);
             };
 
             /// @brief Installs a custom installer to a location with a backing installer(s).
@@ -71,9 +71,9 @@ namespace Lapiz::Zenject {
             template<Lapiz::concepts::IInstaller TCustomInstaller,  Lapiz::concepts::IInstaller TBaseInstaller, typename... Targs>
             inline void Install(Targs&... parameters) {
                 if constexpr (sizeof...(parameters) == 0) {
-                    Install(classof(TCustomInstaller), classof(TBaseInstaller), nullptr);
+                    Install(i2c::class_of<TCustomInstaller>(), i2c::class_of<TBaseInstaller>(), nullptr);
                 } else {
-                    Install(classof(TCustomInstaller), classof(TBaseInstaller), ArrayUtils::box_array(parameters...));
+                    Install(i2c::class_of<TCustomInstaller>(), i2c::class_of<TBaseInstaller>(), ArrayUtils::box_array(parameters...));
                 }
             };
 
@@ -87,7 +87,7 @@ namespace Lapiz::Zenject {
             /// @param installCallback The callback which is used to install custom bindings into the container.
             template<Lapiz::concepts::IInstaller TBaseInstaller>
             void Install(ZenjectorCallback installCallback) {
-                Install(classof(TBaseInstaller), installCallback);
+                Install(i2c::class_of<TBaseInstaller>(), installCallback);
             };
 
             /// @brief Searches a decorator context for the first instance that matches a type, then invokes a callback with that instance for it to be modified or mutated.
@@ -97,7 +97,7 @@ namespace Lapiz::Zenject {
             template<typename T>
             requires(std::is_convertible_v<T, System::Object*> && !std::is_same_v<T, System::Object*>)
             void Mutate(std::string_view contractName, MutateCallback<T> mutationCallback) {
-                Mutate(classof(T), std::string(contractName.data(), contractName.size()), [mutationCallback](::Zenject::SceneDecoratorContext* context, System::Object* obj){ mutationCallback(context, reinterpret_cast<T>(obj)); });
+                Mutate(i2c::class_of<T>(), std::string(contractName.data(), contractName.size()), [mutationCallback](::Zenject::SceneDecoratorContext* context, System::Object* obj){ mutationCallback(context, reinterpret_cast<T>(obj)); });
             }
 
             /// @brief Searches a decorator context for the first instance that matches a type, then invokes a callback with that instance for it to be modified or mutated.
@@ -111,7 +111,7 @@ namespace Lapiz::Zenject {
             /// @param contractName the contract name of the SceneDecoratorContext to search on
             template<typename T>
             void Expose(std::string_view contractName) {
-                Expose(classof(T), std::string(contractName.data(), contractName.size()));
+                Expose(i2c::class_of<T>(), std::string(contractName.data(), contractName.size()));
             }
 
             /// @brief Searches a decorator context for the first instance that matches a type, then automatically binds them the the active container.

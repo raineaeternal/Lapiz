@@ -34,7 +34,7 @@ MAKE_AUTO_HOOK_MATCH(SaberBurnMarkSparkles_Start, &GlobalNamespace::SaberBurnMar
 
 void SaberBurnMarkSparkles_LateUpdate_Replacement(GlobalNamespace::SaberBurnMarkSparkles* self);
 
-MAKE_AUTO_HOOK_ORIG_MATCH(SaberBurnMarkSparkles_LateUpdate, &GlobalNamespace::SaberBurnMarkSparkles::LateUpdate, void, GlobalNamespace::SaberBurnMarkSparkles* self) {
+MAKE_AUTO_ORIG_HOOK_MATCH(SaberBurnMarkSparkles_LateUpdate, &GlobalNamespace::SaberBurnMarkSparkles::LateUpdate, void, GlobalNamespace::SaberBurnMarkSparkles* self) {
     auto instance = Lapiz::Sabers::Effects::SaberBurnMarkSparklesLatch::get_instance();
     if (instance) {
         instance->SaberBurnMarkSparkles_LateUpdate_Prefix(self);
@@ -49,7 +49,7 @@ void SaberBurnMarkSparkles_LateUpdate_Replacement(GlobalNamespace::SaberBurnMark
 	for (int i = 0; i < self->_sabers.size(); i++) {
         auto saber = self->_sabers[i];
 		UnityEngine::Vector3 vector{0.0f, 0.0f, 0.0f};
-		bool flag = saber->get_isActiveAndEnabled() && self->GetBurnMarkPos(saber->saberBladeBottomPos, saber->saberBladeTopPos, byref(vector));
+		bool flag = saber->get_isActiveAndEnabled() && self->GetBurnMarkPos(saber->saberBladeBottomPos, saber->saberBladeTopPos, by_ref(vector));
 
         if (flag) {
 			self->_burnMarksPS[i]->get_transform()->set_localPosition(vector);
@@ -81,7 +81,7 @@ void SaberBurnMarkSparkles_LateUpdate_Replacement(GlobalNamespace::SaberBurnMark
 	}
 }
 
-MAKE_AUTO_HOOK_ORIG_MATCH(ColorManager_ColorForSaberType, &GlobalNamespace::ColorManager::ColorForSaberType, UnityEngine::Color, GlobalNamespace::ColorManager* self, GlobalNamespace::SaberType type) {
+MAKE_AUTO_ORIG_HOOK_MATCH(ColorManager_ColorForSaberType, &GlobalNamespace::ColorManager::ColorForSaberType, UnityEngine::Color, GlobalNamespace::ColorManager* self, GlobalNamespace::SaberType type) {
     auto instance = Lapiz::Sabers::Effects::SaberBurnMarkSparklesLatch::get_instance();
     UnityEngine::Color color;
     if (!instance || instance->ColorManager_ColorForSaberType_Prefix(color)) {
@@ -91,7 +91,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(ColorManager_ColorForSaberType, &GlobalNamespace::Colo
 }
 
 // DOES NOT CALL ORIG
-MAKE_AUTO_HOOK_ORIG_MATCH(SaberBurnMarkSparkles_OnEnable, &GlobalNamespace::SaberBurnMarkSparkles::OnEnable, void, GlobalNamespace::SaberBurnMarkSparkles* self) {
+MAKE_AUTO_ORIG_HOOK_MATCH(SaberBurnMarkSparkles_OnEnable, &GlobalNamespace::SaberBurnMarkSparkles::OnEnable, void, GlobalNamespace::SaberBurnMarkSparkles* self) {
 	if (!self->_burnMarksPS) return;
     for (auto ps : self->_burnMarksPS) {
         if (ps && ps->m_CachedPtr.m_value) {
@@ -101,7 +101,7 @@ MAKE_AUTO_HOOK_ORIG_MATCH(SaberBurnMarkSparkles_OnEnable, &GlobalNamespace::Sabe
 }
 
 // DOES NOT CALL ORIG
-MAKE_AUTO_HOOK_ORIG_MATCH(SaberBurnMarkSparkles_OnDisable, &GlobalNamespace::SaberBurnMarkSparkles::OnDisable, void, GlobalNamespace::SaberBurnMarkSparkles* self) {
+MAKE_AUTO_ORIG_HOOK_MATCH(SaberBurnMarkSparkles_OnDisable, &GlobalNamespace::SaberBurnMarkSparkles::OnDisable, void, GlobalNamespace::SaberBurnMarkSparkles* self) {
 	if (!self->_burnMarksPS) return;
     for (auto ps : self->_burnMarksPS) {
         if (ps && ps->m_CachedPtr.m_value) {

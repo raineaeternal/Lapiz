@@ -10,6 +10,8 @@
 #include "System/Collections/Generic/HashSet_1.hpp"
 #include "System/IDisposable.hpp"
 
+#include "beatsaber-hook/shared/listw.hpp"
+
 DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelProvider, System::Object, System::IDisposable*) {
     DECLARE_INSTANCE_FIELD(::Zenject::DiContainer*, _container);
     DECLARE_INSTANCE_FIELD(GlobalNamespace::SaberManager*, _saberManager);
@@ -26,7 +28,7 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers, SaberModelProvider, System::Obje
     public:
         static SaberModelProvider* get_instance();
         GlobalNamespace::SaberModelController* NewModel(std::optional<GlobalNamespace::SaberType> saberType = std::nullopt);
-        
+
         bool SetSaberGlowColor_Start_Prefix(GlobalNamespace::SetSaberGlowColor* self);
         bool SetSaberFakeGlowColor_Start_Prefix(GlobalNamespace::SetSaberFakeGlowColor* self);
         void SaberModelContainer_Start_Prefix(GlobalNamespace::SaberModelContainer* self);
