@@ -3,7 +3,6 @@
 #include "sabers/effects/ObstacleSaberSparkleEffectManagerLatch.hpp"
 #include "GlobalNamespace/BeatmapObjectManager.hpp"
 #include "GlobalNamespace/ObstacleController.hpp"
-#include "GlobalNamespace/HapticFeedbackManager.hpp"
 #include "GlobalNamespace/SaberType.hpp"
 #include "UnityEngine/XR/XRNode.hpp"
 #include "System/Action_1.hpp"
