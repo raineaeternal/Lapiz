@@ -35,7 +35,9 @@ LAPIZ_EXPORT_FUNC void load() {
     Hooks::InstallHooks();
     using namespace Lapiz::Zenject;
     auto zenjector = Zenjector::Get();
-    zenjector->Install(Location::App, [](::Zenject::DiContainer* container){ container->BindInterfacesAndSelfTo<Lapiz::Utilities::MainThreadScheduler*>()->AsSingle(); });
+    zenjector->Install(Location::App, [](::Zenject::DiContainer* container){ 
+        container->BindInterfacesAndSelfTo<Lapiz::Utilities::MainThreadScheduler*>()->AsSingle(); 
+    });
     zenjector->Install<Lapiz::Installers::LapizGameplayInstaller*>(Location::Player | Location::Tutorial);
     zenjector->Install<Lapiz::Installers::LapizGameCoreInstaller*>(Location::GameCore);
 }

@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -rln \"RunMethodRethrow\" ~/.local/share/QPM-RS/cache/beatsaber-hook/8.0.1/src 2>/dev/null)",
+      "Read(//home/foxxy/.local/share/QPM-RS/cache/beatsaber-hook/8.0.1/src/**)"
+    ]
+  }
+}
