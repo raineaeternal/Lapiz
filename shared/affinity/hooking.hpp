@@ -20,10 +20,14 @@
     };                                                                                                           \
     ret_type hook_##name_::hook_m_##name_(__VA_ARGS__)
 
+#ifdef AFFINITY_HOOK
+#error "AFFINITY_HOOK already defined! Undefine it before including hooking.hpp!"
+#endif
+
 // Creates a fluent builder for a hook made with MAKE_AFFINITY_HOOK, scoped under mod_id.
 // Chain .before(other_mod_id), .after(other_mod_id), and/or .final(), then call .install(container)
 // with the DiContainer the hook's handle should be bound into.
 // Optionally takes an address to install to directly, bypassing the hook's own addr().
 #define AFFINITY_HOOK(logger, mod_id, name_, ...) \
-    ::affinity::make_affinity_hook_builder<hook_##name_>(logger, mod_id __VA_OPT__(,) __VA_ARGS__)
+    ::Lapiz::Affinity::make_affinity_hook_builder<hook_##name_>(logger, mod_id __VA_OPT__(,) __VA_ARGS__)
 

@@ -17,7 +17,7 @@
 #include <string_view>
 #include <utility>
 
-namespace affinity {
+namespace Lapiz::Affinity {
 
     namespace detail {
         // An affinity hook struct only needs name/addr/hook/trampoline.
@@ -98,7 +98,7 @@ namespace affinity {
             };
             auto affinityHook = AffinityHookInfo{.logger_ = logger_, .mod_ = mod_, .hook_info_ = std::move(flamingo_info)};
             auto* handle = ::Lapiz::Affinity::HookHandle::New_ctor();
-            handle->Configure(mod_.id, T::name(), affinityHook);
+            handle->Configure(mod_, T::name(), affinityHook);
 
             auto id = static_cast<System::String*>(::StringW(mod_.id + ":" + T::name()));
             container->BindInstance(handle)->WithId(static_cast<System::Object*>(id))->AsCached();
@@ -118,4 +118,4 @@ namespace affinity {
         return AffinityHookBuilder<T, std::decay_t<L>>(std::forward<L>(logger), mod, addr);
     }
 
-}  // namespace affinity
+}  // namespace Lapiz::Affinity
