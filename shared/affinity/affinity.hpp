@@ -39,11 +39,6 @@ namespace affinity {
                 }
             );
     }
-    struct AffinityHookInfo {
-        Paper::LoggerContext logger_;
-        modloader::ModInfo mod_;
-        flamingo::HookInfo hook_info_;
-    };
 
     /// @brief Fluently builds up install priority for an affinity hook, then installs it into a Zenject DiContainer.
     /// Priority is decided at install time (rather than compile time, as with MAKE_HOOK/HOOK_BEFORE/HOOK_AFTER).

@@ -1,12 +1,23 @@
 #pragma once
 
-#include "./affinity.hpp"
+#include "flamingo/shared/hook-data.hpp"
+#include "flamingo/shared/hook-metadata.hpp"
+#include "flamingo/shared/installer.hpp"
+
 #include "custom-types/shared/macros.hpp"
 #include "System/Object.hpp"
 
 #include <functional>
 #include <string>
 #include <string_view>
+
+namespace Lapiz::affinity {
+    struct AffinityHookInfo {
+        Paper::LoggerContext logger_;
+        modloader::ModInfo mod_;
+        flamingo::HookInfo hook_info_;
+    };
+}
 
 // A Zenject-resolvable wrapper around an installed affinity hook.
 // Bound into a DiContainer by AffinityHookBuilder::install, so dependents sharing that container's scope
