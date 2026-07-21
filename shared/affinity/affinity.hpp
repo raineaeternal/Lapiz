@@ -39,6 +39,11 @@ namespace affinity {
                 }
             );
     }
+    struct AffinityHookInfo {
+        Paper::LoggerContext logger_;
+        modloader::ModInfo mod_;
+        flamingo::HookInfo hook_info_;
+    };
 
     /// @brief Fluently builds up install priority for an affinity hook, then installs it into a Zenject DiContainer.
     /// Priority is decided at install time (rather than compile time, as with MAKE_HOOK/HOOK_BEFORE/HOOK_AFTER).
@@ -88,32 +93,17 @@ namespace affinity {
                 MACRO_LOG(logger_, critical, "Attempting to install hook: {} to invalid destination!", T::name());
                 SAFE_ABORT("Failure installing hook: {}", T::name());
             }
-            MACRO_LOG(logger_, info, "Installing hook: {} to offset: {}", T::name(), fmt::ptr(addr));
-            auto install_result = flamingo::Install(flamingo::HookInfo{
-                reinterpret_cast<void*>(T::hook()),
+            auto flamingo_info = flamingo::HookInfo{
+                reinterpret_cast<void *>(T::hook()),
                 addr,
-                reinterpret_cast<void**>(T::trampoline()),
-                flamingo::HookNameMetadata{.name = T::name(), .namespaze = mod_.id},
+                reinterpret_cast<void **>(T::trampoline()),
+                flamingo::HookNameMetadata{.name = T::name(),
+                                           .namespaze = mod_.id},
                 std::move(priority_),
-            });
-            if (!install_result.has_value()) {
-                MACRO_LOG(logger_, critical, "Failed to install hook: {} with flamingo: {}", T::name(), install_result.error());
-                SAFE_ABORT("Failure installing hook: {}", T::name());
-            }
-            MACRO_LOG(logger_, info, "Hook: {} installed with flamingo!", T::name());
-
-            auto flamingo_handle = install_result.value().returned_handle;
+            };
+            auto affinityHook = AffinityHookInfo{.logger_ = logger_, .mod_ = mod_, .hook_info_ = std::move(flamingo_info)};
             auto* handle = ::Lapiz::Affinity::HookHandle::New_ctor();
-            handle->Configure(mod_.id, T::name(), [logger = logger_, flamingo_handle]() mutable {
-                MACRO_LOG(logger, info, "Uninstalling hook: {}", T::name());
-                auto uninstall_result = flamingo::Uninstall(flamingo_handle);
-                if (uninstall_result.has_value()) {
-                    MACRO_LOG(logger, info, "Hook: {} uninstalled with flamingo!", T::name());
-                    return true;
-                }
-                MACRO_LOG(logger, error, "Failed to uninstall hook: {} with flamingo", T::name());
-                return false;
-            });
+            handle->Configure(mod_.id, T::name(), affinityHook);
 
             auto id = static_cast<System::String*>(::StringW(mod_.id + ":" + T::name()));
             container->BindInstance(handle)->WithId(static_cast<System::Object*>(id))->AsCached();
