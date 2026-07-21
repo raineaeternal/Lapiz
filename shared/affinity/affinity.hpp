@@ -6,7 +6,7 @@
 #include "flamingo/shared/hook-metadata.hpp"
 #include "flamingo/shared/installer.hpp"
 
-#include "HookHandle.hpp"
+#include "./HookHandle.hpp"
 #include "System/String.hpp"
 #include "Zenject/DiContainer.hpp"
 #include "Zenject/IdScopeConcreteIdArgConditionCopyNonLazyBinder.hpp"

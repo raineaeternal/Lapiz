@@ -18,7 +18,7 @@ DECLARE_CLASS_CODEGEN(Lapiz::Affinity, HookHandle, System::Object) {
     public:
         modloader::ModInfo const& ModId() const { return _modId; }
         std::string_view HookName() const { return _hookName; }
-        bool IsInstalled() const { return static_cast<bool>(_uninstall); }
+        bool IsInstalled() const { return _flamingoHandle.has_value(); }
 
 
 
