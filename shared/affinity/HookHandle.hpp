@@ -6,8 +6,10 @@
 
 #include "custom-types/shared/macros.hpp"
 #include "System/Object.hpp"
+#include "System/IDisposable.hpp"
 
 #include "Zenject/DiContainer.hpp"
+#include "Zenject/IInitializable.hpp"
 
 #include "beatsaber-hook/shared/safeptr.hpp"
 #include "objects/RedecoratorRegistration.hpp"
@@ -34,9 +36,13 @@ namespace Lapiz::Affinity {
 // A Zenject-resolvable wrapper around an installed affinity hook.
 // Bound into a DiContainer by AffinityHookBuilder::install, so dependents sharing that container's scope
 // can resolve it (container->ResolveId<HookHandle*>(...)) without needing direct access to the builder.
-// TODO: Implement IInitializable and IDisposable so that the hook is automatically uninstalled when the container is disposed.
-DECLARE_CLASS_CODEGEN(Lapiz::Affinity, HookHandle, System::Object) {
+// Implements IInitializable and IDisposable so the hook is installed once the container resolves it
+// (requires the binding to be NonLazy - see AffinityHookBuilder::install) and uninstalled when the
+// owning container is disposed (e.g. on scene/context teardown).
+DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Affinity, HookHandle, System::Object, ::Zenject::IInitializable*, ::System::IDisposable*) {
     DECLARE_CTOR(ctor);
+    DECLARE_OVERRIDE_METHOD_MATCH(void, Initialize, &::Zenject::IInitializable::Initialize);
+    DECLARE_OVERRIDE_METHOD_MATCH(void, Dispose, &::System::IDisposable::Dispose);
 
     // Can we somehow instead have this be Il2CppObject* and with the type known before this HookHandle is registered,
     // store this instead of the container so Zenject makes it part of the
