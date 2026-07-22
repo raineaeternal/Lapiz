@@ -21,7 +21,7 @@
 namespace Lapiz::Affinity {
 
     struct AffinityInjectedParameter {
-      Il2CppType *type;
+      Il2CppType const* type;
       safe_ptr<Il2CppObject*>* value;
     };
 
@@ -81,7 +81,8 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Affinity, HookHandle, System::Object, ::
             if (this->_affinityHookInfo.injected_parameter_.has_value()) {
               auto injected_param =
                   this->_affinityHookInfo.injected_parameter_.value();
-                System::Type* injected_type = reinterpret_cast<System::Type*>(injected_param.type); 
+              
+                auto injected_type = reinterpret_cast<System::Type*>(i2c::get_system_type(injected_param.type));
                 // TODO: Is this correct? what about System::Type::GetTypeFromHandle(injected_param.type);
                 *injected_param.value = container->Resolve(injected_type);
             }

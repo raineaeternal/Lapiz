@@ -25,6 +25,7 @@
 #define MAKE_AFFINITY_HOOK_INJECTED(name_, injected_t, addr_info, ret_type,    \
                                     ...)                                       \
   struct BS_HOOK_HIDDEN hook_##name_ {                                         \
+    using injected_type = injected_t;                                              \
     static inline safe_ptr<injected_t> Injected; /* Injected value. I would've wanted this to be passed as a parameter by flamingo but oh well */          \
     using func_t = ret_type (*)(__VA_ARGS__);                                  \
     constexpr static const char* name() { return #name_; }                                                  \

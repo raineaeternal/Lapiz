@@ -100,8 +100,9 @@ namespace Lapiz::Affinity {
             std::optional<AffinityInjectedParameter> injected_param = std::nullopt;
             if constexpr (requires { T::Injected; }) {
                 injected_param = AffinityInjectedParameter{
-                    .type = T::Injected->klass->byval_arg,
-                    .value = &T::Injected,
+                  .type = i2c::type_of<typename T::injected_type>(),
+                  // this seems unsafe but I prefer this to having a std::function setter
+                  .value = reinterpret_cast<safe_ptr<Il2CppObject*>*>(&T::Injected),
                 };
             }
             auto affinityHook = AffinityHookInfo {
@@ -110,7 +111,7 @@ namespace Lapiz::Affinity {
               .injected_parameter_ = injected_param
             };
             auto* handle = ::Lapiz::Affinity::HookHandle::New_ctor();
-            handle->Configure(mod_.id, T::name(), affinityHook);
+            handle->Configure(mod_, T::name(), affinityHook);
 
             auto id = static_cast<System::String*>(::StringW(mod_.id + ":" + T::name()));
             container->BindInstance(handle)->WithId(static_cast<System::Object*>(id))->AsCached();
