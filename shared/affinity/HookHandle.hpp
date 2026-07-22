@@ -96,6 +96,12 @@ DECLARE_CLASS_CODEGEN(Lapiz::Affinity, HookHandle, System::Object) {
                 MACRO_LOG(logger_, error, "Failed to uninstall hook: {} with flamingo due to {}", _hookName, uninstall_result.error());
                 return false;
             }
+            if (this->_affinityHookInfo.injected_parameter_.has_value()) {
+              auto injected_param =
+                  this->_affinityHookInfo.injected_parameter_.value();
+                // cleanup safe_ptr on uninstall
+                injected_param.value->clear();
+            }
 
             return true;
         }
