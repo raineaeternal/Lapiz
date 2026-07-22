@@ -13,6 +13,7 @@
 #include "Zenject/ScopeConcreteIdArgConditionCopyNonLazyBinder.hpp"
 #include "scotland2/shared/loader.hpp"
 
+#include <optional>
 #include <string>
 #include <string_view>
 #include <utility>
@@ -96,9 +97,20 @@ namespace Lapiz::Affinity {
                                            .namespaze = mod_.id},
                 std::move(priority_),
             };
-            auto affinityHook = AffinityHookInfo{.logger_ = logger_, .mod_ = mod_, .hook_info_ = std::move(flamingo_info)};
+            std::optional<AffinityInjectedParameter> injected_param = std::nullopt;
+            if constexpr (requires { T::Injected; }) {
+                injected_param = AffinityInjectedParameter{
+                    .type = T::Injected->klass->byval_arg,
+                    .value = &T::Injected,
+                };
+            }
+            auto affinityHook = AffinityHookInfo {
+              .logger_ = logger_, .mod_ = mod_,
+              .hook_info_ = std::move(flamingo_info),
+              .injected_parameter_ = injected_param
+            };
             auto* handle = ::Lapiz::Affinity::HookHandle::New_ctor();
-            handle->Configure(mod_, T::name(), affinityHook);
+            handle->Configure(mod_.id, T::name(), affinityHook);
 
             auto id = static_cast<System::String*>(::StringW(mod_.id + ":" + T::name()));
             container->BindInstance(handle)->WithId(static_cast<System::Object*>(id))->AsCached();
@@ -118,4 +130,4 @@ namespace Lapiz::Affinity {
         return AffinityHookBuilder<T, std::decay_t<L>>(std::forward<L>(logger), mod, addr);
     }
 
-}  // namespace Lapiz::Affinity
+}  // namespace affinity

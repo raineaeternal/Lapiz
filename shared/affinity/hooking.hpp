@@ -1,5 +1,7 @@
 #include "affinity.hpp"
 
+#include "beatsaber-hook/shared/safeptr.hpp"
+
 #ifdef MAKE_AFFINITY_HOOK
 #error "MAKE_AFFINITY_HOOK already defined! Undefine it before including hooking.hpp!"
 #endif
@@ -19,6 +21,20 @@
         static inline ret_type (*name_)(__VA_ARGS__) = nullptr; /* Orig */                                       \
     };                                                                                                           \
     ret_type hook_##name_::hook_m_##name_(__VA_ARGS__)
+
+#define MAKE_AFFINITY_HOOK_INJECTED(name_, injected_t, addr_info, ret_type,    \
+                                    ...)                                       \
+  struct BS_HOOK_HIDDEN hook_##name_ {                                         \
+    static inline safe_ptr<injected_t> Injected; /* Injected value. I would've wanted this to be passed as a parameter by flamingo but oh well */          \
+    using func_t = ret_type (*)(__VA_ARGS__);                                  \
+    constexpr static const char* name() { return #name_; }                                                  \
+    static auto addr() { return ::i2c::detail::resolve_addr<func_t>{} addr_info; }                          \
+    static func_t hook() { return hook_m_##name_; }                                                          \
+    static func_t *trampoline() { return &name_; }                             \
+    static ret_type hook_m_##name_(__VA_ARGS__);            /* Hook */         \
+    static inline ret_type (*name_)(__VA_ARGS__) = nullptr; /* Orig */         \
+  };                                                                           \
+  ret_type hook_##name_::hook_m_##name_(__VA_ARGS__)
 
 #ifdef AFFINITY_HOOK
 #error "AFFINITY_HOOK already defined! Undefine it before including hooking.hpp!"
