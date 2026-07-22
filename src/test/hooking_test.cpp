@@ -1,3 +1,5 @@
+#include "tests.hpp"
+
 #include "System/String.hpp"
 
 #include "beatsaber-hook/shared/hooking.hpp"
@@ -26,5 +28,17 @@ MAKE_AFFINITY_HOOK_INJECTED(test2, ::Test::TestInjected*,
     auto saberManager = Injected->saberManager;
     INFO("Injected value: {}", fmt::ptr(Injected.ptr()));
     INFO("SaberManager: {}", fmt::ptr(saberManager));
+}
+
+// Actually installing this hook requires a live Zenject DiContainer from the running game
+// (see Lapiz::Affinity::AffinityHookBuilder::install), which isn't available from this
+// standalone test mod's late_load. This only verifies the hook's target method resolves.
+TEST(affinity_hook_injected_resolves) {
+    auto* addr = hook_test2::addr();
+    if (!addr) {
+        LOG_FAIL("Could not resolve address for hook_test2 (SaberClashEffect::Start)");
+        return;
+    }
+    LOG_OK("Resolved hook_test2 address -> {}", fmt::ptr(addr));
 }
 
