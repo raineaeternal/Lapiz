@@ -66,11 +66,11 @@ DECLARE_CLASS_CODEGEN(Lapiz::Affinity, HookHandle, System::Object) {
             auto install_result = flamingo::Install(std::move(hook_info));
 
             if (!install_result.has_value()) {
-                MACRO_LOG(logger_, critical, "Failed to install hook: {} with flamingo: {}", T::name(), install_result.error());
-                SAFE_ABORT("Failure installing hook: {}", T::name());
+                MACRO_LOG(_affinityHookInfo.logger_, critical, "Failed to install hook: {} with flamingo: {}", _hookName, install_result.error());
+                SAFE_ABORT("Failure installing hook: {}", _hookName);
             }
-            MACRO_LOG(logger_, info, "Hook: {} installed with flamingo!",
-                      T::name());
+            MACRO_LOG(_affinityHookInfo.logger_, info, "Hook: {} installed with flamingo!",
+                      _hookName);
 
             if (this->_affinityHookInfo.injected_parameter_.has_value()) {
               auto injected_param =
@@ -93,7 +93,7 @@ DECLARE_CLASS_CODEGEN(Lapiz::Affinity, HookHandle, System::Object) {
             auto uninstall_result = flamingo::Uninstall(_flamingoHandle.value());
             _flamingoHandle.reset();
             if (!uninstall_result.has_value()) {
-                MACRO_LOG(logger_, error, "Failed to uninstall hook: {} with flamingo due to {}", _hookName, uninstall_result.error());
+                MACRO_LOG(_affinityHookInfo.logger_, error, "Failed to uninstall hook: {} with flamingo due to {}", _hookName, uninstall_result.error());
                 return false;
             }
             if (this->_affinityHookInfo.injected_parameter_.has_value()) {
