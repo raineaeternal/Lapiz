@@ -111,6 +111,9 @@ namespace Lapiz::Affinity {
             };
             std::optional<AffinityInjectedParameter> injected_param = std::nullopt;
             if constexpr (detail::injected_hook_struct<T>) {
+                // ensure handle is allocated 
+                T::Injected.emplace(nullptr);
+              
                 injected_param = AffinityInjectedParameter{
                   .type = i2c::type_of<typename T::injected_type>(),
                   // this seems unsafe but I prefer this to having a std::function setter
