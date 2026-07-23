@@ -39,6 +39,18 @@ namespace Lapiz::Affinity {
                     { T::addr() } -> std::same_as<MethodInfo const*>;
                 }
             );
+
+        // A hook struct made with MAKE_AFFINITY_HOOK_INJECTED / MAKE_AFFINITY_HOOK_MATCH_INJECTED additionally
+        // exposes an injected_type and a safe_ptr<injected_type> Injected member, which AffinityHookBuilder::install
+        // populates by resolving injected_type from the DiContainer before installing the hook.
+        // injected_type must be a C# reference type (has_class + ref_type) since it's resolved from the
+        // DiContainer and stored behind safe_ptr, and install() calls i2c::type_of on it.
+        template <typename T>
+        concept injected_hook_struct = hook_struct<T> && requires {
+            typename T::injected_type;
+            requires ::i2c::type_check::ref_type<typename T::injected_type>;
+            { T::Injected } -> std::same_as<safe_ptr<typename T::injected_type>&>;
+        };
     }
 
     /// @brief Fluently builds up install priority for an affinity hook, then installs it into a Zenject DiContainer.
@@ -98,7 +110,7 @@ namespace Lapiz::Affinity {
                 std::move(priority_),
             };
             std::optional<AffinityInjectedParameter> injected_param = std::nullopt;
-            if constexpr (requires { T::Injected; }) {
+            if constexpr (detail::injected_hook_struct<T>) {
                 injected_param = AffinityInjectedParameter{
                   .type = i2c::type_of<typename T::injected_type>(),
                   // this seems unsafe but I prefer this to having a std::function setter
