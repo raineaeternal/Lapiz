@@ -6,7 +6,7 @@
   "info": {
     "name": "Lapiz",
     "id": "lapiz",
-    "version": "0.3.2",
+    "version": "0.3.3",
     "url": "https://github.com/raineio/Lapiz",
     "additionalData": {
       "overrideSoName": "liblapiz.so",
@@ -33,6 +33,9 @@
       ],
       "qmod": [
         "qpm qmod zip $0:?"
+      ],
+      "tests": [
+        "qpm qmod zip test-lapiz --import mod.tests.json $0:?"
       ],
       "restart": [
         "python ./extern/includes/mod-scripts/shared/restart.py $0:?"
