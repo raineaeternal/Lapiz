@@ -6,7 +6,7 @@ on:
     tags:
       - "v*"
     branches:
-      - 'master'
+      - 'main'
       - 'dev/*'
       - 'feat/*'
       - 'fix/*'
@@ -25,7 +25,7 @@ on:
       - '**.md'
       - '.gitignore'
   pull_request:
-    branches: master
+    branches: main
 
 env:
     module_id: lapiz
