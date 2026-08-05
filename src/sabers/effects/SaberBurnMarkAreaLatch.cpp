@@ -56,36 +56,16 @@ namespace Lapiz::Sabers::Effects {
         UnityEngine::Color::RGBToHSV(color, by_ref(h), by_ref(s), by_ref(_));
         color = UnityEngine::Color::HSVToRGB(h, s, 1.0f);
 
-        auto line = _saberBurnMarkArea->_lineRenderers[index];
-        line->set_startColor(color);
-        line->set_endColor(color);
+        _saberBurnMarkArea->_saberColors[index] = color;
     }
 
     void SaberBurnMarkAreaLatch::AddSaber(GlobalNamespace::Saber* saber) {
         if (!_saberBurnMarkArea || !_saberBurnMarkArea->m_CachedPtr.m_value) return;
 
         _saberBurnMarkArea->_sabers = TypeUtil::AppendArrayOrDefault(_saberBurnMarkArea->_sabers, saber);
-        _saberBurnMarkArea->_prevBurnMarkPos = TypeUtil::AppendArrayOrDefault<UnityEngine::Vector3>(_saberBurnMarkArea->_prevBurnMarkPos);
+        _saberBurnMarkArea->_prevBurnMarkPos = TypeUtil::AppendArrayOrDefault<UnityEngine::Vector2>(_saberBurnMarkArea->_prevBurnMarkPos);
         _saberBurnMarkArea->_prevBurnMarkPosValid = TypeUtil::AppendArrayOrDefault<bool>(_saberBurnMarkArea->_prevBurnMarkPosValid);
-
-        _saberBurnMarkArea->_lineRenderers = TypeUtil::AppendArrayOrDefault(_saberBurnMarkArea->_lineRenderers, CreateNewLineRenderer(_saberModelManager->GetPhysicalSaberColor(saber)));
-    }
-
-    UnityEngine::LineRenderer* SaberBurnMarkAreaLatch::CreateNewLineRenderer(UnityEngine::Color initialColor) {
-        static auto identity = UnityEngine::Quaternion::get_identity();
-        UnityW<UnityEngine::LineRenderer> newLine = UnityEngine::Object::Instantiate(_saberBurnMarkArea->_saberBurnMarkLinePrefab, {0, 0, 0}, identity, nullptr);
-        newLine->set_name(fmt::format("Lapiz | {}", newLine->get_name()));
-        newLine->set_startColor(initialColor);
-        newLine->set_endColor(initialColor);
-        newLine->set_positionCount(2);
-        return newLine;
-    }
-
-    UnityEngine::RenderTexture* SaberBurnMarkAreaLatch::CreateNewRenderTexture() {
-        auto renderTexture = UnityEngine::RenderTexture::New_ctor(_saberBurnMarkArea->_textureWidth, _saberBurnMarkArea->_textureHeight, 0, UnityEngine::RenderTextureFormat::ARGB32, UnityEngine::RenderTextureReadWrite::Default);
-        renderTexture->set_name(fmt::format("Lapiz | SaberBurnMarkArea Texture {}", _lineFactoryIncrement++));
-        renderTexture->set_hideFlags(UnityEngine::HideFlags::DontSave);
-        return renderTexture;
+        _saberBurnMarkArea->_saberColors = TypeUtil::AppendArrayOrDefault<UnityEngine::Color>(_saberBurnMarkArea->_saberColors, _saberModelManager->GetPhysicalSaberColor(saber));
     }
 
     void SaberBurnMarkAreaLatch::SaberBurnMarkArea_Start_Postfix(GlobalNamespace::SaberBurnMarkArea* self) {
