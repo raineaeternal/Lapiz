@@ -27,8 +27,8 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Sabers::Effects, SaberBurnMarkAreaLatch,
     DECLARE_INSTANCE_METHOD(void, ColorUpdated, GlobalNamespace::Saber* saber, UnityEngine::Color color);
     DECLARE_PRIVATE_METHOD(void, AddSaber, GlobalNamespace::Saber* saber);
 
-    DECLARE_PRIVATE_METHOD(UnityEngine::LineRenderer*, CreateNewLineRenderer, UnityEngine::Color initialColor);
-    DECLARE_PRIVATE_METHOD(UnityEngine::RenderTexture*, CreateNewRenderTexture);
+
+
 
     DECLARE_CTOR(ctor, Lapiz::Sabers::SaberModelManager* saberModelManager, Lapiz::Sabers::LapizSaberFactory* lapizSaberFactory);
     public:

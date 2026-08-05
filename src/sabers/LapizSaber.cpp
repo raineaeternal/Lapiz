@@ -8,6 +8,8 @@
 #include "GlobalNamespace/SaberMovementData.hpp"
 #include "utilities/saberutil.hpp"
 
+#include "System/Type.hpp"
+
 DEFINE_TYPE(Lapiz::Sabers, LapizSaber);
 
 namespace Lapiz::Sabers {
@@ -89,7 +91,7 @@ namespace Lapiz::Sabers {
 
         _saberTypeObject->_saberType = saberType;
         _saberModelController = _saberModelProvider->NewModel(saberType);
-        _saberModelController->Init(this->transform, _saber, _saberModelController->____colorManager->ColorForSaberType(saberType));
+        _saberModelController->Init(this->transform, _saber, _saberModelController->____colorManager->ColorForSaberType(saberType), backingType->get_Name());
 
         _trailSaberMovementData = GlobalNamespace::SaberMovementData::New_ctor();
         _saberModelController->_saberTrail->_movementData = *_trailSaberMovementData;
