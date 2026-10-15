@@ -3,6 +3,7 @@
 #include "utilities/logging.hpp"
 
 #include "scotland2/shared/modloader.h"
+#include "custom-types/shared/register.hpp"
 
 static modloader::ModInfo modInfo{MOD_ID, VERSION, 0};
 
@@ -10,7 +11,7 @@ std::vector<std::function<void()>> tests = {};
 
 // Called at the early stages of game loading
 LAPIZ_EXPORT_FUNC void setup(CModInfo* info) {
-    info->id = MOD_ID;
+    info->id = "test-lapiz";
     info->version = VERSION;
     info->version_long = 0;
 
@@ -19,6 +20,7 @@ LAPIZ_EXPORT_FUNC void setup(CModInfo* info) {
 
 // Called once the game (and Lapiz) has finished loading - runs every registered TEST()
 LAPIZ_EXPORT_FUNC void late_load() {
+    custom_types::Register::AutoRegister();
     INFO("Beginning tests...");
     for (auto const& test : tests) {
         try {

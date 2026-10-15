@@ -67,6 +67,14 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Affinity, HookHandle, System::Object, ::
         }
 
         void Install() {
+            if (_flamingoHandle.has_value()) return;
+
+            if (this->_affinityHookInfo.injected_parameter_.has_value()) {
+                auto injected_param = this->_affinityHookInfo.injected_parameter_.value();
+                auto injected_type = reinterpret_cast<System::Type*>(i2c::get_system_type(injected_param.type));
+                *injected_param.value = container->Resolve(injected_type);
+            }
+
             // copy
             flamingo::HookInfo hook_info = this->_affinityHookInfo.hook_info_;
             auto install_result = flamingo::Install(std::move(hook_info));
@@ -77,15 +85,6 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Affinity, HookHandle, System::Object, ::
             }
             MACRO_LOG(_affinityHookInfo.logger_, info, "Hook: {} installed with flamingo!",
                       _hookName);
-
-            if (this->_affinityHookInfo.injected_parameter_.has_value()) {
-              auto injected_param =
-                  this->_affinityHookInfo.injected_parameter_.value();
-              
-                auto injected_type = reinterpret_cast<System::Type*>(i2c::get_system_type(injected_param.type));
-                // TODO: Is this correct? what about System::Type::GetTypeFromHandle(injected_param.type);
-                *injected_param.value = container->Resolve(injected_type);
-            }
 
             _flamingoHandle = install_result.value().returned_handle;
         }
@@ -109,6 +108,8 @@ DECLARE_CLASS_CODEGEN_INTERFACES(Lapiz::Affinity, HookHandle, System::Object, ::
                 // cleanup safe_ptr on uninstall
                 injected_param.value->clear();
             }
+
+            MACRO_LOG(_affinityHookInfo.logger_, info, "Hook: {} uninstalled with flamingo!", _hookName);
 
             return true;
         }
