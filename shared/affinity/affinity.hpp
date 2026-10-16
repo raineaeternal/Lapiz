@@ -9,6 +9,8 @@
 #include "./HookHandle.hpp"
 #include "System/String.hpp"
 #include "Zenject/DiContainer.hpp"
+#include "Zenject/ConcreteIdBinderNonGeneric.hpp"
+#include "Zenject/FromBinderNonGeneric.hpp"
 #include "Zenject/IdScopeConcreteIdArgConditionCopyNonLazyBinder.hpp"
 #include "Zenject/ScopeConcreteIdArgConditionCopyNonLazyBinder.hpp"
 #include "scotland2/shared/loader.hpp"
@@ -53,7 +55,7 @@ namespace Lapiz::Affinity {
         };
     }
 
-    /// @brief Fluently builds up install priority for an affinity hook, then installs it into a Zenject DiContainer.
+    /// @brief Fluently builds hook priority and registers the hook with a Zenject DiContainer's lifecycle.
     /// Priority is decided at install time (rather than compile time, as with MAKE_HOOK/HOOK_BEFORE/HOOK_AFTER).
     /// On a successful install, the resulting Lapiz::Affinity::HookHandle is bound into the container
     /// (BindInstance, WithId(mod.id:hook_name), AsCached), so dependents sharing that container's scope can
@@ -82,8 +84,8 @@ namespace Lapiz::Affinity {
             return *this;
         }
 
-        /// @brief Installs the hook, then binds the resulting Lapiz::Affinity::HookHandle into container,
-        /// keyed by "mod.id:hook_name" so dependents in the same container scope can resolve it by that id.
+        /// @brief Registers a handle that installs after the container's bindings are ready and uninstalls on disposal.
+        /// Also binds it by "mod.id:hook_name" so dependents can resolve it by that id.
         Lapiz::Affinity::HookHandle* install(::Zenject::DiContainer* container) {
             void* addr = addr_;
             if (!addr) {
@@ -127,9 +129,13 @@ namespace Lapiz::Affinity {
             };
             auto* handle = ::Lapiz::Affinity::HookHandle::New_ctor();
             handle->Configure(mod_, T::name(), affinityHook);
+            handle->container = container;
 
             auto id = static_cast<System::String*>(::StringW(mod_.id + ":" + T::name()));
             container->BindInstance(handle)->WithId(static_cast<System::Object*>(id))->AsCached();
+            // The ID binding supports ResolveId; unqualified interface bindings let the
+            // owning context initialize and dispose every handle through its kernel.
+            container->BindInterfacesTo<::Lapiz::Affinity::HookHandle*>()->FromInstance(handle)->AsCached()->NonLazy();
             return handle;
         }
 

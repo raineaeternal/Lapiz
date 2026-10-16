@@ -6,7 +6,7 @@
   "info": {
     "name": "Lapiz",
     "id": "lapiz",
-    "version": "0.3.3",
+    "version": "0.3.7",
     "url": "https://github.com/raineio/Lapiz",
     "additionalData": {
       "overrideSoName": "liblapiz.so",
@@ -52,7 +52,7 @@
   "dependencies": [
     {
       "id": "beatsaber-hook",
-      "versionRange": "^9.0.0",
+      "versionRange": "^9.1.1",
       "additionalData": {}
     },
     {
@@ -65,7 +65,7 @@
     },
     {
       "id": "bs-cordl",
-      "versionRange": "^4502.1.0",
+      "versionRange": "^4503.0.0",
       "additionalData": {}
     },
     {
@@ -75,17 +75,17 @@
     },
     {
       "id": "paper2_scotland2",
-      "versionRange": "^4.7.0",
+      "versionRange": "^4.8.0",
       "additionalData": {}
     },
     {
       "id": "flamingo",
-      "versionRange": "^1.1.2",
+      "versionRange": "^1.2.1",
       "additionalData": {}
     },
     {
       "id": "mod-scripts",
-      "versionRange": "^1.0.1",
+      "versionRange": "^1.0.2",
       "additionalData": {
         "private": true
       }
